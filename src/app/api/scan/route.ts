@@ -89,14 +89,22 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Merge pattern signals with OSINT signals (deduplicate by text)
+    // Merge pattern signals with OSINT signals (deduplicate by similarity)
     const allSignals = [...patternResult.whyBullets.map((text) => ({ text, weight: 15 })), ...osintSignals];
-    const seen = new Set<string>();
-    const dedupedSignals = allSignals.filter((s) => {
-      if (seen.has(s.text)) return false;
-      seen.add(s.text);
-      return true;
-    });
+    const dedupedSignals: { text: string; weight: number }[] = [];
+    for (const signal of allSignals) {
+      // Check for near-duplicates (if 60%+ of words overlap, skip)
+      const words = new Set(signal.text.toLowerCase().split(/\s+/).filter(w => w.length > 4));
+      const isDupe = dedupedSignals.some((existing) => {
+        const existingWords = new Set(existing.text.toLowerCase().split(/\s+/).filter(w => w.length > 4));
+        const overlap = [...words].filter(w => existingWords.has(w)).length;
+        const maxLen = Math.max(words.size, existingWords.size);
+        return maxLen > 0 && overlap / maxLen > 0.6;
+      });
+      if (!isDupe) {
+        dedupedSignals.push(signal);
+      }
+    }
 
     // Recalculate risk with OSINT data
     const totalWeight = dedupedSignals.reduce((sum, s) => sum + s.weight, 0);
