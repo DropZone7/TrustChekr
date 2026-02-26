@@ -90,7 +90,10 @@ export async function POST(req: NextRequest) {
     }
 
     // Merge pattern signals with OSINT signals (deduplicate by similarity)
-    const allSignals = [...patternResult.whyBullets.map((text) => ({ text, weight: 15 })), ...osintSignals];
+    // Preserve original pattern weights by re-running the scanner for weights
+    const patternWeights = patternResult._signalWeights || patternResult.whyBullets.map(() => 20);
+    const patternSignals = patternResult.whyBullets.map((text, i) => ({ text, weight: patternWeights[i] || 20 }));
+    const allSignals = [...patternSignals, ...osintSignals];
     const dedupedSignals: { text: string; weight: number }[] = [];
     for (const signal of allSignals) {
       // Check for near-duplicates (if 60%+ of words overlap, skip)
@@ -107,11 +110,14 @@ export async function POST(req: NextRequest) {
     }
 
     // Recalculate risk with OSINT data
-    const totalWeight = dedupedSignals.reduce((sum, s) => sum + s.weight, 0);
+    // Only count positive weights (negative weights are "good signs")
+    const positiveSignals = dedupedSignals.filter((s) => s.weight > 0);
+    const negativeSignals = dedupedSignals.filter((s) => s.weight < 0);
+    const totalWeight = positiveSignals.reduce((sum, s) => sum + s.weight, 0) + negativeSignals.reduce((sum, s) => sum + s.weight, 0);
     let riskLevel: RiskLevel;
-    if (totalWeight <= 15) riskLevel = "safe";
-    else if (totalWeight <= 40) riskLevel = "suspicious";
-    else if (totalWeight <= 65) riskLevel = "high-risk";
+    if (totalWeight <= 10) riskLevel = "safe";
+    else if (totalWeight <= 45) riskLevel = "suspicious";
+    else if (totalWeight <= 75) riskLevel = "high-risk";
     else riskLevel = "very-likely-scam";
 
     // Build enhanced result

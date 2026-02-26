@@ -67,10 +67,19 @@ function analyzeMessage(input: string): Signal[] {
     "act now", "immediate action", "urgent", "expires today", "last chance",
     "limited time", "don't delay", "right away", "asap", "within 24 hours",
     "account suspended", "account locked", "verify immediately",
+    "immediately", "arrested", "warrant", "legal action", "prosecuted",
+    "suspended", "terminated", "frozen", "seized", "penalty",
+    "you will be", "failure to", "if you do not", "within the next",
   ];
   const urgencyHits = urgencyPhrases.filter((p) => lower.includes(p));
   if (urgencyHits.length > 0) {
-    signals.push({ text: "The message uses urgent language to pressure you into acting quickly. This is a very common scam tactic.", weight: 25 });
+    signals.push({ text: "The message uses urgent or threatening language to pressure you into acting quickly. This is a very common scam tactic.", weight: 30 });
+  }
+
+  // Threat of arrest/legal action (massive red flag)
+  const threatPhrases = ["arrested", "warrant", "jail", "prison", "prosecuted", "legal action", "law enforcement", "police will"];
+  if (threatPhrases.some((p) => lower.includes(p))) {
+    signals.push({ text: "The message threatens you with arrest or legal action. Real government agencies do not threaten people this way over the phone or by text.", weight: 35 });
   }
 
   // Money/payment requests
@@ -240,8 +249,11 @@ export function runScan(type: string, input: string): ScanResult {
   const riskLevel = scoreToRisk(totalScore);
   const scamType = isRomance ? "romance scam" : type === "website" ? "website scam" : type === "message" ? "message scam" : "scam";
 
-  // Build result
-  const whyBullets = signals.slice(0, 6).map((s) => s.text);
+  // Build result - sort by weight so strongest signals come first
+  signals.sort((a, b) => b.weight - a.weight);
+  const topSignals = signals.slice(0, 6);
+  const whyBullets = topSignals.map((s) => s.text);
+  const _signalWeights = topSignals.map((s) => s.weight);
   const nextSteps = getNextSteps(riskLevel, type, isRomance);
   const reportTo = getReportTo();
   const educationalTip = getEducationalTip(type, isRomance);
@@ -273,6 +285,7 @@ export function runScan(type: string, input: string): ScanResult {
     inputValue: input,
     riskLevel,
     whyBullets,
+    _signalWeights,
     nextSteps,
     reportTo,
     educationalTip,

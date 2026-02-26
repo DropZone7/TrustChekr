@@ -5,6 +5,7 @@ export interface ScanResult {
   inputValue: string;
   riskLevel: RiskLevel;
   whyBullets: string[];
+  _signalWeights?: number[];
   nextSteps: string[];
   reportTo: string[];
   educationalTip: string;

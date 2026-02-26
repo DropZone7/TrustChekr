@@ -89,10 +89,16 @@ export async function checkUrlSafety(url: string): Promise<UrlSafetyResult> {
       }
     }
   } catch {
-    signals.push({
-      text: "We couldn't reach this website. It may be down, blocked, or the address may be wrong.",
-      weight: 5,
-    });
+    // Only flag unreachable sites if they have a sketchy TLD
+    const sketchyTlds = [".xyz", ".top", ".buzz", ".click", ".loan", ".work", ".gq", ".tk", ".ml", ".cf", ".ga", ".icu"];
+    const hasSketchy = sketchyTlds.some((tld) => cleaned.toLowerCase().endsWith(tld));
+    if (hasSketchy) {
+      signals.push({
+        text: "We couldn't reach this website. It may be down, blocked, or the address may be wrong.",
+        weight: 10,
+      });
+    }
+    // Don't penalize .com/.org/.net etc for being unreachable (many block HEAD requests)
   }
 
   return {
