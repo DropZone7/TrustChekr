@@ -269,6 +269,7 @@ export function runScan(type: string, input: string): ScanResult {
         "We didn't find any obvious warning signs in what you shared.",
         "This doesn't mean it's guaranteed to be safe — just that we didn't spot common scam patterns.",
       ],
+      _signalWeights: [0, 0],
       nextSteps: [
         "If something still feels off, trust your instincts.",
         "Never send money to someone you haven't met in person.",
