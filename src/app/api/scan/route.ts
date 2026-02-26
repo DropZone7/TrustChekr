@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
-import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety } from "@/lib/osint";
+import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal } from "@/lib/osint";
 import type { RiskLevel } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
@@ -39,12 +39,13 @@ export async function POST(req: NextRequest) {
     const osintSignals: { text: string; weight: number }[] = [];
 
     if (type === "website") {
-      // Run domain OSINT + URL safety in parallel
-      const [domainResult, safetyResult] = await Promise.all([
+      // Run domain OSINT + URL safety + VirusTotal in parallel
+      const [domainResult, safetyResult, vtResult] = await Promise.all([
         analyzeDomain(cleaned),
         checkUrlSafety(cleaned),
+        checkVirusTotal(cleaned),
       ]);
-      osintSignals.push(...domainResult.signals, ...safetyResult.signals);
+      osintSignals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
     }
 
     if (type === "other") {
@@ -71,11 +72,12 @@ export async function POST(req: NextRequest) {
       const urlPattern = /https?:\/\/\S+|www\.\S+/gi;
       const urls = cleaned.match(urlPattern) || [];
       for (const url of urls.slice(0, 3)) {
-        const [domainResult, safetyResult] = await Promise.all([
+        const [domainResult, safetyResult, vtResult] = await Promise.all([
           analyzeDomain(url),
           checkUrlSafety(url),
+          checkVirusTotal(url),
         ]);
-        osintSignals.push(...domainResult.signals, ...safetyResult.signals);
+        osintSignals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
       }
 
       // Check any email addresses in messages
