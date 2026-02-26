@@ -1,0 +1,146 @@
+"use client";
+
+import { useState } from "react";
+import ScanForm from "@/components/ScanForm";
+import Results from "@/components/Results";
+import type { ScanResult } from "@/lib/types";
+
+export default function Home() {
+  const [result, setResult] = useState<ScanResult | null>(null);
+  const [scanning, setScanning] = useState(false);
+
+  const [error, setError] = useState<string | null>(null);
+
+  const handleScan = async (type: string, input: string) => {
+    setScanning(true);
+    setResult(null);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, input }),
+      });
+      const data = await res.json();
+
+      if (data.warning) {
+        setError(data.message);
+        setScanning(false);
+        return;
+      }
+      if (data.error) {
+        setError(data.error);
+        setScanning(false);
+        return;
+      }
+      setResult(data);
+    } catch {
+      setError("Our system is having trouble right now, but your information is safe. Please try again in a few minutes.");
+    }
+    setScanning(false);
+  };
+
+  const handleReset = () => {
+    setResult(null);
+    setScanning(false);
+  };
+
+  return (
+    <div className="flex flex-col gap-8">
+      {!result && !scanning && (
+        <>
+          {/* Hero */}
+          <div className="text-center flex flex-col gap-3 pt-4">
+            <h1
+              className="text-3xl font-bold"
+              style={{ color: "var(--tc-primary)" }}
+            >
+              Check if something might be a scam
+            </h1>
+            <p style={{ color: "var(--tc-text-muted)" }}>
+              Paste a website, message, phone number, or email and we'll check
+              it for you. Free, private, no sign-up needed.
+            </p>
+          </div>
+
+          {/* Scan tiles + form */}
+          <ScanForm onScan={handleScan} />
+
+          {/* How it works */}
+          <div className="flex flex-col gap-4 pt-4">
+            <h2 className="text-xl font-bold text-center" style={{ color: "var(--tc-primary)" }}>
+              How it works
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { step: "1", emoji: "📋", title: "Paste it", desc: "Copy and paste a message, website, phone number, or email." },
+                { step: "2", emoji: "🔍", title: "We check it", desc: "We look for known scam patterns, suspicious signs, and red flags." },
+                { step: "3", emoji: "✅", title: "Get your answer", desc: "See a clear result with what to do next, in plain language." },
+              ].map((item) => (
+                <div key={item.step} className="text-center p-4 rounded-xl" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)" }}>
+                  <span className="text-3xl">{item.emoji}</span>
+                  <h3 className="font-semibold mt-2" style={{ color: "var(--tc-text-main)" }}>{item.title}</h3>
+                  <p className="text-sm mt-1" style={{ color: "var(--tc-text-muted)" }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Trust signals */}
+          <div className="flex flex-col gap-3 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-sm">
+              {[
+                { emoji: "🔒", text: "Private — we never store or sell your data" },
+                { emoji: "🆓", text: "Free — no sign-up, no hidden fees" },
+                { emoji: "🇨🇦", text: "Built in Canada for Canadians and Americans" },
+              ].map((badge, i) => (
+                <div key={i} className="p-3 rounded-xl" style={{ background: "var(--tc-primary-soft)" }}>
+                  <span className="text-lg">{badge.emoji}</span>
+                  <p className="mt-1 font-medium" style={{ color: "var(--tc-primary)" }}>{badge.text}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-sm" style={{ color: "var(--tc-text-muted)" }}>
+              You did the right thing by checking. Scams are designed to fool anyone. 🛡️
+            </p>
+          </div>
+        </>
+      )}
+
+      {error && (
+        <div className="p-5 rounded-xl border-2 text-center" style={{ borderColor: "var(--tc-warning)", background: "#fef9e7" }}>
+          <p className="font-semibold mb-1" style={{ color: "var(--tc-warning)" }}>⚠️ Hold on</p>
+          <p>{error}</p>
+          <button
+            onClick={() => { setError(null); }}
+            className="mt-3 px-4 py-2 rounded-lg font-medium cursor-pointer"
+            style={{ background: "var(--tc-primary)", color: "white" }}
+          >
+            Try again
+          </button>
+        </div>
+      )}
+
+      {scanning && (
+        <div className="text-center flex flex-col items-center gap-4 py-16">
+          <div
+            className="w-12 h-12 border-4 rounded-full animate-spin"
+            style={{
+              borderColor: "var(--tc-primary-soft)",
+              borderTopColor: "var(--tc-primary)",
+            }}
+          />
+          <h2 className="text-xl font-semibold" style={{ color: "var(--tc-primary)" }}>
+            Checking this for you…
+          </h2>
+          <p style={{ color: "var(--tc-text-muted)" }}>
+            This usually takes a few seconds. Your information stays private.
+          </p>
+        </div>
+      )}
+
+      {result && <Results result={result} onReset={handleReset} />}
+    </div>
+  );
+}

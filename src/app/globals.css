@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+:root {
+  /* TrustChekr Design Tokens */
+  --tc-primary: #1a5276;
+  --tc-primary-soft: #d4e6f1;
+  --tc-accent: #2e86c1;
+  --tc-safe: #27ae60;
+  --tc-warning: #f39c12;
+  --tc-danger: #e74c3c;
+  --tc-danger-deep: #922b21;
+  --tc-bg: #fafafa;
+  --tc-surface: #ffffff;
+  --tc-border: #d5d8dc;
+  --tc-text-main: #1c1c1e;
+  --tc-text-muted: #5d6d7e;
+}
+
+html {
+  font-size: 18px;
+}
+
+html.text-lg { font-size: 20px; }
+html.text-xl { font-size: 22px; }
+
+body {
+  background: var(--tc-bg);
+  color: var(--tc-text-main);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--tc-primary-soft);
+}
