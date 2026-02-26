@@ -82,10 +82,25 @@ export async function checkUrlSafety(url: string): Promise<UrlSafetyResult> {
     if (headRes.status >= 300 && headRes.status < 400) {
       const location = headRes.headers.get("location");
       if (location) {
-        signals.push({
-          text: `This link redirects to a different website (${location}). Scammers use redirects to disguise where a link actually takes you.`,
-          weight: 15,
-        });
+        // Check if it's just a same-domain redirect (http→https, naked→www, trailing slash)
+        let inputDomain: string;
+        let redirectDomain: string;
+        try {
+          inputDomain = new URL(cleaned).hostname.replace(/^www\./, "").toLowerCase();
+          redirectDomain = new URL(location, cleaned).hostname.replace(/^www\./, "").toLowerCase();
+        } catch {
+          inputDomain = "";
+          redirectDomain = "";
+        }
+
+        if (inputDomain && redirectDomain && inputDomain !== redirectDomain) {
+          // Actually redirecting to a DIFFERENT domain — suspicious
+          signals.push({
+            text: `This link redirects to a completely different website (${redirectDomain}). Scammers use redirects to disguise where a link actually takes you.`,
+            weight: 20,
+          });
+        }
+        // Same-domain redirects (nhl.com → www.nhl.com) are normal — don't flag
       }
     }
   } catch {
