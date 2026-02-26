@@ -21,10 +21,29 @@ function analyzeUrl(input: string): Signal[] {
   }
 
   // Lookalike detection (common brands)
-  const brands = ["paypal", "amazon", "apple", "microsoft", "netflix", "google", "chase", "wellsfargo", "td", "rbc", "cibc", "scotiabank", "bmo"];
-  for (const brand of brands) {
-    if (lower.includes(brand) && !lower.startsWith(brand + ".")) {
-      signals.push({ text: `The website address contains "${brand}" but is not the official ${brand} website. This is a common trick.`, weight: 30 });
+  // Map brand keywords to their known legitimate domains
+  const brandDomains: Record<string, string[]> = {
+    paypal: ["paypal.com"],
+    amazon: ["amazon.com", "amazon.ca", "amazon.co.uk", "amazonaws.com"],
+    apple: ["apple.com", "icloud.com"],
+    microsoft: ["microsoft.com", "live.com", "outlook.com", "office.com", "xbox.com"],
+    netflix: ["netflix.com"],
+    google: ["google.com", "google.ca", "google.co.uk", "gmail.com", "youtube.com"],
+    chase: ["chase.com"],
+    wellsfargo: ["wellsfargo.com"],
+    td: ["td.com", "tdbank.com", "tdcanadatrust.com"],
+    rbc: ["rbc.com", "rbcroyalbank.com", "rbcinsurance.com", "rbcgam.com", "rbcdirectinvesting.com"],
+    cibc: ["cibc.com"],
+    scotiabank: ["scotiabank.com"],
+    bmo: ["bmo.com", "bmoinvestorline.com", "bmoharris.com"],
+  };
+  for (const [brand, legit] of Object.entries(brandDomains)) {
+    if (lower.includes(brand)) {
+      // Check if this is actually a legitimate domain for this brand
+      const isLegit = legit.some((d) => domain === d || domain.endsWith("." + d));
+      if (!isLegit) {
+        signals.push({ text: `The website address contains "${brand}" but is not the official ${brand} website. This is a common trick.`, weight: 30 });
+      }
       break;
     }
   }

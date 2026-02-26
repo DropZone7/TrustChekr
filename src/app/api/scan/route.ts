@@ -91,8 +91,8 @@ export async function POST(req: NextRequest) {
 
     // Merge pattern signals with OSINT signals (deduplicate by similarity)
     // Preserve original pattern weights by re-running the scanner for weights
-    const patternWeights = patternResult._signalWeights || patternResult.whyBullets.map(() => 20);
-    const patternSignals = patternResult.whyBullets.map((text, i) => ({ text, weight: patternWeights[i] || 20 }));
+    const patternWeights = patternResult._signalWeights ?? patternResult.whyBullets.map(() => 20);
+    const patternSignals = patternResult.whyBullets.map((text, i) => ({ text, weight: patternWeights[i] ?? 20 }));
     const allSignals = [...patternSignals, ...osintSignals];
     const dedupedSignals: { text: string; weight: number }[] = [];
     for (const signal of allSignals) {
