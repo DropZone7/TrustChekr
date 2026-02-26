@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
+import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety } from "@/lib/osint";
+import type { RiskLevel } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,14 +14,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Redact obvious sensitive data before processing
+    // Redact obvious sensitive data
     const sensitivePatterns = [
       /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g, // SSN
       /\b\d{9}\b/g, // SIN
       /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g, // Credit card
     ];
 
-    let cleaned = input.trim();
+    const cleaned = input.trim();
     for (const pattern of sensitivePatterns) {
       if (pattern.test(cleaned)) {
         return NextResponse.json({
@@ -30,8 +32,95 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    const result = runScan(type, cleaned);
-    return NextResponse.json(result);
+    // Start with pattern-based analysis
+    const patternResult = runScan(type, cleaned);
+
+    // Layer on real OSINT based on input type
+    const osintSignals: { text: string; weight: number }[] = [];
+
+    if (type === "website") {
+      // Run domain OSINT + URL safety in parallel
+      const [domainResult, safetyResult] = await Promise.all([
+        analyzeDomain(cleaned),
+        checkUrlSafety(cleaned),
+      ]);
+      osintSignals.push(...domainResult.signals, ...safetyResult.signals);
+    }
+
+    if (type === "other") {
+      const lower = cleaned.toLowerCase();
+
+      // Detect what type of "other" input this is
+      if (lower.includes("@")) {
+        // Email
+        const emailResult = await analyzeEmail(cleaned);
+        osintSignals.push(...emailResult.signals);
+      } else if (/^(r[A-Za-z0-9]{24,34}|0x[a-fA-F0-9]{40}|(1|3|bc1)[A-Za-z0-9]{25,62}|T[A-Za-z0-9]{33})$/.test(cleaned)) {
+        // Crypto address
+        const cryptoResult = await analyzeCrypto(cleaned);
+        osintSignals.push(...cryptoResult.signals);
+      } else {
+        // Phone number (default for "other")
+        const phoneResult = await analyzePhone(cleaned);
+        osintSignals.push(...phoneResult.signals);
+      }
+    }
+
+    if (type === "message") {
+      // Check any URLs embedded in messages
+      const urlPattern = /https?:\/\/\S+|www\.\S+/gi;
+      const urls = cleaned.match(urlPattern) || [];
+      for (const url of urls.slice(0, 3)) {
+        const [domainResult, safetyResult] = await Promise.all([
+          analyzeDomain(url),
+          checkUrlSafety(url),
+        ]);
+        osintSignals.push(...domainResult.signals, ...safetyResult.signals);
+      }
+
+      // Check any email addresses in messages
+      const emailPattern = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
+      const emails = cleaned.match(emailPattern) || [];
+      for (const email of emails.slice(0, 2)) {
+        const emailResult = await analyzeEmail(email);
+        osintSignals.push(...emailResult.signals);
+      }
+    }
+
+    // Merge pattern signals with OSINT signals (deduplicate by text)
+    const allSignals = [...patternResult.whyBullets.map((text) => ({ text, weight: 15 })), ...osintSignals];
+    const seen = new Set<string>();
+    const dedupedSignals = allSignals.filter((s) => {
+      if (seen.has(s.text)) return false;
+      seen.add(s.text);
+      return true;
+    });
+
+    // Recalculate risk with OSINT data
+    const totalWeight = dedupedSignals.reduce((sum, s) => sum + s.weight, 0);
+    let riskLevel: RiskLevel;
+    if (totalWeight <= 15) riskLevel = "safe";
+    else if (totalWeight <= 40) riskLevel = "suspicious";
+    else if (totalWeight <= 65) riskLevel = "high-risk";
+    else riskLevel = "very-likely-scam";
+
+    // Build enhanced result
+    const riskLabels: Record<RiskLevel, string> = {
+      safe: "Likely Safe",
+      suspicious: "Suspicious",
+      "high-risk": "High-Risk",
+      "very-likely-scam": "Very Likely Scam",
+    };
+
+    return NextResponse.json({
+      ...patternResult,
+      riskLevel,
+      whyBullets: dedupedSignals
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, 6)
+        .map((s) => s.text),
+      shareText: `TrustChekr flagged this as ${riskLabels[riskLevel]}. ${dedupedSignals[0]?.text || ""}`,
+    });
   } catch {
     return NextResponse.json(
       {
