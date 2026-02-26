@@ -16,9 +16,9 @@ export async function POST(req: NextRequest) {
 
     // Redact obvious sensitive data
     const sensitivePatterns = [
-      /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g, // SSN
-      /\b\d{9}\b/g, // SIN
-      /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g, // Credit card
+      /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g,
+      /\b\d{9}\b/g,
+      /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g,
     ];
 
     const cleaned = input.trim();
@@ -32,43 +32,48 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Start with pattern-based analysis
+    // ── Collect ALL signals with weights ──────────────────────
+    // Every signal is either a risk indicator (positive weight)
+    // or a trust indicator (negative weight).
+    // Final score = sum of all weights. If ≤ 0, it's safe.
+    const signals: { text: string; weight: number }[] = [];
+
+    // 1. Run pattern-based analysis (returns signals with real weights)
     const patternResult = runScan(type, cleaned);
+    const patternWeights = patternResult._signalWeights ?? [];
+    for (let i = 0; i < patternResult.whyBullets.length; i++) {
+      const w = patternWeights[i];
+      // Only include pattern bullets that have actual risk weight (> 0)
+      if (w !== undefined && w > 0) {
+        signals.push({ text: patternResult.whyBullets[i], weight: w });
+      }
+    }
 
-    // Layer on real OSINT based on input type
-    const osintSignals: { text: string; weight: number }[] = [];
-
+    // 2. Run OSINT based on input type
     if (type === "website") {
-      // Run domain OSINT + URL safety + VirusTotal in parallel
       const [domainResult, safetyResult, vtResult] = await Promise.all([
         analyzeDomain(cleaned),
         checkUrlSafety(cleaned),
         checkVirusTotal(cleaned),
       ]);
-      osintSignals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
+      signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
     }
 
     if (type === "other") {
       const lower = cleaned.toLowerCase();
-
-      // Detect what type of "other" input this is
       if (lower.includes("@")) {
-        // Email
         const emailResult = await analyzeEmail(cleaned);
-        osintSignals.push(...emailResult.signals);
+        signals.push(...emailResult.signals);
       } else if (/^(r[A-Za-z0-9]{24,34}|0x[a-fA-F0-9]{40}|(1|3|bc1)[A-Za-z0-9]{25,62}|T[A-Za-z0-9]{33})$/.test(cleaned)) {
-        // Crypto address
         const cryptoResult = await analyzeCrypto(cleaned);
-        osintSignals.push(...cryptoResult.signals);
+        signals.push(...cryptoResult.signals);
       } else {
-        // Phone number (default for "other")
         const phoneResult = await analyzePhone(cleaned);
-        osintSignals.push(...phoneResult.signals);
+        signals.push(...phoneResult.signals);
       }
     }
 
     if (type === "message") {
-      // Check any URLs embedded in messages
       const urlPattern = /https?:\/\/\S+|www\.\S+/gi;
       const urls = cleaned.match(urlPattern) || [];
       for (const url of urls.slice(0, 3)) {
@@ -77,26 +82,20 @@ export async function POST(req: NextRequest) {
           checkUrlSafety(url),
           checkVirusTotal(url),
         ]);
-        osintSignals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
+        signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
       }
 
-      // Check any email addresses in messages
       const emailPattern = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
       const emails = cleaned.match(emailPattern) || [];
       for (const email of emails.slice(0, 2)) {
         const emailResult = await analyzeEmail(email);
-        osintSignals.push(...emailResult.signals);
+        signals.push(...emailResult.signals);
       }
     }
 
-    // Merge pattern signals with OSINT signals (deduplicate by similarity)
-    // Preserve original pattern weights by re-running the scanner for weights
-    const patternWeights = patternResult._signalWeights ?? patternResult.whyBullets.map(() => 20);
-    const patternSignals = patternResult.whyBullets.map((text, i) => ({ text, weight: patternWeights[i] ?? 20 }));
-    const allSignals = [...patternSignals, ...osintSignals];
+    // ── Deduplicate by similarity ────────────────────────────
     const dedupedSignals: { text: string; weight: number }[] = [];
-    for (const signal of allSignals) {
-      // Check for near-duplicates (if 60%+ of words overlap, skip)
+    for (const signal of signals) {
       const words = new Set(signal.text.toLowerCase().split(/\s+/).filter(w => w.length > 4));
       const isDupe = dedupedSignals.some((existing) => {
         const existingWords = new Set(existing.text.toLowerCase().split(/\s+/).filter(w => w.length > 4));
@@ -109,18 +108,39 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Recalculate risk with OSINT data
-    // Only count positive weights (negative weights are "good signs")
-    const positiveSignals = dedupedSignals.filter((s) => s.weight > 0);
-    const negativeSignals = dedupedSignals.filter((s) => s.weight < 0);
-    const totalWeight = positiveSignals.reduce((sum, s) => sum + s.weight, 0) + negativeSignals.reduce((sum, s) => sum + s.weight, 0);
+    // ── Score: simple sum of all weights ─────────────────────
+    // Positive = risk. Negative = trust. Zero or below = safe.
+    const totalWeight = dedupedSignals.reduce((sum, s) => sum + s.weight, 0);
+
     let riskLevel: RiskLevel;
-    if (totalWeight <= 10) riskLevel = "safe";
-    else if (totalWeight <= 45) riskLevel = "suspicious";
-    else if (totalWeight <= 75) riskLevel = "high-risk";
+    if (totalWeight <= 0) riskLevel = "safe";
+    else if (totalWeight <= 30) riskLevel = "suspicious";
+    else if (totalWeight <= 60) riskLevel = "high-risk";
     else riskLevel = "very-likely-scam";
 
-    // Build enhanced result
+    // ── Build display bullets ────────────────────────────────
+    // Sort by absolute weight (strongest signals first)
+    const riskSignals = dedupedSignals.filter(s => s.weight > 0).sort((a, b) => b.weight - a.weight);
+    const trustSignals = dedupedSignals.filter(s => s.weight < 0);
+
+    const displayBullets: string[] = [];
+
+    if (riskSignals.length > 0) {
+      // Show risk signals
+      displayBullets.push(...riskSignals.slice(0, 5).map(s => s.text));
+    }
+
+    if (trustSignals.length > 0) {
+      // Show trust signals
+      displayBullets.push(...trustSignals.map(s => s.text));
+    }
+
+    if (riskSignals.length === 0) {
+      // No risk signals found — this is clean
+      displayBullets.unshift("We didn't find any warning signs in what you shared.");
+    }
+
+    // ── Use pattern result for next steps / educational tip ──
     const riskLabels: Record<RiskLevel, string> = {
       safe: "Likely Safe",
       suspicious: "Suspicious",
@@ -128,14 +148,25 @@ export async function POST(req: NextRequest) {
       "very-likely-scam": "Very Likely Scam",
     };
 
+    // Rebuild share text
+    const topSignal = riskSignals[0]?.text || "No warning signs found.";
+    const shareText = `TrustChekr flagged this as ${riskLabels[riskLevel]}. ${topSignal}`;
+
     return NextResponse.json({
-      ...patternResult,
+      inputType: patternResult.inputType,
+      inputValue: patternResult.inputValue,
       riskLevel,
-      whyBullets: dedupedSignals
-        .sort((a, b) => b.weight - a.weight)
-        .slice(0, 6)
-        .map((s) => s.text),
-      shareText: `TrustChekr flagged this as ${riskLabels[riskLevel]}. ${dedupedSignals[0]?.text || ""}`,
+      whyBullets: displayBullets.slice(0, 6),
+      nextSteps: riskLevel === "safe"
+        ? [
+            "If something still feels off, trust your instincts.",
+            "Be cautious with personal information and money online.",
+            "When in doubt, ask a trusted friend or family member for a second opinion.",
+          ]
+        : patternResult.nextSteps,
+      reportTo: patternResult.reportTo,
+      educationalTip: patternResult.educationalTip,
+      shareText,
     });
   } catch {
     return NextResponse.json(
