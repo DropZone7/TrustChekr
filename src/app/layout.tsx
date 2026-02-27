@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
-import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: "TrustChekr — Free Canadian Scam Detection Tool",
