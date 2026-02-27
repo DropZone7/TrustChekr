@@ -6,6 +6,9 @@ import { checkUsername } from "@/lib/osint/username";
 import type { RiskLevel } from "@/lib/types";
 import { runUnifiedScan } from "@/lib/scanners/unifiedScan";
 import { logAudit, hashIp } from "@/lib/auditLog";
+import { isDomainBlocked } from "@/lib/training/domainBlocklist";
+import { scoreSpamLikelihood } from "@/lib/training/spamDetector";
+import { analyzeUrlFeatures } from "@/lib/training/urlFeatures";
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,6 +53,47 @@ export async function POST(req: NextRequest) {
       // Only include pattern bullets that have actual risk weight (> 0)
       if (w !== undefined && w > 0) {
         signals.push({ text: patternResult.whyBullets[i], weight: w });
+      }
+    }
+
+    // 1b. Training data signals (49K+ domain blocklist, spam keywords, URL features)
+    let trainingData: any = {};
+
+    if (type === "website") {
+      // Domain blocklist check (49,762 known bad domains)
+      try {
+        const urlObj = new URL(cleaned.startsWith('http') ? cleaned : `https://${cleaned}`);
+        const blockCheck = isDomainBlocked(urlObj.hostname);
+        if (blockCheck.blocked) {
+          signals.push({ text: `Domain "${blockCheck.matchedDomain}" is in a known phishing/malware blocklist (49K+ domains)`, weight: 50 });
+        }
+        // URL feature analysis (trained on 58K+ labeled URLs)
+        const urlFeatures = analyzeUrlFeatures(cleaned);
+        trainingData.urlFeatures = urlFeatures;
+        if (urlFeatures.riskScore >= 50) {
+          signals.push({ text: `URL structure matches phishing patterns (${urlFeatures.riskScore}% match based on 58K trained URLs)`, weight: Math.round(urlFeatures.riskScore * 0.3) });
+        }
+      } catch { /* invalid URL, pattern scanner already caught it */ }
+    }
+
+    if (type === "message") {
+      // Spam keyword analysis (trained on 5,572 labeled messages)
+      const spamScore = scoreSpamLikelihood(cleaned);
+      trainingData.spamAnalysis = spamScore;
+      if (spamScore.isLikelySpam) {
+        signals.push({ text: `Message contains ${spamScore.matchedKeywords.length} spam-associated keywords (trained on 5,572 messages)`, weight: Math.round(spamScore.score * 0.2) });
+      }
+
+      // Check URLs in message against domain blocklist
+      const msgUrls = cleaned.match(/https?:\/\/\S+|www\.\S+/gi) || [];
+      for (const u of msgUrls.slice(0, 3)) {
+        try {
+          const urlObj = new URL(u.startsWith('http') ? u : `https://${u}`);
+          const blockCheck = isDomainBlocked(urlObj.hostname);
+          if (blockCheck.blocked) {
+            signals.push({ text: `Contains link to known phishing/malware domain "${blockCheck.matchedDomain}"`, weight: 50 });
+          }
+        } catch { /* skip invalid URLs */ }
       }
     }
 
@@ -208,6 +252,8 @@ export async function POST(req: NextRequest) {
       shareText,
       // OSINT detail data for frontend panels
       ...(osintResults ? { osint: osintResults } : {}),
+      // Training data analysis
+      ...(Object.keys(trainingData).length > 0 ? { training: trainingData } : {}),
       ...(usernameResult ? { username_lookup: usernameResult } : {}),
       // Enhanced intelligence (new modules)
       ...(unified ? {
