@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
 import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus, analyzeXrplWallet } from "@/lib/osint";
 import type { RiskLevel } from "@/lib/types";
+import { runUnifiedScan } from "@/lib/scanners/unifiedScan";
 
 export async function POST(req: NextRequest) {
   try {
@@ -162,6 +163,20 @@ export async function POST(req: NextRequest) {
     const topSignal = riskSignals[0]?.text || "No warning signs found.";
     const shareText = `TrustChekr flagged this as ${riskLabels[riskLevel]}. ${topSignal}`;
 
+    // Run unified scan pipeline (graph + AI detection) — non-blocking
+    let unified: any = null;
+    try {
+      unified = await runUnifiedScan(
+        { score: riskSignals.reduce((sum: number, s: any) => sum + (s.weight ?? 0), 0), signals: riskSignals, riskLevel },
+        patternResult.inputType,
+        patternResult.inputValue,
+        {
+          runAIDetection: patternResult.inputType === "message",
+          textForAI: patternResult.inputType === "message" ? input : undefined,
+        }
+      );
+    } catch { /* unified scan is optional — don't break existing results */ }
+
     return NextResponse.json({
       inputType: patternResult.inputType,
       inputValue: patternResult.inputValue,
@@ -177,6 +192,13 @@ export async function POST(req: NextRequest) {
       reportTo: patternResult.reportTo,
       educationalTip: patternResult.educationalTip,
       shareText,
+      // Enhanced intelligence (new modules)
+      ...(unified ? {
+        graph: unified.graph,
+        ai_detection: unified.ai_detection,
+        overall_risk_score: unified.overall_risk_score,
+        overall_risk_label: unified.overall_risk_label,
+      } : {}),
     });
   } catch {
     return NextResponse.json(
