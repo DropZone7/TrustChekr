@@ -4,6 +4,7 @@ import { useState } from "react";
 import ScanForm from "@/components/ScanForm";
 import Results from "@/components/Results";
 import type { ScanResult } from "@/lib/types";
+import { LatestScamAlertsWidget } from "@/components/scam-intel/LatestScamAlertsWidget";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -139,6 +140,9 @@ export default function Home() {
               Designed for seniors, parents, and teens. Start learning →
             </p>
           </a>
+
+          {/* Scam Alerts Widget */}
+          <LatestScamAlertsWidget />
 
           {/* Newsletter CTA */}
           <div
