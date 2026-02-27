@@ -34,6 +34,10 @@ export async function submitScamReport(input: ScamReportInput) {
       entity_ids: entityIds,
       verified: false,
       upvotes: 0,
+      source_page: 'community',
+      source_ref: 'user_submission',
+      report_type: input.scam_type,
+      metadata: {},
     })
     .select('id')
     .single();

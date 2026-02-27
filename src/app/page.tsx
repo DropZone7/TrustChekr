@@ -5,6 +5,7 @@ import ScanForm from "@/components/ScanForm";
 import Results from "@/components/Results";
 import type { ScanResult } from "@/lib/types";
 import { LatestScamAlertsWidget } from "@/components/scam-intel/LatestScamAlertsWidget";
+import { ScamCostTicker } from "@/components/ScamCostTicker";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -12,7 +13,7 @@ export default function Home() {
 
   const [error, setError] = useState<string | null>(null);
 
-  const handleScan = async (type: string, input: string) => {
+  const handleScan = async (type: string, input: string, botProfile?: any) => {
     setScanning(true);
     setResult(null);
     setError(null);
@@ -21,7 +22,7 @@ export default function Home() {
       const res = await fetch("/api/scan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type, input }),
+        body: JSON.stringify({ type, input, botProfile }),
       });
       const data = await res.json();
 
@@ -70,6 +71,9 @@ export default function Home() {
           </div>
 
           {/* Hero */}
+          {/* Scam cost ticker */}
+          <ScamCostTicker />
+
           <div className="text-center flex flex-col gap-3 pt-4">
             <h1
               className="text-3xl font-bold"

@@ -6,7 +6,7 @@ import { runUnifiedScan } from "@/lib/scanners/unifiedScan";
 
 export async function POST(req: NextRequest) {
   try {
-    const { type, input } = await req.json();
+    const { type, input, botProfile } = await req.json();
 
     if (!type || !input || typeof input !== "string" || input.trim().length === 0) {
       return NextResponse.json(
@@ -173,6 +173,7 @@ export async function POST(req: NextRequest) {
         {
           runAIDetection: patternResult.inputType === "message",
           textForAI: patternResult.inputType === "message" ? input : undefined,
+          botProfile: botProfile ?? undefined,
         }
       );
     } catch { /* unified scan is optional — don't break existing results */ }

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import FileUpload from "./FileUpload";
+import { useBotDetection } from "@/hooks/useBotDetection";
 
 const scanTypes = [
   { id: "website", emoji: "🌐", label: "Check a website", placeholder: "Paste the website address here (e.g. www.example.com)" },
@@ -11,9 +12,10 @@ const scanTypes = [
   { id: "file", emoji: "📎", label: "Upload a file", placeholder: "" },
 ];
 
-export default function ScanForm({ onScan }: { onScan: (type: string, input: string) => void }) {
+export default function ScanForm({ onScan }: { onScan: (type: string, input: string, botProfile?: any) => void }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [input, setInput] = useState("");
+  const { onKeyDown: botKeyDown, onMouseMove: botMouseMove, getProfile } = useBotDetection();
 
   const activeType = scanTypes.find((t) => t.id === selected);
 
@@ -27,7 +29,7 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" onMouseMove={botMouseMove as any}>
       {/* Scan type tiles */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {scanTypes.map((t) => (
@@ -62,6 +64,7 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
               placeholder={activeType.placeholder}
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={botKeyDown as any}
               autoFocus
             />
           ) : (
@@ -72,8 +75,8 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
               placeholder={activeType.placeholder}
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => { botKeyDown(); if (e.key === "Enter" && input.trim()) onScan(activeType.id, input.trim(), getProfile()); }}
               autoFocus
-              onKeyDown={(e) => e.key === "Enter" && input.trim() && onScan(activeType.id, input.trim())}
             />
           )}
 
@@ -82,7 +85,7 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
           </p>
 
           <button
-            onClick={() => input.trim() && onScan(activeType.id, input.trim())}
+            onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
             disabled={!input.trim()}
             className="w-full py-4 rounded-xl text-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
