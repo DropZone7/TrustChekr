@@ -7,43 +7,45 @@ import { useState, useMemo, useEffect } from 'react';
 // USA: FTC Consumer Sentinel 2024 — $12.5B losses, 25% YoY increase
 // Mexico: CONDUSEF — limited public data, included for coverage
 
-// Canadian provinces — reports/losses proportional to CAFC provincial breakdown
-// CAFC states Ontario has most reports, followed by BC, QC, AB
+import { CA_PATH, US_PATH, MX_PATH } from './paths';
+
+// Canadian provinces — coordinates from real geographic projection
+// Reports/losses proportional to CAFC 2024 provincial breakdown
 const CANADA_REGIONS = [
-  { code: 'ON', name: 'Ontario', x: 420, y: 235, country: 'CA', reports: 38000, losses: 228000000, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'QC', name: 'Quebec', x: 500, y: 210, country: 'CA', reports: 16500, losses: 99000000, topScam: 'Romance scams', trend: 'up' as const },
-  { code: 'BC', name: 'British Columbia', x: 115, y: 220, country: 'CA', reports: 17400, losses: 104000000, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'AB', name: 'Alberta', x: 175, y: 200, country: 'CA', reports: 13200, losses: 79000000, topScam: 'Crypto fraud', trend: 'up' as const },
-  { code: 'MB', name: 'Manitoba', x: 280, y: 220, country: 'CA', reports: 3800, losses: 23000000, topScam: 'CRA impersonation', trend: 'stable' as const },
-  { code: 'SK', name: 'Saskatchewan', x: 225, y: 210, country: 'CA', reports: 3200, losses: 19000000, topScam: 'Employment scams', trend: 'stable' as const },
-  { code: 'NS', name: 'Nova Scotia', x: 570, y: 240, country: 'CA', reports: 2800, losses: 17000000, topScam: 'Phishing', trend: 'up' as const },
-  { code: 'NB', name: 'New Brunswick', x: 545, y: 225, country: 'CA', reports: 2200, losses: 13000000, topScam: 'Grandparent scams', trend: 'stable' as const },
-  { code: 'NL', name: 'Newfoundland & Labrador', x: 600, y: 190, country: 'CA', reports: 1600, losses: 10000000, topScam: 'Lottery scams', trend: 'down' as const },
-  { code: 'PE', name: 'Prince Edward Island', x: 565, y: 215, country: 'CA', reports: 500, losses: 3000000, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'NT', name: 'Northwest Territories', x: 185, y: 115, country: 'CA', reports: 150, losses: 900000, topScam: 'Gov impersonation', trend: 'stable' as const },
-  { code: 'YT', name: 'Yukon', x: 105, y: 115, country: 'CA', reports: 130, losses: 800000, topScam: 'Investment fraud', trend: 'stable' as const },
-  { code: 'NU', name: 'Nunavut', x: 370, y: 100, country: 'CA', reports: 80, losses: 500000, topScam: 'Phishing', trend: 'stable' as const },
+  { code: 'ON', name: 'Ontario', x: 317, y: 255, country: 'CA', reports: 38000, losses: 228000000, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'QC', name: 'Quebec', x: 346, y: 230, country: 'CA', reports: 16500, losses: 99000000, topScam: 'Romance scams', trend: 'up' as const },
+  { code: 'BC', name: 'British Columbia', x: 164, y: 210, country: 'CA', reports: 17400, losses: 104000000, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'AB', name: 'Alberta', x: 198, y: 175, country: 'CA', reports: 13200, losses: 79000000, topScam: 'Crypto fraud', trend: 'up' as const },
+  { code: 'MB', name: 'Manitoba', x: 255, y: 205, country: 'CA', reports: 3800, losses: 23000000, topScam: 'CRA impersonation', trend: 'stable' as const },
+  { code: 'SK', name: 'Saskatchewan', x: 229, y: 201, country: 'CA', reports: 3200, losses: 19000000, topScam: 'Employment scams', trend: 'stable' as const },
+  { code: 'NS', name: 'Nova Scotia', x: 372, y: 248, country: 'CA', reports: 2800, losses: 17000000, topScam: 'Phishing', trend: 'up' as const },
+  { code: 'NB', name: 'New Brunswick', x: 362, y: 237, country: 'CA', reports: 2200, losses: 13000000, topScam: 'Grandparent scams', trend: 'stable' as const },
+  { code: 'NL', name: 'Newfoundland & Labrador', x: 411, y: 223, country: 'CA', reports: 1600, losses: 10000000, topScam: 'Lottery scams', trend: 'down' as const },
+  { code: 'PE', name: 'Prince Edward Island', x: 374, y: 235, country: 'CA', reports: 500, losses: 3000000, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'NT', name: 'Northwest Territories', x: 195, y: 102, country: 'CA', reports: 150, losses: 900000, topScam: 'Gov impersonation', trend: 'stable' as const },
+  { code: 'YT', name: 'Yukon', x: 122, y: 117, country: 'CA', reports: 130, losses: 800000, topScam: 'Investment fraud', trend: 'stable' as const },
+  { code: 'NU', name: 'Nunavut', x: 304, y: 92, country: 'CA', reports: 80, losses: 500000, topScam: 'Phishing', trend: 'stable' as const },
 ];
 
-// US regions (grouped by census region for readability — individual state detail later)
+// US states — coordinates from real geographic projection
 const US_REGIONS = [
-  { code: 'CA-US', name: 'California', x: 100, y: 365, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'TX', name: 'Texas', x: 220, y: 410, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'FL', name: 'Florida', x: 430, y: 430, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'NY', name: 'New York', x: 490, y: 290, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'IL', name: 'Illinois', x: 370, y: 310, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'PA', name: 'Pennsylvania', x: 470, y: 300, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
-  { code: 'OH', name: 'Ohio', x: 420, y: 300, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'GA', name: 'Georgia', x: 430, y: 390, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'WA', name: 'Washington', x: 105, y: 260, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'AZ', name: 'Arizona', x: 145, y: 390, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
+  { code: 'CA-US', name: 'California', x: 177, y: 311, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'TX', name: 'Texas', x: 253, y: 359, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'FL', name: 'Florida', x: 310, y: 386, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'NY', name: 'New York', x: 336, y: 280, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'IL', name: 'Illinois', x: 281, y: 280, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'PA', name: 'Pennsylvania', x: 326, y: 285, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
+  { code: 'OH', name: 'Ohio', x: 308, y: 285, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'GA', name: 'Georgia', x: 302, y: 337, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'WA', name: 'Washington', x: 167, y: 223, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'AZ', name: 'Arizona', x: 203, y: 339, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
 ];
 
-// Mexico regions
+// Mexico regions — coordinates from real geographic projection
 const MX_REGIONS = [
-  { code: 'CDMX', name: 'Mexico City', x: 240, y: 480, country: 'MX', reports: 0, losses: 0, topScam: 'Phishing', trend: 'up' as const },
-  { code: 'JAL', name: 'Jalisco', x: 190, y: 465, country: 'MX', reports: 0, losses: 0, topScam: 'Bank impersonation', trend: 'up' as const },
-  { code: 'NLE', name: 'Nuevo León', x: 230, y: 440, country: 'MX', reports: 0, losses: 0, topScam: 'Phone fraud', trend: 'stable' as const },
+  { code: 'CDMX', name: 'Mexico City', x: 248, y: 453, country: 'MX', reports: 0, losses: 0, topScam: 'Phishing', trend: 'up' as const },
+  { code: 'JAL', name: 'Jalisco', x: 233, y: 443, country: 'MX', reports: 0, losses: 0, topScam: 'Bank impersonation', trend: 'up' as const },
+  { code: 'NLE', name: 'Nuevo León', x: 244, y: 402, country: 'MX', reports: 0, losses: 0, topScam: 'Phone fraud', trend: 'stable' as const },
 ];
 
 const ALL_REGIONS = [...CANADA_REGIONS, ...US_REGIONS, ...MX_REGIONS];
@@ -177,56 +179,13 @@ export default function MapPage() {
           <svg viewBox="0 0 700 530" className="w-full" style={{ minHeight: '350px' }}>
             <rect width="700" height="530" fill="transparent" />
 
-            {/* Country outlines — simplified SVG paths */}
-            {/* Canada */}
-            <path d="
-              M 50,250 L 55,230 L 50,210 L 55,195 L 65,190 L 60,175 L 65,155 L 75,140
-              L 80,120 L 95,110 L 110,100 L 130,95 L 150,90 L 175,85 L 200,80
-              L 230,75 L 260,70 L 290,68 L 320,65 L 350,60 L 380,58 L 400,55
-              L 420,58 L 440,62 L 460,70 L 470,80 L 480,90 L 490,95
-              L 510,100 L 530,110 L 540,120 L 550,130 L 560,140
-              L 580,150 L 600,160 L 620,170 L 630,180 L 635,195
-              L 630,205 L 620,210 L 610,215 L 600,220
-              L 590,230 L 580,240 L 570,248 L 555,252
-              L 540,255 L 520,258 L 500,260 L 480,258 L 460,255
-              L 440,252 L 420,255 L 400,258 L 380,260
-              L 360,258 L 340,260 L 320,258 L 300,260
-              L 280,258 L 260,260 L 240,258 L 220,260
-              L 200,258 L 180,260 L 160,258 L 140,260
-              L 120,258 L 100,260 L 80,258 L 60,255 L 50,250 Z
-            " fill="#ffffff" fillOpacity="0.6" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
-
-            {/* USA */}
-            <path d="
-              M 50,260 L 80,258 L 120,258 L 160,258 L 200,258 L 240,258
-              L 280,258 L 320,258 L 360,258 L 400,258 L 440,252
-              L 460,255 L 480,258 L 500,260 L 520,258 L 540,260
-              L 530,275 L 520,290 L 510,305 L 505,320 L 500,335
-              L 495,350 L 490,365 L 480,380 L 470,395 L 460,410
-              L 450,420 L 440,425 L 430,430 L 420,428 L 400,425
-              L 380,430 L 360,435 L 340,432 L 320,430
-              L 300,432 L 280,435 L 260,432 L 240,430
-              L 220,432 L 200,435 L 180,430 L 160,425
-              L 140,420 L 120,415 L 100,410
-              L 85,400 L 75,385 L 65,370 L 58,355
-              L 52,340 L 48,320 L 45,300 L 48,280 L 50,260 Z
-            " fill="#dbeafe" fillOpacity="0.4" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
-
-            {/* Mexico */}
-            <path d="
-              M 100,410 L 120,415 L 140,420 L 160,425 L 180,430
-              L 200,435 L 220,432 L 240,430 L 260,435 L 280,438
-              L 300,440 L 310,445 L 315,455 L 310,465 L 300,475
-              L 290,485 L 275,495 L 260,500 L 240,505 L 220,508
-              L 200,510 L 180,508 L 165,500 L 155,490 L 148,480
-              L 140,470 L 130,460 L 120,450 L 110,440 L 105,425 L 100,410 Z
-            " fill="#d1fae5" fillOpacity="0.4" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
-
-            {/* Alaska (small inset) */}
-            <path d="
-              M 30,120 L 40,105 L 55,95 L 70,100 L 80,110 L 75,125
-              L 65,135 L 50,140 L 35,135 L 30,120 Z
-            " fill="#dbeafe" fillOpacity="0.3" stroke="#dc2626" strokeWidth="1" strokeOpacity="0.4" />
+            {/* Country outlines — Natural Earth 110m GeoJSON projected to SVG (public domain) */}
+            {/* Canada — white fill, red border */}
+            <path d={CA_PATH} fill="#ffffff" fillOpacity="0.7" stroke="#dc2626" strokeWidth="1.2" strokeOpacity="0.6" />
+            {/* USA — light blue fill, red border */}
+            <path d={US_PATH} fill="#dbeafe" fillOpacity="0.5" stroke="#dc2626" strokeWidth="1.2" strokeOpacity="0.6" />
+            {/* Mexico — light green fill, red border */}
+            <path d={MX_PATH} fill="#d1fae5" fillOpacity="0.5" stroke="#dc2626" strokeWidth="1.2" strokeOpacity="0.6" />
 
             {/* Region bubbles */}
             {visibleRegions.map((region) => {
