@@ -136,11 +136,26 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
         </button>
       </div>
 
-      {/* Disclaimer */}
-      <p className="text-sm text-center" style={{ color: "var(--tc-text-muted)" }}>
-        TrustChekr helps spot patterns, not guarantees. This is informational only — not legal or financial advice.
-        If you are unsure, do not send money and consider contacting your bank or local authorities.
-      </p>
+      {/* Disclaimer — Moffatt-compliant inline warning */}
+      <div
+        className="p-4 rounded-xl border text-sm"
+        style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)", color: "var(--tc-text-muted)" }}
+      >
+        <p className="font-semibold mb-1" style={{ color: "var(--tc-text-main)" }}>⚠️ Automated Analysis Only</p>
+        <p className="mb-2">
+          This is an automated risk assessment based on pattern matching and security databases as of {new Date().toLocaleDateString("en-CA")}. 
+          No tool can detect all scams. New scam domains, phone numbers, and tactics are created daily.
+        </p>
+        <p className="mb-2">
+          <strong>This is not a guarantee of safety.</strong> Always verify high-value transactions through independent channels — 
+          type the official website address directly into your browser, or call using a number from official company materials.
+        </p>
+        <p>
+          TrustChekr provides information to support your own decision-making. It is not legal or financial advice. 
+          TrustChekr is not liable for losses resulting from scam or fraud events. When in doubt, contact your bank 
+          or local authorities directly.
+        </p>
+      </div>
 
       {/* Start over */}
       <button

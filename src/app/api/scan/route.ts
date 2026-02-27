@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
-import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal } from "@/lib/osint";
+import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus } from "@/lib/osint";
 import type { RiskLevel } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
@@ -51,12 +51,14 @@ export async function POST(req: NextRequest) {
 
     // 2. Run OSINT based on input type
     if (type === "website") {
-      const [domainResult, safetyResult, vtResult] = await Promise.all([
+      const [domainResult, safetyResult, vtResult, phishResult, urlhausResult] = await Promise.all([
         analyzeDomain(cleaned),
         checkUrlSafety(cleaned),
         checkVirusTotal(cleaned),
+        checkPhishTank(cleaned),
+        checkUrlhaus(cleaned),
       ]);
-      signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
+      signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals, ...phishResult.signals, ...urlhausResult.signals);
     }
 
     if (type === "other") {
@@ -77,12 +79,14 @@ export async function POST(req: NextRequest) {
       const urlPattern = /https?:\/\/\S+|www\.\S+/gi;
       const urls = cleaned.match(urlPattern) || [];
       for (const url of urls.slice(0, 3)) {
-        const [domainResult, safetyResult, vtResult] = await Promise.all([
+        const [domainResult, safetyResult, vtResult, phishResult, urlhausResult] = await Promise.all([
           analyzeDomain(url),
           checkUrlSafety(url),
           checkVirusTotal(url),
+          checkPhishTank(url),
+          checkUrlhaus(url),
         ]);
-        signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals);
+        signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals, ...phishResult.signals, ...urlhausResult.signals);
       }
 
       const emailPattern = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
@@ -142,7 +146,7 @@ export async function POST(req: NextRequest) {
 
     // ── Use pattern result for next steps / educational tip ──
     const riskLabels: Record<RiskLevel, string> = {
-      safe: "Likely Safe",
+      safe: "Low Risk",
       suspicious: "Suspicious",
       "high-risk": "High-Risk",
       "very-likely-scam": "Very Likely Scam",

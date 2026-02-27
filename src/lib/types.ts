@@ -17,7 +17,7 @@ export const riskConfig: Record<
   { label: string; color: string; bg: string; border: string }
 > = {
   safe: {
-    label: "Likely Safe",
+    label: "Low Risk",
     color: "var(--tc-safe)",
     bg: "#eafaf1",
     border: "var(--tc-safe)",

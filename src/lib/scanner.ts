@@ -387,7 +387,7 @@ function getEducationalTip(type: string, isRomance: boolean): string {
 
 function buildShareText(risk: RiskLevel, scamType: string, bullets: string[]): string {
   const riskLabels: Record<RiskLevel, string> = {
-    safe: "Likely Safe",
+    safe: "Low Risk",
     suspicious: "Suspicious",
     "high-risk": "High-Risk",
     "very-likely-scam": "Very Likely Scam",
