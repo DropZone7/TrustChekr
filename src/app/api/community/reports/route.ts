@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getRecentReports, searchReports, submitScamReport } from '@/lib/community/scamReports';
+import { logAudit } from '@/lib/auditLog';
 import type { EntityType } from '@/lib/graph/entityGraph';
 
 export async function GET(req: NextRequest) {
@@ -49,6 +50,7 @@ export async function POST(req: NextRequest) {
       province,
     });
 
+    logAudit('report_submitted', { scam_type: body.scam_type, province: body.province });
     return NextResponse.json({ success: true, id: result.id }, { status: 201 });
   } catch (e: any) {
     console.error('Report submission error:', e);

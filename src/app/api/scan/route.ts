@@ -3,6 +3,7 @@ import { runScan } from "@/lib/scanner";
 import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus, analyzeXrplWallet } from "@/lib/osint";
 import type { RiskLevel } from "@/lib/types";
 import { runUnifiedScan } from "@/lib/scanners/unifiedScan";
+import { logAudit, hashIp } from "@/lib/auditLog";
 
 export async function POST(req: NextRequest) {
   try {
@@ -177,6 +178,10 @@ export async function POST(req: NextRequest) {
         }
       );
     } catch { /* unified scan is optional — don't break existing results */ }
+
+    // Audit log (fire-and-forget)
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+    logAudit('scan', { type: patternResult.inputType, riskLevel, overall_risk_label: unified?.overall_risk_label }, hashIp(clientIp));
 
     return NextResponse.json({
       inputType: patternResult.inputType,

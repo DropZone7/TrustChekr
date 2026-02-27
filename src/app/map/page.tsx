@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 // Canadian provinces with approximate center coordinates for SVG positioning
 const PROVINCES = [
@@ -56,15 +56,41 @@ function formatMoney(n: number): string {
 export default function MapPage() {
   const [selected, setSelected] = useState<string | null>(null);
   const [scamFilter, setScamFilter] = useState<string | null>(null);
+  const [liveData, setLiveData] = useState<{ code: string; reports: number; topScam: string }[] | null>(null);
+
+  useEffect(() => {
+    fetch('/api/stats/provinces')
+      .then(res => res.json())
+      .then(data => { if (data.provinces?.length) setLiveData(data.provinces); })
+      .catch(() => {});
+  }, []);
+
+  const mergedData = useMemo(() => {
+    const result = { ...SCAM_DATA };
+    if (liveData) {
+      for (const live of liveData) {
+        if (result[live.code]) {
+          result[live.code] = {
+            ...result[live.code],
+            reports: result[live.code].reports + live.reports,
+          };
+          if (live.reports > 5 && live.topScam) {
+            result[live.code].topScam = live.topScam;
+          }
+        }
+      }
+    }
+    return result;
+  }, [liveData]);
 
   const totalLosses = useMemo(() =>
-    Object.values(SCAM_DATA).reduce((sum, d) => sum + d.losses, 0), []);
+    Object.values(mergedData).reduce((sum, d) => sum + d.losses, 0), []);
   const totalReports = useMemo(() =>
-    Object.values(SCAM_DATA).reduce((sum, d) => sum + d.reports, 0), []);
+    Object.values(mergedData).reduce((sum, d) => sum + d.reports, 0), []);
 
-  const maxReports = Math.max(...Object.values(SCAM_DATA).map((d) => d.reports));
+  const maxReports = Math.max(...Object.values(mergedData).map((d) => d.reports));
 
-  const selectedData = selected ? SCAM_DATA[selected] : null;
+  const selectedData = selected ? mergedData[selected] : null;
   const selectedProv = selected ? PROVINCES.find((p) => p.code === selected) : null;
 
   function getHeatColor(reports: number): string {
@@ -116,7 +142,7 @@ export default function MapPage() {
 
             {/* Province bubbles */}
             {PROVINCES.map((prov) => {
-              const data = SCAM_DATA[prov.code];
+              const data = mergedData[prov.code];
               if (!data) return null;
               const radius = 12 + (data.reports / maxReports) * 30;
               const color = getHeatColor(data.reports);
@@ -188,7 +214,7 @@ export default function MapPage() {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {SCAM_TYPES.map((scam) => {
-              const provinces = Object.entries(SCAM_DATA).filter(([, d]) => d.topScam === scam.type);
+              const provinces = Object.entries(mergedData).filter(([, d]) => d.topScam === scam.type);
               return (
                 <div key={scam.type} className="p-3 rounded-xl text-center" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
                   <span className="text-2xl">{scam.emoji}</span>

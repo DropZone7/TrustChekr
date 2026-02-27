@@ -1,5 +1,6 @@
 import { supabaseServer } from '@/lib/supabase/server';
 import { upsertEntity, type EntityType } from '@/lib/graph/entityGraph';
+import { logAudit } from '@/lib/auditLog';
 
 export interface ScamReportInput {
   scam_type: string;
@@ -83,6 +84,8 @@ export async function upvoteReport(reportId: string) {
     .from('user_reports')
     .update({ upvotes: current + 1 })
     .eq('id', reportId);
+
+  logAudit('upvote', { report_id: reportId });
 }
 
 // Rate limiting: check reports from same IP in last 24h
