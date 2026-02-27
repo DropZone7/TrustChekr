@@ -180,8 +180,10 @@ export async function POST(req: NextRequest) {
     } catch { /* unified scan is optional — don't break existing results */ }
 
     // Audit log (fire-and-forget)
-    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
-    logAudit('scan', { type: patternResult.inputType, riskLevel, overall_risk_label: unified?.overall_risk_label }, hashIp(clientIp));
+    try {
+      const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+      logAudit('scan', { type: patternResult.inputType, riskLevel, overall_risk_label: unified?.overall_risk_label }, hashIp(clientIp));
+    } catch { /* never break scan for audit */ }
 
     return NextResponse.json({
       inputType: patternResult.inputType,
