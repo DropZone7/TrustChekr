@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // --- Rate limiting ---
 type Counter = { count: number; resetAt: number };
-const RATE_LIMIT = 100;
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const ONE_HOUR_MS = 60 * 60 * 1000;
 const ipCounters = new Map<string, Counter>();
+const newsletterCounters = new Map<string, Counter>();
 
 function getClientIp(req: NextRequest): string {
   const header = req.headers.get('x-forwarded-for');
@@ -12,42 +13,75 @@ function getClientIp(req: NextRequest): string {
   return header.split(',')[0].trim() || 'unknown';
 }
 
-function checkLimit(ip: string): boolean {
+function checkLimit(ip: string, map: Map<string, Counter>, limit: number, windowMs: number): boolean {
   const now = Date.now();
-  const existing = ipCounters.get(ip);
+  const existing = map.get(ip);
 
   if (!existing) {
-    ipCounters.set(ip, { count: 1, resetAt: now + ONE_DAY_MS });
+    map.set(ip, { count: 1, resetAt: now + windowMs });
     return true;
   }
 
   if (now > existing.resetAt) {
     existing.count = 1;
-    existing.resetAt = now + ONE_DAY_MS;
+    existing.resetAt = now + windowMs;
     return true;
   }
 
-  if (existing.count >= RATE_LIMIT) return false;
-
+  if (existing.count >= limit) return false;
   existing.count += 1;
   return true;
 }
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const ip = getClientIp(req);
 
-  // Rate limit public API
+  // Rate limit public API: 100/day
   if (pathname.startsWith('/api/v1/')) {
-    const ip = getClientIp(req);
-    const ok = checkLimit(ip);
-
-    if (!ok) {
+    if (!checkLimit(ip, ipCounters, 100, ONE_DAY_MS)) {
       return NextResponse.json(
-        {
-          error: 'Rate limit exceeded. Free tier: 100 requests/day. Contact partnerships@trustchekr.com for commercial access.',
-        },
+        { error: 'Rate limit exceeded. Free tier: 100 requests/day. Contact partnerships@trustchekr.com for commercial access.' },
         { status: 429 }
       );
+    }
+  }
+
+  // Rate limit scan API: 50/day per IP
+  if (pathname === '/api/scan') {
+    if (!checkLimit(`scan:${ip}`, ipCounters, 50, ONE_DAY_MS)) {
+      return NextResponse.json(
+        { error: 'You\'ve reached the daily scan limit. Please try again tomorrow.' },
+        { status: 429 }
+      );
+    }
+
+    // Reject oversized payloads (>10KB)
+    const contentLength = parseInt(req.headers.get('content-length') || '0', 10);
+    if (contentLength > 10240) {
+      return NextResponse.json(
+        { error: 'Input too large. Please paste text directly instead of uploading files.' },
+        { status: 413 }
+      );
+    }
+  }
+
+  // Rate limit newsletter: 5/hour per IP
+  if (pathname === '/api/newsletter') {
+    if (!checkLimit(ip, newsletterCounters, 5, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many attempts. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Block admin path without token (server-side gate)
+  if (pathname.startsWith('/tc47x/')) {
+    const token = req.nextUrl.searchParams.get('k');
+    const expected = process.env.TC_ADMIN_TOKEN;
+    if (!token || !expected || token !== expected) {
+      return new NextResponse('Unauthorized', { status: 401 });
     }
   }
 
@@ -55,5 +89,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/v1/:path*'],
+  matcher: ['/api/v1/:path*', '/api/scan', '/api/newsletter', '/tc47x/:path*'],
 };
