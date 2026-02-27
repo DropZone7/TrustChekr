@@ -9,43 +9,43 @@ import { useState, useMemo, useEffect } from 'react';
 
 import { CA_PATH, US_PATH, MX_PATH } from './paths';
 
-// Canadian provinces — coordinates from real geographic projection
+// Canadian provinces — coordinates calibrated to amCharts Miller projection
 // Reports/losses proportional to CAFC 2024 provincial breakdown
 const CANADA_REGIONS = [
-  { code: 'ON', name: 'Ontario', x: 317, y: 255, country: 'CA', reports: 38000, losses: 228000000, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'QC', name: 'Quebec', x: 346, y: 230, country: 'CA', reports: 16500, losses: 99000000, topScam: 'Romance scams', trend: 'up' as const },
-  { code: 'BC', name: 'British Columbia', x: 164, y: 210, country: 'CA', reports: 17400, losses: 104000000, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'AB', name: 'Alberta', x: 198, y: 175, country: 'CA', reports: 13200, losses: 79000000, topScam: 'Crypto fraud', trend: 'up' as const },
-  { code: 'MB', name: 'Manitoba', x: 255, y: 205, country: 'CA', reports: 3800, losses: 23000000, topScam: 'CRA impersonation', trend: 'stable' as const },
-  { code: 'SK', name: 'Saskatchewan', x: 229, y: 201, country: 'CA', reports: 3200, losses: 19000000, topScam: 'Employment scams', trend: 'stable' as const },
-  { code: 'NS', name: 'Nova Scotia', x: 372, y: 248, country: 'CA', reports: 2800, losses: 17000000, topScam: 'Phishing', trend: 'up' as const },
-  { code: 'NB', name: 'New Brunswick', x: 362, y: 237, country: 'CA', reports: 2200, losses: 13000000, topScam: 'Grandparent scams', trend: 'stable' as const },
-  { code: 'NL', name: 'Newfoundland & Labrador', x: 411, y: 223, country: 'CA', reports: 1600, losses: 10000000, topScam: 'Lottery scams', trend: 'down' as const },
-  { code: 'PE', name: 'Prince Edward Island', x: 374, y: 235, country: 'CA', reports: 500, losses: 3000000, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'NT', name: 'Northwest Territories', x: 195, y: 102, country: 'CA', reports: 150, losses: 900000, topScam: 'Gov impersonation', trend: 'stable' as const },
-  { code: 'YT', name: 'Yukon', x: 122, y: 117, country: 'CA', reports: 130, losses: 800000, topScam: 'Investment fraud', trend: 'stable' as const },
-  { code: 'NU', name: 'Nunavut', x: 304, y: 92, country: 'CA', reports: 80, losses: 500000, topScam: 'Phishing', trend: 'stable' as const },
+  { code: 'ON', name: 'Ontario', x: 434, y: 227, country: 'CA', reports: 38000, losses: 228000000, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'QC', name: 'Quebec', x: 464, y: 209, country: 'CA', reports: 16500, losses: 99000000, topScam: 'Romance scams', trend: 'up' as const },
+  { code: 'BC', name: 'British Columbia', x: 215, y: 191, country: 'CA', reports: 17400, losses: 104000000, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'AB', name: 'Alberta', x: 246, y: 173, country: 'CA', reports: 13200, losses: 79000000, topScam: 'Crypto fraud', trend: 'up' as const },
+  { code: 'MB', name: 'Manitoba', x: 318, y: 191, country: 'CA', reports: 3800, losses: 23000000, topScam: 'CRA impersonation', trend: 'stable' as const },
+  { code: 'SK', name: 'Saskatchewan', x: 282, y: 179, country: 'CA', reports: 3200, losses: 19000000, topScam: 'Employment scams', trend: 'stable' as const },
+  { code: 'NS', name: 'Nova Scotia', x: 500, y: 221, country: 'CA', reports: 2800, losses: 17000000, topScam: 'Phishing', trend: 'up' as const },
+  { code: 'NB', name: 'New Brunswick', x: 482, y: 213, country: 'CA', reports: 2200, losses: 13000000, topScam: 'Grandparent scams', trend: 'stable' as const },
+  { code: 'NL', name: 'Newfoundland & Labrador', x: 519, y: 185, country: 'CA', reports: 1600, losses: 10000000, topScam: 'Lottery scams', trend: 'down' as const },
+  { code: 'PE', name: 'Prince Edward Island', x: 494, y: 212, country: 'CA', reports: 500, losses: 3000000, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'NT', name: 'Northwest Territories', x: 252, y: 106, country: 'CA', reports: 150, losses: 900000, topScam: 'Gov impersonation', trend: 'stable' as const },
+  { code: 'YT', name: 'Yukon', x: 200, y: 112, country: 'CA', reports: 130, losses: 800000, topScam: 'Investment fraud', trend: 'stable' as const },
+  { code: 'NU', name: 'Nunavut', x: 385, y: 88, country: 'CA', reports: 80, losses: 500000, topScam: 'Phishing', trend: 'stable' as const },
 ];
 
-// US states — coordinates from real geographic projection
+// US states — coordinates calibrated to amCharts Miller projection
 const US_REGIONS = [
-  { code: 'CA-US', name: 'California', x: 177, y: 311, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'TX', name: 'Texas', x: 253, y: 359, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'FL', name: 'Florida', x: 310, y: 386, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'NY', name: 'New York', x: 336, y: 280, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'IL', name: 'Illinois', x: 281, y: 280, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'PA', name: 'Pennsylvania', x: 326, y: 285, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
-  { code: 'OH', name: 'Ohio', x: 308, y: 285, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
-  { code: 'GA', name: 'Georgia', x: 302, y: 337, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
-  { code: 'WA', name: 'Washington', x: 167, y: 223, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
-  { code: 'AZ', name: 'Arizona', x: 203, y: 339, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
+  { code: 'CA-US', name: 'California', x: 200, y: 318, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'TX', name: 'Texas', x: 306, y: 355, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'FL', name: 'Florida', x: 416, y: 379, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'NY', name: 'New York', x: 452, y: 270, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'IL', name: 'Illinois', x: 379, y: 282, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'PA', name: 'Pennsylvania', x: 446, y: 276, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
+  { code: 'OH', name: 'Ohio', x: 422, y: 280, country: 'US', reports: 0, losses: 0, topScam: 'Investment fraud', trend: 'up' as const },
+  { code: 'GA', name: 'Georgia', x: 409, y: 337, country: 'US', reports: 0, losses: 0, topScam: 'Impersonation scams', trend: 'up' as const },
+  { code: 'WA', name: 'Washington', x: 197, y: 240, country: 'US', reports: 0, losses: 0, topScam: 'Online shopping', trend: 'stable' as const },
+  { code: 'AZ', name: 'Arizona', x: 231, y: 343, country: 'US', reports: 0, losses: 0, topScam: 'Tech support', trend: 'stable' as const },
 ];
 
-// Mexico regions — coordinates from real geographic projection
+// Mexico regions — coordinates calibrated to amCharts Miller projection
 const MX_REGIONS = [
-  { code: 'CDMX', name: 'Mexico City', x: 248, y: 453, country: 'MX', reports: 0, losses: 0, topScam: 'Phishing', trend: 'up' as const },
-  { code: 'JAL', name: 'Jalisco', x: 233, y: 443, country: 'MX', reports: 0, losses: 0, topScam: 'Bank impersonation', trend: 'up' as const },
-  { code: 'NLE', name: 'Nuevo León', x: 244, y: 402, country: 'MX', reports: 0, losses: 0, topScam: 'Phone fraud', trend: 'stable' as const },
+  { code: 'CDMX', name: 'Mexico City', x: 318, y: 458, country: 'MX', reports: 0, losses: 0, topScam: 'Phishing', trend: 'up' as const },
+  { code: 'JAL', name: 'Jalisco', x: 294, y: 440, country: 'MX', reports: 0, losses: 0, topScam: 'Bank impersonation', trend: 'up' as const },
+  { code: 'NLE', name: 'Nuevo León', x: 312, y: 409, country: 'MX', reports: 0, losses: 0, topScam: 'Phone fraud', trend: 'stable' as const },
 ];
 
 const ALL_REGIONS = [...CANADA_REGIONS, ...US_REGIONS, ...MX_REGIONS];
