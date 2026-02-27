@@ -4,6 +4,8 @@ import { mapRowToScamPattern } from '@/lib/scamIntel/supabaseMapper';
 import { scamIntelSeed } from '@/lib/scamIntel/staticData';
 import Link from 'next/link';
 import { ACADEMY_MODULES, getModuleRoute, type AcademyModuleId } from '@/lib/academy/modules';
+import { ReportForm } from '@/components/user-reports/ReportForm';
+import { GrokipediaLink } from '@/components/grokipedia/GrokipediaLink';
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -177,6 +179,12 @@ export default async function ScamDetailsPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* Grokipedia */}
+      <GrokipediaLink query={scam.name} label={`Research "${scam.name}" on Grokipedia`} />
+
+      {/* Report Form */}
+      <ReportForm sourcePage="scam_detail" sourceRef={scam.id} />
 
       {/* Disclaimer */}
       <p className="text-xs text-center" style={{ color: 'var(--tc-text-muted)' }}>

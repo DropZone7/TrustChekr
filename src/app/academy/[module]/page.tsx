@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import { ReportForm } from "@/components/user-reports/ReportForm";
+import { GrokipediaLink } from "@/components/grokipedia/GrokipediaLink";
 
 // ── Module Data ──────────────────────────────────────────────
 const modules: Record<string, ModuleData> = {
@@ -855,6 +857,12 @@ export default function ModulePage() {
       >
         Back to All Modules
       </Link>
+
+      {/* Grokipedia */}
+      <GrokipediaLink query={mod.title} label={`Research "${mod.title}" on Grokipedia`} />
+
+      {/* Report Form */}
+      <ReportForm sourcePage="academy_module" sourceRef={moduleId} />
 
       {/* Disclaimer */}
       <p className="text-xs text-center" style={{ color: "var(--tc-text-muted)" }}>
