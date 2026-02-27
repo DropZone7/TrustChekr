@@ -194,7 +194,7 @@ export default function MapPage() {
               L 280,258 L 260,260 L 240,258 L 220,260
               L 200,258 L 180,260 L 160,258 L 140,260
               L 120,258 L 100,260 L 80,258 L 60,255 L 50,250 Z
-            " fill="#d4e6f1" fillOpacity="0.35" stroke="#1a5276" strokeWidth="1.5" strokeOpacity="0.3" />
+            " fill="#ffffff" fillOpacity="0.6" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
 
             {/* USA */}
             <path d="
@@ -210,7 +210,7 @@ export default function MapPage() {
               L 140,420 L 120,415 L 100,410
               L 85,400 L 75,385 L 65,370 L 58,355
               L 52,340 L 48,320 L 45,300 L 48,280 L 50,260 Z
-            " fill="#dbeafe" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" strokeOpacity="0.25" />
+            " fill="#dbeafe" fillOpacity="0.4" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
 
             {/* Mexico */}
             <path d="
@@ -220,13 +220,13 @@ export default function MapPage() {
               L 290,485 L 275,495 L 260,500 L 240,505 L 220,508
               L 200,510 L 180,508 L 165,500 L 155,490 L 148,480
               L 140,470 L 130,460 L 120,450 L 110,440 L 105,425 L 100,410 Z
-            " fill="#d1fae5" fillOpacity="0.25" stroke="#10b981" strokeWidth="1.5" strokeOpacity="0.25" />
+            " fill="#d1fae5" fillOpacity="0.4" stroke="#dc2626" strokeWidth="1.5" strokeOpacity="0.5" />
 
             {/* Alaska (small inset) */}
             <path d="
               M 30,120 L 40,105 L 55,95 L 70,100 L 80,110 L 75,125
               L 65,135 L 50,140 L 35,135 L 30,120 Z
-            " fill="#dbeafe" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="1" strokeOpacity="0.2" />
+            " fill="#dbeafe" fillOpacity="0.3" stroke="#dc2626" strokeWidth="1" strokeOpacity="0.4" />
 
             {/* Region bubbles */}
             {visibleRegions.map((region) => {
