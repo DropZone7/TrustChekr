@@ -10,6 +10,7 @@ const links = [
   { href: '/map', label: 'Scam Map' },
   { href: '/report', label: 'Report' },
   { href: '/learn', label: 'Learn' },
+  { href: '/stats', label: 'Stats' },
   { href: '/help', label: 'Help' },
 ];
 

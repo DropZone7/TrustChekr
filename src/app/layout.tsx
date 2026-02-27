@@ -9,17 +9,41 @@ import { ToastProvider } from "@/components/Toast";
 import { MobileNav } from "@/components/MobileNav";
 
 export const metadata: Metadata = {
-  title: "TrustChekr — Free Canadian Scam Detection Tool",
+  metadataBase: new URL("https://trustchekr.com"),
+  title: {
+    default: "TrustChekr — Free Canadian Scam Detection Tool",
+    template: "%s | TrustChekr",
+  },
   description:
     "Check if a website, phone number, email, or message is a scam. Free, private, no sign-up. Powered by OSINT and threat intelligence databases. Made in Canada.",
+  applicationName: "TrustChekr",
+  manifest: "/manifest.webmanifest",
   keywords: ["scam checker", "is this a scam", "scam detection canada", "phishing checker", "url scam checker", "phone scam checker canada", "email scam detector", "CRA scam", "romance scam canada", "fraud prevention canada"],
   openGraph: {
     title: "TrustChekr — Free Canadian Scam Detection Tool",
     description: "Paste a suspicious website, message, phone number, or email and get a plain-language risk assessment in seconds. Free and private.",
-    url: "https://trustchekr.com",
+    url: "/",
     siteName: "TrustChekr",
     locale: "en_CA",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "TrustChekr — Free Canadian Scam Detection Tool",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TrustChekr — Free Canadian Scam Detection Tool",
+    description: "Free Canadian Scam Detection Tool",
+    images: ["/twitter-image"],
+  },
+  icons: {
+    icon: "/icon",
+    apple: "/apple-icon",
   },
   alternates: {
     canonical: "https://trustchekr.com",

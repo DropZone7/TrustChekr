@@ -9,6 +9,7 @@ import { ScamCostTicker } from "@/components/ScamCostTicker";
 import { ScanProgress } from "@/components/ScanProgress";
 import { ScanHistory, addToHistory } from "@/components/ScanHistory";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { ScamOfTheDay } from "@/components/ScamOfTheDay";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -77,6 +78,9 @@ export default function Home() {
           {/* Hero */}
           {/* Scam cost ticker */}
           <ScamCostTicker />
+
+          {/* Scam of the Day */}
+          <ScamOfTheDay />
 
           <div className="text-center flex flex-col gap-3 pt-4">
             <h1

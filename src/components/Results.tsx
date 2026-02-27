@@ -6,6 +6,7 @@ import { riskConfig } from "@/lib/types";
 import PrintResults from "./PrintResults";
 import { OsintDetails } from "./OsintDetails";
 import { AffiliateRecommendations } from "./AffiliateRecommendations";
+import { ShareResult } from "./ShareResult";
 
 export default function Results({ result, onReset }: { result: ScanResult; onReset: () => void }) {
   const [showTechnical, setShowTechnical] = useState(false);
@@ -129,13 +130,11 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
         <p className="text-sm mb-3" style={{ color: "var(--tc-text-muted)" }}>
           {result.shareText}
         </p>
-        <button
-          onClick={handleCopy}
-          className="px-4 py-2 rounded-lg border text-sm font-medium cursor-pointer"
-          style={{ borderColor: "var(--tc-primary)", color: "var(--tc-primary)" }}
-        >
-          {copied ? "✅ Copied!" : "Copy to share"}
-        </button>
+        <ShareResult
+          result={result}
+          riskLabel={risk.label}
+          riskColor={risk.color}
+        />
       </div>
 
       {/* Disclaimer — Moffatt-compliant inline warning */}
