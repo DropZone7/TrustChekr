@@ -50,6 +50,24 @@ export default function Home() {
     <div className="flex flex-col gap-8">
       {!result && !scanning && (
         <>
+          {/* Scrolling ticker banner */}
+          <div className="overflow-hidden rounded-xl py-2.5 -mb-2" style={{ background: "var(--tc-primary)", color: "white" }}>
+            <div className="ticker-track whitespace-nowrap text-sm font-medium">
+              {[...Array(2)].map((_, copy) => (
+                <span key={copy} className="inline-block">
+                  <span className="mx-6">🚨 Canadians lost $569M to scams in 2024</span>
+                  <span className="mx-6">📞 The CRA will never call demanding gift cards</span>
+                  <span className="mx-6">💡 When in doubt, check it out — paste it here free</span>
+                  <span className="mx-6">🔒 Your bank will never ask for your password by email</span>
+                  <span className="mx-6">⚠️ Romance scams cost Canadians $50.3M last year</span>
+                  <span className="mx-6">🛡️ If it sounds too good to be true, it probably is</span>
+                  <span className="mx-6">📱 Don't click links in texts from unknown numbers</span>
+                  <span className="mx-6">🇨🇦 Report scams: antifraudcentre-centreantifraude.ca</span>
+                </span>
+              ))}
+            </div>
+          </div>
+
           {/* Hero */}
           <div className="text-center flex flex-col gap-3 pt-4">
             <h1
