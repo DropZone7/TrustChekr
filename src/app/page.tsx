@@ -60,7 +60,7 @@ export default function Home() {
             <div className="ticker-track whitespace-nowrap text-sm font-medium">
               {[...Array(2)].map((_, copy) => (
                 <span key={copy} className="inline-block">
-                  <span className="mx-6">🚨 Canadians lost $569M to scams in 2024</span>
+                  <span className="mx-6">🚨 Canadians lost $638M to scams in 2024 (CAFC)</span>
                   <span className="mx-6">📞 The CRA will never call demanding gift cards</span>
                   <span className="mx-6">💡 When in doubt, check it out — paste it here free</span>
                   <span className="mx-6">🔒 Your bank will never ask for your password by email</span>
