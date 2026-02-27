@@ -5,6 +5,8 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ReportForm } from "@/components/user-reports/ReportForm";
 import { GrokipediaLink } from "@/components/grokipedia/GrokipediaLink";
+import { useAcademyProgress } from "@/hooks/useAcademyProgress";
+import { slugToModuleId } from "@/lib/academy/progress";
 
 // ── Module Data ──────────────────────────────────────────────
 const modules: Record<string, ModuleData> = {
@@ -703,19 +705,16 @@ export default function ModulePage() {
   const params = useParams();
   const moduleId = params.module as string;
   const mod = modules[moduleId];
+  const { progress, setModuleStatus } = useAcademyProgress();
+  const academyModuleId = slugToModuleId(moduleId);
+  const currentStatus = academyModuleId && progress ? progress.modules[academyModuleId] : "not_started";
 
   useEffect(() => {
-    if (mod) {
-      try {
-        const stored = localStorage.getItem("tc-academy-progress");
-        const progress = stored ? JSON.parse(stored) : { modulesViewed: [] };
-        if (!progress.modulesViewed.includes(moduleId)) {
-          progress.modulesViewed.push(moduleId);
-          localStorage.setItem("tc-academy-progress", JSON.stringify(progress));
-        }
-      } catch { /* */ }
+    if (mod && academyModuleId) {
+      // Auto-mark as in_progress when viewing (won't downgrade completed)
+      setModuleStatus(academyModuleId, "in_progress");
     }
-  }, [mod, moduleId]);
+  }, [mod, academyModuleId, setModuleStatus]);
 
   if (!mod) {
     return (
@@ -866,6 +865,30 @@ export default function ModulePage() {
       >
         Back to All Modules
       </Link>
+
+      {/* Mark as Completed */}
+      {academyModuleId && (
+        <div className="flex items-center justify-between p-4 rounded-xl border" style={{ borderColor: currentStatus === "completed" ? "var(--tc-safe)" : "var(--tc-border)", background: currentStatus === "completed" ? "#eafaf1" : "var(--tc-surface)" }}>
+          {currentStatus === "completed" ? (
+            <p className="font-semibold" style={{ color: "var(--tc-safe)" }}>
+              ✅ You've completed this module!
+            </p>
+          ) : (
+            <>
+              <p className="text-sm" style={{ color: "var(--tc-text-muted)" }}>
+                Finished the quiz? Mark this module as done.
+              </p>
+              <button
+                onClick={() => setModuleStatus(academyModuleId, "completed")}
+                className="px-4 py-2 rounded-lg font-semibold cursor-pointer"
+                style={{ background: "var(--tc-safe)", color: "white" }}
+              >
+                ✅ Mark as Completed
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       {/* Grokipedia */}
       <GrokipediaLink query={mod.title} label={`Research "${mod.title}" on Grokipedia`} />
