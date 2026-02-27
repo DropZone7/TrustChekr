@@ -62,7 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </a>
             <nav className="flex gap-4 text-sm" style={{ color: "var(--tc-text-muted)" }}>
               <a href="/" className="hover:underline">Home</a>
-              <a href="/romance" className="hover:underline">Romance Check</a>
+              <a href="/romance" className="hover:underline">Romance</a>
+              <a href="/report" className="hover:underline">Report</a>
               <a href="/learn" className="hover:underline">Learn</a>
               <a href="/help" className="hover:underline">Help</a>
             </nav>
@@ -75,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <footer className="w-full border-t border-[var(--tc-border)] bg-[var(--tc-surface)]">
           <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between text-sm" style={{ color: "var(--tc-text-muted)" }}>
-            <p>We never sell your information. Your checks stay private.</p>
+            <p>We never sell your information. <a href="/privacy" className="underline">Privacy & Terms</a></p>
             <div className="flex items-center gap-3">
               <HighContrastToggle />
               <TextSizeControl />
