@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     reporter_email: reporter_email || null,
     report_type,
     message,
-    metadata: metadata ?? {},
+    metadata: metadata ? JSON.stringify(metadata).length <= 2048 ? metadata : {} : {},
   });
 
   if (error) {

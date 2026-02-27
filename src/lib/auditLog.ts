@@ -9,12 +9,7 @@ export function logAudit(action: string, details: Record<string, any>, ipHash?: 
 }
 
 export function hashIp(ip: string): string {
-  // Simple non-crypto hash for IP anonymization (deterministic, not reversible enough for privacy)
-  let hash = 0;
-  for (let i = 0; i < ip.length; i++) {
-    const char = ip.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return Math.abs(hash).toString(16).padStart(8, '0').slice(0, 16);
+  // SHA-256 with static salt for PIPEDA-compliant IP anonymization
+  const crypto = require('crypto');
+  return crypto.createHash('sha256').update(`tc_salt_2026:${ip}`).digest('hex').slice(0, 16);
 }

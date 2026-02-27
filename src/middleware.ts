@@ -76,7 +76,35 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // Block admin path without token (server-side gate)
+  // Rate limit user reports: 10/hour per IP
+  if (pathname === '/api/user-reports') {
+    if (!checkLimit(`reports:${ip}`, newsletterCounters, 10, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many reports. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit community reports: 10/hour per IP
+  if (pathname.startsWith('/api/community/')) {
+    if (!checkLimit(`community:${ip}`, newsletterCounters, 10, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Block admin paths without token (server-side gate)
+  if (pathname.startsWith('/admin/')) {
+    const token = req.nextUrl.searchParams.get('k');
+    const expected = process.env.TC_ADMIN_TOKEN;
+    if (!token || !expected || token !== expected) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
+  }
+
   if (pathname.startsWith('/tc47x/')) {
     const token = req.nextUrl.searchParams.get('k');
     const expected = process.env.TC_ADMIN_TOKEN;
@@ -89,5 +117,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/v1/:path*', '/api/scan', '/api/newsletter', '/tc47x/:path*'],
+  matcher: ['/api/v1/:path*', '/api/scan', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/tc47x/:path*', '/admin/:path*'],
 };
