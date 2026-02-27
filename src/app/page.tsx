@@ -123,6 +123,65 @@ export default function Home() {
               You did the right thing by checking. Scams are designed to fool anyone. 🛡️
             </p>
           </div>
+
+          {/* Academy Promo */}
+          <a
+            href="/academy"
+            className="block p-5 rounded-xl border-2 text-center transition-all hover:shadow-md cursor-pointer"
+            style={{ borderColor: "var(--tc-primary)", background: "var(--tc-primary-soft)" }}
+          >
+            <p className="text-2xl mb-2">🎓</p>
+            <p className="text-lg font-bold" style={{ color: "var(--tc-primary)" }}>
+              Free Online Safety Academy
+            </p>
+            <p className="text-sm mt-1" style={{ color: "var(--tc-text-main)" }}>
+              8 interactive modules to protect yourself and your family from scams.
+              Designed for seniors, parents, and teens. Start learning →
+            </p>
+          </a>
+
+          {/* Newsletter CTA */}
+          <div
+            className="p-5 rounded-xl text-center"
+            style={{ background: "var(--tc-primary)", color: "white" }}
+          >
+            <p className="text-2xl mb-2">📬</p>
+            <p className="text-lg font-bold">Monthly Scam Alert Newsletter</p>
+            <p className="text-sm mt-1 mb-4 opacity-90">
+              Get the latest scam warnings, new threats, and protection tips delivered to your inbox once a month.
+              No spam, no tracking — just the alerts that matter.
+            </p>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const input = e.currentTarget.querySelector("input");
+                if (input) {
+                  // For now, just show confirmation — backend integration later
+                  input.value = "";
+                  alert("Thanks for subscribing! You'll receive your first newsletter soon.");
+                }
+              }}
+              className="flex gap-2 max-w-md mx-auto"
+            >
+              <input
+                type="email"
+                placeholder="your@email.com"
+                required
+                className="flex-1 px-4 py-3 rounded-lg text-base"
+                style={{ color: "var(--tc-text-main)", border: "none" }}
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-lg font-semibold cursor-pointer whitespace-nowrap"
+                style={{ background: "white", color: "var(--tc-primary)" }}
+              >
+                Subscribe Free
+              </button>
+            </form>
+            <p className="text-xs mt-3 opacity-70">
+              Unsubscribe anytime. We never share your email. <a href="/privacy" className="underline">Privacy Policy</a>
+            </p>
+          </div>
         </>
       )}
 

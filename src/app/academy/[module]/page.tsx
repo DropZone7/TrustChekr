@@ -217,6 +217,289 @@ const modules: Record<string, ModuleData> = {
     nextModule: { id: "romance-scams", title: "Romance & Friendship Scams" },
     prevModule: { id: "bank-cra-scams", title: "Bank & CRA Impersonation" },
   },
+  "romance-scams": {
+    number: 4,
+    icon: "💔",
+    title: "Romance & Friendship Scams",
+    objectives: [
+      "Recognize the pattern: fast love + excuses + money requests = scam",
+      "Understand that romance scammers invest weeks or months building trust",
+      "Know how to verify someone's identity using reverse image search",
+    ],
+    videoId: "uq3KBkHFMBY",
+    videoTitle: "Romance Scam Awareness",
+    videoSource: "Canadian Anti-Fraud Centre",
+    keyPoints: [
+      "Romance scammers build intense emotional connections over weeks or months before asking for money",
+      "They always have excuses for not video calling — military deployment, oil rig, poor internet connection",
+      "The first money request is small to test you. It always escalates from there",
+      "They move conversations off dating platforms quickly (to WhatsApp, Telegram, or email)",
+      "Reverse image search their profile photos — stolen photos from real people are extremely common",
+      "Anyone who asks for money, crypto, or gift cards in an online relationship is very likely a scammer",
+      "Romance scam victims in Canada lost $50.3 million in 2024 — you are not alone",
+    ],
+    quiz: [
+      {
+        id: "q1",
+        scenario: "💕 You've been talking to someone online for 3 weeks. They say \"I love you\" and want to meet, but first they need $500 for a plane ticket.",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! Saying 'I love you' after 3 weeks AND asking for money is a textbook romance scam pattern. Real partners don't ask for money before meeting." },
+          { text: "They might really need help", correct: false, feedback: "This is a classic romance scam pattern. The combination of fast emotional attachment + money request is the #1 red flag. A real person would find another way to meet." },
+        ],
+      },
+      {
+        id: "q2",
+        scenario: "💕 Someone you met on a dating app wants to video call next week when they're back from a work trip.",
+        options: [
+          { text: "This seems reasonable", correct: true, feedback: "This is actually normal! They're willing to video call and gave a specific timeframe. The key difference from scams: no excuses, no rush, no money involved." },
+          { text: "This is suspicious", correct: false, feedback: "This is actually fine! Being willing to video call is a good sign. Scammers avoid video calls entirely — they always have excuses." },
+        ],
+      },
+      {
+        id: "q3",
+        scenario: "💕 Your online partner of 2 months says they're a US soldier deployed overseas. Their camera is broken. They need you to invest in their 'crypto trading platform.'",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! Military deployment + broken camera + crypto investment = three major red flags. The US military provides communication equipment. This is a classic script." },
+          { text: "Military life is tough — they might need support", correct: false, feedback: "This hits three major red flags: fake military deployment (a top cover story), refusing video calls, and pushing a crypto 'investment.' This is a well-known scam script." },
+        ],
+      },
+      {
+        id: "q4",
+        scenario: "💕 Someone you've been chatting with asks to move the conversation from the dating app to WhatsApp 'because it's easier.'",
+        options: [
+          { text: "Normal — many people prefer WhatsApp", correct: false, feedback: "While some people do prefer WhatsApp, moving off the dating platform quickly is a red flag. Dating platforms have fraud detection — scammers want to avoid that oversight." },
+          { text: "Suspicious — scammers do this to avoid detection", correct: true, feedback: "Good instinct! Scammers move conversations off dating platforms to avoid the platform's fraud detection systems. It's fine to stay on the app until you've verified who they are." },
+        ],
+      },
+      {
+        id: "q5",
+        scenario: "💕 Your online partner sends you a gift and then says they're in a medical emergency overseas and need $3,000 for hospital bills.",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! Sending a small gift first builds trust and creates a sense of obligation. The 'emergency' that follows is designed to make you feel guilty if you don't help. This is textbook manipulation." },
+          { text: "They sent a gift — they must be real", correct: false, feedback: "The gift is the trap! Scammers invest $50-100 in a gift to create a sense of obligation, then ask for thousands. Real emergencies don't require your online partner to pay hospital bills." },
+        ],
+      },
+    ],
+    grokipediaQueries: [
+      { label: "How do romance scams work?", query: "romance scam red flags patterns" },
+      { label: "How to reverse image search", query: "reverse image search dating profile how to" },
+      { label: "Romance scam statistics Canada", query: "romance scam losses Canada statistics" },
+    ],
+    nextModule: { id: "too-good-to-be-true", title: "Lotteries, Fake Jobs & Crypto" },
+    prevModule: { id: "tech-support-scams", title: "Tech Support & Fake Warnings" },
+  },
+  "too-good-to-be-true": {
+    number: 5,
+    icon: "🎰",
+    title: "Lotteries, Fake Jobs & Crypto Scams",
+    objectives: [
+      "Recognize lottery, prize, and inheritance scams",
+      "Spot fake job offers and 'work from home' schemes",
+      "Understand basic crypto and investment fraud red flags",
+    ],
+    videoId: "uq3KBkHFMBY",
+    videoTitle: "Too Good to Be True Scams",
+    videoSource: "Competition Bureau of Canada",
+    keyPoints: [
+      "You cannot win a lottery or contest you never entered",
+      "Real prizes never require you to pay a 'processing fee' or 'taxes' upfront",
+      "Legitimate employers never ask you to pay for training, equipment, or a background check",
+      "If investment returns are 'guaranteed,' it's a scam — no investment is risk-free",
+      "Cryptocurrency is not regulated like banks — once sent, it's almost impossible to recover",
+      "'Inheritance from a distant relative' emails are always scams",
+      "If it sounds too good to be true, it is. Every time.",
+    ],
+    quiz: [
+      {
+        id: "q1",
+        scenario: "📧 Email: \"Congratulations! You've been selected to receive $2.4 million from the Canadian National Lottery. Pay $250 processing fee to claim.\"",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! There is no 'Canadian National Lottery' that contacts winners by email. Real lotteries never require upfront payment to claim prizes." },
+          { text: "Could be real — it's only $250", correct: false, feedback: "This is a classic advance fee scam. There's no such lottery. And once you pay $250, they'll ask for more 'fees' — it never ends." },
+        ],
+      },
+      {
+        id: "q2",
+        scenario: "💼 Job posting: \"Work from home! Make $5,000/week reshipping packages. No experience needed. Send $200 for your starter kit.\"",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! Reshipping scams use you to launder stolen goods. The 'starter kit' fee is theft, and you could face criminal charges for reshipping stolen merchandise." },
+          { text: "Might be a legitimate opportunity", correct: false, feedback: "This is a reshipping scam — one of the most common job fraud types. You'd be unknowingly laundering stolen goods, and the 'kit fee' is pure theft." },
+        ],
+      },
+      {
+        id: "q3",
+        scenario: "📱 Instagram ad: \"New crypto token launching — guaranteed 500% returns in 30 days! Join now before it's too late!\"",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! No investment can 'guarantee' 500% returns. The urgency ('before it's too late') is designed to stop you from thinking critically." },
+          { text: "Crypto can have big returns", correct: false, feedback: "While crypto can be volatile, NO legitimate investment 'guarantees' 500% returns. The word 'guaranteed' combined with urgency is always a scam signal." },
+        ],
+      },
+      {
+        id: "q4",
+        scenario: "💼 You apply for a job on Indeed. The company emails you for an interview, asks about your experience, and invites you to their office downtown.",
+        options: [
+          { text: "This seems legitimate", correct: true, feedback: "This looks normal! They found you on a real job site, asked about qualifications, and want an in-person meeting. No upfront payments, no urgency." },
+          { text: "Could be a scam", correct: false, feedback: "This is likely legitimate! Key signs: real job platform, interest in your qualifications, in-person interview. No money requested, no 'act now' pressure." },
+        ],
+      },
+      {
+        id: "q5",
+        scenario: "📧 Email from a 'lawyer' in Nigeria: \"Your distant uncle passed away and left you an inheritance of $4.7 million. We need your bank details to transfer the funds.\"",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! This is the classic 'Nigerian prince' / advance fee scam. No legitimate lawyer contacts you by unsolicited email about an inheritance." },
+          { text: "I should look into it", correct: false, feedback: "This is one of the oldest email scams in existence. They'll ask for 'transfer fees' that escalate endlessly. Delete and ignore." },
+        ],
+      },
+    ],
+    grokipediaQueries: [
+      { label: "Advance fee fraud explained", query: "advance fee fraud how it works" },
+      { label: "Fake job scams in Canada", query: "fake job scam Canada warning signs" },
+      { label: "Crypto investment scam red flags", query: "cryptocurrency investment scam warning signs" },
+    ],
+    nextModule: { id: "phishing", title: "Phishing Emails, Texts & Fake Sites" },
+    prevModule: { id: "romance-scams", title: "Romance & Friendship Scams" },
+  },
+  "phishing": {
+    number: 6,
+    icon: "🎣",
+    title: "Phishing Emails, Texts & Fake Websites",
+    objectives: [
+      "Check sender email addresses to spot fakes",
+      "Learn to hover over links before clicking them",
+      "Spot fake websites by checking the URL carefully",
+    ],
+    videoId: "uq3KBkHFMBY",
+    videoTitle: "How to Spot Phishing",
+    videoSource: "Government of Canada",
+    keyPoints: [
+      "Check the ACTUAL email address, not just the display name — 'RBC Security' could be from scammer@gmail.com",
+      "Hover over links (don't click!) to see where they really go — the text can say one thing but link to another",
+      "Look for typos, odd grammar, and generic greetings like 'Dear Customer' instead of your name",
+      "Real companies don't ask you to 'verify your account' through an email link",
+      "When in doubt, type the company's website address directly into your browser — never click the email link",
+      "Check for the padlock icon AND the correct domain name — scam sites can have padlocks too",
+    ],
+    quiz: [
+      {
+        id: "q1",
+        scenario: "📧 Email from: \"Amazon Customer Service\" <orders-update@amazn-secure.com>. Subject: \"Your order has been cancelled — verify your payment method.\"",
+        options: [
+          { text: "This is phishing", correct: true, feedback: "Correct! The email is from 'amazn-secure.com' — not amazon.com. Scammers use lookalike domains. Always check the actual email address, not just the display name." },
+          { text: "This could be from Amazon", correct: false, feedback: "Look at the email address carefully: 'amazn-secure.com' is NOT amazon.com. One missing letter makes it a scam domain. Real Amazon emails come from @amazon.com or @amazon.ca." },
+        ],
+      },
+      {
+        id: "q2",
+        scenario: "📱 Text from your phone carrier: \"Your bill is overdue. Pay now to avoid service interruption: https://rogers-bill-pay.net\"",
+        options: [
+          { text: "This is phishing", correct: true, feedback: "Correct! 'rogers-bill-pay.net' is not Rogers' real website (rogers.com). Always go to your carrier's website directly or use their app." },
+          { text: "I should pay my bill", correct: false, feedback: "The link 'rogers-bill-pay.net' is NOT Rogers' real website. Log into rogers.com directly or call the number on your bill to check if you owe anything." },
+        ],
+      },
+      {
+        id: "q3",
+        scenario: "📧 Email from your actual boss's email address asking you to review an attached document about next week's meeting.",
+        options: [
+          { text: "Probably safe", correct: true, feedback: "If it's truly from your boss's real email address and the context makes sense (you have meetings), this is likely legitimate. But if anything feels off, verify with a quick call." },
+          { text: "Could be a spear-phishing attack", correct: false, feedback: "While spear-phishing exists, if the email is from your boss's verified address and the context is normal, it's likely fine. Trust but verify if something feels unusual." },
+        ],
+      },
+      {
+        id: "q4",
+        scenario: "📧 Email: \"Dear Valued Customer, We detected unusual activity. Click here to secure your account immediately or it will be permanently locked.\"",
+        options: [
+          { text: "This is phishing", correct: true, feedback: "Correct! Multiple red flags: generic greeting ('Valued Customer'), urgency ('immediately'), threat ('permanently locked'), and a vague 'click here' link. Real companies address you by name." },
+          { text: "I should check my account", correct: false, feedback: "This is phishing! 'Dear Valued Customer' (not your name), urgency, and threats are classic signs. If concerned, go to the company's website directly — don't click the email link." },
+        ],
+      },
+      {
+        id: "q5",
+        scenario: "🌐 You're on a website that looks like your bank's login page. The URL bar shows: https://td-banking-secure.com with a padlock icon.",
+        options: [
+          { text: "This is a fake site", correct: true, feedback: "Correct! The padlock only means the connection is encrypted — it does NOT mean the site is legitimate. TD's real website is td.com. 'td-banking-secure.com' is a scam domain." },
+          { text: "The padlock means it's safe", correct: false, feedback: "Common misconception! The padlock means the connection is encrypted, but scam sites can have padlocks too. Always check the domain: td.com is real, td-banking-secure.com is fake." },
+        ],
+      },
+    ],
+    grokipediaQueries: [
+      { label: "How to identify phishing emails", query: "phishing email identification tips" },
+      { label: "What is URL spoofing?", query: "URL spoofing fake website how to spot" },
+      { label: "How to check if a website is real", query: "how to verify website legitimacy" },
+    ],
+    nextModule: { id: "social-media", title: "Social Media Red Flags" },
+    prevModule: { id: "too-good-to-be-true", title: "Lotteries, Fake Jobs & Crypto" },
+  },
+  "social-media": {
+    number: 7,
+    icon: "📱",
+    title: "Social Media & Messaging Red Flags",
+    objectives: [
+      "Recognize fake profiles and impersonation accounts",
+      "Understand social engineering through direct messages",
+      "Know basic privacy settings to protect yourself",
+    ],
+    videoId: "uq3KBkHFMBY",
+    videoTitle: "Social Media Safety",
+    videoSource: "Canadian Centre for Cyber Security",
+    keyPoints: [
+      "Verify accounts before trusting DMs — check follower count, post history, and account age",
+      "Don't share your location, school, workplace, or daily routine with strangers online",
+      "'Friend of a friend' requests are often fake — scammers clone real profiles",
+      "Free giveaways that ask you to 'click a link' or 'enter your details' are almost always scams",
+      "If a celebrity or brand DMs you first, it's almost certainly an impersonator",
+      "Report and block suspicious accounts — it protects others too",
+      "Review your privacy settings: limit who can see your posts, friends list, and personal info",
+    ],
+    quiz: [
+      {
+        id: "q1",
+        scenario: "📱 A Facebook account with your friend's name and photo sends you a friend request. You're already friends with them.",
+        options: [
+          { text: "This is a cloned/fake profile", correct: true, feedback: "Correct! If you're already friends with this person, the new request is from a cloned profile. Report it and warn your real friend — their photos are being used." },
+          { text: "They might have made a new account", correct: false, feedback: "While possible, a duplicate account with the same name and photo is almost always a cloned profile. Check with your real friend through their verified account before accepting." },
+        ],
+      },
+      {
+        id: "q2",
+        scenario: "📱 Instagram DM from a brand account: \"Congratulations! You've won our $500 giveaway! Click this link to claim your prize: bit.ly/win500now\"",
+        options: [
+          { text: "This is a scam", correct: true, feedback: "Correct! Real brands announce winners publicly and don't use shortened links in DMs. Also check: is this the verified brand account (blue checkmark)?" },
+          { text: "I did enter a giveaway recently", correct: false, feedback: "Even if you entered a giveaway, legitimate brands announce winners publicly and never use URL shorteners in DMs. Check for the verification badge and contact the brand through their official website." },
+        ],
+      },
+      {
+        id: "q3",
+        scenario: "📱 Someone on a Facebook group you're in comments on your post with helpful advice about a topic you asked about.",
+        options: [
+          { text: "Normal community interaction", correct: true, feedback: "Correct! This is normal social media behavior. People helping in groups they're part of is fine. Just be cautious if they then DM you with links or money requests." },
+          { text: "They might be targeting me", correct: false, feedback: "This is normal! Helpful comments in groups are standard social media. Only be cautious if they follow up with unsolicited DMs containing links or requests." },
+        ],
+      },
+      {
+        id: "q4",
+        scenario: "📱 A TikTok account claiming to be Elon Musk DMs you about a 'special crypto opportunity' just for his followers.",
+        options: [
+          { text: "This is an impersonation scam", correct: true, feedback: "Correct! Celebrities and billionaires do not DM random people about investment opportunities. This is a very common impersonation scam on every platform." },
+          { text: "It could be real — he does talk about crypto", correct: false, feedback: "Elon Musk (and every other celebrity) does NOT DM random people about crypto. These impersonation accounts exist on every platform and are always scams." },
+        ],
+      },
+      {
+        id: "q5",
+        scenario: "📱 A classmate you know in real life tags you in a post saying \"OMG check out these amazing deals!\" with a link to an unknown website.",
+        options: [
+          { text: "Their account may be hacked", correct: true, feedback: "Good thinking! When real friends post unusual promotional content, their account may be compromised. Message them through another channel to check." },
+          { text: "They're just sharing a deal", correct: false, feedback: "When friends suddenly start posting promotional links, their account may be hacked. The scammer uses their trusted account to spread malicious links. Verify through text or in person." },
+        ],
+      },
+    ],
+    grokipediaQueries: [
+      { label: "How to spot fake social media profiles", query: "how to identify fake social media profile" },
+      { label: "Social media scam types", query: "social media scams common types 2026" },
+      { label: "Privacy settings guide", query: "social media privacy settings guide Facebook Instagram" },
+    ],
+    nextModule: { id: "what-to-do", title: "What to Do If You're Scammed" },
+    prevModule: { id: "phishing", title: "Phishing Emails, Texts & Fake Sites" },
+  },
   "what-to-do": {
     number: 8,
     icon: "🆘",

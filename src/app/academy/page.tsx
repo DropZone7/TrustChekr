@@ -7,10 +7,10 @@ const MODULES = [
   { id: "phone-scams", number: 1, icon: "📞", title: "Phone & Grandparent Scams", subtitle: "How to spot fake emergency calls", audiences: ["Seniors", "Parents"], ready: true },
   { id: "bank-cra-scams", number: 2, icon: "🏦", title: "Bank & CRA Impersonation", subtitle: "When 'your bank' isn't really your bank", audiences: ["Seniors", "Parents"], ready: true },
   { id: "tech-support-scams", number: 3, icon: "💻", title: "Tech Support & Fake Warnings", subtitle: "Those scary pop-ups are lying to you", audiences: ["Seniors", "Parents", "Teens"], ready: true },
-  { id: "romance-scams", number: 4, icon: "💔", title: "Romance & Friendship Scams", subtitle: "When online love turns into a trap", audiences: ["Seniors", "Parents"], ready: false },
-  { id: "too-good-to-be-true", number: 5, icon: "🎰", title: "Lotteries, Fake Jobs & Crypto", subtitle: "If it sounds too good to be true...", audiences: ["All"], ready: false },
-  { id: "phishing", number: 6, icon: "🎣", title: "Phishing Emails, Texts & Fake Sites", subtitle: "Don't click that link", audiences: ["All"], ready: false },
-  { id: "social-media", number: 7, icon: "📱", title: "Social Media Red Flags", subtitle: "Protecting yourself online", audiences: ["Teens", "Parents"], ready: false },
+  { id: "romance-scams", number: 4, icon: "💔", title: "Romance & Friendship Scams", subtitle: "When online love turns into a trap", audiences: ["Seniors", "Parents"], ready: true },
+  { id: "too-good-to-be-true", number: 5, icon: "🎰", title: "Lotteries, Fake Jobs & Crypto", subtitle: "If it sounds too good to be true...", audiences: ["All"], ready: true },
+  { id: "phishing", number: 6, icon: "🎣", title: "Phishing Emails, Texts & Fake Sites", subtitle: "Don't click that link", audiences: ["All"], ready: true },
+  { id: "social-media", number: 7, icon: "📱", title: "Social Media Red Flags", subtitle: "Protecting yourself online", audiences: ["Teens", "Parents"], ready: true },
   { id: "what-to-do", number: 8, icon: "🆘", title: "What to Do If You're Scammed", subtitle: "Emergency steps to protect yourself", audiences: ["All"], ready: true },
 ];
 
