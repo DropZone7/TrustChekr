@@ -18,6 +18,7 @@
 
 html {
   font-size: 18px;
+  scroll-behavior: smooth;
 }
 
 html.text-lg { font-size: 20px; }
@@ -52,4 +53,24 @@ body {
 
 .ticker-track:hover {
   animation-play-state: paused;
+}
+
+/* Toast slide-in */
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Focus ring for keyboard navigation */
+*:focus-visible {
+  outline: 3px solid var(--tc-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ticker-track { animation: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

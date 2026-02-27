@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
+import { BackToTop } from "@/components/BackToTop";
+import { SkipToContent } from "@/components/SkipToContent";
+import { ToastProvider } from "@/components/Toast";
+import { MobileNav } from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "TrustChekr — Free Canadian Scam Detection Tool",
@@ -57,27 +61,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen flex flex-col">
-        <header className="w-full border-b border-[var(--tc-border)] bg-[var(--tc-surface)]">
+        <SkipToContent />
+        <ToastProvider>
+        <header className="w-full border-b border-[var(--tc-border)] bg-[var(--tc-surface)]" style={{ position: 'relative' }}>
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/" className="text-xl font-bold" style={{ color: "var(--tc-primary)" }}>
               🛡️ TrustChekr
             </a>
-            <nav className="flex gap-4 text-sm" style={{ color: "var(--tc-text-muted)" }}>
-              <a href="/" className="hover:underline">Home</a>
-              <a href="/academy" className="hover:underline">Academy</a>
-              <a href="/tools" className="hover:underline">Tools</a>
-              <a href="/community" className="hover:underline">Community</a>
-              <a href="/map" className="hover:underline">Scam Map</a>
-              <a href="/report" className="hover:underline">Report</a>
-              <a href="/learn" className="hover:underline">Learn</a>
-              <a href="/help" className="hover:underline">Help</a>
-            </nav>
+            <MobileNav />
           </div>
         </header>
 
-        <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-8">
+        <main id="main-content" className="flex-1 w-full max-w-2xl mx-auto px-4 py-8">
           {children}
         </main>
+        <BackToTop />
 
         <footer className="w-full border-t border-[var(--tc-border)] bg-[var(--tc-surface)]">
           <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between text-sm" style={{ color: "var(--tc-text-muted)" }}>
@@ -88,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         </footer>
+        </ToastProvider>
       </body>
     </html>
   );

@@ -6,6 +6,8 @@ import Results from "@/components/Results";
 import type { ScanResult } from "@/lib/types";
 import { LatestScamAlertsWidget } from "@/components/scam-intel/LatestScamAlertsWidget";
 import { ScamCostTicker } from "@/components/ScamCostTicker";
+import { ScanProgress } from "@/components/ScanProgress";
+import { ScanHistory, addToHistory } from "@/components/ScanHistory";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -37,6 +39,7 @@ export default function Home() {
         return;
       }
       setResult(data);
+      addToHistory(input, type, data.riskLevel);
     } catch {
       setError("Our system is having trouble right now, but your information is safe. Please try again in a few minutes.");
     }
@@ -89,6 +92,9 @@ export default function Home() {
 
           {/* Scan tiles + form */}
           <ScanForm onScan={handleScan} />
+
+          {/* Recent checks */}
+          <ScanHistory onRescan={handleScan} />
 
           {/* Advanced tools CTA */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -226,23 +232,7 @@ export default function Home() {
         </div>
       )}
 
-      {scanning && (
-        <div className="text-center flex flex-col items-center gap-4 py-16">
-          <div
-            className="w-12 h-12 border-4 rounded-full animate-spin"
-            style={{
-              borderColor: "var(--tc-primary-soft)",
-              borderTopColor: "var(--tc-primary)",
-            }}
-          />
-          <h2 className="text-xl font-semibold" style={{ color: "var(--tc-primary)" }}>
-            Checking this for you…
-          </h2>
-          <p style={{ color: "var(--tc-text-muted)" }}>
-            This usually takes a few seconds. Your information stays private.
-          </p>
-        </div>
-      )}
+      {scanning && <ScanProgress />}
 
       {result && <Results result={result} onReset={handleReset} />}
     </div>
