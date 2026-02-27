@@ -177,14 +177,56 @@ export default function MapPage() {
           <svg viewBox="0 0 700 530" className="w-full" style={{ minHeight: '350px' }}>
             <rect width="700" height="530" fill="transparent" />
 
-            {/* Faint country labels */}
-            <text x="300" y="170" textAnchor="middle" fontSize="20" fontWeight="bold" fill="var(--tc-border)" opacity="0.4">CANADA</text>
-            <text x="320" y="350" textAnchor="middle" fontSize="20" fontWeight="bold" fill="var(--tc-border)" opacity="0.4">UNITED STATES</text>
-            <text x="240" y="490" textAnchor="middle" fontSize="14" fontWeight="bold" fill="var(--tc-border)" opacity="0.4">MEXICO</text>
+            {/* Country outlines — simplified SVG paths */}
+            {/* Canada */}
+            <path d="
+              M 50,250 L 55,230 L 50,210 L 55,195 L 65,190 L 60,175 L 65,155 L 75,140
+              L 80,120 L 95,110 L 110,100 L 130,95 L 150,90 L 175,85 L 200,80
+              L 230,75 L 260,70 L 290,68 L 320,65 L 350,60 L 380,58 L 400,55
+              L 420,58 L 440,62 L 460,70 L 470,80 L 480,90 L 490,95
+              L 510,100 L 530,110 L 540,120 L 550,130 L 560,140
+              L 580,150 L 600,160 L 620,170 L 630,180 L 635,195
+              L 630,205 L 620,210 L 610,215 L 600,220
+              L 590,230 L 580,240 L 570,248 L 555,252
+              L 540,255 L 520,258 L 500,260 L 480,258 L 460,255
+              L 440,252 L 420,255 L 400,258 L 380,260
+              L 360,258 L 340,260 L 320,258 L 300,260
+              L 280,258 L 260,260 L 240,258 L 220,260
+              L 200,258 L 180,260 L 160,258 L 140,260
+              L 120,258 L 100,260 L 80,258 L 60,255 L 50,250 Z
+            " fill="#d4e6f1" fillOpacity="0.35" stroke="#1a5276" strokeWidth="1.5" strokeOpacity="0.3" />
 
-            {/* Divider lines (approximate borders) */}
-            <line x1="80" y1="258" x2="620" y2="258" stroke="var(--tc-border)" strokeWidth="1" strokeDasharray="4,4" opacity="0.3" />
-            <line x1="150" y1="435" x2="350" y2="435" stroke="var(--tc-border)" strokeWidth="1" strokeDasharray="4,4" opacity="0.3" />
+            {/* USA */}
+            <path d="
+              M 50,260 L 80,258 L 120,258 L 160,258 L 200,258 L 240,258
+              L 280,258 L 320,258 L 360,258 L 400,258 L 440,252
+              L 460,255 L 480,258 L 500,260 L 520,258 L 540,260
+              L 530,275 L 520,290 L 510,305 L 505,320 L 500,335
+              L 495,350 L 490,365 L 480,380 L 470,395 L 460,410
+              L 450,420 L 440,425 L 430,430 L 420,428 L 400,425
+              L 380,430 L 360,435 L 340,432 L 320,430
+              L 300,432 L 280,435 L 260,432 L 240,430
+              L 220,432 L 200,435 L 180,430 L 160,425
+              L 140,420 L 120,415 L 100,410
+              L 85,400 L 75,385 L 65,370 L 58,355
+              L 52,340 L 48,320 L 45,300 L 48,280 L 50,260 Z
+            " fill="#dbeafe" fillOpacity="0.25" stroke="#3b82f6" strokeWidth="1.5" strokeOpacity="0.25" />
+
+            {/* Mexico */}
+            <path d="
+              M 100,410 L 120,415 L 140,420 L 160,425 L 180,430
+              L 200,435 L 220,432 L 240,430 L 260,435 L 280,438
+              L 300,440 L 310,445 L 315,455 L 310,465 L 300,475
+              L 290,485 L 275,495 L 260,500 L 240,505 L 220,508
+              L 200,510 L 180,508 L 165,500 L 155,490 L 148,480
+              L 140,470 L 130,460 L 120,450 L 110,440 L 105,425 L 100,410 Z
+            " fill="#d1fae5" fillOpacity="0.25" stroke="#10b981" strokeWidth="1.5" strokeOpacity="0.25" />
+
+            {/* Alaska (small inset) */}
+            <path d="
+              M 30,120 L 40,105 L 55,95 L 70,100 L 80,110 L 75,125
+              L 65,135 L 50,140 L 35,135 L 30,120 Z
+            " fill="#dbeafe" fillOpacity="0.2" stroke="#3b82f6" strokeWidth="1" strokeOpacity="0.2" />
 
             {/* Region bubbles */}
             {visibleRegions.map((region) => {
