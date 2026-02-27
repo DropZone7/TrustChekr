@@ -3,19 +3,9 @@ import type { ScamPattern } from '@/lib/scamIntel/types';
 import { mapRowToScamPattern } from '@/lib/scamIntel/supabaseMapper';
 import { scamIntelSeed } from '@/lib/scamIntel/staticData';
 import Link from 'next/link';
+import { ACADEMY_MODULES, getModuleRoute, type AcademyModuleId } from '@/lib/academy/modules';
 
 type PageProps = { params: Promise<{ id: string }> };
-
-const MODULE_MAP: Record<string, { slug: string; name: string }> = {
-  M1_PHONE_GRANDPARENT: { slug: 'phone-scams', name: 'Phone & Grandparent Scams' },
-  M2_BANK_CRA: { slug: 'bank-cra-scams', name: 'Bank & CRA Impersonation' },
-  M3_TECH_SUPPORT: { slug: 'tech-support-scams', name: 'Tech Support & Fake Warnings' },
-  M4_ROMANCE: { slug: 'romance-scams', name: 'Romance & Friendship Scams' },
-  M5_TOO_GOOD: { slug: 'too-good-to-be-true', name: 'Lotteries, Fake Jobs & Crypto' },
-  M6_PHISHING: { slug: 'phishing', name: 'Phishing Emails, Texts & Fake Sites' },
-  M7_SOCIAL_MEDIA: { slug: 'social-media', name: 'Social Media Red Flags' },
-  M8_WHAT_TO_DO: { slug: 'what-to-do', name: "What to Do If You're Scammed" },
-};
 
 async function getScamById(id: string): Promise<ScamPattern | null> {
   try {
@@ -169,17 +159,17 @@ export default async function ScamDetailsPage({ params }: PageProps) {
           <h2 className="text-lg font-bold mb-2" style={{ color: 'var(--tc-text-main)' }}>🎓 Learn more in the Academy</h2>
           <div className="flex flex-col gap-2">
             {scam.academy_modules_impacted.map((mod) => {
-              const m = MODULE_MAP[mod];
-              if (!m) return null;
+              const meta = ACADEMY_MODULES[mod as AcademyModuleId];
+              if (!meta) return null;
               return (
                 <Link
                   key={mod}
-                  href={`/academy/${m.slug}`}
+                  href={getModuleRoute(meta.id)}
                   className="flex items-center gap-3 p-3 rounded-lg border hover:shadow-sm transition-all"
                   style={{ borderColor: 'var(--tc-border)', background: 'var(--tc-surface)' }}
                 >
                   <span>📚</span>
-                  <span className="font-medium" style={{ color: 'var(--tc-primary)' }}>{m.name}</span>
+                  <span className="font-medium" style={{ color: 'var(--tc-primary)' }}>{meta.title}</span>
                   <span className="ml-auto text-sm" style={{ color: 'var(--tc-text-muted)' }}>→</span>
                 </Link>
               );
