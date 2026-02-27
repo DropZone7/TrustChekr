@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "academy": "Academy",
+    "tools": "Tools",
+    "community": "Community",
+    "scamMap": "Scam Map",
+    "report": "Report",
+    "learn": "Learn",
+    "help": "Help"
+  },
+  "scan": {
+    "title": "Check if something might be a scam",
+    "button": "Check this for me",
+    "privacy": "We don't store what you paste. Your check stays private.",
+    "features": {
+      "private": "Private — we never store or sell your data",
+      "free": "Free — no sign-up, no hidden fees",
+      "canadian": "Built in Canada for Canadians and Americans"
+    }
+  },
+  "risk": {
+    "low": "Low Risk",
+    "suspicious": "Suspicious",
+    "high": "High Risk",
+    "veryLikelyScam": "Very Likely Scam"
+  },
+  "scanTypes": {
+    "email": "Email",
+    "sms": "Text message",
+    "phone": "Phone call",
+    "social": "Social media",
+    "marketplace": "Marketplace listing",
+    "website": "Website / URL",
+    "other": "Other"
+  },
+  "errors": {
+    "unknown": "Something went wrong. Please try again.",
+    "network": "Network error. Check your connection and try again.",
+    "noInput": "Paste or type something for us to check.",
+    "rateLimited": "Too many checks. Please wait a moment and try again.",
+    "unsupportedType": "This type of content is not supported yet."
+  },
+  "footer": {
+    "tagline": "Free scam detection built in Canada.",
+    "legal": "This tool does not provide legal, financial, or investment advice.",
+    "disclaimer": "Always verify with official government sources before sending money or sharing personal information.",
+    "copyright": "© {{year}} TrustChekr. All rights reserved.",
+    "linksTitle": "Helpful resources",
+    "cafc": "Canadian Anti-Fraud Centre",
+    "cafcDescription": "Report fraud and learn how to protect yourself from scams across Canada.",
+    "cafcUrl": "https://antifraudcentre-centreantifraude.ca/",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact",
+    "builtFor": "Built for Canadians and Americans."
+  }
+}

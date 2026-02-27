@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "academy": "Académie",
+    "tools": "Outils",
+    "community": "Communauté",
+    "scamMap": "Carte des arnaques",
+    "report": "Signaler",
+    "learn": "Apprendre",
+    "help": "Aide"
+  },
+  "scan": {
+    "title": "Vérifiez si quelque chose pourrait être une arnaque",
+    "button": "Vérifiez ceci pour moi",
+    "privacy": "Nous ne conservons pas ce que vous collez. Votre vérification reste privée.",
+    "features": {
+      "private": "Privé — nous ne stockons ni ne vendons vos données",
+      "free": "Gratuit — sans inscription, sans frais cachés",
+      "canadian": "Conçu au Canada pour les Canadiens et les Américains"
+    }
+  },
+  "risk": {
+    "low": "Risque faible",
+    "suspicious": "Suspect",
+    "high": "Risque élevé",
+    "veryLikelyScam": "Très probablement une arnaque"
+  },
+  "scanTypes": {
+    "email": "Courriel",
+    "sms": "Message texte",
+    "phone": "Appel téléphonique",
+    "social": "Réseaux sociaux",
+    "marketplace": "Annonce de marché en ligne",
+    "website": "Site Web / URL",
+    "other": "Autre"
+  },
+  "errors": {
+    "unknown": "Une erreur s'est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Vérifiez votre connexion et réessayez.",
+    "noInput": "Collez ou tapez quelque chose pour que nous puissions le vérifier.",
+    "rateLimited": "Trop de vérifications. Veuillez patienter un moment et réessayer.",
+    "unsupportedType": "Ce type de contenu n'est pas encore pris en charge."
+  },
+  "footer": {
+    "tagline": "Détection d'arnaques gratuite conçue au Canada.",
+    "legal": "Cet outil ne fournit pas de conseils juridiques, financiers ou en placement.",
+    "disclaimer": "Vérifiez toujours auprès de sources gouvernementales officielles avant d'envoyer de l'argent ou de partager des renseignements personnels.",
+    "copyright": "© {{year}} TrustChekr. Tous droits réservés.",
+    "linksTitle": "Ressources utiles",
+    "cafc": "Centre antifraude du Canada",
+    "cafcDescription": "Signalez la fraude et apprenez à vous protéger contre les arnaques partout au Canada.",
+    "cafcUrl": "https://antifraudcentre-centreantifraude.ca/",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation",
+    "contact": "Contact",
+    "builtFor": "Conçu pour les Canadiens et les Américains."
+  }
+}

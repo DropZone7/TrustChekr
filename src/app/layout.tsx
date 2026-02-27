@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "TrustChekr — Free Canadian Scam Detection Tool",
@@ -25,10 +27,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const messages = await getMessages();
   return (
     <html lang="en">
       <head>
+        <link rel="alternate" hrefLang="en" href="https://trustchekr.com" />
+        <link rel="alternate" hrefLang="fr" href="https://trustchekr.com/fr" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -73,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
+        <NextIntlClientProvider messages={messages}>
         <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-8">
           {children}
         </main>
@@ -86,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         </footer>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
