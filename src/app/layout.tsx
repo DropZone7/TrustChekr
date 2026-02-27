@@ -3,7 +3,6 @@ import "./globals.css";
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "TrustChekr — Free Canadian Scam Detection Tool",
@@ -27,8 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const messages = await getMessages();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -78,7 +76,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </div>
         </header>
 
-        <NextIntlClientProvider messages={messages}>
         <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-8">
           {children}
         </main>
@@ -92,7 +89,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </div>
         </footer>
-        </NextIntlClientProvider>
       </body>
     </html>
   );

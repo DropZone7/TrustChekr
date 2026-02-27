@@ -1,9 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import createMiddleware from 'next-intl/middleware';
-import { routing } from '@/i18n';
-
-// --- i18n middleware ---
-const intlMiddleware = createMiddleware(routing);
 
 // --- Rate limiting ---
 type Counter = { count: number; resetAt: number };
@@ -41,7 +36,7 @@ function checkLimit(ip: string): boolean {
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // 1. Rate limit public API
+  // Rate limit public API
   if (pathname.startsWith('/api/v1/')) {
     const ip = getClientIp(req);
     const ok = checkLimit(ip);
@@ -54,18 +49,11 @@ export function middleware(req: NextRequest) {
         { status: 429 }
       );
     }
-    return NextResponse.next();
   }
 
-  // 2. Skip i18n for all API routes and static assets
-  if (pathname.startsWith('/api/') || pathname.startsWith('/_next/') || pathname.includes('.')) {
-    return NextResponse.next();
-  }
-
-  // 3. Locale detection and routing for pages
-  return intlMiddleware(req);
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next|.*\\..*).*)'],
+  matcher: ['/api/v1/:path*'],
 };
