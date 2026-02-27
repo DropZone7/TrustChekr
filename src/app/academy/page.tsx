@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAcademyProgress } from "@/hooks/useAcademyProgress";
 import { slugToModuleId } from "@/lib/academy/progress";
+import { CertificateGenerator } from "@/components/academy/CertificateGenerator";
 import type { ModuleCompletionStatus } from "@/lib/academy/progress";
 
 const MODULES = [
@@ -136,6 +137,9 @@ export default function AcademyPage() {
           );
         })}
       </div>
+
+      {/* Certificate generator */}
+      <CertificateGenerator completedModules={completedCount} />
 
       {/* Partnership note */}
       <div className="p-4 rounded-xl border text-center" style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)" }}>
