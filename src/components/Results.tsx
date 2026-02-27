@@ -4,6 +4,8 @@ import { useState } from "react";
 import type { ScanResult } from "@/lib/types";
 import { riskConfig } from "@/lib/types";
 import PrintResults from "./PrintResults";
+import { OsintDetails } from "./OsintDetails";
+import { AffiliateRecommendations } from "./AffiliateRecommendations";
 
 export default function Results({ result, onReset }: { result: ScanResult; onReset: () => void }) {
   const [showTechnical, setShowTechnical] = useState(false);
@@ -156,6 +158,12 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
           or local authorities directly.
         </p>
       </div>
+
+      {/* OSINT details */}
+      <OsintDetails result={result} />
+
+      {/* Affiliate recommendations */}
+      <AffiliateRecommendations riskLevel={result.riskLevel} scanType={result.inputType} />
 
       {/* Start over */}
       <button

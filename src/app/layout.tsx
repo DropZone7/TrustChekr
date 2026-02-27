@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
+import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { BackToTop } from "@/components/BackToTop";
 import { SkipToContent } from "@/components/SkipToContent";
 import { ToastProvider } from "@/components/Toast";
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>We never sell your information. <a href="/privacy" className="underline">Privacy & Terms</a></p>
             <div className="flex items-center gap-3">
               <HighContrastToggle />
+              <DarkModeToggle />
               <TextSizeControl />
             </div>
           </div>

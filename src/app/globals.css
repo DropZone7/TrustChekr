@@ -74,3 +74,13 @@ body {
   .ticker-track { animation: none; }
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* Dark mode theme */
+html.dark {
+  --tc-bg: #0f172a;
+  --tc-surface: #1e293b;
+  --tc-border: #334155;
+  --tc-text-main: #f1f5f9;
+  --tc-text-muted: #94a3b8;
+  --tc-primary-soft: #1e3a5f;
+}

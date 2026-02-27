@@ -8,6 +8,7 @@ import { LatestScamAlertsWidget } from "@/components/scam-intel/LatestScamAlerts
 import { ScamCostTicker } from "@/components/ScamCostTicker";
 import { ScanProgress } from "@/components/ScanProgress";
 import { ScanHistory, addToHistory } from "@/components/ScanHistory";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -184,33 +185,9 @@ export default function Home() {
               Get the latest scam warnings, new threats, and protection tips delivered to your inbox once a month.
               No spam, no tracking — just the alerts that matter.
             </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const input = e.currentTarget.querySelector("input");
-                if (input) {
-                  // For now, just show confirmation — backend integration later
-                  input.value = "";
-                  alert("Thanks for subscribing! You'll receive your first newsletter soon.");
-                }
-              }}
-              className="flex gap-2 max-w-md mx-auto"
-            >
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="flex-1 px-4 py-3 rounded-lg text-base"
-                style={{ color: "var(--tc-text-main)", border: "none" }}
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 rounded-lg font-semibold cursor-pointer whitespace-nowrap"
-                style={{ background: "white", color: "var(--tc-primary)" }}
-              >
-                Subscribe Free
-              </button>
-            </form>
+            <div className="flex justify-center">
+              <NewsletterForm />
+            </div>
             <p className="text-xs mt-3 opacity-70">
               Unsubscribe anytime. We never share your email. <a href="/privacy" className="underline">Privacy Policy</a>
             </p>

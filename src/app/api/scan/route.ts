@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
-import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus, analyzeXrplWallet } from "@/lib/osint";
+import { analyzeEmail, analyzePhone, analyzeCrypto, analyzeXrplWallet } from "@/lib/osint";
+import { batchWebsiteOsint } from "@/lib/osint/batchOsint";
+import { checkUsername } from "@/lib/osint/username";
 import type { RiskLevel } from "@/lib/types";
 import { runUnifiedScan } from "@/lib/scanners/unifiedScan";
 import { logAudit, hashIp } from "@/lib/auditLog";
@@ -52,15 +54,17 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Run OSINT based on input type
+    let osintResults: any = null;
+    let usernameResult: any = null;
+
     if (type === "website") {
-      const [domainResult, safetyResult, vtResult, phishResult, urlhausResult] = await Promise.all([
-        analyzeDomain(cleaned),
-        checkUrlSafety(cleaned),
-        checkVirusTotal(cleaned),
-        checkPhishTank(cleaned),
-        checkUrlhaus(cleaned),
-      ]);
-      signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals, ...phishResult.signals, ...urlhausResult.signals);
+      const osint = await batchWebsiteOsint(cleaned);
+      osintResults = osint;
+      if (osint.domain?.signals) signals.push(...osint.domain.signals);
+      if (osint.safeBrowsing?.signals) signals.push(...osint.safeBrowsing.signals);
+      if (osint.virusTotal?.signals) signals.push(...osint.virusTotal.signals);
+      if (osint.phishTank?.signals) signals.push(...osint.phishTank.signals);
+      if (osint.urlhaus?.signals) signals.push(...osint.urlhaus.signals);
     }
 
     if (type === "other") {
@@ -69,13 +73,17 @@ export async function POST(req: NextRequest) {
         const emailResult = await analyzeEmail(cleaned);
         signals.push(...emailResult.signals);
       } else if (/^(r[A-Za-z0-9]{24,34}|0x[a-fA-F0-9]{40}|(1|3|bc1)[A-Za-z0-9]{25,62}|T[A-Za-z0-9]{33})$/.test(cleaned)) {
-        // Run both generic crypto analysis AND XRPL-specific if it's an XRP address
         const cryptoResult = await analyzeCrypto(cleaned);
         signals.push(...cryptoResult.signals);
-        // XRPL addresses start with 'r'
         if (/^r[A-Za-z0-9]{24,34}$/.test(cleaned)) {
           const xrplResult = await analyzeXrplWallet(cleaned);
           signals.push(...xrplResult.signals);
+        }
+      } else if (/^[a-zA-Z0-9_]{3,30}$/.test(cleaned) && !cleaned.includes('.')) {
+        // Looks like a username
+        usernameResult = await checkUsername(cleaned);
+        if (usernameResult.riskSignals?.length) {
+          usernameResult.riskSignals.forEach((s: string) => signals.push({ text: s, weight: 15 }));
         }
       } else {
         const phoneResult = await analyzePhone(cleaned);
@@ -87,14 +95,12 @@ export async function POST(req: NextRequest) {
       const urlPattern = /https?:\/\/\S+|www\.\S+/gi;
       const urls = cleaned.match(urlPattern) || [];
       for (const url of urls.slice(0, 3)) {
-        const [domainResult, safetyResult, vtResult, phishResult, urlhausResult] = await Promise.all([
-          analyzeDomain(url),
-          checkUrlSafety(url),
-          checkVirusTotal(url),
-          checkPhishTank(url),
-          checkUrlhaus(url),
-        ]);
-        signals.push(...domainResult.signals, ...safetyResult.signals, ...vtResult.signals, ...phishResult.signals, ...urlhausResult.signals);
+        const osint = await batchWebsiteOsint(url);
+        if (osint.domain?.signals) signals.push(...osint.domain.signals);
+        if (osint.safeBrowsing?.signals) signals.push(...osint.safeBrowsing.signals);
+        if (osint.virusTotal?.signals) signals.push(...osint.virusTotal.signals);
+        if (osint.phishTank?.signals) signals.push(...osint.phishTank.signals);
+        if (osint.urlhaus?.signals) signals.push(...osint.urlhaus.signals);
       }
 
       const emailPattern = /[^\s@]+@[^\s@]+\.[^\s@]+/g;
@@ -200,6 +206,9 @@ export async function POST(req: NextRequest) {
       reportTo: patternResult.reportTo,
       educationalTip: patternResult.educationalTip,
       shareText,
+      // OSINT detail data for frontend panels
+      ...(osintResults ? { osint: osintResults } : {}),
+      ...(usernameResult ? { username_lookup: usernameResult } : {}),
       // Enhanced intelligence (new modules)
       ...(unified ? {
         graph: unified.graph,
