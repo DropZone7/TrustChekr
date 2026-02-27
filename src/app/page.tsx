@@ -86,6 +86,25 @@ export default function Home() {
           {/* Scan tiles + form */}
           <ScanForm onScan={handleScan} />
 
+          {/* Advanced tools CTA */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <a href="/tools" className="p-3 rounded-xl text-center transition-all hover:shadow-sm" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)" }}>
+              <span className="text-2xl">📱</span>
+              <p className="font-semibold text-sm mt-1" style={{ color: "var(--tc-primary)" }}>Scan a Screenshot</p>
+              <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>Upload a photo of a suspicious message</p>
+            </a>
+            <a href="/tools" className="p-3 rounded-xl text-center transition-all hover:shadow-sm" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)" }}>
+              <span className="text-2xl">📷</span>
+              <p className="font-semibold text-sm mt-1" style={{ color: "var(--tc-primary)" }}>Scan a QR Code</p>
+              <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>Check if a QR code is safe to scan</p>
+            </a>
+            <a href="/tools" className="p-3 rounded-xl text-center transition-all hover:shadow-sm" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)" }}>
+              <span className="text-2xl">📄</span>
+              <p className="font-semibold text-sm mt-1" style={{ color: "var(--tc-primary)" }}>Check a Document</p>
+              <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>Detect image manipulation or fakes</p>
+            </a>
+          </div>
+
           {/* How it works */}
           <div className="flex flex-col gap-4 pt-4">
             <h2 className="text-xl font-bold text-center" style={{ color: "var(--tc-primary)" }}>

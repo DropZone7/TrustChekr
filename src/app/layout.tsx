@@ -63,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="flex gap-4 text-sm" style={{ color: "var(--tc-text-muted)" }}>
               <a href="/" className="hover:underline">Home</a>
               <a href="/academy" className="hover:underline">Academy</a>
+              <a href="/tools" className="hover:underline">Tools</a>
               <a href="/report" className="hover:underline">Report</a>
               <a href="/learn" className="hover:underline">Learn</a>
               <a href="/help" className="hover:underline">Help</a>
