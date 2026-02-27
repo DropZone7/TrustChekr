@@ -7,6 +7,7 @@ import PrintResults from "./PrintResults";
 import { OsintDetails } from "./OsintDetails";
 import { AffiliateRecommendations } from "./AffiliateRecommendations";
 import { ShareResult } from "./ShareResult";
+import { FeedbackWidget } from "./FeedbackWidget";
 
 export default function Results({ result, onReset }: { result: ScanResult; onReset: () => void }) {
   const [showTechnical, setShowTechnical] = useState(false);
@@ -157,6 +158,9 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
           or local authorities directly.
         </p>
       </div>
+
+      {/* Feedback */}
+      <FeedbackWidget scanType={result.inputType} riskLevel={result.riskLevel} />
 
       {/* OSINT details */}
       <OsintDetails result={result} />

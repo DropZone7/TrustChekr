@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Learn About Scams',
+  description: 'Free guides on spotting phishing, phone scams, romance fraud, and more. Protect yourself and your family with plain-language scam education.',
+};
+
 export default function LearnPage() {
   const articles = [
     {

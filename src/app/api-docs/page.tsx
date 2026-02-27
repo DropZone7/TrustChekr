@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'API Documentation',
+  description: 'Integrate TrustChekr scam detection into your app. Free public API for researchers, journalists, and developers.',
+};
+
 export default function APIDocsPage() {
   return (
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>

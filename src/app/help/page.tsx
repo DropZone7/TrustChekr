@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Help & Emergency Contacts',
+  description: 'Get help with TrustChekr, find emergency fraud contacts, and learn what to do if you have been scammed.',
+};
+
 export default function HelpPage() {
   return (
     <div className="flex flex-col gap-8">

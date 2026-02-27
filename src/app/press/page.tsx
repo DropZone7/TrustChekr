@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Press Kit',
+  description: 'Media resources, platform stats, and brand assets for journalists covering TrustChekr and Canadian scam prevention.',
+};
+
 export default function PressPage() {
   const stats = [
     { label: 'Analysis Modules', value: '14', detail: 'Pattern matching, OSINT, graph intelligence, AI detection' },

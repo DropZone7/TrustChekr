@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About TrustChekr',
+  description: 'Canadian-built, privacy-first scam detection platform. Learn about our mission to make scam checking as easy as spell-check.',
+};
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
