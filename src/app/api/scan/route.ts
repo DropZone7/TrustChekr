@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { runScan } from "@/lib/scanner";
-import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus } from "@/lib/osint";
+import { analyzeDomain, analyzeEmail, analyzePhone, analyzeCrypto, checkUrlSafety, checkVirusTotal, checkPhishTank, checkUrlhaus, analyzeXrplWallet } from "@/lib/osint";
 import type { RiskLevel } from "@/lib/types";
 
 export async function POST(req: NextRequest) {
@@ -67,8 +67,14 @@ export async function POST(req: NextRequest) {
         const emailResult = await analyzeEmail(cleaned);
         signals.push(...emailResult.signals);
       } else if (/^(r[A-Za-z0-9]{24,34}|0x[a-fA-F0-9]{40}|(1|3|bc1)[A-Za-z0-9]{25,62}|T[A-Za-z0-9]{33})$/.test(cleaned)) {
+        // Run both generic crypto analysis AND XRPL-specific if it's an XRP address
         const cryptoResult = await analyzeCrypto(cleaned);
         signals.push(...cryptoResult.signals);
+        // XRPL addresses start with 'r'
+        if (/^r[A-Za-z0-9]{24,34}$/.test(cleaned)) {
+          const xrplResult = await analyzeXrplWallet(cleaned);
+          signals.push(...xrplResult.signals);
+        }
       } else {
         const phoneResult = await analyzePhone(cleaned);
         signals.push(...phoneResult.signals);
