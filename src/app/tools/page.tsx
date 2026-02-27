@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { ScreenshotScanner } from '@/components/scanners/ScreenshotScanner';
 import { QRScanner } from '@/components/scanners/QRScanner';
 import { DocumentScanner } from '@/components/scanners/DocumentScanner';
+import { ReverseImageSearch } from '@/components/scanners/ReverseImageSearch';
 
-type Tool = 'screenshot' | 'qr' | 'document';
+type Tool = 'screenshot' | 'qr' | 'document' | 'reverse-image';
 
 const tools: { id: Tool; emoji: string; title: string; desc: string }[] = [
   { id: 'screenshot', emoji: '📱', title: 'Screenshot Scanner', desc: 'Upload a screenshot of a suspicious text, email, or DM' },
   { id: 'qr', emoji: '📷', title: 'QR Code Scanner', desc: 'Check if a QR code leads to a scam website' },
   { id: 'document', emoji: '📄', title: 'Document Checker', desc: 'Check if an image or document has been manipulated' },
+  { id: 'reverse-image', emoji: '💔', title: 'Reverse Image Search', desc: 'Check if a photo from a romance interest is stolen' },
 ];
 
 export default function ToolsPage() {
@@ -55,6 +57,7 @@ export default function ToolsPage() {
         {activeTool === 'screenshot' && <ScreenshotScanner />}
         {activeTool === 'qr' && <QRScanner />}
         {activeTool === 'document' && <DocumentScanner />}
+        {activeTool === 'reverse-image' && <ReverseImageSearch />}
 
         {/* Privacy note */}
         <div className="text-center p-3 rounded-xl" style={{ background: 'var(--tc-primary-soft)' }}>
