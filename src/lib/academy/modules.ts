@@ -26,13 +26,13 @@ export const ACADEMY_MODULES: Record<AcademyModuleId, AcademyModuleMeta> = {
     id: 'M2_BANK_GOV',
     slug: 'bank-cra-scams',
     title: 'Bank & Government Impersonation',
-    shortDescription: 'Recognize fake bank and government messages so you never share sensitive info.',
+    shortDescription: 'Identify fake bank and government messages across phone, email, and SMS so you never share sensitive info.',
   },
   M3_TECH_SUPPORT: {
     id: 'M3_TECH_SUPPORT',
     slug: 'tech-support-scams',
     title: 'Tech Support & Fake Virus Warnings',
-    shortDescription: 'Ignore scary pop-ups and fake tech support calls that try to take over your device.',
+    shortDescription: 'Recognize scary pop-ups and fake tech support calls — and know what to do if you already gave someone access.',
   },
   M4_ROMANCE: {
     id: 'M4_ROMANCE',

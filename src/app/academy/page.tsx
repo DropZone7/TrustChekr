@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const MODULES = [
   { id: "phone-scams", number: 1, icon: "📞", title: "Phone & Grandparent Scams", subtitle: "How to spot fake emergency calls", audiences: ["Seniors", "Parents"], ready: true },
-  { id: "bank-cra-scams", number: 2, icon: "🏦", title: "Bank & CRA Impersonation", subtitle: "When 'your bank' isn't really your bank", audiences: ["Seniors", "Parents"], ready: true },
-  { id: "tech-support-scams", number: 3, icon: "💻", title: "Tech Support & Fake Warnings", subtitle: "Those scary pop-ups are lying to you", audiences: ["Seniors", "Parents", "Teens"], ready: true },
+  { id: "bank-cra-scams", number: 2, icon: "🏦", title: "Bank & Government Impersonation", subtitle: "When 'your bank' or 'the CRA' isn't who they say they are", audiences: ["Seniors", "Parents"], ready: true },
+  { id: "tech-support-scams", number: 3, icon: "💻", title: "Tech Support & Fake Virus Warnings", subtitle: "Those scary pop-ups are lying to you", audiences: ["Seniors", "Parents", "Teens"], ready: true },
   { id: "romance-scams", number: 4, icon: "💔", title: "Romance & Friendship Scams", subtitle: "When online love turns into a trap", audiences: ["Seniors", "Parents"], ready: true },
   { id: "too-good-to-be-true", number: 5, icon: "🎰", title: "Lotteries, Fake Jobs & Crypto", subtitle: "If it sounds too good to be true...", audiences: ["All"], ready: true },
   { id: "phishing", number: 6, icon: "🎣", title: "Phishing Emails, Texts & Fake Sites", subtitle: "Don't click that link", audiences: ["All"], ready: true },

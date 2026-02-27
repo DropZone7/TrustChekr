@@ -13,9 +13,10 @@ const modules: Record<string, ModuleData> = {
     icon: "📞",
     title: "Phone & Grandparent Scams",
     objectives: [
-      "Recognize the \"emergency call\" pattern used in grandparent scams",
+      "Recognize common \"grandparent\" and emergency phone scam patterns",
       "Know that real emergencies never require gift cards or wire transfers",
       "Learn the one-step verification: hang up and call the person directly",
+      "Practice safe responses and verification steps you can use today",
     ],
     videoId: "uq3KBkHFMBY", // CAFC fraud prevention - replace with best match
     videoTitle: "Protect Yourself From Fraud",
@@ -24,10 +25,12 @@ const modules: Record<string, ModuleData> = {
       "Scammers call pretending to be a grandchild, police officer, or lawyer",
       "They create panic with fake emergencies (accident, arrest, hospital)",
       "They demand immediate payment by gift card, wire transfer, or crypto",
+      "They ask you to keep the situation secret from other family members",
       "Real family members can wait for you to verify — scammers can't",
       "The CRA, police, and courts will NEVER call demanding gift cards",
       "Always hang up and call your family member at their REAL number",
       "Set up a family code word that only your real family knows",
+      "Scammers often call late at night when you're tired and less alert",
     ],
     quiz: [
       {
@@ -82,10 +85,11 @@ const modules: Record<string, ModuleData> = {
   "bank-cra-scams": {
     number: 2,
     icon: "🏦",
-    title: "Bank & CRA Impersonation",
+    title: "Bank & Government Impersonation",
     objectives: [
-      "Understand that the CRA never threatens arrest by phone or text",
-      "Know how to verify a real bank communication from a fake one",
+      "Identify fake bank and government messages across phone, email, and SMS",
+      "Know what real banks and the CRA will never ask you to do",
+      "Respond safely to suspicious payment or account-security requests",
       "Learn the \"hang up and call back\" verification method",
     ],
     videoId: "uq3KBkHFMBY",
@@ -94,10 +98,12 @@ const modules: Record<string, ModuleData> = {
     keyPoints: [
       "The CRA will NEVER call threatening arrest, demanding gift cards, or asking for crypto",
       "Banks will NEVER ask for your password, PIN, or one-time code by phone/text/email",
+      "Scammers may threaten account closures, legal action, or missed refunds to create panic",
       "If a bank texts you, don't click the link — open your banking app directly",
       "Caller ID and email addresses can be faked to look like real bank/CRA numbers",
       "When in doubt: hang up, find the real number (on your card/statement), call back yourself",
       "CRA communicates primarily through My Account (online) and regular mail",
+      "Real banks and government agencies do not demand payment via gift cards or crypto",
     ],
     quiz: [
       {
@@ -152,11 +158,12 @@ const modules: Record<string, ModuleData> = {
   "tech-support-scams": {
     number: 3,
     icon: "💻",
-    title: "Tech Support & Fake Warnings",
+    title: "Tech Support & Fake Virus Warnings",
     objectives: [
       "Recognize fake virus pop-ups and \"your computer is infected\" warnings",
       "Know that Microsoft, Apple, and Google will never call you about viruses",
       "Learn how to safely close a scary pop-up without clicking anything in it",
+      "Know what to do immediately if you already gave someone remote access",
     ],
     videoId: "uq3KBkHFMBY",
     videoTitle: "Tech Support Scam Awareness",
@@ -508,18 +515,20 @@ const modules: Record<string, ModuleData> = {
     title: "What to Do If You've Been Scammed",
     objectives: [
       "Know the exact steps to take immediately after being scammed",
-      "Understand how to report to CAFC, police, and your bank",
-      "Learn about credit monitoring and fraud alerts",
+      "Understand how to contact your bank and freeze or secure accounts",
+      "Learn how to report scams in Canada (CAFC, police, credit bureaus)",
+      "Know how to protect yourself from further damage",
     ],
     videoId: "uq3KBkHFMBY",
     videoTitle: "I've Been Scammed — What Now?",
     videoSource: "Canadian Anti-Fraud Centre",
     keyPoints: [
-      "STOP all contact with the scammer immediately",
-      "Call your bank or card issuer — they may be able to reverse charges",
-      "Change passwords on any affected accounts (email, banking, social media)",
+      "STOP all contact with the scammer immediately — do not send more money",
+      "Call your bank or card issuer RIGHT AWAY — they may be able to reverse charges",
+      "Change passwords on all important accounts (email, banking, social media)",
+      "Enable two-factor authentication (2FA) on every account that supports it",
       "Report to CAFC: call 1-888-495-8501 or visit antifraudcentre-centreantifraude.ca",
-      "File a police report — even if they can't recover funds, it's on record",
+      "File a police report — even if they can't recover funds, it creates a record",
       "Place fraud alerts: Equifax (1-800-465-7166) and TransUnion (1-800-663-9980)",
       "Don't be ashamed — scammers are professionals and anyone can be targeted",
     ],
