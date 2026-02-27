@@ -80,6 +80,31 @@ export default function LearnPage() {
         </p>
       </div>
 
+      {/* Featured article */}
+      <a
+        href="/learn/ai-deanonymization"
+        className="block p-6 rounded-xl border-2 transition-all hover:shadow-lg"
+        style={{ borderColor: "var(--tc-danger)", background: "#fdedec" }}
+      >
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-xs font-bold px-2 py-1 rounded-full" style={{ background: "var(--tc-danger)", color: "white" }}>
+            NEW
+          </span>
+          <span className="text-xs font-medium" style={{ color: "var(--tc-danger)" }}>
+            February 26, 2026
+          </span>
+        </div>
+        <h2 className="text-xl font-bold" style={{ color: "var(--tc-text-main)" }}>
+          🤖 How AI Can Figure Out Who You Are — Even From Anonymous Posts
+        </h2>
+        <p className="mt-2" style={{ color: "var(--tc-text-muted)" }}>
+          New research shows AI can identify anonymous internet users from their posts alone — at 67% accuracy, for as little as $1 per person. Here's what you need to know.
+        </p>
+        <span className="inline-block mt-3 text-sm font-semibold" style={{ color: "var(--tc-danger)" }}>
+          Read the full article →
+        </span>
+      </a>
+
       <div className="flex flex-col gap-6">
         {articles.map((a, i) => (
           <article
