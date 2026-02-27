@@ -3,6 +3,10 @@ import type { ScamPattern } from '@/lib/scamIntel/types';
 import { mapRowToScamPattern } from '@/lib/scamIntel/supabaseMapper';
 import { ACADEMY_MODULES, type AcademyModuleId } from '@/lib/academy/modules';
 import Link from 'next/link';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+const ADMIN_TOKEN = process.env.TC_ADMIN_TOKEN;
 
 type UserReportRow = {
   id: string;
@@ -51,7 +55,18 @@ const severityColors: Record<string, { bg: string; text: string; border: string 
   info:     { bg: '#e0f2fe', text: '#0369a1', border: '#bae6fd' },
 };
 
-export default async function ScamIntelAdminPage() {
+export default async function ScamIntelAdminPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  // Auth gate: requires ?k=<secret> to access
+  const params = await searchParams;
+  const providedToken = params.k;
+  if (!ADMIN_TOKEN || providedToken !== ADMIN_TOKEN) {
+    redirect('/');
+  }
+
   const [scams, reports] = await Promise.all([
     getScamPatterns(),
     getRecentReports(),
@@ -242,7 +257,7 @@ export default async function ScamIntelAdminPage() {
       </section>
 
       <p className="text-xs text-center" style={{ color: 'var(--tc-text-muted)' }}>
-        ⚠️ This page is not publicly linked. Add authentication before sharing access.
+        🔒 Authenticated session. Do not share this URL.
       </p>
     </div>
   );

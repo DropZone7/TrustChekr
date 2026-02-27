@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /tc47x/
+Disallow: /api/
+Disallow: /safety/
+
+Sitemap: https://trustchekr.com/sitemap.xml
