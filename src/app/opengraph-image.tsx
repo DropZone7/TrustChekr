@@ -5,7 +5,7 @@ export const contentType = 'image/png';
 export const alt = 'TrustChekr — Free Canadian Scam Detection Tool';
 
 export default function OpenGraphImage() {
-  const primary = '#1a5276';
+  const primary = '#A40000';
   return new ImageResponse(
     (
       <div

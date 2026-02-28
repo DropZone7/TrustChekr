@@ -17,6 +17,7 @@
     "leaflet": "^1.9.4",
     "next": "^16.1.6",
     "next-intl": "^4.8.3",
+    "node-telegram-bot-api": "^0.67.0",
     "pg": "^8.19.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",

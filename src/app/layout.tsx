@@ -42,8 +42,11 @@ export const metadata: Metadata = {
     images: ["/twitter-image"],
   },
   icons: {
-    icon: "/icon",
-    apple: "/apple-icon",
+    icon: "/favicon.png",
+    apple: "/apple-icon.png",
+  },
+  other: {
+    "theme-color": "#A40000",
   },
   alternates: {
     canonical: "https://trustchekr.com",
@@ -90,8 +93,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ToastProvider>
         <header className="w-full border-b border-[var(--tc-border)] bg-[var(--tc-surface)]" style={{ position: 'relative' }}>
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/" className="text-xl font-bold" style={{ color: "var(--tc-primary)" }}>
-              🛡️ TrustChekr
+            <a href="/" className="flex items-center gap-2 text-xl font-bold" style={{ color: "var(--tc-primary)" }}>
+              <img src="/logo.png" alt="TrustChekr" width={36} height={36} style={{ borderRadius: 4 }} />
+              TrustChekr
             </a>
             <MobileNav />
           </div>

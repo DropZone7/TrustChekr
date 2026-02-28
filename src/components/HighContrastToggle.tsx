@@ -20,7 +20,7 @@ export default function HighContrastToggle() {
       document.documentElement.style.setProperty("--tc-text-main", "#1c1c1e");
       document.documentElement.style.setProperty("--tc-text-muted", "#5d6d7e");
       document.documentElement.style.setProperty("--tc-border", "#d5d8dc");
-      document.documentElement.style.setProperty("--tc-primary-soft", "#d4e6f1");
+      document.documentElement.style.setProperty("--tc-primary-soft", "#fde8e8");
     }
   };
 

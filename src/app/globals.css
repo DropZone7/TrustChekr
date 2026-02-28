@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  /* TrustChekr Design Tokens */
-  --tc-primary: #1a5276;
-  --tc-primary-soft: #d4e6f1;
-  --tc-accent: #2e86c1;
+  /* TrustChekr Design Tokens — Falcon Shield Brand */
+  --tc-primary: #A40000;
+  --tc-primary-hover: #8B0000;
+  --tc-primary-soft: #fde8e8;
+  --tc-accent: #FF0000;
   --tc-safe: #27ae60;
   --tc-warning: #f39c12;
   --tc-danger: #e74c3c;
-  --tc-danger-deep: #922b21;
+  --tc-danger-deep: #A40000;
   --tc-bg: #fafafa;
   --tc-surface: #ffffff;
   --tc-border: #d5d8dc;
-  --tc-text-main: #1c1c1e;
-  --tc-text-muted: #5d6d7e;
+  --tc-text-main: #1a1a1a;
+  --tc-text-muted: #555555;
 }
 
 html {
@@ -75,12 +76,15 @@ body {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
 
-/* Dark mode theme */
+/* Dark mode theme — Falcon Shield Dark */
 html.dark {
-  --tc-bg: #0f172a;
-  --tc-surface: #1e293b;
-  --tc-border: #334155;
-  --tc-text-main: #f1f5f9;
-  --tc-text-muted: #94a3b8;
-  --tc-primary-soft: #1e3a5f;
+  --tc-primary: #FF0000;
+  --tc-primary-hover: #CC0000;
+  --tc-primary-soft: #3d0000;
+  --tc-accent: #FF3333;
+  --tc-bg: #0a0a0a;
+  --tc-surface: #1a1a1a;
+  --tc-border: #333333;
+  --tc-text-main: #f0f0f0;
+  --tc-text-muted: #999999;
 }

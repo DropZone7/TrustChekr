@@ -8,7 +8,7 @@
  *
  * Or with custom config:
  *   <script src="https://trustchekr.com/widget-v2.js"
- *     data-theme="dark" data-accent="#1a5276" defer></script>
+ *     data-theme="dark" data-accent="#A40000" defer></script>
  */
 (function () {
   'use strict';
@@ -18,7 +18,7 @@
   // Find our script tag for config
   const scriptTag = document.currentScript || document.querySelector('script[src*="widget-v2"]');
   const theme = scriptTag?.getAttribute('data-theme') || 'light';
-  const accent = scriptTag?.getAttribute('data-accent') || '#1a5276';
+  const accent = scriptTag?.getAttribute('data-accent') || '#A40000';
 
   // Find or create container
   let container = document.getElementById('trustchekr-widget');

@@ -72,7 +72,7 @@ export async function GET(req: NextRequest) {
     ? alerts.map((a) => `<tr><td style="padding:8px 0;border-bottom:1px solid #e5e7eb;">
         <div style="font-weight:600;font-size:14px;color:#111827;">${escapeHtml(a.title)}</div>
         <div style="font-size:13px;color:#4b5563;margin-top:2px;">${escapeHtml(a.summary)}</div>
-        ${a.url ? `<a href="${escapeHtml(a.url)}" style="font-size:12px;color:#1a5276;">Read more</a>` : ''}
+        ${a.url ? `<a href="${escapeHtml(a.url)}" style="font-size:12px;color:#A40000;">Read more</a>` : ''}
       </td></tr>`).join('')
     : '<tr><td style="padding:12px 0;font-size:13px;color:#9ca3af;">No specific alerts were added this week.</td></tr>';
 
@@ -96,7 +96,7 @@ export async function GET(req: NextRequest) {
   <tr><td align="center" style="padding:20px 10px;">
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#ffffff;border-collapse:collapse;border-radius:8px;overflow:hidden;">
       <!-- Header -->
-      <tr><td style="background-color:#1a5276;padding:18px 16px;">
+      <tr><td style="background-color:#A40000;padding:18px 16px;">
         <table width="100%"><tr>
           <td style="font-size:22px;font-weight:700;color:#ffffff;">🛡️ TrustChekr</td>
           <td align="right" style="font-size:13px;color:#dbeafe;">Weekly Scam Digest</td>
@@ -125,7 +125,7 @@ export async function GET(req: NextRequest) {
       <!-- Footer -->
       <tr><td style="background-color:#f3f4f6;padding:14px 16px;">
         <p style="margin:0;font-size:11px;color:#9ca3af;line-height:1.5;">This email is for general information only and cannot guarantee whether something is legitimate. If something feels off, contact your bank or the company directly using contact details from their official website.</p>
-        <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;"><a href="${base}" style="color:#1a5276;">trustchekr.com</a></p>
+        <p style="margin:8px 0 0;font-size:11px;color:#9ca3af;"><a href="${base}" style="color:#A40000;">trustchekr.com</a></p>
       </td></tr>
     </table>
   </td></tr>
