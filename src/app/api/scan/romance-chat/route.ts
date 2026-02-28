@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { RomanceConversationMessage, RomanceScanResult } from '@/lib/romanceScan/types';
+import type { RomanceConversationMessage } from '@/lib/romanceScan/types';
+import { assessRomanceConversation } from '@/lib/romanceScan/service';
 
 export async function POST(req: NextRequest) {
   try {
@@ -29,39 +30,20 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Cap at 200 messages for now
-    const capped: RomanceConversationMessage[] = messages.slice(0, 200);
+    // Cap at 200 messages
+    const capped: RomanceConversationMessage[] = messages.slice(0, 200).map((m: any) => ({
+      role: m.role as 'user' | 'other',
+      text: m.text.trim(),
+      ...(m.timestamp ? { timestamp: m.timestamp } : {}),
+    }));
 
-    // Stub response — real analysis engine coming soon
-    const result: RomanceScanResult = {
-      riskScore: 0.6,
-      riskLevel: 'medium',
-      scamType: 'romance',
-      stage: 'grooming',
-      redFlags: [
-        {
-          id: 'love_bombing',
-          label: 'Excessive flattery and rapid emotional escalation',
-          severity: 3,
-          messageIndices: [0],
-        },
-        {
-          id: 'wrong_number_intro',
-          label: 'Conversation started with a "wrong number" or unsolicited contact',
-          severity: 2,
-          messageIndices: [0],
-        },
-      ],
-      summary:
-        'This conversation shows multiple romance-style grooming patterns, but no explicit money request yet.',
-      modelVersion: 'romance-scam-mvp-0.0.1',
-    };
-
+    const result = await assessRomanceConversation(capped);
     return NextResponse.json(result);
-  } catch {
+  } catch (err) {
+    console.error('Romance chat scan error:', err);
     return NextResponse.json(
-      { error: 'Invalid request.' },
-      { status: 400 }
+      { error: 'Something went wrong analyzing this conversation. Please try again.' },
+      { status: 500 }
     );
   }
 }

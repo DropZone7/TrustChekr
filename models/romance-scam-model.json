@@ -1,0 +1,13 @@
+{
+  "version": "romance-scam-mvp-0.0.1-placeholder",
+  "labels": ["romance_scam", "pig_butchering_scam", "generic_scam", "legit"],
+  "vocabulary": [],
+  "weights": [[], [], [], []],
+  "biases": [0, 0, 0, 0],
+  "tokenizationConfig": {
+    "lowercase": true,
+    "minTokenLength": 3,
+    "stopWordsRemoved": true,
+    "normalization": "l2"
+  }
+}
