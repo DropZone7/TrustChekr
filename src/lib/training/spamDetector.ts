@@ -18,7 +18,7 @@ const SPAM_KEYWORDS: Record<string, number> = {
   // Money/offers
   cash: 58, offer: 57, cashback: 15, discount: 18, voucher: 20,
   // Action demands
-  claim: 113, reply: 101, subscribe: 15, unsubscribe: 12,
+  reply: 101, subscribe: 15, unsubscribe: 12,
   // Suspicious patterns
   tone: 53, ringtone: 30, mobile: 123, txt: 40, msg: 35,
   // Financial
