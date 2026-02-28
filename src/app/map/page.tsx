@@ -82,7 +82,7 @@ export default function MapPage() {
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
       <div className="w-full max-w-4xl flex flex-col gap-6">
         <div className="text-center">
-          <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>🗺️ North American Scam Heat Map</h1>
+          <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>North American Scam Heat Map</h1>
           <p className="mt-2" style={{ color: 'var(--tc-text-muted)' }}>Fraud activity across North America — verified government sources</p>
         </div>
 
@@ -90,19 +90,19 @@ export default function MapPage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
           <div className="p-3 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
             <p className="text-2xl font-bold" style={{ color: '#dc2626' }}>$638M</p>
-            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>🇨🇦 Canada losses (2024)</p>
+            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>Canada losses (2024)</p>
           </div>
           <div className="p-3 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
             <p className="text-2xl font-bold" style={{ color: '#3b82f6' }}>$12.5B</p>
-            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>🇺🇸 USA losses (2024)</p>
+            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>USA losses (2024)</p>
           </div>
           <div className="p-3 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
             <p className="text-2xl font-bold" style={{ color: 'var(--tc-primary)' }}>108,878</p>
-            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>🇨🇦 Reports filed (CAFC)</p>
+            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>Reports filed (CAFC)</p>
           </div>
           <div className="p-3 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
             <p className="text-2xl font-bold" style={{ color: '#f97316' }}>+25%</p>
-            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>🇺🇸 YoY increase (FTC)</p>
+            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>YoY increase (FTC)</p>
           </div>
         </div>
 

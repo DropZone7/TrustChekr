@@ -2,127 +2,112 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Press Kit',
-  description: 'Media resources, platform stats, and brand assets for journalists covering TrustChekr and Canadian scam prevention.',
+  description: 'Media resources and platform stats for journalists covering TrustChekr.',
 };
 
 export default function PressPage() {
-  const stats = [
-    { label: 'Analysis Modules', value: '14', detail: 'Pattern matching, OSINT, graph intelligence, AI detection' },
-    { label: 'OSINT Databases', value: '9', detail: 'VirusTotal, Google Safe Browsing, PhishTank, URLhaus, HIBP, RDAP, Etherscan, blockchain.info, XRPL' },
-    { label: 'Scan Types', value: '10', detail: 'URLs, messages, emails, phones, crypto, QR codes, screenshots, documents, romance, text AI detection' },
-    { label: 'Academy Modules', value: '8', detail: 'Phone, bank, tech support, romance, phishing, social media, and more' },
-    { label: 'Quiz Questions', value: '40', detail: 'Interactive SpotTheScam quizzes with per-question feedback' },
-    { label: 'Cost to User', value: '$0', detail: 'Free forever. No sign-up. No tracking.' },
-  ];
-
   return (
-    <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
-      <div className="w-full max-w-2xl flex flex-col gap-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>
-            📰 Press Kit
-          </h1>
-          <p className="mt-2" style={{ color: 'var(--tc-text-muted)' }}>
-            Everything journalists and partners need to cover TrustChekr.
-          </p>
-        </div>
+    <div className="flex flex-col gap-8">
+      <div>
+        <h1 className="text-2xl font-bold" style={{ color: 'var(--tc-text-main)' }}>Press Kit</h1>
+        <p className="mt-1" style={{ color: 'var(--tc-text-muted)' }}>
+          Resources for journalists and media covering TrustChekr.
+        </p>
+      </div>
 
-        {/* One-liner */}
-        <div className="p-5 rounded-xl text-center" style={{ background: 'var(--tc-primary)', color: 'white' }}>
-          <p className="text-sm uppercase tracking-wide opacity-80 mb-2">The One-Liner</p>
-          <p className="text-lg font-bold leading-relaxed">
-            "TrustChekr is Canada's free scam detection platform — 14 analysis modules,
-            9 intelligence databases, and an online safety academy, built to protect
-            Canadians from the $530M+ annual fraud epidemic."
-          </p>
-        </div>
+      {/* One-liner */}
+      <div className="p-4 rounded-lg" style={{ background: 'var(--tc-surface)', borderLeft: '4px solid var(--tc-primary)' }}>
+        <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--tc-text-muted)' }}>Boilerplate</p>
+        <p className="font-medium" style={{ color: 'var(--tc-text-main)' }}>
+          TrustChekr is a free, privacy-first scam detection platform built in Canada. It checks suspicious
+          messages, websites, phone numbers, emails, and crypto wallets against 21+ analysis modules and
+          9 threat intelligence databases — no sign-up required.
+        </p>
+      </div>
 
-        {/* Key stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {stats.map((stat) => (
-            <div key={stat.label} className="p-3 rounded-xl text-center" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-              <p className="text-2xl font-bold" style={{ color: 'var(--tc-primary)' }}>{stat.value}</p>
-              <p className="text-xs font-semibold" style={{ color: 'var(--tc-text-main)' }}>{stat.label}</p>
-              <p className="text-xs mt-1" style={{ color: 'var(--tc-text-muted)' }}>{stat.detail}</p>
+      {/* Stats */}
+      <section>
+        <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--tc-text-main)' }}>Platform numbers</h2>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          {[
+            { value: '21+', label: 'Analysis modules' },
+            { value: '9', label: 'OSINT databases' },
+            { value: '8', label: 'Academy modules' },
+            { value: '49K', label: 'Known bad domains' },
+            { value: '22', label: 'Phone scam patterns' },
+            { value: '$0', label: 'Cost to user' },
+          ].map(s => (
+            <div key={s.label} className="p-3 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+              <p className="text-xl font-bold" style={{ color: 'var(--tc-primary)' }}>{s.value}</p>
+              <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>{s.label}</p>
             </div>
           ))}
         </div>
+      </section>
 
-        {/* The story */}
-        <div className="p-5 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-          <h2 className="text-xl font-bold mb-3" style={{ color: 'var(--tc-primary)' }}>📖 The Story</h2>
-          <div className="flex flex-col gap-3 text-sm leading-relaxed" style={{ color: 'var(--tc-text-main)' }}>
-            <p>
-              In 2025, Canadians reported over $530 million lost to fraud — and experts estimate the true figure
-              is 5 to 10 times higher. Seniors are disproportionately targeted, and most existing tools are
-              either American-focused, require technical knowledge, or only check one type of scam.
-            </p>
-            <p>
-              TrustChekr was built to fill this gap. It's a free, privacy-first platform where anyone can
-              paste a suspicious message, URL, phone number, email, or crypto wallet address and get a
-              plain-English risk assessment in seconds. No sign-up required. No data stored.
-            </p>
-            <p>
-              What makes TrustChekr different is the depth of analysis. Each scan runs through 14 modules
-              including 9 threat intelligence databases, pattern matching trained on Canadian scam data,
-              an entity graph that links suspicious actors across reports, and AI text detection that
-              flags machine-generated scam messages.
-            </p>
-            <p>
-              The platform also includes Canada's first free Online Safety Academy — 8 modules covering
-              everything from phone scams to romance fraud, with interactive quizzes and completion certificates.
-            </p>
-          </div>
-        </div>
+      {/* What's different */}
+      <section>
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>What makes TrustChekr different</h2>
+        <ul className="flex flex-col gap-1.5 text-sm" style={{ color: 'var(--tc-text-main)' }}>
+          <li><strong>Multi-surface scanning</strong> — checks URLs, messages, phone numbers, emails, and crypto wallets in one place</li>
+          <li><strong>Canadian-first</strong> — trained on CRA impersonation, bank fraud, RCMP threats, and Interac scam patterns</li>
+          <li><strong>Entity graph intelligence</strong> — links suspicious actors across scans; risk compounds over time</li>
+          <li><strong>Native cryptocurrency analysis</strong> — Bitcoin, Ethereum, and XRP Ledger wallet scanning</li>
+          <li><strong>Romance scam assessment</strong> — guided intake with behavioral pattern scoring</li>
+          <li><strong>AI text detection</strong> — flags machine-generated scam messages</li>
+          <li><strong>Zero data collection</strong> — no accounts, no cookies, no tracking. PIPEDA compliant.</li>
+          <li><strong>Senior-first design</strong> — large text, high contrast, plain language, blame-free tone</li>
+        </ul>
+      </section>
 
-        {/* Key differentiators */}
-        <div className="p-5 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-          <h2 className="text-xl font-bold mb-3" style={{ color: 'var(--tc-primary)' }}>🏆 Key Differentiators</h2>
-          <ul className="flex flex-col gap-2 text-sm" style={{ color: 'var(--tc-text-main)' }}>
-            <li>🇨🇦 <strong>Only Canadian-focused scam scanner</strong> — CRA, bank impersonation, Canadian phone patterns</li>
-            <li>🕸️ <strong>Entity graph intelligence</strong> — links entities across scans, risk scores compound over time</li>
-            <li>₿ <strong>First consumer tool with native cryptocurrency analysis</strong> — Bitcoin, Ethereum, and XRP Ledger</li>
-            <li>💔 <strong>Dedicated romance scam assessment</strong> — guided intake with behavioral scoring</li>
-            <li>🤖 <strong>AI-generated text detection</strong> — flags ChatGPT-written scam messages</li>
-            <li>📱 <strong>Screenshot OCR scanning</strong> — upload a photo of a suspicious text message</li>
-            <li>🎓 <strong>8-module safety academy</strong> — with quizzes, progress tracking, and certificates</li>
-            <li>🔒 <strong>Zero data collection</strong> — no accounts, no cookies, no tracking</li>
-            <li>👴 <strong>Senior-first design</strong> — 18px+ fonts, high contrast, blame-free language</li>
-          </ul>
-        </div>
-
-        {/* Available on */}
-        <div className="p-5 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-          <h2 className="text-xl font-bold mb-3" style={{ color: 'var(--tc-primary)' }}>📱 Available On</h2>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <div className="p-2 rounded-lg" style={{ background: 'var(--tc-primary-soft)' }}>
-              <strong>🌐 Web</strong> — trustchekr.com
-            </div>
-            <div className="p-2 rounded-lg" style={{ background: 'var(--tc-primary-soft)' }}>
-              <strong>🧩 Chrome Extension</strong> — coming soon
-            </div>
-            <div className="p-2 rounded-lg" style={{ background: 'var(--tc-primary-soft)' }}>
-              <strong>💬 Telegram Bot</strong> — @TrustChekrBot
-            </div>
-            <div className="p-2 rounded-lg" style={{ background: 'var(--tc-primary-soft)' }}>
-              <strong>📱 SMS</strong> — text to scan (coming soon)
-            </div>
-            <div className="p-2 rounded-lg col-span-2" style={{ background: 'var(--tc-primary-soft)' }}>
-              <strong>🔌 Embeddable Widget</strong> — one line of code for any website
-            </div>
-          </div>
-        </div>
-
-        {/* Contact */}
-        <div className="p-5 rounded-xl text-center" style={{ background: 'var(--tc-primary-soft)', border: '2px solid var(--tc-primary)' }}>
-          <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--tc-primary)' }}>📧 Contact</h2>
-          <p className="text-sm" style={{ color: 'var(--tc-text-main)' }}>
-            <strong>Media inquiries:</strong> press@trustchekr.com<br />
-            <strong>Partnerships:</strong> partnerships@trustchekr.com<br />
-            <strong>General:</strong> hello@trustchekr.com
+      {/* The story */}
+      <section>
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>Background</h2>
+        <div className="flex flex-col gap-3 text-sm" style={{ color: 'var(--tc-text-main)' }}>
+          <p>
+            Canadians lost $638 million to fraud in 2024 — and experts estimate the real figure is 5–10x higher.
+            Seniors are disproportionately targeted, and most existing tools are American-focused, require
+            technical knowledge, or only check one type of threat.
+          </p>
+          <p>
+            TrustChekr fills this gap. Anyone can paste something suspicious and get a plain-language risk
+            assessment in seconds. The platform also includes Canada's first free Online Safety Academy — 8
+            modules with interactive quizzes and completion certificates.
           </p>
         </div>
-      </div>
-    </main>
+      </section>
+
+      {/* Available on */}
+      <section>
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>Available on</h2>
+        <div className="grid grid-cols-2 gap-2 text-sm" style={{ color: 'var(--tc-text-main)' }}>
+          <div className="p-2.5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <strong>Web</strong> — trustchekr.com
+          </div>
+          <div className="p-2.5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <strong>Telegram</strong> — @TrustChekrBot
+          </div>
+          <div className="p-2.5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <strong>Chrome Extension</strong> — coming soon
+          </div>
+          <div className="p-2.5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <strong>Embeddable Widget</strong> — one line of code
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="text-sm" style={{ color: 'var(--tc-text-main)' }}>
+        <h2 className="text-lg font-semibold mb-2">Contact</h2>
+        <p>Media: <a href="mailto:press@trustchekr.com" style={{ color: 'var(--tc-primary)' }}>press@trustchekr.com</a></p>
+        <p>Partnerships: <a href="mailto:partnerships@trustchekr.com" style={{ color: 'var(--tc-primary)' }}>partnerships@trustchekr.com</a></p>
+        <p>General: <a href="mailto:hello@trustchekr.com" style={{ color: 'var(--tc-primary)' }}>hello@trustchekr.com</a></p>
+      </section>
+
+      <hr style={{ borderColor: 'var(--tc-border)' }} />
+      <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>
+        TrustChekr is operated by 17734344 Canada Inc.
+      </p>
+    </div>
   );
 }

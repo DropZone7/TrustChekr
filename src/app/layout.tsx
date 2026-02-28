@@ -107,12 +107,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BackToTop />
 
         <footer className="w-full border-t border-[var(--tc-border)] bg-[var(--tc-surface)]">
-          <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between text-sm" style={{ color: "var(--tc-text-muted)" }}>
-            <p>We never sell your information. <a href="/privacy" className="underline">Privacy & Terms</a></p>
-            <div className="flex items-center gap-3">
-              <HighContrastToggle />
-              <DarkModeToggle />
-              <TextSizeControl />
+          <div className="max-w-2xl mx-auto px-4 py-4 text-sm" style={{ color: "var(--tc-text-muted)" }}>
+            <div className="flex items-center justify-between">
+              <p>© 17734344 Canada Inc. <a href="/privacy" className="underline">Privacy</a> · <a href="/about" className="underline">About</a></p>
+              <div className="flex items-center gap-3">
+                <HighContrastToggle />
+                <DarkModeToggle />
+                <TextSizeControl />
+              </div>
             </div>
           </div>
         </footer>

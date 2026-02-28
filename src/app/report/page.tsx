@@ -106,7 +106,7 @@ export default function ReportPage() {
     <div className="flex flex-col gap-6">
       <div className="text-center">
         <h1 className="text-2xl font-bold mb-2" style={{ color: "var(--tc-primary)" }}>
-          🚨 Report a Scam
+          Report a Scam
         </h1>
         <p style={{ color: "var(--tc-text-muted)" }}>
           Help protect other Canadians by reporting scams you've encountered.
@@ -116,7 +116,7 @@ export default function ReportPage() {
 
       <div className="p-4 rounded-xl border" style={{ borderColor: "var(--tc-safe)", background: "#eafaf1" }}>
         <p className="text-sm" style={{ color: "var(--tc-text-main)" }}>
-          🔒 <strong>Your privacy is protected.</strong> We never share your personal information.
+          <strong>Your privacy is protected.</strong> We never share your personal information.
           Reports are used only to improve scam detection and warn others. You don't need an account.
         </p>
       </div>

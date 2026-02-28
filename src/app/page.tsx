@@ -135,7 +135,7 @@ export default function Home() {
           <p className="text-center text-xs pb-2" style={{ color: "var(--tc-text-muted)" }}>
             We don't store your scans. We don't sell your data. We don't require sign-up.
             <br />
-            Built in Canada. <a href="/privacy" className="underline">Privacy Policy</a> · <a href="/about" className="underline">About</a> · <a href="/press" className="underline">Press</a>
+            © 17734344 Canada Inc. <a href="/privacy" className="underline">Privacy Policy</a> · <a href="/about" className="underline">About</a> · <a href="/press" className="underline">Press</a>
           </p>
         </>
       )}

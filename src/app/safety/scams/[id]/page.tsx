@@ -119,7 +119,7 @@ export default async function ScamDetailsPage({ params }: PageProps) {
 
       {/* What you should do */}
       <section className="p-4 rounded-xl border-2" style={{ borderColor: 'var(--tc-safe)', background: '#eafaf1' }}>
-        <h2 className="font-bold mb-2" style={{ color: 'var(--tc-safe)' }}>🛡️ What you should do</h2>
+        <h2 className="font-bold mb-2" style={{ color: 'var(--tc-safe)' }}>What you should do</h2>
         <p>{scam.recommended_ui_messaging}</p>
         {scam.academy_modules_impacted.includes('M8_WHAT_TO_DO') && (
           <p className="mt-2 text-sm">

@@ -23,11 +23,11 @@ export default function HelpPage() {
         style={{ borderColor: "var(--tc-danger)", background: "#fdedec" }}
       >
         <h2 className="text-lg font-bold mb-3" style={{ color: "var(--tc-danger)" }}>
-          🚨 If you already sent money
+          If you already sent money
         </h2>
         <ul className="flex flex-col gap-3">
           <li className="flex gap-2">
-            <span>📞</span>
+            <span style={{ color: "var(--tc-primary)", fontWeight: 700 }}>1.</span>
             <div>
               <p className="font-semibold">Call your bank or credit card company right away</p>
               <p className="text-sm" style={{ color: "var(--tc-text-muted)" }}>
@@ -54,7 +54,7 @@ export default function HelpPage() {
             </div>
           </li>
           <li className="flex gap-2">
-            <span>🚔</span>
+            <span style={{ color: "var(--tc-primary)", fontWeight: 700 }}>4.</span>
             <div>
               <p className="font-semibold">Your local police (non-emergency line)</p>
               <p className="text-sm" style={{ color: "var(--tc-text-muted)" }}>
@@ -71,7 +71,7 @@ export default function HelpPage() {
         style={{ borderColor: "var(--tc-accent)", background: "#eaf2f8" }}
       >
         <h2 className="text-lg font-bold mb-3" style={{ color: "var(--tc-accent)" }}>
-          💙 Feeling overwhelmed or embarrassed?
+          Feeling overwhelmed or embarrassed?
         </h2>
         <p className="mb-3">
           Being scammed can feel terrible. You might feel angry, embarrassed, or ashamed. Those feelings are completely normal — but please know:
@@ -129,7 +129,7 @@ export default function HelpPage() {
       </section>
 
       <div className="text-center p-4" style={{ color: "var(--tc-text-muted)" }}>
-        <p>🛡️ TrustChekr is here to help you stay safe. You did the right thing by coming here.</p>
+        <p>TrustChekr is here to help. You did the right thing by coming here.</p>
       </div>
     </div>
   );

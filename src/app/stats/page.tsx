@@ -28,7 +28,7 @@ const SCAM_TYPE_LABELS: Record<string, string> = {
   romance_scam: '💔 Romance Scam',
   crypto_scam: '🪙 Crypto Scam',
   phishing: '🎣 Phishing',
-  investment_fraud: '📈 Investment Fraud',
+  investment_fraud: '— Investment Fraud',
   other: '❓ Other',
   unknown: '❓ Unknown',
 };
