@@ -1,0 +1,15 @@
+{
+  "version": "xrpl-wallet-risk-mvp-0.0.1-placeholder",
+  "featureNames": [
+    "txCountTotal", "txCountInbound", "txCountOutbound", "uniqueCounterparties",
+    "lifetimeDays", "avgTxAmount", "medianTxAmount", "maxTxAmount", "minTxAmount",
+    "avgTxPerDayActive", "maxTxInOneDay", "daysSinceFirstTx", "daysSinceLastTx",
+    "fractionTinyAmounts", "fractionFirstTimeInbound", "fractionToKnownExchanges"
+  ],
+  "normalization": {
+    "mean": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    "std": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+  },
+  "weights": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  "bias": 0
+}

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { CryptoRiskResult } from '@/lib/cryptoRisk/types';
+import { assessWalletRisk, WalletNotFoundError } from '@/lib/cryptoRisk/service';
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,28 +12,23 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const result: CryptoRiskResult = {
-      address: address.trim(),
-      riskScore: 0.5,
-      riskLevel: 'medium',
-      signals: [
-        {
-          id: 'stub_placeholder',
-          label: 'Stub signal — real analysis coming soon',
-          weight: 0,
-          value: 'placeholder',
-        },
-      ],
-      explanation:
-        'This is a stubbed response. Wallet-level risk scoring is under development.',
-      modelVersion: 'xrpl-wallet-risk-mvp-0.0.1',
-    };
-
+    const result = await assessWalletRisk(address.trim());
     return NextResponse.json(result);
-  } catch {
+  } catch (err) {
+    if (err instanceof WalletNotFoundError) {
+      return NextResponse.json(
+        {
+          error: 'We don\'t have analysis data for this wallet yet. Try scanning it on the main page first.',
+          address: (err as any).message?.match(/for (.+)/)?.[1] ?? '',
+        },
+        { status: 404 }
+      );
+    }
+
+    console.error('Crypto scan error:', err);
     return NextResponse.json(
-      { error: 'Invalid request.' },
-      { status: 400 }
+      { error: 'Something went wrong analyzing this wallet. Please try again.' },
+      { status: 500 }
     );
   }
 }
