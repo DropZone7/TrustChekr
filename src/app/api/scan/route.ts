@@ -113,13 +113,15 @@ export async function POST(req: NextRequest) {
     let usernameResult: any = null;
 
     if (type === "website") {
-      const osint = await batchWebsiteOsint(cleaned);
-      osintResults = osint;
-      if (osint.domain?.signals) signals.push(...osint.domain.signals);
-      if (osint.safeBrowsing?.signals) signals.push(...osint.safeBrowsing.signals);
-      if (osint.virusTotal?.signals) signals.push(...osint.virusTotal.signals);
-      if (osint.phishTank?.signals) signals.push(...osint.phishTank.signals);
-      if (osint.urlhaus?.signals) signals.push(...osint.urlhaus.signals);
+      try {
+        const osint = await batchWebsiteOsint(cleaned);
+        osintResults = osint;
+        if (osint.domain?.signals) signals.push(...osint.domain.signals);
+        if (osint.safeBrowsing?.signals) signals.push(...osint.safeBrowsing.signals);
+        if (osint.virusTotal?.signals) signals.push(...osint.virusTotal.signals);
+        if (osint.phishTank?.signals) signals.push(...osint.phishTank.signals);
+        if (osint.urlhaus?.signals) signals.push(...osint.urlhaus.signals);
+      } catch { /* OSINT is enrichment — never break scan */ }
     }
 
     if (type === "other") {
@@ -289,7 +291,8 @@ export async function POST(req: NextRequest) {
       } : {}),
       ...(aiAnalysis?.available ? { ai_analysis: aiAnalysis } : {}),
     });
-  } catch {
+  } catch (err: any) {
+    console.error('[SCAN API ERROR]', err?.message, err?.stack?.split('\n').slice(0, 5).join('\n'));
     return NextResponse.json(
       {
         error:

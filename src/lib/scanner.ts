@@ -20,6 +20,9 @@ function analyzeUrl(input: string): Signal[] {
     signals.push({ text: "This website uses a domain ending that is very commonly seen in scam sites.", weight: 20 });
   }
 
+  // Extract domain early (needed for brand checks)
+  const domain = lower.split("/")[0];
+
   // Lookalike detection (common brands)
   // Map brand keywords to their known legitimate domains
   const brandDomains: Record<string, string[]> = {
@@ -49,7 +52,6 @@ function analyzeUrl(input: string): Signal[] {
   }
 
   // Excessive hyphens or numbers in domain
-  const domain = lower.split("/")[0];
   if ((domain.match(/-/g) || []).length >= 3) {
     signals.push({ text: "The website address has many hyphens, which is unusual for legitimate sites.", weight: 15 });
   }
