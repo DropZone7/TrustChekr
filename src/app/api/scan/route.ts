@@ -245,10 +245,13 @@ export async function POST(req: NextRequest) {
       );
     } catch { /* unified scan is optional — don't break existing results */ }
 
-    // Gemini AI analysis (non-blocking, optional enhancement)
+    // Gemini AI analysis (non-blocking, optional, 3s timeout to avoid Vercel function timeout)
     let aiAnalysis: any = null;
     try {
-      aiAnalysis = await analyzeWithAI(patternResult.inputType, cleaned, riskLabels[riskLevel]);
+      aiAnalysis = await Promise.race([
+        analyzeWithAI(patternResult.inputType, cleaned, riskLabels[riskLevel]),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('AI timeout')), 3000)),
+      ]);
     } catch { /* AI is optional — never break existing results */ }
 
     // Audit log (fire-and-forget)
