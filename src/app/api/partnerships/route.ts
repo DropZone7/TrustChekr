@@ -1,36 +1,80 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase/server';
-import { logAudit, hashIp } from '@/lib/auditLog';
+
+type PartnershipLead = {
+  name: string;
+  organization: string;
+  email: string;
+  useCase: string;
+  message: string;
+  source: string;
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { name, organization, email, useCase, message } = body;
+    const raw = await req.json();
+
+    const name = String(raw.name ?? '').trim();
+    const organization = String(raw.organization ?? '').trim();
+    const email = String(raw.email ?? '').trim();
+    const useCase = String(raw.useCase ?? '').trim();
+    const message = String(raw.message ?? '').trim();
+    const source = String(raw.source ?? 'partners-page').trim();
 
     if (!name || !organization || !email) {
       return NextResponse.json({ error: 'Name, organization, and email are required.' }, { status: 400 });
     }
-
-    // Store as a user report with type 'partnership_inquiry'
-    const { error } = await supabaseServer.from('user_reports').insert({
-      source_page: '/partners',
-      source_ref: `partner-${Date.now()}`,
-      reporter_email: email,
-      report_type: 'partnership_inquiry',
-      message: `[${organization}] ${useCase ?? 'General'}: ${message ?? 'No details provided'}`,
-      metadata: { name, organization, useCase },
-    });
-
-    if (error) {
-      console.error('Partnership inquiry insert error', error);
-      return NextResponse.json({ error: 'Failed to submit inquiry.' }, { status: 500 });
+    if (!EMAIL_RE.test(email)) {
+      return NextResponse.json({ error: 'Please provide a valid email address.' }, { status: 400 });
     }
 
-    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
-    try { logAudit('partnership_inquiry', { organization, useCase }, hashIp(clientIp)); } catch { /* fire and forget */ }
+    const lead: PartnershipLead = { name, organization, email, useCase, message, source };
 
-    return NextResponse.json({ success: true, message: 'Thank you! We will be in touch within 1-2 business days.' }, { status: 201 });
+    // Persist to Supabase (user_reports table as partnership_inquiry)
+    try {
+      await supabaseServer.from('user_reports').insert({
+        source_page: '/partners',
+        source_ref: `partner-${Date.now()}`,
+        reporter_email: email,
+        report_type: 'partnership_inquiry',
+        message: `[${organization}] ${useCase || 'General'}: ${message || 'No details provided'}`,
+        metadata: { name, organization, useCase, source },
+      });
+    } catch { /* DB insert is best-effort */ }
+
+    // Forward to webhook if configured (fire-and-forget)
+    const webhookUrl = process.env.PARTNERSHIP_WEBHOOK_URL;
+    if (webhookUrl) {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(lead),
+      }).catch(() => { /* fire and forget */ });
+    }
+
+    return NextResponse.json(
+      { ok: true, message: 'Partnership request received. We typically respond within 1–2 business days.' },
+      { status: 201 },
+    );
   } catch {
-    return NextResponse.json({ error: 'Unable to process request.' }, { status: 500 });
+    return NextResponse.json({ error: 'Unable to process request right now.' }, { status: 500 });
   }
+}
+
+export async function GET() {
+  return NextResponse.json({
+    endpoint: 'POST /api/partnerships',
+    description: 'Submit a partnership inquiry. Write-only from external clients.',
+    required_fields: ['name', 'organization', 'email'],
+    optional_fields: ['useCase', 'message', 'source'],
+    example: {
+      name: 'Jane Doe',
+      organization: 'Maple Credit Union',
+      email: 'jane@maplecreditunion.ca',
+      useCase: 'Credit union / Central 1 Forge',
+      message: 'Interested in API integration for e-Transfer screening.',
+    },
+  });
 }
