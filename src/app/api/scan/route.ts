@@ -10,6 +10,7 @@ import { isDomainBlocked } from "@/lib/training/domainBlocklist";
 import { scoreSpamLikelihood } from "@/lib/training/spamDetector";
 import { analyzeUrlFeatures } from "@/lib/training/urlFeatures";
 import { scorePhishingEmail } from "@/lib/training/phishingEmailDetector";
+import { analyzeWithAI } from "@/lib/google/scamAnalysis";
 
 export async function POST(req: NextRequest) {
   try {
@@ -238,6 +239,12 @@ export async function POST(req: NextRequest) {
       );
     } catch { /* unified scan is optional — don't break existing results */ }
 
+    // Gemini AI analysis (non-blocking, optional enhancement)
+    let aiAnalysis: any = null;
+    try {
+      aiAnalysis = await analyzeWithAI(patternResult.inputType, cleaned, riskLabels[riskLevel]);
+    } catch { /* AI is optional — never break existing results */ }
+
     // Audit log (fire-and-forget)
     try {
       const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
@@ -271,6 +278,7 @@ export async function POST(req: NextRequest) {
         overall_risk_score: unified.overall_risk_score,
         overall_risk_label: unified.overall_risk_label,
       } : {}),
+      ...(aiAnalysis?.available ? { ai_analysis: aiAnalysis } : {}),
     });
   } catch {
     return NextResponse.json(
