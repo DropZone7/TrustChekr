@@ -1,0 +1,2 @@
+// Prompt 3 Part 2: Top campaigns section received
+// Status: SAVED, need trending chart + community reports + CA alerts + CTA + closing tags

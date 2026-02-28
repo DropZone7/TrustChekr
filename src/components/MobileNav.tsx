@@ -5,12 +5,14 @@ import { useState } from 'react';
 const links = [
   { href: '/', label: 'Home' },
   { href: '/academy', label: 'Academy' },
+  { href: '/chat', label: 'Chat' },
   { href: '/tools', label: 'Tools' },
+  { href: '/threats', label: 'Threats' },
   { href: '/community', label: 'Community' },
   { href: '/map', label: 'Scam Map' },
   { href: '/report', label: 'Report' },
   { href: '/learn', label: 'Learn' },
-  { href: '/stats', label: 'Stats' },
+  { href: '/partners', label: 'Partners' },
   { href: '/help', label: 'Help' },
 ];
 

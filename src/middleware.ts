@@ -47,6 +47,16 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // Rate limit chat API: 30/day per IP
+  if (pathname === '/api/chat/analyze') {
+    if (!checkLimit(`chat:${ip}`, ipCounters, 30, ONE_DAY_MS)) {
+      return NextResponse.json(
+        { error: 'You\'ve reached the daily chat limit. Please try again tomorrow.' },
+        { status: 429 }
+      );
+    }
+  }
+
   // Rate limit scan API: 50/day per IP
   if (pathname === '/api/scan') {
     if (!checkLimit(`scan:${ip}`, ipCounters, 50, ONE_DAY_MS)) {
@@ -117,5 +127,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/v1/:path*', '/api/scan', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/tc47x/:path*', '/admin/:path*'],
+  matcher: ['/api/v1/:path*', '/api/scan', '/api/chat/analyze', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/api/partnerships', '/tc47x/:path*', '/admin/:path*'],
 };
