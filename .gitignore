@@ -6,4 +6,7 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 data/
+!data/romance_conversations_template.json
+!data/xrpl_wallet_labels.json
 scripts/
+!scripts/*.ts

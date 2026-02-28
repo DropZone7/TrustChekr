@@ -1,0 +1,71 @@
+[
+  {
+    "id": "template-romance-001",
+    "label": "romance_scam",
+    "stage": "grooming",
+    "source": "synthetic_template",
+    "messages": [
+      { "role": "other", "text": "Hi! I saw your profile and I just had to reach out. You have the most beautiful smile." },
+      { "role": "user", "text": "Oh thank you! That's so sweet. Do I know you?" },
+      { "role": "other", "text": "Not yet, but I feel like I've been looking for someone like you my whole life. I'm an engineer working overseas." },
+      { "role": "user", "text": "That's interesting, where are you based?" },
+      { "role": "other", "text": "I'm on an oil rig right now, but I'll be back in Canada soon. I already feel such a strong connection with you. Can we talk every day?" },
+      { "role": "other", "text": "I think I'm falling for you. I've never felt this way about anyone so quickly." }
+    ],
+    "redFlags": [
+      { "id": "love_bombing", "label": "Excessive flattery and declarations of love very early", "severity": 4, "messageIndices": [0, 5] },
+      { "id": "fast_commitment", "label": "Pushing for daily contact and exclusive emotional bond", "severity": 4, "messageIndices": [4, 5] },
+      { "id": "cant_video_call", "label": "Claims to be in a remote location (oil rig) making meetings impossible", "severity": 3, "messageIndices": [4] }
+    ]
+  },
+  {
+    "id": "template-pig-butchering-001",
+    "label": "pig_butchering_scam",
+    "stage": "first_ask",
+    "source": "synthetic_template",
+    "messages": [
+      { "role": "other", "text": "Hey! I think I have the wrong number, but how are you doing today?" },
+      { "role": "user", "text": "I think you do have the wrong number lol" },
+      { "role": "other", "text": "Haha well maybe it was fate! I'm Jessica, I work in finance. What do you do?" },
+      { "role": "user", "text": "I work in retail. Nothing fancy." },
+      { "role": "other", "text": "Don't say that! I actually started small too. I've been doing really well with crypto trading lately. Made $12K last month on this platform my uncle showed me." },
+      { "role": "other", "text": "I could show you how it works if you want? You just need to put in a small amount to start, like $200. The returns are incredible." }
+    ],
+    "redFlags": [
+      { "id": "wrong_number_intro", "label": "Conversation initiated via wrong number", "severity": 3, "messageIndices": [0] },
+      { "id": "crypto_investment_push", "label": "Steering conversation toward crypto investment", "severity": 5, "messageIndices": [4, 5] },
+      { "id": "guaranteed_returns", "label": "Claiming incredible or guaranteed returns", "severity": 5, "messageIndices": [5] },
+      { "id": "small_wins_first", "label": "Encouraging a small initial deposit to build trust", "severity": 4, "messageIndices": [5] }
+    ]
+  },
+  {
+    "id": "template-generic-scam-001",
+    "label": "generic_scam",
+    "stage": "first_ask",
+    "source": "synthetic_template",
+    "messages": [
+      { "role": "other", "text": "URGENT: This is Service Canada. Your Social Insurance Number has been compromised in a fraud investigation." },
+      { "role": "other", "text": "You must verify your identity immediately or your accounts will be frozen. Reply with your full name and SIN." },
+      { "role": "user", "text": "Is this real? How do I know you're actually from Service Canada?" },
+      { "role": "other", "text": "This is an official notification. If you do not comply within 24 hours, the RCMP will be notified and a warrant may be issued." }
+    ],
+    "redFlags": [
+      { "id": "urgency_threat", "label": "Creating urgency through threats of arrest or account freeze", "severity": 4, "messageIndices": [0, 3] },
+      { "id": "personal_info_request", "label": "Requesting SIN and personal identity information", "severity": 5, "messageIndices": [1] },
+      { "id": "unsolicited_contact", "label": "Unsolicited contact claiming to be a government agency", "severity": 2, "messageIndices": [0] }
+    ]
+  },
+  {
+    "id": "template-legit-001",
+    "label": "legit",
+    "stage": "none",
+    "source": "synthetic_template",
+    "messages": [
+      { "role": "other", "text": "Hey! Are we still on for coffee tomorrow at 2?" },
+      { "role": "user", "text": "Yes! The place on Queen St?" },
+      { "role": "other", "text": "That's the one. See you there!" },
+      { "role": "user", "text": "Sounds good, see you tomorrow!" }
+    ],
+    "redFlags": []
+  }
+]
