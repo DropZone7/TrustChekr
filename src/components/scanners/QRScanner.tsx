@@ -123,7 +123,7 @@ export function QRScanner() {
         onClick={() => fileRef.current?.click()}
       >
         <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
-        <p className="text-3xl mb-2">📷</p>
+        <p className="text-3xl mb-2"></p>
         <p className="font-semibold" style={{ color: 'var(--tc-primary)' }}>
           Upload a QR code image to scan
         </p>
@@ -208,7 +208,7 @@ export function QRScanner() {
                   <ul className="flex flex-col gap-1 text-sm">
                     {result.url_scan_result.signals.map((s: any, i: number) => (
                       <li key={i} className="flex gap-2">
-                        <span>{s.weight > 0 ? '⚠️' : '✅'}</span>
+                        <span>{s.weight > 0 ? '' : ''}</span>
                         <span>{s.description}</span>
                       </li>
                     ))}

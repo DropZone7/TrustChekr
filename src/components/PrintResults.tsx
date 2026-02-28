@@ -67,7 +67,7 @@ Checked with TrustChekr — trustchekr.com
         className="flex-1 py-3 rounded-xl border-2 font-medium cursor-pointer flex items-center justify-center gap-2"
         style={{ borderColor: "var(--tc-border)", color: "var(--tc-text-main)", background: "var(--tc-surface)" }}
       >
-        🖨️ Print these steps
+        Print these steps
       </button>
       <button
         onClick={handleEmail}

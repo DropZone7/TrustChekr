@@ -56,7 +56,7 @@ export function LatestScamAlertsWidget() {
     <div className="rounded-xl border p-4" style={{ borderColor: 'var(--tc-border)', background: 'var(--tc-surface)' }}>
       <div className="mb-3 flex items-center justify-between">
         <h2 className="text-sm font-semibold" style={{ color: 'var(--tc-text-main)' }}>
-          🚨 Latest Scam Alerts (Canada)
+          Latest Scam Alerts (Canada)
         </h2>
       </div>
       <ul className="flex flex-col gap-3">

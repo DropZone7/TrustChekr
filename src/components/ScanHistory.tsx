@@ -17,7 +17,7 @@ const STORAGE_KEY = 'trustchekr_scan_history_v1';
 const MAX_ITEMS = 50;
 
 const typeIcon: Record<string, string> = {
-  website: '🌐', message: '💬', phone: '📱', crypto: '🔗', romance: '❤️', other: '❓',
+  website: 'Web', message: 'Msg', phone: 'Other', crypto: 'URL', romance: '', other: '?',
 };
 
 const riskColors: Record<HistoryRiskLevel, { bg: string; text: string; label: string }> = {
@@ -134,12 +134,12 @@ export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: str
         <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search scans…" style={{ flex: 1, minWidth: '140px', borderRadius: '999px', border: '1px solid var(--tc-border)', padding: '0.35rem 0.65rem', fontSize: '0.85rem' }} />
         <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as any)} style={{ borderRadius: '999px', border: '1px solid var(--tc-border)', padding: '0.35rem 0.65rem', fontSize: '0.85rem' }}>
           <option value="all">All types</option>
-          <option value="website">🌐 Website</option>
-          <option value="message">💬 Message</option>
-          <option value="phone">📱 Phone</option>
-          <option value="crypto">🔗 Crypto</option>
-          <option value="romance">❤️ Romance</option>
-          <option value="other">❓ Other</option>
+          <option value="website">Web Website</option>
+          <option value="message">Msg Message</option>
+          <option value="phone">Other Phone</option>
+          <option value="crypto">URL Crypto</option>
+          <option value="romance"> Romance</option>
+          <option value="other">? Other</option>
         </select>
       </div>
 
@@ -152,7 +152,7 @@ export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: str
           const risk = riskColors[item.riskLevel] ?? riskColors.low;
           return (
             <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.6rem', borderRadius: '10px', border: '1px solid var(--tc-border)', fontSize: '0.9rem' }}>
-              <span style={{ fontSize: '1.1rem' }}>{typeIcon[item.type] ?? '❓'}</span>
+              <span style={{ fontSize: '1.1rem' }}>{typeIcon[item.type] ?? '?'}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{truncate(item.input)}</div>
                 <div style={{ fontSize: '0.75rem', color: 'var(--tc-text-muted)' }}>{formatDate(item.createdAt)}</div>
@@ -161,7 +161,7 @@ export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: str
                 {risk.label}
               </span>
               {onRescan && (
-                <button type="button" onClick={() => onRescan(item.input, item.type)} title="Re-scan" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--tc-primary)' }}>🔄</button>
+                <button type="button" onClick={() => onRescan(item.input, item.type)} title="Re-scan" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--tc-primary)' }}></button>
               )}
               <button type="button" onClick={() => handleRemove(item.id)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--tc-text-muted)' }}>✕</button>
             </div>

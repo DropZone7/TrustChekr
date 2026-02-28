@@ -94,7 +94,7 @@ export function ScreenshotScanner() {
         onClick={() => fileRef.current?.click()}
       >
         <input ref={fileRef} type="file" accept="image/*" onChange={handleFile} className="hidden" />
-        <p className="text-3xl mb-2">📱</p>
+        <p className="text-3xl mb-2"></p>
         <p className="font-semibold" style={{ color: 'var(--tc-primary)' }}>
           Upload or paste a screenshot
         </p>
@@ -222,7 +222,7 @@ export function ScreenshotScanner() {
 
               {/* Disclaimer */}
               <p className="text-xs leading-relaxed" style={{ color: 'var(--tc-text-muted)' }}>
-                ⚠️ This analysis is based on automated pattern matching and may not be accurate. It does not constitute professional advice.
+                This analysis is based on automated pattern matching and may not be accurate. It does not constitute professional advice.
                 Results generated {new Date().toLocaleDateString('en-CA')}. When in doubt, contact the{' '}
                 <a href="https://antifraudcentre-centreantifraude.ca/" target="_blank" rel="noopener" style={{ color: 'var(--tc-primary)' }}>
                   Canadian Anti-Fraud Centre

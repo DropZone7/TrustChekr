@@ -62,7 +62,7 @@ export function ReportForm({ sourcePage, sourceRef }: Props) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3 rounded-xl border p-4" style={{ borderColor: 'var(--tc-border)', background: 'var(--tc-surface)' }}>
       <h3 className="font-semibold" style={{ color: 'var(--tc-text-main)' }}>
-        📝 Report a scam or give feedback
+        Report a scam or give feedback
       </h3>
 
       <div className="flex gap-4 text-sm">

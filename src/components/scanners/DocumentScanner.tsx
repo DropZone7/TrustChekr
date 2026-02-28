@@ -164,7 +164,7 @@ export function DocumentScanner() {
         onClick={() => fileRef.current?.click()}
       >
         <input ref={fileRef} type="file" accept="image/*,.pdf" onChange={handleFile} className="hidden" />
-        <p className="text-3xl mb-2">📄</p>
+        <p className="text-3xl mb-2"></p>
         <p className="font-semibold" style={{ color: 'var(--tc-primary)' }}>
           Upload an image or document to analyze
         </p>
@@ -224,7 +224,7 @@ export function DocumentScanner() {
               </div>
               <p className="text-xs mt-2" style={{ color: 'var(--tc-text-muted)' }}>
                 ELA detects areas that have been edited by analyzing compression artifacts.
-                {result.ela.manipulation_detected ? ' ⚠️ Abnormal levels detected.' : ' Levels appear normal.'}
+                {result.ela.manipulation_detected ? ' Abnormal levels detected.' : ' Levels appear normal.'}
               </p>
             </div>
           )}

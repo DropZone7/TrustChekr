@@ -41,7 +41,7 @@ export default function AIDeanonymizationArticle() {
           className="font-bold text-lg"
           style={{ color: "var(--tc-danger)" }}
         >
-          ⚠️ The short version
+          The short version
         </p>
         <p className="mt-2">
           Researchers just proved that AI can read your anonymous online posts —
@@ -233,7 +233,7 @@ export default function AIDeanonymizationArticle() {
           className="text-xl font-bold mb-3"
           style={{ color: "var(--tc-primary)" }}
         >
-          📊 By the numbers
+          By the numbers
         </h2>
         <ul className="flex flex-col gap-2">
           <li>
@@ -319,7 +319,7 @@ export default function AIDeanonymizationArticle() {
           className="mt-1 text-sm"
           style={{ color: "var(--tc-text-muted)" }}
         >
-          🛡️ TrustChekr — Helping you stay safe online
+          TrustChekr — Helping you stay safe online
         </p>
         <div className="flex gap-3 justify-center mt-4">
           <a

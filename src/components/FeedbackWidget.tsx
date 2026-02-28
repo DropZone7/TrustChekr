@@ -57,7 +57,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
             fontSize: '14px', cursor: 'pointer', fontWeight: 500,
           }}
         >
-          👍 Yes
+           Yes
         </button>
         <button
           type="button"
@@ -69,7 +69,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
             fontSize: '14px', cursor: 'pointer', fontWeight: 500,
           }}
         >
-          👎 No
+           No
         </button>
       </div>
       {showComment && (

@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react';
 
 const steps = [
-  { emoji: '🔍', text: 'Analyzing patterns…' },
+  { emoji: 'Checking', text: 'Analyzing patterns…' },
   { emoji: '🌐', text: 'Checking security databases…' },
-  { emoji: '🛡️', text: 'Running risk assessment…' },
+  { emoji: 'Scanning', text: 'Running risk assessment…' },
   { emoji: '📋', text: 'Preparing your report…' },
 ];
 

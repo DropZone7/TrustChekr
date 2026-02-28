@@ -11,20 +11,20 @@ export const metadata: Metadata = {
 };
 
 const modules = [
-  { icon: '🔍', name: 'Pattern Matching', desc: 'Checks for known scam phrases, urgency tactics, impersonation keywords (CRA, RCMP, IRS), and suspicious URL structures.' },
-  { icon: '🛡️', name: 'Domain Blocklist', desc: '49,000+ known phishing and malware domains checked instantly via Bloom filter — zero network latency.' },
-  { icon: '📧', name: 'Phishing Email Detector', desc: 'Trained on 5,100 labeled phishing emails. Scores keyword density, phrase patterns, and Canadian-specific signals.' },
-  { icon: '💬', name: 'Spam Keyword Analysis', desc: 'Trained on 5,572 labeled SMS messages. Identifies spam-associated language patterns.' },
-  { icon: '🌐', name: 'OSINT: Domain & RDAP', desc: 'Checks domain age, registrar info, and DNS records. Newly registered domains are higher risk.' },
-  { icon: '🔒', name: 'Google Safe Browsing', desc: 'Cross-references URLs against Google\'s continuously updated database of dangerous sites.' },
-  { icon: '🦠', name: 'VirusTotal', desc: '70+ antivirus engines scan the URL for malware, phishing, and suspicious behavior.' },
-  { icon: '🎣', name: 'PhishTank + URLhaus', desc: 'Community-verified phishing URL database and malware URL tracker.' },
-  { icon: '💰', name: 'XRPL Wallet Analysis', desc: 'Analyzes XRP Ledger wallets — transaction patterns, account age, payment velocity, and trust line behavior.' },
-  { icon: '🤖', name: 'AI Text Detection', desc: '7-signal heuristic detecting AI-generated content: repetition, vocabulary diversity, sentence structure.' },
-  { icon: '🧠', name: 'Gemini AI Analysis', desc: 'Google Gemini 2.5 Flash provides natural-language scam classification, tactic identification, and confidence scoring.' },
-  { icon: '📊', name: 'Entity Graph', desc: 'Maps relationships between phone numbers, emails, domains, and crypto addresses to identify coordinated scam networks.' },
-  { icon: '👤', name: 'Username OSINT', desc: 'Checks username presence across X/Twitter, Instagram, TikTok, GitHub, and Reddit.' },
-  { icon: '🔗', name: 'URL Feature Analysis', desc: 'Trained on 58,645 URLs. Analyzes path length, special characters, subdomain depth, and entropy.' },
+  { icon: '—', name: 'Pattern Matching', desc: 'Checks for known scam phrases, urgency tactics, impersonation keywords (CRA, RCMP, IRS), and suspicious URL structures.' },
+  { icon: '—', name: 'Domain Blocklist', desc: '49,000+ known phishing and malware domains checked instantly via Bloom filter — zero network latency.' },
+  { icon: '—', name: 'Phishing Email Detector', desc: 'Trained on 5,100 labeled phishing emails. Scores keyword density, phrase patterns, and Canadian-specific signals.' },
+  { icon: '—', name: 'Spam Keyword Analysis', desc: 'Trained on 5,572 labeled SMS messages. Identifies spam-associated language patterns.' },
+  { icon: '—', name: 'OSINT: Domain & RDAP', desc: 'Checks domain age, registrar info, and DNS records. Newly registered domains are higher risk.' },
+  { icon: '—', name: 'Google Safe Browsing', desc: 'Cross-references URLs against Google\'s continuously updated database of dangerous sites.' },
+  { icon: '—', name: 'VirusTotal', desc: '70+ antivirus engines scan the URL for malware, phishing, and suspicious behavior.' },
+  { icon: '—', name: 'PhishTank + URLhaus', desc: 'Community-verified phishing URL database and malware URL tracker.' },
+  { icon: '—', name: 'XRPL Wallet Analysis', desc: 'Analyzes XRP Ledger wallets — transaction patterns, account age, payment velocity, and trust line behavior.' },
+  { icon: '—', name: 'AI Text Detection', desc: '7-signal heuristic detecting AI-generated content: repetition, vocabulary diversity, sentence structure.' },
+  { icon: '—', name: 'Gemini AI Analysis', desc: 'Google Gemini 2.5 Flash provides natural-language scam classification, tactic identification, and confidence scoring.' },
+  { icon: '—', name: 'Entity Graph', desc: 'Maps relationships between phone numbers, emails, domains, and crypto addresses to identify coordinated scam networks.' },
+  { icon: '—', name: 'Username OSINT', desc: 'Checks username presence across X/Twitter, Instagram, TikTok, GitHub, and Reddit.' },
+  { icon: '—', name: 'URL Feature Analysis', desc: 'Trained on 58,645 URLs. Analyzes path length, special characters, subdomain depth, and entropy.' },
 ];
 
 const scoringRules = [

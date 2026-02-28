@@ -67,7 +67,7 @@ export function OsintDetails({ result }: { result: any }) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, fontSize: '0.95rem' }}>
-          <span>🔍</span><span>Detailed Analysis</span>
+          <span>Scan</span><span>Detailed Analysis</span>
         </div>
         <span style={{ display: 'inline-block', transition: 'transform 0.2s ease', transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>▶</span>
       </button>
@@ -77,19 +77,19 @@ export function OsintDetails({ result }: { result: any }) {
 
           {domain && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🌐</span><span>Domain Info</span></div>
+              <div style={titleStyle}><span>Domain</span><span>Domain Info</span></div>
               <div style={bodyStyle}>
                 {domain.registrar && <div><strong>Registrar:</strong> {domain.registrar}</div>}
                 {domainCreationDisplay && <div><strong>Created:</strong> {domainCreationDisplay}</div>}
                 {domain.country && <div><strong>Country:</strong> {domain.country}</div>}
-                {domainIsVeryNew && <div style={{ marginTop: '0.4rem', color: '#f97316', fontWeight: 500 }}>⚠️ Very new domain</div>}
+                {domainIsVeryNew && <div style={{ marginTop: '0.4rem', color: '#f97316', fontWeight: 500 }}>! Very new domain</div>}
               </div>
             </div>
           )}
 
           {virusTotal && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🛡️</span><span>VirusTotal</span></div>
+              <div style={titleStyle}><span>Block</span><span>VirusTotal</span></div>
               <div style={bodyStyle}>
                 {vtPositives !== null && vtTotal !== null ? (
                   <div><span style={{ fontWeight: 500, color: vtPositives > 0 ? '#dc2626' : '#16a34a' }}>{vtPositives}/{vtTotal} security vendors</span> flagged this.</div>
@@ -101,14 +101,14 @@ export function OsintDetails({ result }: { result: any }) {
 
           {safeBrowsing && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🔒</span><span>Google Safe Browsing</span></div>
+              <div style={titleStyle}><span>GSB</span><span>Google Safe Browsing</span></div>
               <div style={{ fontSize: '0.85rem', color: sbStatus === 'No threats found' ? '#16a34a' : '#dc2626', fontWeight: 500 }}>{sbStatus}</div>
             </div>
           )}
 
           {phishTank && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🎣</span><span>PhishTank</span></div>
+              <div style={titleStyle}><span>PT</span><span>PhishTank</span></div>
               <div style={{ fontSize: '0.85rem', color: isPhishing ? '#dc2626' : '#16a34a', fontWeight: 500 }}>
                 {isPhishing ? 'Known phishing URL' : 'Not in phishing database'}
               </div>
@@ -117,7 +117,7 @@ export function OsintDetails({ result }: { result: any }) {
 
           {urlhaus && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🦠</span><span>URLhaus Malware Check</span></div>
+              <div style={titleStyle}><span>VT</span><span>URLhaus Malware Check</span></div>
               <div style={bodyStyle}>
                 {urlhaus.status && <div><strong>Status:</strong> {urlhaus.status}</div>}
                 {urlhaus.threat && <div><strong>Threat:</strong> {urlhaus.threat}</div>}
@@ -128,7 +128,7 @@ export function OsintDetails({ result }: { result: any }) {
 
           {ai && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🤖</span><span>AI Text Analysis</span></div>
+              <div style={titleStyle}><span>AI</span><span>AI Text Analysis</span></div>
               <div style={bodyStyle}>
                 {typeof ai.ai_probability === 'number' && ai.label && (
                   <div style={{ marginBottom: '0.25rem' }}><strong>Probability:</strong> {(ai.ai_probability * 100).toFixed(1)}% ({ai.label})</div>
@@ -149,7 +149,7 @@ export function OsintDetails({ result }: { result: any }) {
 
           {graph && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>🕸️</span><span>Network Analysis</span></div>
+              <div style={titleStyle}><span>Graph</span><span>Network Analysis</span></div>
               <div style={bodyStyle}>
                 {typeof graph.network_risk_score === 'number' && <div><strong>Network risk score:</strong> {graph.network_risk_score}</div>}
                 {typeof graph.entities_created === 'number' && <div><strong>Entities created:</strong> {graph.entities_created}</div>}

@@ -117,7 +117,7 @@ export default function CommunityPage() {
       <div className="w-full max-w-2xl flex flex-col gap-5">
         <div className="text-center">
           <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>
-            🚨 Community Scam Reports
+            Community Scam Reports
           </h1>
           <p className="mt-2" style={{ color: 'var(--tc-text-muted)' }}>
             Real reports from Canadians. See what scams are active and help warn others.
@@ -136,7 +136,7 @@ export default function CommunityPage() {
               style={{ border: '1px solid var(--tc-border)' }}
             />
             <button type="submit" className="px-4 py-2 rounded-lg text-sm font-semibold text-white" style={{ background: 'var(--tc-primary)' }}>
-              🔍
+              
             </button>
           </form>
           <button
@@ -144,7 +144,7 @@ export default function CommunityPage() {
             className="px-4 py-2 rounded-lg text-sm font-semibold text-white"
             style={{ background: showForm ? 'var(--tc-text-muted)' : '#dc2626' }}
           >
-            {showForm ? '✕ Cancel' : '🚩 Report a Scam'}
+            {showForm ? '✕ Cancel' : '+ Report'}
           </button>
         </div>
 
@@ -152,7 +152,7 @@ export default function CommunityPage() {
         {submitted && (
           <div className="p-3 rounded-xl text-center" style={{ background: '#eafaf1', border: '1px solid var(--tc-safe)' }}>
             <p className="font-semibold" style={{ color: 'var(--tc-safe)' }}>
-              ✅ Report submitted! It will appear after verification. Thank you for helping protect others.
+              Report submitted. It will appear after verification. Thank you for helping protect others.
             </p>
           </div>
         )}
@@ -209,10 +209,10 @@ export default function CommunityPage() {
                     className="px-2 py-1 rounded text-sm"
                     style={{ border: '1px solid var(--tc-border)', width: '110px' }}
                   >
-                    <option value="phone">📞 Phone</option>
-                    <option value="email">📧 Email</option>
-                    <option value="url">🔗 URL</option>
-                    <option value="crypto_wallet">₿ Wallet</option>
+                    <option value="phone">Phone</option>
+                    <option value="email">Email</option>
+                    <option value="url">URL</option>
+                    <option value="crypto_wallet">Wallet</option>
                   </select>
                   <input
                     type="text"
@@ -241,11 +241,11 @@ export default function CommunityPage() {
               className="px-4 py-2 rounded-lg font-semibold text-white"
               style={{ background: formMessage.trim().length >= 10 ? '#dc2626' : 'var(--tc-border)', cursor: formMessage.trim().length >= 10 ? 'pointer' : 'not-allowed' }}
             >
-              {submitting ? 'Submitting...' : '🚩 Submit Report'}
+              {submitting ? 'Submitting...' : 'Submit Report'}
             </button>
 
             <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>
-              ⚠️ Reports are reviewed before publishing. Don't include personal info about yourself.
+              Reports are reviewed before publishing. Don't include personal info about yourself.
             </p>
           </form>
         )}
@@ -257,7 +257,7 @@ export default function CommunityPage() {
           </div>
         ) : reports.length === 0 ? (
           <div className="text-center py-8 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-            <p className="text-lg">📭</p>
+            <p className="text-lg"></p>
             <p className="font-semibold" style={{ color: 'var(--tc-text-muted)' }}>
               {searchQuery ? 'No reports match your search' : 'No verified reports yet — be the first to report a scam!'}
             </p>
@@ -273,7 +273,7 @@ export default function CommunityPage() {
                       {typeInfo.emoji} {typeInfo.label}
                     </span>
                     <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--tc-text-muted)' }}>
-                      {report.province && <span>📍 {report.province}</span>}
+                      {report.province && <span>{report.province}</span>}
                       <span>{timeAgo(report.created_at)}</span>
                     </div>
                   </div>
@@ -282,11 +282,11 @@ export default function CommunityPage() {
                   </p>
                   <div className="flex items-center gap-3 mt-2">
                     <span className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>
-                      👍 {report.upvotes} {report.upvotes === 1 ? 'person' : 'people'} found this helpful
+                      {report.upvotes} {report.upvotes === 1 ? 'person' : 'people'} found this helpful
                     </span>
                     {report.verified && (
                       <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: '#eafaf1', color: 'var(--tc-safe)' }}>
-                        ✅ Verified
+                        Verified
                       </span>
                     )}
                   </div>
@@ -299,7 +299,7 @@ export default function CommunityPage() {
         {/* CTA */}
         <div className="text-center p-4 rounded-xl" style={{ background: 'var(--tc-primary-soft)' }}>
           <p className="text-sm" style={{ color: 'var(--tc-primary)' }}>
-            🛡️ Think you've been targeted? <a href="/" className="font-bold underline">Scan it here</a> for a full analysis, or <a href="/report" className="font-bold underline">file a detailed report</a>.
+            Think you've been targeted? <a href="/" className="font-bold underline">Scan it here</a> for a full analysis, or <a href="/report" className="font-bold underline">file a detailed report</a>.
           </p>
         </div>
       </div>

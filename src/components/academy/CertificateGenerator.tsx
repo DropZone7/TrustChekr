@@ -61,7 +61,7 @@ export function CertificateGenerator({ completedModules }: CertificateGeneratorP
                 cursor: name.trim() ? 'pointer' : 'not-allowed',
               }}
             >
-              🎓 Generate Certificate
+              Generate Certificate
             </button>
           </div>
 

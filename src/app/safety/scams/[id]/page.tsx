@@ -158,7 +158,7 @@ export default async function ScamDetailsPage({ params }: PageProps) {
       {/* Academy modules */}
       {scam.academy_modules_impacted.length > 0 && (
         <section>
-          <h2 className="text-lg font-bold mb-2" style={{ color: 'var(--tc-text-main)' }}>🎓 Learn more in the Academy</h2>
+          <h2 className="text-lg font-bold mb-2" style={{ color: 'var(--tc-text-main)' }}>Learn more in the Academy</h2>
           <div className="flex flex-col gap-2">
             {scam.academy_modules_impacted.map((mod) => {
               const meta = ACADEMY_MODULES[mod as AcademyModuleId];

@@ -122,7 +122,7 @@ export default function MapPage() {
                   background: selectedRegion.trend === 'up' ? '#fee2e2' : '#fef9e7',
                   color: selectedRegion.trend === 'up' ? '#991b1b' : '#854d0e',
                 }}>
-                  {selectedRegion.trend === 'up' ? '📈 Increasing' : selectedRegion.trend === 'down' ? '📉 Decreasing' : '➡️ Stable'}
+                  {selectedRegion.trend === 'up' ? 'Increasing' : selectedRegion.trend === 'down' ? 'Decreasing' : '➡️ Stable'}
                 </span>
               )}
             </div>

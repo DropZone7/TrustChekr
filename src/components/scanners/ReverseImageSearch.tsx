@@ -48,7 +48,7 @@ export function ReverseImageSearch() {
               }
             }}
           >
-            <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📷</div>
+            <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}></div>
             <div style={{ color: 'var(--tc-text-main)', fontSize: '1rem', fontWeight: 600 }}>Upload a photo to check</div>
             <div style={{ color: 'var(--tc-text-muted)', fontSize: '0.85rem', marginTop: '0.4rem' }}>Click or drag image here</div>
           </div>
@@ -69,7 +69,7 @@ export function ReverseImageSearch() {
                 onClick={() => window.open('https://images.google.com', '_blank')}
                 style={{ padding: '0.65rem 1.25rem', background: 'var(--tc-primary)', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}
               >
-                🔍 Search Google Images
+                Search Google Images
               </button>
               <button
                 onClick={handleTinEyeSearch}

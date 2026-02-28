@@ -97,7 +97,7 @@ export default function FileUpload({ onFilesReady }: { onFilesReady: (files: Upl
           onChange={(e) => e.target.files && processFiles(e.target.files)}
         />
         <div className="flex flex-col items-center gap-2">
-          <span className="text-4xl">{dragOver ? "📥" : "📎"}</span>
+          <span className="text-4xl">{dragOver ? "" : ""}</span>
           <p className="font-semibold" style={{ color: "var(--tc-text-main)" }}>
             {dragOver ? "Drop files here" : "Drag files here to check them for scams"}
           </p>
@@ -112,14 +112,14 @@ export default function FileUpload({ onFilesReady }: { onFilesReady: (files: Upl
 
       {/* Privacy note */}
       <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>
-        🔒 Your files are analyzed locally and never stored on our servers.
+         Your files are analyzed locally and never stored on our servers.
         Please avoid uploading documents with passwords, banking details, or government IDs.
       </p>
 
       {/* Error */}
       {error && (
         <div className="p-3 rounded-lg border" style={{ borderColor: "var(--tc-warning)", background: "#fef9e7" }}>
-          <p className="text-sm" style={{ color: "var(--tc-warning)" }}>⚠️ {error}</p>
+          <p className="text-sm" style={{ color: "var(--tc-warning)" }}>{error}</p>
         </div>
       )}
 
@@ -134,7 +134,7 @@ export default function FileUpload({ onFilesReady }: { onFilesReady: (files: Upl
             >
               <div className="flex items-center gap-3 min-w-0">
                 <span className="text-lg">
-                  {file.type.startsWith("image/") ? "🖼️" : file.type === "application/pdf" ? "📄" : "📝"}
+                  {file.type.startsWith("image/") ? "" : file.type === "application/pdf" ? "" : ""}
                 </span>
                 <div className="min-w-0">
                   <p className="font-medium truncate" style={{ color: "var(--tc-text-main)" }}>
@@ -157,7 +157,7 @@ export default function FileUpload({ onFilesReady }: { onFilesReady: (files: Upl
                   className="text-lg cursor-pointer hover:opacity-60"
                   title="Remove file"
                 >
-                  ✕
+                  ×
                 </button>
               </div>
             </div>

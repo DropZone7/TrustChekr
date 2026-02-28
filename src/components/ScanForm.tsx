@@ -5,11 +5,11 @@ import FileUpload from "./FileUpload";
 import { useBotDetection } from "@/hooks/useBotDetection";
 
 const scanTypes = [
-  { id: "website", emoji: "🌐", label: "Check a website", placeholder: "Paste the website address here (e.g. www.example.com)" },
-  { id: "message", emoji: "💬", label: "Check a message", placeholder: "Paste the suspicious message here" },
-  { id: "other", emoji: "📱", label: "Phone, email, or other", placeholder: "Paste a phone number, email address, crypto address, or username" },
-  { id: "romance", emoji: "💌", label: "Check a relationship", placeholder: "", isLink: true, href: "/romance" },
-  { id: "file", emoji: "📎", label: "Upload a file", placeholder: "" },
+  { id: "website", label: "Website", placeholder: "Paste the URL (e.g. www.example.com)" },
+  { id: "message", label: "Message", placeholder: "Paste the suspicious text message or email" },
+  { id: "other", label: "Phone / Email / Crypto", placeholder: "Paste a phone number, email, crypto address, or username" },
+  { id: "romance", label: "Relationship", placeholder: "", isLink: true, href: "/romance" },
+  { id: "file", label: "Upload", placeholder: "" },
 ];
 
 export default function ScanForm({ onScan }: { onScan: (type: string, input: string, botProfile?: any) => void }) {
@@ -30,37 +30,31 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
 
   return (
     <div className="flex flex-col gap-4" onMouseMove={botMouseMove as any}>
-      {/* Scan type tiles */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      {/* Scan type selector — pill buttons, not emoji cards */}
+      <div className="flex flex-wrap gap-2">
         {scanTypes.map((t) => (
           <button
             key={t.id}
             onClick={() => handleTileClick(t)}
-            className="flex flex-col items-center gap-2 p-5 rounded-xl border-2 transition-all cursor-pointer"
+            className="px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer"
             style={{
-              borderColor: selected === t.id ? "var(--tc-primary)" : "var(--tc-border)",
-              background: selected === t.id ? "var(--tc-primary-soft)" : "var(--tc-surface)",
+              border: `2px solid ${selected === t.id ? "var(--tc-primary)" : "var(--tc-border)"}`,
+              background: selected === t.id ? "var(--tc-primary)" : "var(--tc-surface)",
+              color: selected === t.id ? "white" : "var(--tc-text-main)",
             }}
           >
-            <span className="text-3xl">{t.emoji}</span>
-            <span className="font-semibold text-sm text-center" style={{ color: "var(--tc-text-main)" }}>
-              {t.label}
-            </span>
+            {t.label}
           </button>
         ))}
       </div>
 
       {/* Input area */}
       {activeType && activeType.id !== "file" && activeType.id !== "romance" && (
-        <div className="flex flex-col gap-3 mt-2">
-          <label className="font-medium" style={{ color: "var(--tc-text-main)" }}>
-            Step 1 of 2: Paste what you want to check
-          </label>
-
+        <div className="flex flex-col gap-3">
           {activeType.id === "message" ? (
             <textarea
-              className="w-full min-h-[120px] p-4 rounded-xl border-2 text-base resize-y"
-              style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)" }}
+              className="w-full min-h-[120px] p-4 rounded-lg border text-base resize-y"
+              style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)", color: "var(--tc-text-main)" }}
               placeholder={activeType.placeholder}
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -70,8 +64,8 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
           ) : (
             <input
               type="text"
-              className="w-full p-4 rounded-xl border-2 text-base"
-              style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)" }}
+              className="w-full p-4 rounded-lg border text-base"
+              style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)", color: "var(--tc-text-main)" }}
               placeholder={activeType.placeholder}
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -80,33 +74,29 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
             />
           )}
 
-          <p className="text-sm" style={{ color: "var(--tc-text-muted)" }}>
-            🔒 We don't store what you paste. Your check stays private.
-          </p>
-
-          <button
-            onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
-            disabled={!input.trim()}
-            className="w-full py-4 rounded-xl text-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-            style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
-          >
-            Check this for me
-          </button>
+          <div className="flex items-center justify-between">
+            <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>
+              We don't store what you paste.
+            </p>
+            <button
+              onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
+              disabled={!input.trim()}
+              className="px-6 py-2.5 rounded-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
+            >
+              Check this
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Drop zone */}
+      {/* File upload */}
       {selected === "file" && (
-        <div className="flex flex-col gap-3 mt-2">
-          <label className="font-medium" style={{ color: "var(--tc-text-main)" }}>
-            Upload screenshots, chat exports, or documents to check
-          </label>
+        <div className="flex flex-col gap-3">
           <FileUpload onFilesReady={() => {}} />
-          <div className="p-4 rounded-xl text-center" style={{ background: "var(--tc-primary-soft)" }}>
-            <p className="text-sm" style={{ color: "var(--tc-primary)" }}>
-              📷 File scanning is coming soon. For now, try pasting the text from your screenshots or messages using the options above.
-            </p>
-          </div>
+          <p className="text-sm p-3 rounded-lg" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-muted)" }}>
+            File scanning coming soon. For now, paste the text from your screenshots using the Message option.
+          </p>
         </div>
       )}
     </div>
