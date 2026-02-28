@@ -9,11 +9,11 @@ export async function batchWebsiteOsint(url: string) {
   try {
     const [domain, safeBrowsing, virusTotal, phishTank, urlhaus] =
       await Promise.all([
-        withTimeout(analyzeDomain(url), 4000, null),
-        withTimeout(checkUrlSafety(url), 4000, null),
-        withTimeout(checkVirusTotal(url), 4000, null),
-        withTimeout(checkPhishTank(url), 4000, null),
-        withTimeout(checkUrlhaus(url), 4000, null),
+        withTimeout(analyzeDomain(url), 3000, null),
+        withTimeout(checkUrlSafety(url), 3000, null),
+        withTimeout(checkVirusTotal(url), 3000, null),
+        withTimeout(checkPhishTank(url), 3000, null),
+        withTimeout(checkUrlhaus(url), 3000, null),
       ]);
     return { domain, safeBrowsing, virusTotal, phishTank, urlhaus };
   } catch {

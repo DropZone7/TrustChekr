@@ -30,7 +30,7 @@ export async function analyzeDomain(url: string): Promise<DomainResult> {
   // RDAP lookup (free, no API key, replaces WHOIS)
   try {
     const rdapRes = await fetch(`https://rdap.org/domain/${domain}`, {
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(2500),
     });
     if (rdapRes.ok) {
       const data = await rdapRes.json();
