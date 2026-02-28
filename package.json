@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "train:xrpl-wallet-risk": "ts-node scripts/xrpl-train-wallet-risk-model.ts",
-    "build:romance-dataset": "ts-node scripts/romance-build-dataset.ts"
+    "build:romance-dataset": "ts-node scripts/romance-build-dataset.ts",
+    "train:romance": "ts-node scripts/romance-train-model.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.98.0",
