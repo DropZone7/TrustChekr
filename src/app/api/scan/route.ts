@@ -11,6 +11,7 @@ import { scoreSpamLikelihood } from "@/lib/training/spamDetector";
 import { analyzeUrlFeatures } from "@/lib/training/urlFeatures";
 import { scorePhishingEmail } from "@/lib/training/phishingEmailDetector";
 import { analyzeWithAI } from "@/lib/google/scamAnalysis";
+import { matchScamPattern } from "@/lib/phone/scamPatterns";
 
 export async function POST(req: NextRequest) {
   try {
@@ -142,6 +143,11 @@ export async function POST(req: NextRequest) {
       } else {
         const phoneResult = await analyzePhone(cleaned);
         signals.push(...phoneResult.signals);
+        // Enrich with scam pattern database (22 known CA+US patterns)
+        const scamMatches = matchScamPattern(cleaned);
+        for (const pattern of scamMatches.slice(0, 3)) {
+          signals.push({ text: `Matches known scam pattern: ${pattern.name} — ${pattern.description.slice(0, 80)}`, weight: pattern.riskLevel === 'high' ? 25 : 10 });
+        }
       }
     }
 

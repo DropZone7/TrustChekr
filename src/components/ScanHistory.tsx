@@ -1,100 +1,177 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { riskConfig } from '@/lib/types';
-import type { RiskLevel } from '@/lib/types';
+import { useEffect, useMemo, useState } from 'react';
 
-type HistoryItem = {
+type ScanType = 'website' | 'message' | 'phone' | 'crypto' | 'romance' | 'other';
+type HistoryRiskLevel = 'low' | 'medium' | 'high';
+
+export type ScanHistoryItem = {
+  id: string;
+  type: ScanType;
   input: string;
-  type: string;
-  riskLevel: RiskLevel;
-  date: string;
+  riskLevel: HistoryRiskLevel;
+  createdAt: string;
 };
 
-const MAX_HISTORY = 10;
-const STORAGE_KEY = 'tc_scan_history';
+const STORAGE_KEY = 'trustchekr_scan_history_v1';
+const MAX_ITEMS = 50;
 
-export function addToHistory(input: string, type: string, riskLevel: RiskLevel) {
+const typeIcon: Record<string, string> = {
+  website: '🌐', message: '💬', phone: '📱', crypto: '🔗', romance: '❤️', other: '❓',
+};
+
+const riskColors: Record<HistoryRiskLevel, { bg: string; text: string; label: string }> = {
+  low: { bg: 'rgba(16,185,129,0.12)', text: '#059669', label: 'Low Risk' },
+  medium: { bg: 'rgba(245,158,11,0.12)', text: '#d97706', label: 'Suspicious' },
+  high: { bg: 'rgba(239,68,68,0.12)', text: '#dc2626', label: 'High Risk' },
+};
+
+function loadHistory(): ScanHistoryItem[] {
+  if (typeof window === 'undefined') return [];
   try {
-    const existing: HistoryItem[] = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    const item: HistoryItem = {
-      input: input.length > 80 ? input.slice(0, 80) + '…' : input,
-      type, riskLevel,
-      date: new Date().toLocaleDateString('en-CA'),
-    };
-    const updated = [item, ...existing.filter(h => h.input !== item.input)].slice(0, MAX_HISTORY);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-  } catch { /* localStorage unavailable */ }
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.slice(0, MAX_ITEMS) : [];
+  } catch { return []; }
 }
 
-export function ScanHistory({ onRescan }: { onRescan: (type: string, input: string) => void }) {
-  const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [show, setShow] = useState(false);
+function saveHistory(items: ScanHistoryItem[]) {
+  try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items.slice(0, MAX_ITEMS))); } catch { /* ignore */ }
+}
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-      setHistory(stored);
-    } catch { /* */ }
-  }, []);
+/** Call this from ScanForm after a successful scan to add to history */
+export function addToScanHistory(item: Omit<ScanHistoryItem, 'id' | 'createdAt'>) {
+  if (typeof window === 'undefined') return;
+  const entry: ScanHistoryItem = { ...item, id: `sh-${Date.now()}`, createdAt: new Date().toISOString() };
+  const existing = loadHistory();
+  saveHistory([entry, ...existing]);
+}
 
-  if (history.length === 0) return null;
+/** Compat alias used by homepage */
+export function addToHistory(input: string, type: string, riskLevel: string) {
+  const mapped: HistoryRiskLevel =
+    riskLevel === 'safe' ? 'low' :
+    riskLevel === 'suspicious' ? 'medium' :
+    'high';
+  addToScanHistory({ type: type as ScanType, input, riskLevel: mapped });
+}
+
+
+
+export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: string) => void }) {
+  const [items, setItems] = useState<ScanHistoryItem[]>([]);
+  const [search, setSearch] = useState('');
+  const [typeFilter, setTypeFilter] = useState<ScanType | 'all'>('all');
+  const [confirmClear, setConfirmClear] = useState(false);
+
+  useEffect(() => { setItems(loadHistory()); }, []);
+
+  const filtered = useMemo(() => {
+    return items.filter((item) => {
+      const matchesType = typeFilter === 'all' || item.type === typeFilter;
+      const matchesSearch = !search.trim() || item.input.toLowerCase().includes(search.toLowerCase());
+      return matchesType && matchesSearch;
+    });
+  }, [items, search, typeFilter]);
+
+  const handleClear = () => {
+    if (!confirmClear) { setConfirmClear(true); return; }
+    setItems([]);
+    saveHistory([]);
+    setConfirmClear(false);
+  };
+
+  const handleRemove = (id: string) => {
+    const next = items.filter((i) => i.id !== id);
+    setItems(next);
+    saveHistory(next);
+  };
+
+  const exportCsv = () => {
+    if (!items.length) return;
+    const lines = ['Type,Input,Risk Level,Date'];
+    for (const item of items) {
+      lines.push(`${item.type},"${item.input.replace(/"/g, '""')}",${item.riskLevel},${item.createdAt}`);
+    }
+    const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'trustchekr-scan-history.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const formatDate = (iso: string) => {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, { month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+  };
+
+  const truncate = (text: string, max = 60) => text.length <= max ? text : text.slice(0, max - 1) + '…';
+
+  if (items.length === 0) return null;
 
   return (
-    <div style={{ marginTop: '0.5rem' }}>
-      <button
-        onClick={() => setShow(!show)}
-        style={{
-          background: 'none', border: 'none', cursor: 'pointer',
-          color: 'var(--tc-text-muted)', fontSize: '0.85rem',
-          textDecoration: 'underline', padding: 0,
-        }}
-      >
-        {show ? 'Hide' : 'Show'} recent checks ({history.length})
-      </button>
-
-      {show && (
-        <div style={{
-          marginTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem',
-        }}>
-          {history.map((item, i) => {
-            const risk = riskConfig[item.riskLevel];
-            return (
-              <button
-                key={i}
-                onClick={() => onRescan(item.type, item.input)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '0.75rem',
-                  padding: '0.6rem 0.75rem', borderRadius: '8px',
-                  border: '1px solid var(--tc-border)', background: 'var(--tc-surface)',
-                  cursor: 'pointer', textAlign: 'left', width: '100%',
-                }}
-              >
-                <span style={{
-                  width: '10px', height: '10px', borderRadius: '50%',
-                  background: risk?.color ?? 'var(--tc-border)', flexShrink: 0,
-                }} />
-                <span style={{ flex: 1, fontSize: '0.85rem', color: 'var(--tc-text-main)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                  {item.input}
-                </span>
-                <span style={{ fontSize: '0.75rem', color: 'var(--tc-text-muted)', flexShrink: 0 }}>
-                  {item.date}
-                </span>
-              </button>
-            );
-          })}
-          <button
-            onClick={() => { localStorage.removeItem(STORAGE_KEY); setHistory([]); setShow(false); }}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              color: 'var(--tc-text-muted)', fontSize: '0.75rem',
-              textDecoration: 'underline', padding: '0.25rem 0',
-            }}
-          >
-            Clear history
+    <section style={{ marginTop: '1.5rem', borderRadius: '16px', border: '1px solid var(--tc-border)', padding: '1rem', backgroundColor: 'var(--tc-surface)' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 600, color: 'var(--tc-primary)' }}>Recent Scans</h2>
+        <div style={{ display: 'flex', gap: '0.5rem', fontSize: '0.8rem' }}>
+          <button type="button" onClick={exportCsv} style={{ background: 'none', border: '1px solid var(--tc-border)', borderRadius: '999px', padding: '0.25rem 0.6rem', cursor: 'pointer', color: 'var(--tc-text-muted)' }}>
+            Export CSV
+          </button>
+          <button type="button" onClick={handleClear} style={{ background: 'none', border: '1px solid var(--tc-border)', borderRadius: '999px', padding: '0.25rem 0.6rem', cursor: 'pointer', color: confirmClear ? '#dc2626' : 'var(--tc-text-muted)' }}>
+            {confirmClear ? 'Confirm clear?' : 'Clear all'}
           </button>
         </div>
-      )}
-    </div>
+      </div>
+
+      {/* Filters */}
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', flexWrap: 'wrap' }}>
+        <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search scans…" style={{ flex: 1, minWidth: '140px', borderRadius: '999px', border: '1px solid var(--tc-border)', padding: '0.35rem 0.65rem', fontSize: '0.85rem' }} />
+        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as any)} style={{ borderRadius: '999px', border: '1px solid var(--tc-border)', padding: '0.35rem 0.65rem', fontSize: '0.85rem' }}>
+          <option value="all">All types</option>
+          <option value="website">🌐 Website</option>
+          <option value="message">💬 Message</option>
+          <option value="phone">📱 Phone</option>
+          <option value="crypto">🔗 Crypto</option>
+          <option value="romance">❤️ Romance</option>
+          <option value="other">❓ Other</option>
+        </select>
+      </div>
+
+      {/* List */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+        {filtered.length === 0 && (
+          <p style={{ fontSize: '0.9rem', color: 'var(--tc-text-muted)', textAlign: 'center', padding: '0.5rem' }}>No matching scans found.</p>
+        )}
+        {filtered.map((item) => {
+          const risk = riskColors[item.riskLevel] ?? riskColors.low;
+          return (
+            <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.6rem', borderRadius: '10px', border: '1px solid var(--tc-border)', fontSize: '0.9rem' }}>
+              <span style={{ fontSize: '1.1rem' }}>{typeIcon[item.type] ?? '❓'}</span>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{truncate(item.input)}</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--tc-text-muted)' }}>{formatDate(item.createdAt)}</div>
+              </div>
+              <span style={{ borderRadius: '999px', padding: '0.12rem 0.5rem', fontSize: '0.75rem', fontWeight: 600, backgroundColor: risk.bg, color: risk.text, whiteSpace: 'nowrap' }}>
+                {risk.label}
+              </span>
+              {onRescan && (
+                <button type="button" onClick={() => onRescan(item.input, item.type)} title="Re-scan" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--tc-primary)' }}>🔄</button>
+              )}
+              <button type="button" onClick={() => handleRemove(item.id)} title="Remove" style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--tc-text-muted)' }}>✕</button>
+            </div>
+          );
+        })}
+      </div>
+
+      <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'var(--tc-text-muted)' }}>
+        Stored in your browser only — not sent anywhere. Up to 50 entries.
+      </p>
+    </section>
   );
 }
