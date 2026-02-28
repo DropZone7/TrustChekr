@@ -61,3 +61,4 @@ export function scoreSpamLikelihood(text: string): {
 
   return { score, matchedKeywords, isLikelySpam: score >= 40 };
 }
+// rebuild 1772309377
