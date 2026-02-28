@@ -106,6 +106,46 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // Rate limit romance/crypto/ai-text scan endpoints: 30/day per IP
+  if (pathname.startsWith('/api/scan/') && pathname !== '/api/scan') {
+    if (!checkLimit(`subscan:${ip}`, ipCounters, 30, ONE_DAY_MS)) {
+      return NextResponse.json(
+        { error: 'You\'ve reached the daily limit for this scan type. Please try again tomorrow.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit feed endpoints: 60/hour per IP
+  if (pathname.startsWith('/api/feed/')) {
+    if (!checkLimit(`feed:${ip}`, newsletterCounters, 60, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit phone scam patterns: 100/day per IP
+  if (pathname.startsWith('/api/phone/')) {
+    if (!checkLimit(`phone:${ip}`, ipCounters, 100, ONE_DAY_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit partnerships: 5/hour per IP
+  if (pathname === '/api/partnerships') {
+    if (!checkLimit(`partner:${ip}`, newsletterCounters, 5, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
   // Block admin paths without token (server-side gate)
   if (pathname.startsWith('/admin/')) {
     const token = req.nextUrl.searchParams.get('k');
@@ -127,5 +167,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/v1/:path*', '/api/scan', '/api/chat/analyze', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/api/partnerships', '/tc47x/:path*', '/admin/:path*'],
+  matcher: ['/api/v1/:path*', '/api/scan', '/api/scan/:path*', '/api/chat/analyze', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/api/partnerships', '/api/feed/:path*', '/api/phone/:path*', '/tc47x/:path*', '/admin/:path*'],
 };
