@@ -9,6 +9,7 @@ import { logAudit, hashIp } from "@/lib/auditLog";
 import { isDomainBlocked } from "@/lib/training/domainBlocklist";
 import { scoreSpamLikelihood } from "@/lib/training/spamDetector";
 import { analyzeUrlFeatures } from "@/lib/training/urlFeatures";
+import { scorePhishingEmail } from "@/lib/training/phishingEmailDetector";
 
 export async function POST(req: NextRequest) {
   try {
@@ -82,6 +83,14 @@ export async function POST(req: NextRequest) {
       trainingData.spamAnalysis = spamScore;
       if (spamScore.isLikelySpam) {
         signals.push({ text: `Message contains ${spamScore.matchedKeywords.length} spam-associated keywords (trained on 5,572 messages)`, weight: Math.round(spamScore.score * 0.2) });
+      }
+
+      // Phishing email detection (trained on 5,100 labeled emails)
+      const phishScore = scorePhishingEmail(cleaned);
+      trainingData.phishingEmail = phishScore;
+      if (phishScore.score >= 30) {
+        const topMatches = [...phishScore.matchedPhrases, ...phishScore.matchedKeywords].slice(0, 3).join(', ');
+        signals.push({ text: `Phishing indicators detected: ${topMatches} (${phishScore.score}% match based on 5,100 trained emails)`, weight: Math.round(phishScore.score * 0.3) });
       }
 
       // Check URLs in message against domain blocklist
