@@ -207,7 +207,7 @@ export default function ScamRadar() {
                   </div>
                   {cat.postCount > 0 && (
                     <div style={{ color: '#555', fontSize: 11 }}>
-                      {cat.postCount.toLocaleString()} posts
+                      {cat.postCount.toLocaleString()} reports
                     </div>
                   )}
                 </div>
