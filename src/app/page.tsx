@@ -53,7 +53,7 @@ export default function Home() {
               <br />
               <span style={{ fontSize: "0.85rem" }}>Free. Private. No account needed.</span>
               <br />
-              <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--tc-text-main)" }}>Choose what you have:</span>
+              <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--tc-text-main)" }}>What would you like to check?</span>
             </p>
           </div>
 
