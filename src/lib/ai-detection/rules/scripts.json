@@ -1,0 +1,90 @@
+{
+  "scripts": [
+    {
+      "id": "script_cra_arrest_pay",
+      "category": "CRA_IMPERSONATION",
+      "weight": 10,
+      "description": "Classic CRA arrest-then-pay script.",
+      "steps": [
+        "Call victim claiming to be CRA officer.",
+        "State that victim owes taxes and a warrant has been issued for their arrest.",
+        "Use aggressive language, mention police/RCMP/jail/deportation.",
+        "Demand immediate payment via Bitcoin ATM, gift cards, or Interac e-Transfer.",
+        "Threaten that if payment is not made within a short timeframe, police will come."
+      ]
+    },
+    {
+      "id": "script_interac_cra_refund",
+      "category": "INTERAC_PHISHING",
+      "weight": 8,
+      "description": "Fake CRA refund via Interac notification.",
+      "steps": [
+        "Send SMS or email with Government of Canada logo offering GST/HST or Climate Action refund.",
+        "Include a link that appears to be an Interac deposit page.",
+        "Ask victim to input banking credentials to accept the transfer.",
+        "Steal credentials and drain real accounts."
+      ]
+    },
+    {
+      "id": "script_pig_butchering_full",
+      "category": "PIG_BUTCHERING",
+      "weight": 10,
+      "description": "Wrong-number to romance to crypto investment pipeline.",
+      "steps": [
+        "Send a message to victim claiming wrong number.",
+        "Continue friendly conversation and move to daily chats.",
+        "Build emotional/romantic relationship over weeks or months.",
+        "Introduce crypto investing and claim to be highly successful.",
+        "Guide victim to sign up on fake exchange and make small initial deposit.",
+        "Show fake profits on dashboard to build trust.",
+        "Encourage larger deposits and repeat until victim is heavily invested.",
+        "When victim tries to withdraw, lock account and demand extra fees.",
+        "Eventually stop responding and disappear."
+      ]
+    },
+    {
+      "id": "script_tech_support_popup",
+      "category": "TECH_SUPPORT",
+      "weight": 9,
+      "description": "Pop-up + remote access tech support scam.",
+      "steps": [
+        "Victim sees pop-up claiming their computer is infected.",
+        "Pop-up urges them to call a toll-free number for Microsoft/Apple/other support.",
+        "Scammer answers and asks victim to install AnyDesk/TeamViewer.",
+        "Scammer takes remote control and shows fake 'problems'.",
+        "Scammer requests payment for 'fixing' via credit card or gift cards.",
+        "Scammer sometimes causes intentional issues or transfers funds while connected."
+      ]
+    },
+    {
+      "id": "script_fake_crypto_platform",
+      "category": "CRYPTO_INVESTMENT",
+      "weight": 9,
+      "description": "Fake crypto investment website funnel.",
+      "steps": [
+        "Victim sees ad or receives message about exclusive crypto investment opportunity.",
+        "Scammer sends link to professional-looking website claiming to be regulated and 'as seen on' major media.",
+        "Victim is asked to create an account and deposit a small amount of crypto or fiat.",
+        "Dashboard displays rapidly increasing fake profits.",
+        "Scammer pressures victim to deposit more to maximize gains.",
+        "When victim requests withdrawal, website blocks or demands extra fees/taxes.",
+        "Eventually, website goes offline or stops responding."
+      ]
+    },
+    {
+      "id": "script_rental_overseas",
+      "category": "RENTAL_SCAM",
+      "weight": 9,
+      "description": "Overseas landlord Kijiji/FB rental scam.",
+      "steps": [
+        "Scammer copies photos and text from a legitimate MLS or Kijiji listing.",
+        "Posts a new ad at below-market rent with all utilities included.",
+        "Responds quickly, claiming to be landlord currently overseas or out of province.",
+        "Refuses in-person viewing and pushes for quick decision due to 'high demand'.",
+        "Sends fake lease and sometimes stolen ID documents.",
+        "Demands first and last month's rent via Interac e-Transfer or wire.",
+        "After receiving funds, stops responding and deletes account/listing."
+      ]
+    }
+  ]
+}

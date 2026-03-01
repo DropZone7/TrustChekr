@@ -50,6 +50,16 @@ export interface DomainPattern {
   legitimateDomain?: string;
 }
 
+// ── Script Template (known scam flows) ───────────────────────
+
+export interface ScamScript {
+  id: string;
+  category: ScamCategory;
+  weight: number;
+  description: string;
+  steps: string[];
+}
+
 // ── Pipeline Input (from Round A+B results) ──────────────────
 
 export interface AIScamAnalysisInput {

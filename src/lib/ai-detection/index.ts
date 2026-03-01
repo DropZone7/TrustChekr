@@ -4,10 +4,12 @@ import type {
   MatchedSignal,
   ScamCategory,
   ScamPattern,
+  ScamScript,
   DomainPattern,
 } from './types';
 import { matchTextPatterns } from './matchers/textMatcher';
 import { matchUrlPatterns } from './matchers/urlMatcher';
+import { matchScriptPatterns } from './matchers/scriptMatcher';
 import { applyChannelAnalysis } from './matchers/channelMatcher';
 import { computeTotalPenalty, mapScoreToAIRiskTier } from './scoring';
 import { getCanadianGuidance } from './canadianContext';
@@ -24,6 +26,7 @@ import techSupportRules from './rules/tech_support.json';
 import rentalRules from './rules/rental.json';
 import phishingRules from './rules/phishing.json';
 import domainRules from './rules/domains.json';
+import scriptRules from './rules/scripts.json';
 
 /**
  * Combine all loaded rule sets into a single array.
@@ -75,6 +78,15 @@ export async function analyzeForAIScam(
   if (input.text) {
     const textSignals = matchTextPatterns(input.text, getAllTextPatterns());
     allSignals.push(...textSignals);
+  }
+
+  // ── Step 1b: Script flow matching ─────────────────────────
+  if (input.text) {
+    const scriptSignals = matchScriptPatterns(
+      input.text,
+      scriptRules.scripts as ScamScript[],
+    );
+    allSignals.push(...scriptSignals);
   }
 
   // ── Step 2: URL pattern matching ─────────────────────────
