@@ -1,0 +1,116 @@
+{
+  "patterns": [
+    {
+      "id": "cra_arrest_warrant",
+      "pattern": "(canada revenue agency|\\bCRA\\b).*warrant for your arrest",
+      "type": "regex",
+      "weight": 10,
+      "category": "CRA_IMPERSONATION",
+      "description": "Threatens arrest with a warrant — the CRA will never threaten arrest by phone."
+    },
+    {
+      "id": "cra_arrest_warrant_generic",
+      "pattern": "we (have|issued) (an )?arrest warrant (for you|in your name)",
+      "type": "regex",
+      "weight": 9,
+      "category": "CRA_IMPERSONATION",
+      "description": "Generic arrest warrant language commonly used in CRA phone scams."
+    },
+    {
+      "id": "cra_specific_amount_owed",
+      "pattern": "you (owe|have an outstanding balance of) \\$?[0-9,.]+ to (the )?(canada revenue agency|\\bCRA\\b)",
+      "type": "regex",
+      "weight": 8,
+      "category": "CRA_IMPERSONATION",
+      "description": "Claims you owe a specific dollar amount to CRA — real CRA sends written notices first."
+    },
+    {
+      "id": "cra_pay_or_arrest",
+      "pattern": "you (must|need to) pay (immediately|today|within 24 hours) (or|otherwise) (you will|we will) (be arrested|go to jail|be deported)",
+      "type": "regex",
+      "weight": 9,
+      "category": "CRA_IMPERSONATION",
+      "description": "Demands immediate payment under threat of arrest, jail, or deportation."
+    },
+    {
+      "id": "cra_gift_card_payment",
+      "pattern": "(gift cards?|itunes|apple cards?|google play|prepaid credit cards?).*(pay|settle|clear) (your )?(tax|cra) debt",
+      "type": "regex",
+      "weight": 10,
+      "category": "CRA_IMPERSONATION",
+      "description": "Demands CRA tax payment via gift cards — the CRA never accepts gift cards."
+    },
+    {
+      "id": "cra_crypto_payment",
+      "pattern": "(pay|send|deposit).*(bitcoin|crypto|BTC).*(cra|tax|owe|debt|balance)",
+      "type": "regex",
+      "weight": 10,
+      "category": "CRA_IMPERSONATION",
+      "description": "Demands CRA payment via cryptocurrency or Bitcoin ATM."
+    },
+    {
+      "id": "cra_bitcoin_atm",
+      "pattern": "bitcoin\\s*ATM|crypto\\s*ATM|go to (a |the )?ATM.*(bitcoin|crypto)",
+      "type": "regex",
+      "weight": 9,
+      "category": "CRA_IMPERSONATION",
+      "description": "Instructs victim to use a Bitcoin ATM for payment — the CRA never does this."
+    },
+    {
+      "id": "cra_climate_action",
+      "pattern": "climate action incentive|climate action refund|CAI payment|climate incentive",
+      "type": "regex",
+      "weight": 7,
+      "category": "CRA_IMPERSONATION",
+      "description": "References the Climate Action Incentive — a common phishing pretext since Oct 2025."
+    },
+    {
+      "id": "cra_refund_link",
+      "pattern": "you have (a )?refund of \\$?[0-9,.]+ waiting.*(click|tap) (the )?link",
+      "type": "regex",
+      "weight": 8,
+      "category": "CRA_IMPERSONATION",
+      "description": "CRA refund phishing — offers a specific refund amount with a link to claim it."
+    },
+    {
+      "id": "cra_gst_hst_refund",
+      "pattern": "GST.?HST.*refund|tax refund available|refund.*GST",
+      "type": "regex",
+      "weight": 7,
+      "category": "CRA_IMPERSONATION",
+      "description": "Offers a GST/HST tax refund — real refunds come through direct deposit, not links."
+    },
+    {
+      "id": "cra_emergency_benefit",
+      "pattern": "emergency (benefit|relief|disaster payment) from (cra|canada revenue agency|the government)",
+      "type": "regex",
+      "weight": 6,
+      "category": "CRA_IMPERSONATION",
+      "description": "Uses emergency/disaster benefit pretext to harvest personal information."
+    },
+    {
+      "id": "cra_sin_request",
+      "pattern": "(provide|confirm|verify) your (social insurance number|\\bSIN\\b)",
+      "type": "regex",
+      "weight": 8,
+      "category": "CRA_IMPERSONATION",
+      "description": "Requests your SIN — the CRA will never ask for your full SIN by phone, text, or email."
+    },
+    {
+      "id": "cra_rcmp_coming",
+      "pattern": "RCMP (will|are) (coming|on the way|being sent|dispatched)",
+      "type": "regex",
+      "weight": 9,
+      "category": "CRA_IMPERSONATION",
+      "description": "Threatens that RCMP officers are being sent — the CRA does not dispatch police."
+    },
+    {
+      "id": "cra_etransfer_refund",
+      "pattern": "(e-?transfer|etransfer|interac).*(refund|rebate|credit).*(cra|canada revenue|tax)",
+      "type": "regex",
+      "weight": 8,
+      "category": "CRA_IMPERSONATION",
+      "description": "Claims CRA refund via Interac e-Transfer — the CRA never sends refunds by e-Transfer."
+    }
+  ]
+}
