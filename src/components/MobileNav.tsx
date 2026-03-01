@@ -46,16 +46,15 @@ export function MobileNav() {
         <button
           onClick={() => setOpen(!open)}
           aria-label="More pages"
+          className="hover:underline"
           style={{
-            background: 'none', border: '1px solid var(--tc-border)',
-            borderRadius: '6px', padding: '1px 6px',
-            fontSize: '0.875rem', cursor: 'pointer',
-            color: 'var(--tc-text-muted)',
-            display: 'inline-flex', alignItems: 'center', gap: '3px',
-            lineHeight: 1.4,
+            background: 'none', border: 'none',
+            padding: 0, margin: 0,
+            fontSize: 'inherit', cursor: 'pointer',
+            color: 'inherit',
           }}
         >
-          More {open ? '✕' : '☰'}
+          More
         </button>
       </nav>
 
