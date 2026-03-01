@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 const PAGE_NAMES: Record<string, string> = {
   '/': 'Home',
@@ -10,7 +11,7 @@ const PAGE_NAMES: Record<string, string> = {
   '/help': 'Support',
   '/academy': 'Academy',
   '/about': 'About',
-  '/about/founder': 'About',
+  '/about/founder': 'Founder',
   '/threats': 'Threats',
   '/report': 'Report',
   '/community': 'Community',
@@ -19,73 +20,71 @@ const PAGE_NAMES: Record<string, string> = {
   '/privacy': 'Privacy',
   '/press': 'Press',
   '/romance': 'Romance Check',
-  '/trust-score': 'How Scoring Works',
+  '/trust-score': 'Scoring',
   '/stats': 'Stats',
   '/claim': 'Claim',
   '/claim/status': 'Claim',
   '/scan': 'Scan Results',
   '/scam-check': 'Scam Check',
   '/safety': 'Safety',
-  '/safety/scams': 'Safety',
   '/api-docs': 'API Docs',
   '/tools/email-headers': 'Tools',
 };
 
-function getParentName(pathname: string): string {
-  // For nested routes, find the parent path name
-  // e.g., /academy/phone-scams → "Academy"
-  // e.g., /about/founder → "About"
-  // e.g., /tools/email-headers → "Tools"
-  // e.g., /learn/ai-deanonymization → "Learn"
+function getPageName(path: string): string {
+  // Direct match
+  if (PAGE_NAMES[path]) return PAGE_NAMES[path];
 
-  // Direct match first
-  if (PAGE_NAMES[pathname]) {
-    // This page is a top-level page, go back to Home
-    return 'Home';
-  }
-
-  // Try parent paths
-  const segments = pathname.split('/').filter(Boolean);
+  // Try parent paths for dynamic routes like /academy/phone-scams
+  const segments = path.split('/').filter(Boolean);
   for (let i = segments.length - 1; i > 0; i--) {
     const parentPath = '/' + segments.slice(0, i).join('/');
-    if (PAGE_NAMES[parentPath]) {
-      return PAGE_NAMES[parentPath];
-    }
+    if (PAGE_NAMES[parentPath]) return PAGE_NAMES[parentPath];
   }
 
   return 'Home';
 }
 
-function getParentPath(pathname: string): string {
-  if (PAGE_NAMES[pathname]) {
-    return '/';
-  }
-
-  const segments = pathname.split('/').filter(Boolean);
-  for (let i = segments.length - 1; i > 0; i--) {
-    const parentPath = '/' + segments.slice(0, i).join('/');
-    if (PAGE_NAMES[parentPath]) {
-      return parentPath;
-    }
-  }
-
-  return '/';
-}
+const HISTORY_KEY = 'tc_nav_history';
 
 export function BackButton() {
   const router = useRouter();
   const pathname = usePathname();
+  const [prevName, setPrevName] = useState('Home');
 
-  const parentName = getParentName(pathname);
-  const parentPath = getParentPath(pathname);
+  useEffect(() => {
+    // Read the stored previous page
+    try {
+      const stored = sessionStorage.getItem(HISTORY_KEY);
+      if (stored) {
+        const history: string[] = JSON.parse(stored);
+        // Find the last page that isn't the current one
+        for (let i = history.length - 1; i >= 0; i--) {
+          if (history[i] !== pathname) {
+            setPrevName(getPageName(history[i]));
+            break;
+          }
+        }
+      }
+    } catch { /* ignore */ }
+
+    // Store current page in history
+    try {
+      const stored = sessionStorage.getItem(HISTORY_KEY);
+      const history: string[] = stored ? JSON.parse(stored) : [];
+      // Only push if different from last entry
+      if (history[history.length - 1] !== pathname) {
+        history.push(pathname);
+        // Keep last 20 entries
+        if (history.length > 20) history.shift();
+        sessionStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+      }
+    } catch { /* ignore */ }
+  }, [pathname]);
 
   return (
-    <a
-      href={parentPath}
-      onClick={(e) => {
-        e.preventDefault();
-        router.back();
-      }}
+    <button
+      onClick={() => router.back()}
       style={{
         background: 'none',
         border: 'none',
@@ -97,10 +96,9 @@ export function BackButton() {
         alignItems: 'center',
         gap: '4px',
         marginBottom: '1rem',
-        textDecoration: 'none',
       }}
     >
-      ← Back to {parentName}
-    </a>
+      ← Back to {prevName}
+    </button>
   );
 }
