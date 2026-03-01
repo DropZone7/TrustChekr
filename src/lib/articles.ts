@@ -275,6 +275,67 @@ const ARTICLES: Article[] = [
       "Crypto is legal and widely used in Canada. The technology is not the problem — irreversible payments attract criminals the same way wire fraud existed before email. Three rules will protect you: never send crypto to anyone you have not met in person, verify every platform through official registries before depositing a single dollar, and remember that guaranteed returns do not exist in any asset class — crypto or otherwise.",
     ],
   },
+  {
+    slug: "irs-impersonation-scams-how-to-spot-them",
+    title: "IRS Impersonation Scams — How to Spot Them",
+    domain: "trustchekr.com",
+    category: "Government Scams",
+    publishedAt: "2026-03-01",
+    updatedAt: "2026-03-01",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "The FTC reported $789 million in government imposter losses in 2024. The IRS will never call you demanding gift cards — but scammers will. Over 2.5 million contacts have been reported to TIGTA from IRS impersonation schemes alone. Here is how the scam works and what the real IRS actually does.",
+    body: [
+      "A woman in Atlanta lost $280,000 to people pretending to be the IRS. She is not alone — the FTC logged $789 million in government imposter losses in 2024, up $171 million from the year before. The Treasury Inspector General for Tax Administration has received over 2.5 million contacts about IRS impersonation scams, with confirmed victim losses exceeding $50 million. In Canada, the CRA version of this scam costs Canadians tens of millions every year through the same playbook.",
+      "The most common version right now is the SSN suspension scam. It starts with a robocall: \"Your Social Security Number has been suspended due to suspicious activity.\" Press 1, and you reach a live \"agent\" who already knows your name and the last four digits of your SSN — scraped from old data breaches. They claim a warrant has been issued for your arrest. The only way to fix it? Pay immediately with gift cards, wire transfers, or crypto. They keep you on the phone while you drive to the store, buy the cards, and read the numbers back. One victim lost $20,000 in a single session this way.",
+      "Gift cards are the payment method of choice — and the biggest tell. Scammers favour Apple and iTunes cards, Google Play, Amazon, Green Dot MoneyPak, and Steam Wallet cards. The DOJ prosecuted a $9 million IRS impersonation ring that ran call centres in India, routing thousands of calls daily to American victims. Money mules in the U.S. converted payments into gift cards and wire transfers. No government agency — not the IRS, not the CRA, not the RCMP — will ever ask you to pay with gift cards. Ever.",
+      "AI is making these calls harder to spot. Voice cloning attacks jumped 400% between 2023 and 2025. Scammers can now replicate an IRS agent's tone using publicly available audio clips — or clone a family member's voice for follow-up \"emergency\" calls tied to fake tax fraud claims. It takes as little as 3 seconds of audio to create a convincing clone, and 70% of people cannot tell the difference.",
+      "Here is what the real IRS actually does: they send mail. Initial contact always comes through a CP notice — a physical letter mailed to your address. The CP5071C letter handles identity verification. You can check your balance and payments at IRS.gov through your online account. The IRS will never call demanding immediate payment, threaten arrest or deportation, request gift cards or crypto, or ask for credit card numbers over the phone. The Taxpayer Advocate Service is reachable at 1-877-777-4778. In Canada, the CRA follows the same pattern — first contact is through My Account or physical mail, never a threatening phone call.",
+      "If you have already been targeted: report to TIGTA at 1-800-366-4484 or tigta.gov. File a report at reportfraud.ftc.gov. Submit IRS Form 14039 — the Identity Theft Affidavit. Contact the IRS Identity Protection Specialized Unit at 1-800-908-4490. Place credit freezes with Equifax, Experian, and TransUnion. File a police report. Request an IP PIN from the IRS for future filing protection. In Canada, report to the CAFC at 1-888-495-8501 and contact the CRA directly through your My Account. The scammers are professionals — getting caught does not make you careless. It makes you their target.",
+    ],
+  },
+  {
+    slug: "zelle-venmo-payment-scams-what-banks-wont-tell-you",
+    title: "Zelle and Venmo Scams — What Banks Won't Tell You",
+    domain: "trustchekr.com",
+    category: "Finance",
+    publishedAt: "2026-03-01",
+    updatedAt: "2026-03-01",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "The New York Attorney General sued Zelle's parent company in 2025, claiming over $1 billion in consumer losses. The CFPB hit Cash App's parent with a $175 million penalty for failing to protect users. Banks reimburse scam victims as little as 2% of the time. Here is what Regulation E actually covers — and what it does not.",
+    body: [
+      "The New York Attorney General filed a lawsuit in August 2025 against Early Warning Services — the company behind Zelle, owned by JPMorgan Chase, Bank of America, Wells Fargo, Capital One, PNC, Truist, and U.S. Bank — claiming the platform launched without adequate fraud protections and has caused over $1 billion in consumer losses. That same year, the CFPB ordered Block, Inc. to pay $175 million — $120 million in refunds and a $55 million fine — for Cash App's failure to investigate fraud and its barriers to recovering stolen funds. These are not fringe apps. These are the backbone of how North Americans send money.",
+      "The accidental transfer scam is one of the sneakiest. A stranger sends you money through Zelle — real money, from a compromised account. They message you: \"I accidentally sent you $500, can you send it back?\" You do the decent thing and return it. Then the bank discovers the original transfer came from a hacked account and reverses it. You are now out $500 of your own money, and because you authorized the return transfer, Regulation E does not protect you. The bank calls it your problem.",
+      "Bank impersonation is the other big one. You get a text: \"Did you authorize a Zelle payment of $500? Reply YES or NO.\" You reply NO. Seconds later, your phone rings — caller ID shows your bank's real number (spoofed). The \"fraud department\" walks you through \"securing\" your account by sending money to yourself via Zelle. The phone number or email they give you? It is the scammer's Zelle account. The money vanishes. Banks classify this as an \"authorized\" transaction — meaning they have no legal obligation to reimburse you.",
+      "That distinction is everything. Under Regulation E, unauthorized transactions — where someone accessed your account without permission — must be reimbursed: $0 liability if reported within 2 business days, up to $50 within 2 to 60 days, and unlimited liability after that. But authorized transactions — where you sent the money yourself, even under false pretences — get no protection. Bank reimbursement rates for scam victims range from 2% to 24% depending on the institution. Zelle introduced new rules in late 2023 requiring member banks to reimburse victims of certain bank impersonation scams, but the scope is narrow and critics say it leaves most victims uncovered.",
+      "In Canada, the picture is different — and better. Interac e-Transfer processed over $400 billion in 2023 and operates under a zero-liability policy. When scammers posed as bank investigators and convinced victims to send e-Transfers to \"secure\" accounts — $16.5 million worth in 2024 — Canadian banks reimbursed under the zero-liability framework. The Interac system also covers authorized scam scenarios that Regulation E ignores. Canadian consumers have meaningfully stronger peer-to-peer fraud protection than Americans do.",
+      "Venmo has its own problems. Fake payment screenshots — edited images showing a completed transaction that never happened — are a staple of marketplace scams. Scammers exploit Venmo's pending payment feature to make it look like money has been sent before it clears. Never rely on the sender's screenshot. Check your own app. On Cash App, the CFPB found that users could not reach humans for dispute resolution and that the company failed to investigate fraud claims — problems that led to the $175 million penalty covering an estimated 15 million affected users.",
+      "The rules are the same across all these platforms: send money only to people you know and trust in real life. Never send money because someone you do not know asked you to \"return\" a payment. Never send money because a caller told you to — your bank will never ask you to Zelle yourself as a security step. If you get a suspicious text or call, hang up and call the number on the back of your debit card. In Canada, the same advice applies to Interac — no bank will ever call asking you to e-Transfer money to protect your account.",
+    ],
+  },
+  {
+    slug: "immigration-scams-canada-how-to-protect-yourself",
+    title: "Immigration Scams in Canada — How to Protect Yourself",
+    domain: "trustchekr.com",
+    category: "Government Scams",
+    publishedAt: "2026-03-01",
+    updatedAt: "2026-03-01",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "Ghost immigration consultants charge $10,000 to $50,000 for fabricated documents. The CICC penalized 18 consultants in Ontario alone in 2025, totalling roughly $500,000 in fines. Over 2,000 fake Letters of Acceptance have been flagged, and IRCC investigates roughly 9,000 cases per month. Here is how to verify a consultant and avoid the most common traps.",
+    body: [
+      "A man in Ontario paid $66,000 to an immigration consultant who forged his documents. The College of Immigration and Citizenship Consultants fined the consultant — the largest individual penalty in CICC history — but the money was gone. He is one of thousands. Ghost consultants operate without CICC registration, charge between $10,000 and $50,000 for fabricated LMIAs, fake Letters of Acceptance, and fraudulent applications. The CICC penalized 18 consultants in Ontario alone in 2025, with roughly $500,000 in total fines. One consultant — Amirahmadi — had their licence revoked, was fined $32,000, and ordered to pay $50,000 in costs.",
+      "LMIA fraud is one of the cruelest patterns. Employers are never permitted to charge workers for Labour Market Impact Assessment processing — that is the law. But scammers demand anywhere from $1,000 to $45,000 for fake or fraudulent LMIAs. Temporary foreign workers arrive in Canada expecting a real job and find nothing. Some have spent their entire savings. IRCC investigates roughly 9,000 cases per month, and over 2,000 fake Letters of Acceptance have been flagged across Canadian institutions. Workers can verify any LMIA through the ESDC portal — if someone tells you not to check, that is your answer.",
+      "International students are hit hardest. Scammers build fake university websites, issue fraudulent acceptance letters, and charge thousands for study permits that were never filed. Some students only discover the fraud when they arrive in Canada and find no program waiting for them. Others learn their permit was based on forged documents — putting their immigration status at risk through no fault of their own. The Designated Learning Institutions list on the IRCC website shows every legitimate school. If a school is not on that list, the acceptance letter is worthless.",
+      "Ghost consultants have a pattern you can spot. They guarantee results — no honest consultant can do that, because IRCC makes the decisions. They pressure you to sign quickly. They ask for cash or e-Transfer instead of documented payments. They refuse to give you copies of what they filed. They do not appear on the CICC registry at college-ic.ca. In Canada, only three categories of people can legally represent you on immigration matters: registered consultants (RCICs) listed on the CICC registry, lawyers who are members of a provincial law society, and Quebec notaries. Anyone else offering immigration help for a fee is breaking the law.",
+      "In the U.S., a parallel problem exists. \"Notario\" fraud targets Latino communities — in many Latin American countries, a notario público is a high-ranking legal official. In the U.S. and Canada, it means nothing. Scammers use the title to charge thousands for immigration help they are not qualified or authorized to provide. USCIS impersonation scams and fake green card lottery schemes follow the same playbook as fake IRCC calls in Canada.",
+      "To protect yourself: verify any consultant at college-ic.ca before paying a dollar. Verify your school on the DLI list at the IRCC website. Never pay an employer for LMIA processing. Keep copies of everything you sign and everything that is filed on your behalf. If something goes wrong, report to the CICC, the CAFC at 1-888-495-8501, the CBSA, and IRCC directly. Call 1-800-O-Canada for general government information. You deserve a fair process — and knowing how to spot fraud is the first step toward getting one.",
+    ],
+  },
 ];
 
 export function getArticle(slug: string): Article | null {

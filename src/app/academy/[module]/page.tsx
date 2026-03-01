@@ -188,6 +188,15 @@ const modules: Record<string, ModuleData> = {
         ],
       },
     ],
+      {
+        id: "q8",
+        scenario: "📞 You get a call from someone claiming to be your bank's Zelle fraud department. They say someone is trying to drain your account and you need to send $1,500 via Zelle to a \"secure holding account\" to protect your funds. The caller ID shows your bank's real number.",
+        options: [
+          { text: "This is a scam — hang up and call your bank directly", correct: true, feedback: "Correct. Your bank will never ask you to send money via Zelle to \"protect\" your account — that is not how fraud departments work. Caller ID can be spoofed to show any number. Hang up and call the number on the back of your debit card." },
+          { text: "The caller ID matches my bank so it must be real", correct: false, feedback: "Caller ID can be faked — this is called spoofing. No bank will ever ask you to Zelle money to a \"secure account.\" The NY Attorney General sued Zelle's parent company in 2025 over $1 billion in losses from scams like this one. Hang up and call your bank yourself." },
+        ],
+      },
+    ],
     grokipediaQueries: [
       { label: "How do CRA scams work?", query: "CRA scam Canada how to spot 2026" },
       { label: "How to verify CRA communication", query: "how to verify CRA communication legitimate canada.ca" },
@@ -368,6 +377,15 @@ const modules: Record<string, ModuleData> = {
         options: [
           { text: "This is sextortion — do not pay", correct: true, feedback: "Correct! This is sextortion — a form of blackmail. Do NOT pay — paying usually leads to more demands, not silence. Block the person, save evidence, and report to the RCMP and CAFC. You can also report to the Canadian Centre for Child Protection at cybertip.ca if a minor is involved. You are the victim here — there is no shame in getting help." },
           { text: "I should pay to make it go away", correct: false, feedback: "Do NOT pay. In most cases, paying leads to more demands — not relief. Block the scammer, screenshot the threats as evidence, and report to the RCMP and CAFC at 1-888-495-8501. Sextortion is a crime and you are the victim. If you or someone you know is under 18, also report to cybertip.ca." },
+        ],
+      },
+    ],
+      {
+        id: "q8",
+        scenario: "💕 Someone you have been chatting with on WhatsApp for six weeks says: \"I have been making great returns on this trading app — let me show you how.\" They send a link to download an app called CryptoVault Pro. You install it, deposit $1,000, and within days the app shows your balance at $4,200. When you try to withdraw, the app says you must pay a 20% \"withdrawal tax\" first.",
+        options: [
+          { text: "This is a pig butchering scam — the app and the profits are fake", correct: true, feedback: "Correct. The app is controlled by scammers — the balance is just numbers on a screen. The \"withdrawal tax\" is another way to extract money. Real platforms never require upfront tax payments to release your own funds. The FBI reported $5.8 billion in pig butchering losses in 2024." },
+          { text: "A 20% tax on profits sounds like a real requirement", correct: false, feedback: "No legitimate trading platform requires you to pay taxes to them before withdrawing. Capital gains taxes are handled through your tax return — not paid to an app. The entire platform is fake. The person who introduced you is part of the scam." },
         ],
       },
     ],
@@ -574,6 +592,15 @@ const modules: Record<string, ModuleData> = {
         ],
       },
     ],
+      {
+        id: "q9",
+        scenario: "📱 Text message: \"IRS ALERT: Your tax account is past due. Purchase $2,000 in Apple gift cards and text the codes to this number to resolve your balance immediately or a warrant will be issued.\"",
+        options: [
+          { text: "This is a scam — the IRS never demands gift cards by text", correct: true, feedback: "Correct. The IRS contacts taxpayers by mail — never by text or phone demanding gift cards. No government agency in any country accepts Apple gift cards as payment. Delete the text and report it to TIGTA at 1-800-366-4484." },
+          { text: "I should check with the IRS just in case", correct: false, feedback: "The IRS will never text you demanding gift card payments. This is a well-documented scam — the FTC reported $789 million in government imposter losses in 2024. If you are concerned about your tax account, log into IRS.gov directly." },
+        ],
+      },
+    ],
     grokipediaQueries: [
       { label: "How to identify phishing emails", query: "phishing email identification tips 2026" },
       { label: "AI-written phishing emails", query: "AI generated phishing email how to spot 2026" },
@@ -671,6 +698,15 @@ const modules: Record<string, ModuleData> = {
         options: [
           { text: "This is likely a scam — do not send money via e-Transfer for tickets from a stranger", correct: true, feedback: "Correct! Blue checkmarks can be purchased on most platforms now and do not guarantee trustworthiness. Scammers create or buy verified accounts to sell fake tickets, especially for sold-out events. Once you send an e-Transfer, the money is gone. Buy tickets only through official platforms like Ticketmaster or verified resale sites that offer buyer protection." },
           { text: "The blue checkmark and followers mean the account is trustworthy", correct: false, feedback: "Blue checkmarks can now be purchased on Instagram, X, and Facebook — they no longer mean the account is verified as authentic. Scammers invest in followers and checkmarks to look credible. Never send e-Transfers to strangers for event tickets. Use official ticket platforms with buyer protection — if the deal sounds too good, it is." },
+        ],
+      },
+    ],
+      {
+        id: "q9",
+        scenario: "📱 You post regularly on Reddit using an anonymous username. You never share your real name. One day, someone DMs you: \"Hey [your real name], interesting post about your neighbourhood.\" They figured out who you are from your writing style and the details in your posts — the coffee shop you mentioned, the intersection you complained about, your job industry.",
+        options: [
+          { text: "This is a real risk — your anonymous posts can be used to identify you", correct: true, feedback: "Correct. A 2025 ETH Zurich study showed AI can match anonymous writing to real identities with 68% accuracy. Small details — your neighbourhood, job, commute, opinions — add up fast. Scammers and stalkers can piece together your identity from posts you thought were anonymous. Review your post history and remove anything that narrows down where you live or work." },
+          { text: "If I never shared my real name, no one can find me", correct: false, feedback: "AI-powered de-anonymization can match your writing style and the details you share — neighbourhood landmarks, job references, daily routines — to identify you. A 2025 ETH Zurich study achieved 68% accuracy at this. Your name is not the only thing that identifies you. Review your posts and remove location-specific details." },
         ],
       },
     ],
@@ -772,6 +808,15 @@ const modules: Record<string, ModuleData> = {
         options: [
           { text: "Do NOT pay — block the scammer, save evidence, and report to police and the CAFC", correct: true, feedback: "Correct! This is sextortion — a crime, and you are the victim. Paying almost always leads to more demands, not silence. Screenshot the threats, block the scammer on all platforms, and report to your local police and the CAFC at 1-888-495-8501. If you are under 18, also report to cybertip.ca. You can contact needhelpnow.ca for support. There is no shame — sextortion affects thousands of Canadians every year." },
           { text: "Pay quickly so they don't follow through on the threat", correct: false, feedback: "Do NOT pay. In most cases, paying leads to more demands for more money. Block the scammer, screenshot all threats as evidence, and report to police and the CAFC. If you are under 18, report to cybertip.ca. Visit needhelpnow.ca for support. Remember: you are the victim of a crime, and help is available. The RCMP reports sextortion complaints have increased over 300% in recent years." },
+        ],
+      },
+    ],
+      {
+        id: "q9",
+        scenario: "😰 You paid an immigration consultant $15,000 to file your permanent residency application. Six months later, you discover they were never registered with the CICC and never filed anything. Your work permit expires in 60 days. What should you do?",
+        options: [
+          { text: "Report to the CICC, file a CAFC complaint, contact a licensed consultant or immigration lawyer immediately", correct: true, feedback: "Correct. File a complaint with the CICC at college-ic.ca — they investigate unlicensed consultants and have issued fines up to $66,000. Report to the CAFC at 1-888-495-8501 and your local police. Then contact a CICC-registered consultant or immigration lawyer urgently to assess your options before your work permit expires. Keep all receipts and communications as evidence." },
+          { text: "There is nothing you can do — the money is gone and your status is at risk", correct: false, feedback: "You can take action. Report the consultant to the CICC — they have the power to investigate and fine unlicensed operators. File with the CAFC and police. Most importantly, contact a legitimate immigration lawyer or CICC-registered consultant right away. Your immigration status may still be salvageable, but you need qualified help fast." },
         ],
       },
     ],

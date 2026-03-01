@@ -18,12 +18,12 @@
 | API routes | 29 |
 | SEO articles | 15 (13 rewritten to journalism standard) |
 | Academy modules | 10 (61+ quiz scenarios) |
-| Detection rules | 121 patterns (89 text + 20 domain + 12 script flows) |
+| Detection rules | 138 patterns (106 text + 20 domain + 12 script flows) |
 | Rule JSON files | 16 |
 | OSINT integrations | 9 live APIs |
 | Countries covered | 3 (Canada, USA, Mexico) |
-| Scam categories | 10 |
-| Brand targets monitored | 27 legitimate domains |
+| Scam categories | 13 |
+| Brand targets monitored | 40 legitimate domains |
 | Test data rows | 7.7M+ across 7 datasets |
 
 ---
