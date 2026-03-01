@@ -30,8 +30,8 @@ export default function PressPage() {
         <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--tc-text-main)' }}>Platform numbers</h2>
         <div className="grid grid-cols-3 gap-3 text-center">
           {[
-            { value: '21+', label: 'Analysis modules' },
-            { value: '9', label: 'OSINT databases' },
+            { value: '13', label: 'Scam types detected' },
+            { value: 'Free', label: 'Always, no account needed' },
             { value: '8', label: 'Academy modules' },
             { value: '49K', label: 'Known bad domains' },
             { value: '22', label: 'Phone scam patterns' },

@@ -34,7 +34,7 @@ export default function AboutPage() {
       <section>
         <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>What we check</h2>
         <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)' }}>
-          Every scan runs through 21+ analysis modules in parallel:
+          Every scan checks multiple sources at once:
         </p>
         <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm" style={{ color: 'var(--tc-text-main)' }}>
           {[

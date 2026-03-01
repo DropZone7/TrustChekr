@@ -66,19 +66,15 @@ export default function FounderPage() {
         </p>
       </section>
 
-      {/* By the Numbers */}
+      {/* What You Get */}
       <section style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>Built like a product, not a prototype</h2>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          TrustChekr has been engineered the way we approach security: small, sharp components that work
-          together, shipped quickly and iterated relentlessly.
-        </p>
+        <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>What TrustChekr does for you</h2>
         <div style={{ marginTop: '8px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
           {[
-            { value: '10,000+', label: 'Lines of code' },
-            { value: '17', label: 'Analysis modules' },
-            { value: '49,762', label: 'Blocked domains' },
-            { value: '50+', label: 'Pages & flows built' },
+            { value: 'Free', label: 'Always — no hidden costs' },
+            { value: 'Private', label: 'We never store your data' },
+            { value: 'Seconds', label: 'To check if something is a scam' },
+            { value: '13', label: 'Types of scams we detect' },
           ].map((stat) => (
             <div key={stat.label} style={{ padding: '10px 12px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)' }}>
               <div style={{ fontSize: '22px', fontWeight: 700 }}>{stat.value}</div>
@@ -86,9 +82,6 @@ export default function FounderPage() {
             </div>
           ))}
         </div>
-        <p style={{ margin: '8px 0 0', fontSize: '13px', color: 'var(--tc-text-muted)' }}>
-          Built in weeks, not months — with the kind of velocity investors look for and the kind of care users need.
-        </p>
       </section>
 
       {/* Vision */}

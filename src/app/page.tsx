@@ -96,7 +96,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-xs mt-2" style={{ color: "var(--tc-text-muted)" }}>
-              21+ analysis modules. Results in seconds. <a href="/trust-score" className="underline">See how scoring works →</a>
+              Results in seconds. <a href="/trust-score" className="underline">See how scoring works →</a>
             </p>
           </div>
 
