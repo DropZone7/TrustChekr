@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { PartnersDemoForm } from '@/components/partners/PartnersDemoForm';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'TrustChekr Partnerships & Integrations',
@@ -41,12 +42,13 @@ export default function PartnersPage() {
       `}</style>
 
       <div className="tc-container">
+        <BackButton />
         {/* Hero */}
         <section className="tc-section">
           <div className="tc-hero-layout">
             <div style={{ flex: 3 }}>
-              <span style={{ display: 'inline-block', padding: '0.2rem 0.6rem', borderRadius: '999px', border: '1px solid rgba(26,82,118,0.2)', fontSize: '0.8rem', color: 'var(--tc-primary)', marginBottom: '0.75rem' }}>
-                For credit unions, telecoms, police, and consumer protection teams
+              <span style={{ display: 'inline-block', padding: '0.2rem 0.6rem', borderRadius: '999px', border: '1px solid rgba(26,82,118,0.2)', fontSize: '0.8rem', color: 'var(--tc-primary)', marginBottom: '0.75rem', fontFamily: 'var(--font-heading)' }}>
+                For Credit Unions, Telecoms, Police, and Consumer Protection Teams
               </span>
               <h1 style={{ margin: 0, fontSize: '2.2rem', lineHeight: 1.15, fontWeight: 700, color: 'var(--tc-primary)' }}>
                 Protect your customers from scams, before the money leaves.

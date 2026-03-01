@@ -1,4 +1,5 @@
 import { Bot, AlertTriangle, Target, Landmark, Briefcase, Search, FileText } from 'lucide-react';
+import { BackButton } from '@/components/BackButton';
 
 const DEANON_ICON_MAP: Record<string, React.ComponentType<any>> = {
   '🎯': Target,
@@ -19,13 +20,7 @@ export default function AIDeanonymizationArticle() {
     <article className="flex flex-col gap-6">
       {/* Header */}
       <div className="pt-4">
-        <a
-          href="/learn"
-          className="text-sm hover:underline"
-          style={{ color: "var(--tc-accent)" }}
-        >
-          ← Back to Learn
-        </a>
+        <BackButton />
         <h1
           className="text-3xl font-bold mt-3"
           style={{ color: "var(--tc-primary)" }}
