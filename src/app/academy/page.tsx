@@ -15,6 +15,8 @@ const MODULES = [
   { id: "phishing", number: 6, title: "Phishing Emails, Texts & Fake Sites", subtitle: "Don't click that link", audiences: ["All"] },
   { id: "social-media", number: 7, title: "Social Media Red Flags", subtitle: "Protecting yourself online", audiences: ["Teens", "Parents"] },
   { id: "what-to-do", number: 8, title: "What to Do If You're Scammed", subtitle: "Emergency steps to protect yourself", audiences: ["All"] },
+  { id: "crypto-basics", number: 9, title: "Crypto Basics — Without the Jargon", subtitle: "What crypto actually is, in plain English", audiences: ["All"] },
+  { id: "crypto-safety", number: 10, title: "Protecting Your Crypto", subtitle: "Scams, wallets & the red flags that matter", audiences: ["All"] },
 ];
 
 function StatusPill({ status }: { status: ModuleCompletionStatus }) {

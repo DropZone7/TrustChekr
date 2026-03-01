@@ -21,6 +21,8 @@ export function getDefaultProgress(): AcademyProgress {
       M6_PHISHING: 'not_started',
       M7_SOCIAL: 'not_started',
       M8_WHAT_TO_DO: 'not_started',
+      M9_CRYPTO_BASICS: 'not_started',
+      M10_CRYPTO_SAFETY: 'not_started',
     },
     lastUpdated: new Date().toISOString(),
   };
@@ -36,6 +38,8 @@ const SLUG_TO_MODULE_ID: Record<string, AcademyModuleId> = {
   'phishing': 'M6_PHISHING',
   'social-media': 'M7_SOCIAL',
   'what-to-do': 'M8_WHAT_TO_DO',
+  'crypto-basics': 'M9_CRYPTO_BASICS',
+  'crypto-safety': 'M10_CRYPTO_SAFETY',
 };
 
 export function slugToModuleId(slug: string): AcademyModuleId | null {

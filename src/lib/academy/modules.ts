@@ -6,7 +6,9 @@ export type AcademyModuleId =
   | 'M5_TOO_GOOD'
   | 'M6_PHISHING'
   | 'M7_SOCIAL'
-  | 'M8_WHAT_TO_DO';
+  | 'M8_WHAT_TO_DO'
+  | 'M9_CRYPTO_BASICS'
+  | 'M10_CRYPTO_SAFETY';
 
 export interface AcademyModuleMeta {
   id: AcademyModuleId;
@@ -63,6 +65,18 @@ export const ACADEMY_MODULES: Record<AcademyModuleId, AcademyModuleMeta> = {
     slug: 'what-to-do',
     title: "What to Do If You're Scammed",
     shortDescription: 'Immediate steps to limit damage and who to contact in Canada.',
+  },
+  M9_CRYPTO_BASICS: {
+    id: 'M9_CRYPTO_BASICS',
+    slug: 'crypto-basics',
+    title: 'Crypto Basics — Without the Jargon',
+    shortDescription: 'What cryptocurrency actually is, how wallets work, and which Canadian platforms are legit.',
+  },
+  M10_CRYPTO_SAFETY: {
+    id: 'M10_CRYPTO_SAFETY',
+    slug: 'crypto-safety',
+    title: 'Protecting Your Crypto',
+    shortDescription: 'The 5 biggest crypto scams targeting Canadians and how to avoid every one of them.',
   },
 };
 
