@@ -1,5 +1,7 @@
 "use client";
 
+import { BackButton } from '@/components/BackButton';
+
 import { useState } from "react";
 import RomanceIntake from "@/components/RomanceIntake";
 import Results from "@/components/Results";
@@ -40,6 +42,7 @@ export default function RomancePage() {
 
   return (
     <div className="flex flex-col gap-8">
+      <BackButton />
       {!result && !scanning && !error && (
         <>
           <div className="text-center pt-4">

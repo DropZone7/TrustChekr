@@ -1,5 +1,7 @@
 'use client';
 
+import { BackButton } from '@/components/BackButton';
+
 import React, { useEffect, useState } from 'react';
 import { Phone, Landmark, Building2, Monitor, HeartCrack, Shield } from 'lucide-react';
 
@@ -92,6 +94,7 @@ export default function StatsPage() {
         color: 'var(--tc-text-main)',
       }}
     >
+      <BackButton />
       {/* Hero */}
       <section style={{ marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>

@@ -1,5 +1,7 @@
 'use client';
 
+import { BackButton } from '@/components/BackButton';
+
 import React, { useState, useEffect, useRef, useId, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
@@ -190,6 +192,7 @@ function ClaimPage() {
   if (status === 'success') {
     return (
       <main style={{ maxWidth: '560px', margin: '0 auto', padding: '4rem 1.25rem', textAlign: 'center' }}>
+      <BackButton />
         <div
           style={{
             width: '52px',

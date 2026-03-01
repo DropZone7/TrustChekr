@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'API Documentation',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function APIDocsPage() {
   return (
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
+      <BackButton />
       <div className="w-full max-w-3xl flex flex-col gap-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>

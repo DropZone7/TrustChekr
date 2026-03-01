@@ -1,5 +1,7 @@
 "use client";
 
+import { BackButton } from '@/components/BackButton';
+
 import { useState } from "react";
 
 const SCAM_TYPES = [
@@ -54,6 +56,7 @@ export default function ReportPage() {
   if (submitted) {
     return (
       <div className="flex flex-col gap-6">
+      <BackButton />
         <div className="text-center py-8">
           <p className="text-4xl mb-4">✅</p>
           <h1 className="text-2xl font-bold mb-2" style={{ color: "var(--tc-primary)" }}>

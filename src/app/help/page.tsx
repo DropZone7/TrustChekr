@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'Help & Emergency Contacts',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function HelpPage() {
   return (
     <div className="flex flex-col gap-8">
+      <BackButton />
       <div className="text-center pt-4">
         <h1 className="text-3xl font-bold" style={{ color: "var(--tc-primary)" }}>
           Need Help?

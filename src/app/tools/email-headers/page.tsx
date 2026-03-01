@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { EmailHeaderAnalyzer } from '@/components/tools/EmailHeaderAnalyzer';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'Email Header Analyzer',
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function EmailHeadersPage() {
   return (
     <div>
+      <BackButton />
       <h1
         style={{
           margin: 0,

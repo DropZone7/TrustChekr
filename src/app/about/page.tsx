@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'About TrustChekr',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="flex flex-col gap-8">
+      <BackButton />
       <div>
         <h1 className="text-2xl font-bold" style={{ color: 'var(--tc-text-main)' }}>About TrustChekr</h1>
         <p className="mt-2" style={{ color: 'var(--tc-text-muted)' }}>

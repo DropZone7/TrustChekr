@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'How TrustChekr Scores Risk',
@@ -20,6 +21,7 @@ const scoringRules = [
 export default function TrustScorePage() {
   return (
     <div>
+      <BackButton />
       <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 700, color: 'var(--tc-primary)' }}>How TrustChekr Scores Risk</h1>
       <p style={{ margin: '0.5rem 0 1.5rem', fontSize: '1rem', color: 'var(--tc-text-muted)' }}>
         When you paste something into TrustChekr, we check it against known scam patterns, fraud databases,

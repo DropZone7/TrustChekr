@@ -1,5 +1,6 @@
 import { MailOpen, Globe, Smartphone, Mail, Coins, Gift, Bot, Shield, AlertTriangle } from 'lucide-react';
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 const ARTICLE_ICONS: Record<string, React.ComponentType<any>> = {
   '💌': MailOpen,
@@ -88,6 +89,7 @@ export default function LearnPage() {
 
   return (
     <div className="flex flex-col gap-8">
+      <BackButton />
       <div className="text-center pt-4">
         <h1 className="text-3xl font-bold" style={{ color: "var(--tc-primary)" }}>
           Learn About Common Scams

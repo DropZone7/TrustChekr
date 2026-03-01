@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'Threat Dashboard',
@@ -58,6 +59,7 @@ export default async function ThreatsPage() {
 
   return (
     <div>
+      <BackButton />
       <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 700, color: 'var(--tc-primary)' }}>
         Threat Dashboard
       </h1>

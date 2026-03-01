@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import type { TrustScoreResult } from "@/lib/trustScore";
 import { gradeToCssColor } from "@/lib/trustScore";
+import { BackButton } from '@/components/BackButton';
 
 interface ReportApiResponse {
   inputType: string;
@@ -144,6 +145,7 @@ function NextStepsList({ steps }: { steps: string[] }) {
 function SectionBox({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "12px", padding: "24px", display: "flex", flexDirection: "column", gap: "16px" }}>
+      <BackButton />
       <h2 style={{ fontSize: "18px", fontWeight: "700", color: "var(--tc-text-main)", margin: 0, paddingBottom: "12px", borderBottom: "1px solid var(--tc-border)" }}>{title}</h2>
       {children}
     </section>

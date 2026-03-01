@@ -1,5 +1,7 @@
 'use client';
 
+import { BackButton } from '@/components/BackButton';
+
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
@@ -93,6 +95,7 @@ function ClaimStatusPage() {
 
   return (
     <main style={{ maxWidth: '600px', margin: '0 auto', padding: '3rem 1.25rem' }}>
+      <BackButton />
       <h1 style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--tc-text-main)', margin: '0 0 0.5rem' }}>
         Claim Status
       </h1>

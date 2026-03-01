@@ -1,5 +1,6 @@
 import { Shield } from 'lucide-react';
 import type { Metadata } from 'next';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'About the Founder — TrustChekr',
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function FounderPage() {
   return (
     <main style={{ width: '100%', maxWidth: '700px', margin: '0 auto', padding: '32px 16px 48px', color: 'var(--tc-text-main)' }}>
+      <BackButton />
       {/* Hero */}
       <section style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <h1 style={{ margin: 0, fontSize: '26px', fontWeight: 700 }}>Meet the Founder</h1>

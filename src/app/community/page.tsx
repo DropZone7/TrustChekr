@@ -1,5 +1,7 @@
 'use client';
 
+import { BackButton } from '@/components/BackButton';
+
 import { useState, useEffect, useCallback } from 'react';
 import { Phone, Landmark, Building2, Monitor, HeartCrack, AlertTriangle } from 'lucide-react';
 
@@ -124,6 +126,7 @@ export default function CommunityPage() {
 
   return (
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
+      <BackButton />
       <div className="w-full max-w-2xl flex flex-col gap-5">
         <div className="text-center">
           <h1 className="text-3xl font-bold" style={{ color: 'var(--tc-primary)' }}>

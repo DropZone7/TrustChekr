@@ -1,9 +1,12 @@
 "use client";
 
+import { BackButton } from '@/components/BackButton';
+
 import Link from "next/link";
 import { useAcademyProgress } from "@/hooks/useAcademyProgress";
 import { slugToModuleId } from "@/lib/academy/progress";
 import { CertificateGenerator } from "@/components/academy/CertificateGenerator";
+import { AcademySuggestionBox } from "@/components/academy/AcademySuggestionBox";
 import type { ModuleCompletionStatus } from "@/lib/academy/progress";
 
 const MODULES = [
@@ -47,10 +50,29 @@ export default function AcademyPage() {
 
   return (
     <div className="flex flex-col gap-6">
+      <BackButton />
       <div>
         <h1 className="text-2xl font-bold" style={{ color: 'var(--tc-text-main)' }}>Safety Academy</h1>
-        <p className="mt-1" style={{ color: 'var(--tc-text-muted)' }}>
-          8 free modules on recognizing scams. 5–10 minutes each. Built for seniors, parents, and teens.
+      </div>
+
+      {/* Welcome section */}
+      <div className="p-5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>Welcome</h2>
+        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
+          <strong>What:</strong> Free, bite-sized lessons on recognizing scams — from fake CRA calls to romance fraud to crypto tricks.
+        </p>
+        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
+          <strong>Who it&apos;s for:</strong> Everyone. We built this for seniors, parents, and teens — but scammers don&apos;t discriminate, and neither should safety education.
+        </p>
+        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
+          <strong>Why:</strong> Because knowing what a scam looks like <em>before</em> you see one is the single best way to protect yourself.
+          You wouldn&apos;t swim without learning to float first.
+        </p>
+        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
+          <strong>How it works:</strong> Pick a module, read through real examples, test yourself with a quick quiz. 5–10 minutes each. No sign-up, no tracking, no grades — just knowledge you can actually use.
+        </p>
+        <p className="text-sm" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
+          <strong>When &amp; where:</strong> Right here, right now, on any device. Share it with someone you care about.
         </p>
       </div>
 
@@ -114,6 +136,16 @@ export default function AcademyPage() {
 
       {/* Certificate */}
       <CertificateGenerator completedModules={completedCount} />
+
+      {/* Suggestion box */}
+      <div className="p-5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+        <h2 className="text-base font-semibold mb-1" style={{ color: 'var(--tc-text-main)' }}>Help us make this better</h2>
+        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.5 }}>
+          Think we&apos;re missing a topic? Seen a new scam we should cover? Have research or resources that could help?
+          The Academy is built for the community — your input makes it stronger.
+        </p>
+        <AcademySuggestionBox />
+      </div>
 
       {/* Partnership — one line */}
       <p className="text-xs text-center" style={{ color: 'var(--tc-text-muted)' }}>

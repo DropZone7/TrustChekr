@@ -1,5 +1,7 @@
 'use client';
 
+import { BackButton } from '@/components/BackButton';
+
 import { useState } from 'react';
 import { Smartphone, ScanLine, FileText, HeartCrack, Lock, AlertTriangle } from 'lucide-react';
 import { ScreenshotScanner } from '@/components/scanners/ScreenshotScanner';
@@ -28,6 +30,7 @@ export default function ToolsPage() {
 
   return (
     <main className="min-h-screen p-4 sm:p-8 flex flex-col items-center" style={{ background: 'var(--tc-bg)' }}>
+      <BackButton />
       <div className="w-full max-w-2xl flex flex-col gap-6">
         {/* Header */}
         <div className="text-center">

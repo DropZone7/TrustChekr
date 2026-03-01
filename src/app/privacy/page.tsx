@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: "Privacy Policy & Terms — TrustChekr",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="flex flex-col gap-6">
+      <BackButton />
       <h1 className="text-2xl font-bold" style={{ color: "var(--tc-primary)" }}>
         Privacy Policy & Terms of Use
       </h1>

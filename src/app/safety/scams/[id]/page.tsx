@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ACADEMY_MODULES, getModuleRoute, type AcademyModuleId } from '@/lib/academy/modules';
 import { ReportForm } from '@/components/user-reports/ReportForm';
 import { GrokipediaLink } from '@/components/grokipedia/GrokipediaLink';
+import { BackButton } from '@/components/BackButton';
 
 type PageProps = { params: Promise<{ id: string }> };
 
@@ -36,6 +37,7 @@ export default async function ScamDetailsPage({ params }: PageProps) {
   if (!scam) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10">
+      <BackButton />
         <h1 className="mb-4 text-xl font-semibold" style={{ color: 'var(--tc-primary)' }}>Scam not found</h1>
         <p className="mb-4 text-sm" style={{ color: 'var(--tc-text-muted)' }}>
           This scam alert may have been removed or is not available.

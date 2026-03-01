@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getArticle, getAllArticles, type Article } from "@/lib/articles";
+import { BackButton } from '@/components/BackButton';
 
 export function generateStaticParams() {
   return getAllArticles().map((a) => ({ slug: a.slug }));
@@ -174,6 +175,7 @@ function VerdictBox({ article }: { article: Article }) {
         marginBottom: "2rem",
       }}
     >
+      <BackButton />
       <p
         style={{
           margin: "0 0 1rem 0",

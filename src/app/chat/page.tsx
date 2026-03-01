@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ChatScanner } from '@/components/chat/ChatScanner';
+import { BackButton } from '@/components/BackButton';
 
 export const metadata: Metadata = {
   title: 'Chat with TrustChekr',
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
 export default function ChatPage() {
   return (
     <div>
+      <BackButton />
       <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 700, color: 'var(--tc-primary)' }}>
         Chat with TrustChekr
       </h1>

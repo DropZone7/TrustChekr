@@ -1,5 +1,7 @@
 "use client";
 
+import { BackButton } from '@/components/BackButton';
+
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
@@ -1036,6 +1038,7 @@ function SpotTheScam({ items }: { items: QuizItem[] }) {
   if (finished) {
     return (
       <div className="p-5 rounded-xl border text-center" style={{ borderColor: "var(--tc-safe)", background: "var(--tc-surface)" }}>
+      <BackButton />
         <p className="text-3xl mb-2">🎉</p>
         <p className="text-xl font-bold" style={{ color: "var(--tc-safe)" }}>
           You got {score} out of {items.length} correct!
