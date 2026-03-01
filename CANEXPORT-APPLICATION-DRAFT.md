@@ -63,15 +63,27 @@ TrustChekr is not a concept or prototype — it is **live, production-deployed, 
 - Rapidly digitizing financial sector with increasing fraud exposure
 - Limited consumer-facing fraud prevention tools available in Spanish
 
-### Competitive Landscape — No Direct Competitor
-| Competitor | Limitation |
-|-----------|-----------|
-| **ScamAdviser** | Less than 3% Canadian traffic, no education component, no detection engine |
-| **CAFC** | Static PDF advisories only — no interactive detection or analysis |
-| **BBB Scam Tracker** | US-centric, no real-time detection engine, no multilingual support |
-| **Bank fraud tools** | Institution-specific, not consumer-portable, no cross-platform coverage |
+### Competitive Landscape
 
-TrustChekr is the **only Canadian-built, trilingual, consumer-facing scam detection platform** with integrated education — a category of one.
+The consumer scam detection market includes well-funded global players:
+
+| Competitor | What They Offer | Users | Pricing | Gap TrustChekr Fills |
+|-----------|----------------|-------|---------|---------------------|
+| **ScamAdviser** | Website trust scoring, call blocking, B2B API | 6.5M/month | Free + API plans | No Canadian-specific rules (CRA, Interac), no interactive education |
+| **Norton LifeLock** | AI scam detection, $1M identity insurance, credit monitoring, dark web monitoring | Millions | $12-35/month | US-centric, no Canadian/Mexican rules, expensive paywall, no education modules |
+| **McAfee Scam Detector** | AI text analysis (top-rated in independent testing) | Millions | Part of McAfee suite | No screenshot support, no country-specific guidance, no education |
+| **Trend Micro ScamCheck** | AI-powered scam and call analysis | Millions | Part of security suite | Character limits, false positives on legitimate messages, no trilingual coverage |
+| **Aura** | All-in-one identity protection, real-time scam detection, VPN, antivirus | 1M+ | $9-15/month | No interactive education, no Canadian-specific detection, identity focus not scam education |
+| **CAFC** | Fraud reporting, static advisories | N/A (government) | Free | No real-time detection, PDF-based education only |
+
+**TrustChekr's differentiation is specific, not universal.** Major security companies offer AI scam detection within $12-35/month security suites, but none provide:
+- **Canadian-specific detection rules** (CRA impersonation, Interac e-Transfer fraud, Big 5 bank patterns)
+- **Trilingual North American coverage** (Canada, US, Mexico with country-specific guidance and reporting hotlines)
+- **Interactive consumer education** (10 quiz-based modules with 61+ real-world scenarios)
+- **Cryptocurrency scam analysis** including XRP Ledger native support
+- **Free, accessible entry point** designed for seniors and non-technical users who won't purchase a full security suite
+
+TrustChekr fills a gap between enterprise-grade fraud tools (Sift, Feedzai — $200K+/year B2B) and expensive consumer security suites — providing accessible, country-specific scam protection for the underserved majority who need help but won't pay $15/month for it.
 
 ---
 
