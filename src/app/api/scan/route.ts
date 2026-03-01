@@ -12,6 +12,7 @@ import { analyzeUrlFeatures } from "@/lib/training/urlFeatures";
 import { scorePhishingEmail } from "@/lib/training/phishingEmailDetector";
 import { analyzeWithAI } from "@/lib/google/scamAnalysis";
 import { matchScamPattern } from "@/lib/phone/scamPatterns";
+import { verifyMessageClaims } from "@/lib/google/knowledgeGraph";
 
 export async function POST(req: NextRequest) {
   try {
@@ -106,6 +107,19 @@ export async function POST(req: NextRequest) {
           }
         } catch { /* skip invalid URLs */ }
       }
+
+      // Verify company claims via Google Knowledge Graph (3s timeout, non-blocking)
+      try {
+        const claimCheck = await Promise.race([
+          verifyMessageClaims(cleaned),
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), 3000)),
+        ]);
+        if (claimCheck && claimCheck.signals.length > 0) {
+          for (const s of claimCheck.signals) {
+            signals.push({ text: s, weight: claimCheck.weight });
+          }
+        }
+      } catch { /* Knowledge Graph is optional enrichment */ }
     }
 
     // 2. Run OSINT based on input type
