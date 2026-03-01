@@ -57,22 +57,14 @@ export default function AcademyPage() {
 
       {/* Welcome section */}
       <div className="p-5 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
-        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>Welcome</h2>
-        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
-          <strong>What:</strong> Free, bite-sized lessons on recognizing scams — from fake CRA calls to romance fraud to crypto tricks.
-        </p>
-        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
-          <strong>Who it&apos;s for:</strong> Everyone. We built this for seniors, parents, and teens — but scammers don&apos;t discriminate, and neither should safety education.
-        </p>
-        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
-          <strong>Why:</strong> Because knowing what a scam looks like <em>before</em> you see one is the single best way to protect yourself.
-          You wouldn&apos;t swim without learning to float first.
-        </p>
-        <p className="text-sm mb-3" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
-          <strong>How it works:</strong> Pick a module, read through real examples, test yourself with a quick quiz. 5–10 minutes each. No sign-up, no tracking, no grades — just knowledge you can actually use.
-        </p>
-        <p className="text-sm" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.6 }}>
-          <strong>When &amp; where:</strong> Right here, right now, on any device. Share it with someone you care about.
+        <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--tc-text-main)' }}>Welcome — we&apos;re glad you&apos;re here</h2>
+        <p className="text-sm" style={{ color: 'var(--tc-text-muted)', lineHeight: 1.7 }}>
+          The fact that you clicked on this page means you care about protecting yourself or someone you love — and that already puts you ahead.
+          These lessons are short, free, and written in plain language. No tech jargon, no tests you can fail, no sign-ups. Just real examples of real scams,
+          so you can spot them before they spot you. We built this for grandparents getting scary phone calls, for parents worried about their kids online,
+          and for teenagers who think it could never happen to them (it can, and it does). Take five minutes with any module that catches your eye.
+          And when you&apos;re done? Send it to someone you care about. That&apos;s the best thing you can do — because the people who fall for scams aren&apos;t
+          careless or foolish. They&apos;re just the ones nobody warned in time.
         </p>
       </div>
 
