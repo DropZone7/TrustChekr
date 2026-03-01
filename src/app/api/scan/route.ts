@@ -13,6 +13,7 @@ import { scorePhishingEmail } from "@/lib/training/phishingEmailDetector";
 import { analyzeWithAI } from "@/lib/google/scamAnalysis";
 import { matchScamPattern } from "@/lib/phone/scamPatterns";
 import { verifyMessageClaims } from "@/lib/google/knowledgeGraph";
+import { calculateTrustScore, type PositiveSignalContext } from "@/lib/trustScore";
 
 export async function POST(req: NextRequest) {
   try {
@@ -135,6 +136,18 @@ export async function POST(req: NextRequest) {
         if (osint.virusTotal?.signals) signals.push(...osint.virusTotal.signals);
         if (osint.phishTank?.signals) signals.push(...osint.phishTank.signals);
         if (osint.urlhaus?.signals) signals.push(...osint.urlhaus.signals);
+        // Social media presence (module 6)
+        if (osint.socialPresence?.signals) {
+          for (const sig of osint.socialPresence.signals) {
+            signals.push(sig);
+          }
+        }
+        // Tranco rank (module 7)
+        if (osint.tranco?.signals) {
+          for (const sig of osint.tranco.signals) {
+            signals.push(sig);
+          }
+        }
       } catch { /* OSINT is enrichment — never break scan */ }
     }
 
@@ -276,6 +289,17 @@ export async function POST(req: NextRequest) {
       logAudit('scan', { type: patternResult.inputType, riskLevel, overall_risk_label: unified?.overall_risk_label }, hashIp(clientIp));
     } catch { /* never break scan for audit */ }
 
+    // ── Trust Score (0-100) ─────────────────────────────────────
+    const trustScoreContext: PositiveSignalContext = {
+      domainAgeYears: osintResults?.domain?.domainAgeDays != null
+        ? osintResults.domain.domainAgeDays / 365
+        : null,
+      isBrandWhitelisted: patternResult.riskLevel === 'safe' && riskSignals.length === 0,
+      sslValid: osintResults?.safeBrowsing ? !osintResults.safeBrowsing.flagged : undefined,
+      isKnownRegistrar: false,
+    };
+    const trustScore = calculateTrustScore(dedupedSignals, type, trustScoreContext);
+
     return NextResponse.json({
       inputType: patternResult.inputType,
       inputValue: patternResult.inputValue,
@@ -304,6 +328,8 @@ export async function POST(req: NextRequest) {
         overall_risk_label: unified.overall_risk_label,
       } : {}),
       ...(aiAnalysis?.available ? { ai_analysis: aiAnalysis } : {}),
+      // Trust Score (0-100)
+      trustScore,
     });
   } catch (err: any) {
     console.error('[SCAN API ERROR]', err?.message, err?.stack?.split('\n').slice(0, 5).join('\n'));
