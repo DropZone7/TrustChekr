@@ -1,9 +1,113 @@
-import type { ScamCategory } from './types';
+import type { ScamCategory, Country } from './types';
 
 /**
- * Maps detected scam categories to Canadian-specific guidance.
- * This is what makes TrustChekr uniquely valuable — no competitor does this.
+ * Maps detected scam categories to country-specific guidance.
+ * Canada + US + Mexico (future). This is TrustChekr's moat.
  */
+
+interface CountryGuidance {
+  context: string[];
+  actions: string[];
+}
+
+// ── US-Specific Guidance ─────────────────────────────────────
+
+const US_GUIDANCE: Partial<Record<ScamCategory, CountryGuidance>> = {
+  IRS_IMPERSONATION: {
+    context: [
+      'The real IRS will never threaten arrest, demand gift cards, or call without sending a written notice first.',
+      'The IRS initiates most contact through regular mail delivered by the USPS.',
+      'The IRS will never demand immediate payment by wire transfer, gift card, or cryptocurrency.',
+      'IRS impersonation is consistently a top-5 scam reported to the FTC, costing Americans hundreds of millions yearly.',
+      'Your Social Security number cannot be "suspended" — anyone who says it can is a scammer.',
+    ],
+    actions: [
+      'Hang up immediately — do not press any buttons or call back the number they gave you.',
+      'Check your IRS account at irs.gov/account to verify any balance or notice.',
+      'Call the real IRS at 1-800-829-1040 if you want to confirm your tax status.',
+      'Report to the Treasury Inspector General at 1-800-366-4484.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'If someone claimed your SSN is suspended, report to the SSA Inspector General at oig.ssa.gov.',
+    ],
+  },
+  BANK_IMPERSONATION: {
+    context: [
+      'Your bank will never ask for your password, PIN, or one-time code by phone, text, or email.',
+      'Zelle scams cost Americans an estimated $400M in 2023 — the NY Attorney General filed a $1B lawsuit in 2025.',
+      'Zelle transfers are instant and irreversible — once sent, your bank may not be able to recover the funds.',
+      'The FDIC insures deposits — they will never contact you claiming your deposits are "at risk."',
+    ],
+    actions: [
+      'Hang up and call your bank using the number on the back of your card.',
+      'Never click links in texts claiming to be from your bank — open the banking app directly.',
+      'If you sent money via Zelle to a scammer, contact your bank immediately — some are now required to reimburse fraud.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'File a complaint with the CFPB at consumerfinance.gov/complaint.',
+    ],
+  },
+  PIG_BUTCHERING: {
+    context: [
+      'This pattern matches romance-investment fraud — the FBI calls it "pig butchering."',
+      'The FBI IC3 reported $5.8B in pig butchering losses in 2024 — average loss is $170,000 per victim.',
+      'The "trading platform" showing your profits is fake — the balance was never real.',
+    ],
+    actions: [
+      'Stop all contact with this person immediately — do not send any more money.',
+      'Report to the FBI IC3 at ic3.gov.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'Contact your bank or exchange to report the receiving wallet or account.',
+    ],
+  },
+  TECH_SUPPORT: {
+    context: [
+      'Microsoft, Apple, and Google will never call you about a virus on your computer.',
+      'The FTC reported tech support scams as a top-5 fraud category, with billions in losses.',
+    ],
+    actions: [
+      'Close the browser tab or hang up the phone immediately.',
+      'If you gave remote access: disconnect from the internet, change all passwords from a different device, call your bank.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+    ],
+  },
+  CRYPTO_INVESTMENT: {
+    context: [
+      'No legitimate investment can guarantee returns. If it says "guaranteed," it is a scam.',
+      'The IC3 reported $9.3B in cryptocurrency fraud losses in 2024, up 66% from 2023.',
+      'Check any platform with the SEC at sec.gov/cgi-bin/browse-edgar or FINRA BrokerCheck.',
+    ],
+    actions: [
+      'Verify any platform with the SEC or FINRA before sending money.',
+      'Report to the FBI IC3 at ic3.gov.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'Contact your exchange to report the receiving wallet.',
+    ],
+  },
+  RENTAL_SCAM: {
+    context: [
+      'The FTC received over 100,000 rental and real estate scam reports in 2024.',
+      'Scammers copy real listings from Zillow, Apartments.com, and Craigslist at below-market prices.',
+    ],
+    actions: [
+      'Never send a deposit via wire transfer, Zelle, or Venmo before viewing the property in person.',
+      'Verify ownership through your county property records.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'Report to your state Attorney General.',
+    ],
+  },
+  GENERIC_PHISHING: {
+    context: [
+      'Americans lost $12.5B to fraud in 2024 according to the FTC — the highest ever recorded.',
+      'AI-written phishing emails now have perfect grammar. "Check for typos" is no longer reliable advice.',
+    ],
+    actions: [
+      'Do not click any links or scan QR codes from unexpected messages.',
+      'Report to the FTC at reportfraud.ftc.gov.',
+      'Report phishing emails to the Anti-Phishing Working Group at reportphishing@apwg.org.',
+    ],
+  },
+};
+
+// ── Canadian Guidance ────────────────────────────────────────
 
 interface CanadianGuidance {
   context: string[];
@@ -11,6 +115,9 @@ interface CanadianGuidance {
 }
 
 const GUIDANCE: Record<ScamCategory, CanadianGuidance> = {
+  // US categories get empty defaults in the CA map (handled by US_GUIDANCE)
+  IRS_IMPERSONATION: { context: [], actions: [] },
+  SAT_IMPERSONATION: { context: [], actions: [] },
   CRA_IMPERSONATION: {
     context: [
       'The real CRA will never threaten arrest, demand gift cards, or ask for payment by Bitcoin ATM.',
@@ -133,18 +240,30 @@ const GUIDANCE: Record<ScamCategory, CanadianGuidance> = {
 };
 
 /**
- * Get Canadian context and recommended actions for detected scam categories.
+ * Get country-specific context and recommended actions for detected scam categories.
+ * Defaults to Canada. Pass country code to get US or MX guidance.
  */
-export function getCanadianGuidance(
+export function getCountryGuidance(
   categories: ScamCategory[],
+  country: Country = 'CA',
 ): { context: string[]; actions: string[] } {
   const contextSet = new Set<string>();
   const actionSet = new Set<string>();
 
-  // Deduplicate across categories
   for (const cat of categories) {
+    // Try country-specific guidance first
+    if (country === 'US') {
+      const usG = US_GUIDANCE[cat];
+      if (usG) {
+        usG.context.forEach((c) => contextSet.add(c));
+        usG.actions.forEach((a) => actionSet.add(a));
+        continue; // US guidance found, skip CA fallback
+      }
+    }
+
+    // Fall back to Canadian guidance (or shared categories)
     const g = GUIDANCE[cat];
-    if (g) {
+    if (g && (g.context.length > 0 || g.actions.length > 0)) {
       g.context.forEach((c) => contextSet.add(c));
       g.actions.forEach((a) => actionSet.add(a));
     }
@@ -154,4 +273,11 @@ export function getCanadianGuidance(
     context: Array.from(contextSet),
     actions: Array.from(actionSet),
   };
+}
+
+// Backward compatibility
+export function getCanadianGuidance(
+  categories: ScamCategory[],
+): { context: string[]; actions: string[] } {
+  return getCountryGuidance(categories, 'CA');
 }

@@ -1,0 +1,92 @@
+{
+  "patterns": [
+    {
+      "id": "irs_arrest_warrant",
+      "pattern": "(internal revenue service|\\bIRS\\b).*warrant for your arrest",
+      "type": "regex",
+      "weight": 10,
+      "category": "IRS_IMPERSONATION",
+      "description": "Threatens arrest with a warrant — the IRS will never threaten arrest by phone."
+    },
+    {
+      "id": "irs_arrest_generic",
+      "pattern": "(local police|sheriff|federal agents?) (will|are) (coming|on the way|being sent|dispatched).*(tax|irs|owe)",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "Threatens to send police or federal agents for unpaid taxes."
+    },
+    {
+      "id": "irs_specific_amount",
+      "pattern": "you (owe|have an outstanding balance of) \\$?[0-9,.]+ to (the )?(internal revenue service|\\bIRS\\b)",
+      "type": "regex",
+      "weight": 8,
+      "category": "IRS_IMPERSONATION",
+      "description": "Claims you owe a specific amount to IRS — real IRS sends written notices first."
+    },
+    {
+      "id": "irs_pay_or_arrest",
+      "pattern": "you (must|need to) pay (immediately|today|within 24 hours).*(arrested|jail|deported|license (revoked|suspended))",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "Demands immediate payment under threat of arrest, deportation, or license revocation."
+    },
+    {
+      "id": "irs_gift_card_payment",
+      "pattern": "(gift cards?|itunes|apple cards?|google play|prepaid).*(pay|settle|clear) (your )?(tax|irs|federal) (debt|balance|bill)",
+      "type": "regex",
+      "weight": 10,
+      "category": "IRS_IMPERSONATION",
+      "description": "Demands IRS tax payment via gift cards — the IRS never accepts gift cards."
+    },
+    {
+      "id": "irs_wire_transfer",
+      "pattern": "(wire transfer|western union|moneygram).*(irs|tax|federal)",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "Demands IRS payment via wire transfer or money order."
+    },
+    {
+      "id": "irs_stimulus_refund",
+      "pattern": "(stimulus|economic impact|tax refund|recovery rebate).*(click|tap|claim|verify).*(link|here|now)",
+      "type": "regex",
+      "weight": 8,
+      "category": "IRS_IMPERSONATION",
+      "description": "Phishing using stimulus check or tax refund as pretext."
+    },
+    {
+      "id": "irs_ssn_request",
+      "pattern": "(provide|confirm|verify) your (social security number|\\bSSN\\b|\\bSSA\\b)",
+      "type": "regex",
+      "weight": 8,
+      "category": "IRS_IMPERSONATION",
+      "description": "Requests your SSN — the IRS will never ask for your full SSN by phone or email."
+    },
+    {
+      "id": "irs_suspend_ssn",
+      "pattern": "your (social security number|\\bSSN\\b) (has been|will be) (suspended|compromised|used in a crime)",
+      "type": "regex",
+      "weight": 10,
+      "category": "IRS_IMPERSONATION",
+      "description": "Claims your SSN has been suspended — Social Security numbers cannot be suspended."
+    },
+    {
+      "id": "irs_back_taxes",
+      "pattern": "(back taxes|tax lien|tax levy|federal tax).*(immediate|urgent|today|now).*(payment|action)",
+      "type": "regex",
+      "weight": 8,
+      "category": "IRS_IMPERSONATION",
+      "description": "Urgent demand about back taxes or tax liens — real IRS communicates by mail."
+    },
+    {
+      "id": "ssa_impersonation",
+      "pattern": "(social security administration|\\bSSA\\b).*(benefits? (suspended|terminated|reduced)|account (locked|frozen))",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "SSA impersonation — claims benefits are suspended or account is frozen."
+    }
+  ]
+}

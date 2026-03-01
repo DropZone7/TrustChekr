@@ -1,0 +1,44 @@
+{
+  "scripts": [
+    {
+      "id": "script_irs_arrest_pay",
+      "category": "IRS_IMPERSONATION",
+      "weight": 10,
+      "description": "Classic IRS arrest-then-pay phone scam.",
+      "steps": [
+        "Call victim claiming to be IRS agent or officer.",
+        "State that victim owes back taxes and a warrant has been issued.",
+        "Threaten arrest, deportation, or driver's license revocation.",
+        "Demand immediate payment via gift cards, wire transfer, or Bitcoin.",
+        "May spoof caller ID to show IRS or local police number.",
+        "Tell victim not to contact their tax preparer or attorney."
+      ]
+    },
+    {
+      "id": "script_ssa_benefits_scam",
+      "category": "IRS_IMPERSONATION",
+      "weight": 9,
+      "description": "Social Security benefits suspension scam.",
+      "steps": [
+        "Call victim claiming to be from Social Security Administration.",
+        "Claim SSN has been used in a crime or is being suspended.",
+        "Ask victim to confirm SSN to 'reactivate' it.",
+        "Demand payment for 'processing fee' or 'security deposit'.",
+        "Threaten loss of benefits if victim doesn't comply immediately."
+      ]
+    },
+    {
+      "id": "script_zelle_accidental_transfer",
+      "category": "BANK_IMPERSONATION",
+      "weight": 8,
+      "description": "Zelle accidental transfer refund scam.",
+      "steps": [
+        "Scammer sends victim a Zelle payment (often from stolen account).",
+        "Contact victim claiming the payment was accidental.",
+        "Ask victim to send the money back via a new Zelle transfer.",
+        "Original payment gets reversed by the bank as fraudulent.",
+        "Victim loses the money they sent back — it's gone."
+      ]
+    }
+  ]
+}

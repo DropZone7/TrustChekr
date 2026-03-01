@@ -1,0 +1,128 @@
+id,text,category,channel,risk_level,source,triggering_rule
+ca_0,This is the Canada Revenue Agency. A warrant for your arrest has been issued due to unpaid taxes. Call us immediately at 1-800-555-1234.,cra_impersonation,phone,critical,synthetic_canadian,cra_arrest_warrant
+ca_1,CRA URGENT: We have issued a warrant for your arrest. You must call back within 2 hours or the RCMP will be dispatched to your residence.,cra_impersonation,phone,critical,synthetic_canadian,cra_arrest_warrant
+ca_2,We have issued an arrest warrant for you due to tax fraud. Contact our office immediately to resolve this matter.,cra_impersonation,sms,critical,synthetic_canadian,cra_arrest_warrant_generic
+ca_3,We have an arrest warrant in your name. Failure to respond will result in immediate legal action.,cra_impersonation,sms,critical,synthetic_canadian,cra_arrest_warrant_generic
+ca_4,"You owe $4,327.89 to the Canada Revenue Agency. This balance must be settled today or legal proceedings will begin.",cra_impersonation,sms,critical,synthetic_canadian,cra_specific_amount_owed
+ca_5,"Our records show you have an outstanding balance of $2,150.00 to the CRA. Please call to arrange payment.",cra_impersonation,phone,critical,synthetic_canadian,cra_specific_amount_owed
+ca_6,You must pay immediately or you will be arrested. The police are standing by. Call now.,cra_impersonation,phone,critical,synthetic_canadian,cra_pay_or_arrest
+ca_7,You need to pay within 24 hours otherwise we will proceed with arrest and deportation.,cra_impersonation,sms,critical,synthetic_canadian,cra_pay_or_arrest
+ca_8,Purchase iTunes gift cards to pay and settle your CRA tax debt. This is the fastest way to resolve your case.,cra_impersonation,sms,critical,synthetic_canadian,cra_gift_card_payment
+ca_9,Buy Apple cards and read us the codes to clear your tax debt with the CRA immediately.,cra_impersonation,sms,critical,synthetic_canadian,cra_gift_card_payment
+ca_10,"Please pay via Bitcoin to settle your CRA tax balance. Go to the nearest Bitcoin ATM and deposit $3,000.",cra_impersonation,sms,critical,synthetic_canadian,cra_crypto_payment
+ca_11,Send crypto to the following wallet to pay your tax debt to the CRA: bc1q...,cra_impersonation,sms,critical,synthetic_canadian,cra_crypto_payment
+ca_12,Go to a Bitcoin ATM near you and deposit the amount owed. This is the only accepted payment method.,cra_impersonation,sms,critical,synthetic_canadian,cra_bitcoin_atm
+ca_13,Visit the nearest crypto ATM and follow the instructions we text you.,cra_impersonation,sms,critical,synthetic_canadian,cra_bitcoin_atm
+ca_14,You are eligible for a Climate Action Incentive payment of $467.50. Click the link to claim: bit.ly/cra-cai,cra_impersonation,sms,critical,synthetic_canadian,cra_climate_action
+ca_15,Your CAI payment is ready. Verify your banking info to receive your climate action refund.,cra_impersonation,sms,critical,synthetic_canadian,cra_climate_action
+ca_16,You have a refund of $384.50 waiting from the CRA. Click the link below to claim it now.,cra_impersonation,sms,critical,synthetic_canadian,cra_refund_link
+ca_17,CRA Notice: You have a refund of $612.00 waiting. Tap the link to deposit it to your bank account.,cra_impersonation,sms,critical,synthetic_canadian,cra_refund_link
+ca_18,Your GST/HST refund is available. Click here to verify your identity and receive your payment.,cra_impersonation,sms,critical,synthetic_canadian,cra_gst_hst_refund
+ca_19,Tax refund available: Your GST credit has been recalculated. Claim your refund now.,cra_impersonation,sms,critical,synthetic_canadian,cra_gst_hst_refund
+ca_20,RBC Alert: Suspicious activity detected on your account ending in 4532. Click here to verify: rbc-secure.xyz,bank_impersonation,sms,high,synthetic_canadian,bank_suspicious_activity
+ca_21,TD Canada Trust: We noticed suspicious transaction on your debit card. Please log in to verify.,bank_impersonation,sms,high,synthetic_canadian,bank_suspicious_activity
+ca_22,Scotiabank Security: Suspicious activity on your account. Verify immediately at scotiabank-verify.com,bank_impersonation,sms,high,synthetic_canadian,bank_suspicious_activity
+ca_23,Your account has been locked due to unusual activity. Please verify your identity to restore access.,bank_impersonation,sms,high,synthetic_canadian,bank_account_locked
+ca_24,ALERT: Account suspended due to suspicious activity. Click here to unlock.,bank_impersonation,sms,high,synthetic_canadian,bank_account_locked
+ca_25,Please verify your account by clicking the link below. Failure to verify within 24 hours will result in account closure.,bank_impersonation,sms,high,synthetic_canadian,bank_verify_via_link
+ca_26,Verify your identity by tapping the link to keep your account active.,bank_impersonation,sms,high,synthetic_canadian,bank_verify_via_link
+ca_27,"For security purposes, please share the verification code we just sent you via text.",bank_impersonation,sms,high,synthetic_canadian,bank_share_otp
+ca_28,Please share the one-time code we just sent you to complete the verification process.,bank_impersonation,sms,high,synthetic_canadian,bank_share_otp
+ca_29,"To secure your account, please complete this transaction by transferring $500 to the safety account.",bank_impersonation,sms,high,synthetic_canadian,bank_secure_transaction
+ca_30,"To protect your account, please complete this transaction within the next hour.",bank_impersonation,sms,high,synthetic_canadian,bank_secure_transaction
+ca_31,RBC Online Banking: Please verify and update your login credentials at rbc-login-secure.com,bank_impersonation,sms,high,synthetic_canadian,bank_rbc_phishing
+ca_32,RBC security update: You must secure your login information. Click here to update.,bank_impersonation,sms,high,synthetic_canadian,bank_rbc_phishing
+ca_33,TD Security Alert: Unusual login detected. Verify your TD account immediately.,bank_impersonation,sms,high,synthetic_canadian,bank_td_phishing
+ca_34,TD: Security alert for your account. Verify your TD account to prevent suspension.,bank_impersonation,sms,high,synthetic_canadian,bank_td_phishing
+ca_35,You have received an Interac e-Transfer of $250.00 from John Smith. Click here to deposit: etransfer-deposit.xyz,interac_phishing,sms,high,synthetic_canadian,interac_fake_deposit_link
+ca_36,Notification: You have received an Interac e-Transfer. Click below to deposit the funds to your account.,interac_phishing,sms,high,synthetic_canadian,interac_fake_deposit_link
+ca_37,You have received an Interac e-Transfer of $467.00 from the Canada Revenue Agency. Accept your refund here.,interac_phishing,sms,high,synthetic_canadian,interac_cra_etransfer
+ca_38,Interac e-Transfer notification: CRA has sent you $312.50. Click to deposit.,interac_phishing,sms,high,synthetic_canadian,interac_cra_etransfer
+ca_39,"You have received $1,200.00 from RBC via Interac. Click to accept the deposit.",interac_phishing,sms,high,synthetic_canadian,interac_bank_deposit_lure
+ca_40,You have received $500 from TD via Interac e-Transfer. Accept now.,interac_phishing,sms,high,synthetic_canadian,interac_bank_deposit_lure
+ca_41,Your Interac e-Transfer has expired. Click here to re-claim your funds before they are returned.,interac_phishing,sms,high,synthetic_canadian,interac_expired_reclaim
+ca_42,Notice: Your Interac e-Transfer has failed. Click here to re-claim the funds.,interac_phishing,sms,high,synthetic_canadian,interac_expired_reclaim
+ca_43,"Hey! Oh sorry, wrong number. I was trying to reach my friend Jessica. How are you though?",pig_butchering,sms,high,synthetic_canadian,pig_wrong_number
+ca_44,"Oops, sorry, I must have the wrong number. But since we're here, how's your day going?",pig_butchering,sms,high,synthetic_canadian,pig_wrong_number
+ca_45,You seem really nice! Can we be friends? I don't know many people in this city.,pig_butchering,sms,high,synthetic_canadian,pig_be_friends
+ca_46,You seem so kind and interesting. Can we be friends? I'd love to chat more.,pig_butchering,sms,high,synthetic_canadian,pig_be_friends
+ca_47,I work in crypto trading and have been very successful lately. I can show you how!,pig_butchering,sms,high,synthetic_canadian,pig_crypto_expert
+ca_48,I do forex trading full time and make great returns. Want me to teach you?,pig_butchering,sms,high,synthetic_canadian,pig_crypto_expert
+ca_49,I have a special strategy for crypto that guarantees profits. Let me show you.,pig_butchering,sms,high,synthetic_canadian,pig_secret_strategy
+ca_50,My uncle has insider information for Bitcoin trading. I can share it with you.,pig_butchering,sms,high,synthetic_canadian,pig_secret_strategy
+ca_51,I can help you earn 15% per day with no risk at all. Just start with $500.,pig_butchering,sms,high,synthetic_canadian,pig_guaranteed_returns
+ca_52,I can help you make 30% per month with no risk. It's completely safe.,pig_butchering,sms,high,synthetic_canadian,pig_guaranteed_returns
+ca_53,Download this app called Binancc to start trading. It's the best platform.,pig_butchering,phone,high,synthetic_canadian,pig_fake_app
+ca_54,Download this app USDTPRO to begin — it's where I do all my trades.,pig_butchering,sms,high,synthetic_canadian,pig_fake_app
+ca_55,"You need to pay a service charge of $2,000 before you can withdraw your profits.",pig_butchering,sms,high,synthetic_canadian,pig_withdrawal_fee
+ca_56,"There's a tax you need to pay before you can withdraw. It's just $1,500.",pig_butchering,sms,high,synthetic_canadian,pig_withdrawal_fee
+ca_57,ALERT: This is Microsoft Support. Your computer has been compromised. Call 1-888-555-0199 immediately.,tech_support,phone,medium,synthetic_canadian,tech_brand_support
+ca_58,Apple Support: Your iCloud account has been breached. Contact our team now.,tech_support,sms,medium,synthetic_canadian,tech_brand_support
+ca_59,WARNING: Your computer is infected by a virus! Do not restart. Call support immediately.,tech_support,phone,medium,synthetic_canadian,tech_virus_infected
+ca_60,CRITICAL ALERT: Your computer is at risk due to a trojan virus. Call now for help.,tech_support,phone,medium,synthetic_canadian,tech_virus_infected
+ca_61,Your Windows license has expired. Call the toll-free number below for immediate support: 1-888-555-0123,tech_support,phone,medium,synthetic_canadian,tech_call_toll_free
+ca_62,Security breach detected. Call the toll-free number below for urgent support.,tech_support,phone,medium,synthetic_canadian,tech_call_toll_free
+ca_63,Our technician will fix your computer. Please download AnyDesk so we can connect remotely.,tech_support,sms,medium,synthetic_canadian,tech_remote_access
+ca_64,"To resolve the issue, download TeamViewer and give us the access code.",tech_support,sms,medium,synthetic_canadian,tech_remote_access
+ca_65,"We will refund $399.99 to your bank account, but we accidentally sent too much. Please return the difference via gift card.",tech_support,sms,medium,synthetic_canadian,tech_refund_overpayment
+ca_66,We will refund $250.00 to your card. Unfortunately we sent extra money — please wire back the overpayment.,tech_support,sms,medium,synthetic_canadian,tech_refund_overpayment
+ca_67,"Beautiful 2BR apartment in downtown Toronto, $850/month, all utilities included. Available immediately!",rental_scam,sms,medium,synthetic_canadian,rental_too_good_price
+ca_68,"Spacious condo near Yonge & Bloor, $900/month all utilities included. DM for details.",rental_scam,sms,medium,synthetic_canadian,rental_too_good_price
+ca_69,Thank you for your interest. I am currently overseas for work and cannot show the apartment in person.,rental_scam,sms,medium,synthetic_canadian,rental_overseas_landlord
+ca_70,"Hi, I am currently working abroad so I can't meet you to show the place, but I can send more photos.",rental_scam,sms,medium,synthetic_canadian,rental_overseas_landlord
+ca_71,"Unfortunately I cannot show you the place before you send the deposit. Once I receive it, I'll courier the keys.",rental_scam,sms,medium,synthetic_canadian,rental_deposit_before_viewing
+ca_72,You'll need to pay first and last before viewing. I cannot show you the place before you pay the deposit.,rental_scam,sms,medium,synthetic_canadian,rental_deposit_before_viewing
+ca_73,Please send first and last month's rent via e-Transfer to secure the unit. I have other interested parties.,rental_scam,sms,medium,synthetic_canadian,rental_etransfer_deposit
+ca_74,"Please send a deposit of $1,700 via Interac e-Transfer to hold the apartment.",rental_scam,sms,medium,synthetic_canadian,rental_etransfer_deposit
+ca_75,"Do not worry, I will mail you the keys via Canada Post once the deposit clears.",rental_scam,sms,medium,synthetic_canadian,rental_mail_keys
+ca_76,The keys will be with the cleaner downstairs. Just send the deposit and I'll arrange everything.,rental_scam,sms,medium,synthetic_canadian,rental_mail_keys
+ca_77,I saw your listing on Kijiji for the 1BR on Queen St. Is it still available?,rental_scam,sms,medium,synthetic_canadian,rental_platform_mention
+ca_78,Found this on Facebook Marketplace — is the room still up for rent?,rental_scam,sms,medium,synthetic_canadian,rental_platform_mention
+ca_79,Your Notice of Assessment for the 2025 tax year is now available in My Account at canada.ca/my-cra-account.,legitimate,email,safe,synthetic_canadian,
+ca_80,CRA: Your 2025 income tax return has been received and is being processed.,legitimate,email,safe,synthetic_canadian,
+ca_81,"Your RRSP deduction limit for 2026 is $29,210. View details in My Account.",legitimate,email,safe,synthetic_canadian,
+ca_82,CRA: A new T4 slip has been added to your account for the 2025 tax year.,legitimate,email,safe,synthetic_canadian,
+ca_83,"Reminder: The deadline to file your 2025 income tax return is April 30, 2026.",legitimate,email,safe,synthetic_canadian,
+ca_84,Your GST/HST credit payment of $125.50 has been deposited to your bank account.,legitimate,sms,safe,synthetic_canadian,
+ca_85,CRA: Your direct deposit information has been updated successfully.,legitimate,email,safe,synthetic_canadian,
+ca_86,Your Canada Child Benefit payment of $583.00 has been issued.,legitimate,email,safe,synthetic_canadian,
+ca_87,RBC Alert: A purchase of $42.50 was made on your Visa ending in 1234 at Shoppers Drug Mart.,legitimate,sms,safe,synthetic_canadian,
+ca_88,TD: Your chequing account balance is below $100. Current balance: $87.32.,legitimate,sms,safe,synthetic_canadian,
+ca_89,"Scotiabank: Your mortgage payment of $1,450.00 has been processed.",legitimate,sms,safe,synthetic_canadian,
+ca_90,BMO: Your credit card statement is now available. Log in to the BMO app to view.,legitimate,email,safe,synthetic_canadian,
+ca_91,"CIBC: A new device was used to log into your online banking. If this wasn't you, call 1-800-465-2422.",legitimate,sms,safe,synthetic_canadian,
+ca_92,RBC: Your bill payment of $156.78 to Bell Canada has been processed.,legitimate,sms,safe,synthetic_canadian,
+ca_93,TD EasyWeb: You have a new secure message. Log in to TD app to read it.,legitimate,email,safe,synthetic_canadian,
+ca_94,"Scotiabank: Your GIC of $5,000 matures on March 15, 2026. Log in to renew or redeem.",legitimate,email,safe,synthetic_canadian,
+ca_95,INTERAC e-Transfer: Sarah Chen sent you $50.00. The money has been automatically deposited.,legitimate,sms,safe,synthetic_canadian,
+ca_96,INTERAC e-Transfer: Your request for $200.00 from Mike Johnson has been fulfilled.,legitimate,email,safe,synthetic_canadian,
+ca_97,INTERAC e-Transfer: You sent $75.00 to David Lee. Reference: Dinner last night.,legitimate,sms,safe,synthetic_canadian,
+ca_98,Your Interac e-Transfer to Jane Smith for $120.00 has been deposited.,legitimate,email,safe,synthetic_canadian,
+ca_99,INTERAC e-Transfer: Auto-deposit is now active for your email address.,legitimate,email,safe,synthetic_canadian,
+ca_100,"Microsoft: Your Microsoft 365 subscription renews on March 1, 2026 for $99.99 CAD.",legitimate,email,safe,synthetic_canadian,
+ca_101,Apple: Your iCloud storage is 90% full. Manage your storage at icloud.com.,legitimate,email,safe,synthetic_canadian,
+ca_102,Windows Update: Your device will restart tonight to install security updates.,legitimate,other,safe,synthetic_canadian,
+ca_103,Hi! I'm interested in the 1BR apartment on Queen St listed on Kijiji. When can I schedule a viewing?,legitimate,other,safe,synthetic_canadian,
+ca_104,Thanks for coming to see the apartment today. Let me know if you'd like to submit an application.,legitimate,other,safe,synthetic_canadian,
+ca_105,"Your rent payment of $1,800 for March has been received. Thank you!",legitimate,email,safe,synthetic_canadian,
+ca_106,Reminder: Building maintenance will be working on the HVAC system Tuesday from 9-5.,legitimate,email,safe,synthetic_canadian,
+ca_107,Amazon.ca: Your order #302-1234567-8901234 has shipped and will arrive by March 3.,legitimate,email,safe,synthetic_canadian,
+ca_108,Canada Post: A package is on its way! Track it at canadapost.ca/track,legitimate,sms,safe,synthetic_canadian,
+ca_109,Rogers: Your February bill of $89.50 is now available. Pay by March 15 to avoid late fees.,legitimate,sms,safe,synthetic_canadian,
+ca_110,Bell: Your data usage is at 80% of your 20GB plan. Manage your plan in the MyBell app.,legitimate,sms,safe,synthetic_canadian,
+ca_111,"Costco: Your Costco Executive membership renewal is coming up on April 1, 2026.",legitimate,email,safe,synthetic_canadian,
+ca_112,"Service Ontario: Your driver's licence expires on June 15, 2026. Renew online at ontario.ca.",legitimate,email,safe,synthetic_canadian,
+ca_113,"City of Toronto: Your property tax installment of $1,234.56 is due on March 1, 2026.",legitimate,email,safe,synthetic_canadian,
+ca_114,Hydro One: Your electricity bill for February is $142.30. View and pay at hydroone.com.,legitimate,email,safe,synthetic_canadian,
+ca_115,TTC: Service alert — Line 1 Yonge-University is experiencing delays due to signal problems.,legitimate,sms,safe,synthetic_canadian,
+ca_116,Your Presto card balance is low ($3.20). Reload at prestocard.ca or any fare machine.,legitimate,sms,safe,synthetic_canadian,
+ca_117,Uber: Your ride to Pearson Airport is confirmed for 6:30 AM tomorrow. Driver: Ahmed.,legitimate,sms,safe,synthetic_canadian,
+ca_118,Skip The Dishes: Your order from Thai Express is on its way! Estimated delivery: 35 min.,legitimate,sms,safe,synthetic_canadian,
+ca_119,LinkedIn: You appeared in 47 searches this week. See who's looking at your profile.,legitimate,email,safe,synthetic_canadian,
+ca_120,Indeed: 3 new jobs match your alert for 'Cybersecurity Analyst' in Toronto.,legitimate,email,safe,synthetic_canadian,
+ca_121,"Hey Alex, are we still on for coffee at 2pm? Meet at the usual spot?",legitimate,sms,safe,synthetic_canadian,
+ca_122,Mom: Don't forget dinner at Nonna's on Sunday at 5. Bring the wine!,legitimate,sms,safe,synthetic_canadian,
+ca_123,Reminder: Your dentist appointment is tomorrow at 10:30 AM at Dr. Patel's office.,legitimate,sms,safe,synthetic_canadian,
+ca_124,GoodLife Fitness: Your membership payment of $54.99 has been processed for March.,legitimate,email,safe,synthetic_canadian,
+ca_125,Netflix: New episodes of your show are now available. Start watching!,legitimate,email,safe,synthetic_canadian,
+ca_126,Spotify: Your Wrapped 2025 is here! See your top artists and songs.,legitimate,email,safe,synthetic_canadian,

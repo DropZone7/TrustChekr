@@ -1,0 +1,84 @@
+{
+  "patterns": [
+    {
+      "id": "us_bank_chase_phishing",
+      "pattern": "(chase|jpmorgan).*(verify|secure|update|confirm).*( login|account|password)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Chase/JPMorgan-branded phishing asking to verify or update login."
+    },
+    {
+      "id": "us_bank_bofa_phishing",
+      "pattern": "(bank of america|\\bbofa\\b).*(verify|secure|update|suspended|locked)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Bank of America-branded phishing."
+    },
+    {
+      "id": "us_bank_wells_fargo",
+      "pattern": "(wells fargo).*(verify|secure|update|suspicious|locked|alert)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Wells Fargo-branded phishing."
+    },
+    {
+      "id": "us_bank_citi",
+      "pattern": "(citibank|\\bciti\\b).*(verify|secure|update|suspended|alert)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Citibank-branded phishing."
+    },
+    {
+      "id": "us_bank_usbank",
+      "pattern": "(u\\.?s\\.? bank).*(verify|secure|update|locked|alert)",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "US Bank-branded phishing."
+    },
+    {
+      "id": "us_bank_capital_one",
+      "pattern": "(capital one).*(verify|secure|update|suspicious|locked)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Capital One-branded phishing."
+    },
+    {
+      "id": "us_zelle_scam",
+      "pattern": "(zelle).*(payment|transfer|deposit).*(verify|confirm|click|tap|link)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Zelle payment notification — Zelle doesn't send deposit links."
+    },
+    {
+      "id": "us_zelle_reversal",
+      "pattern": "(zelle|bank).*(accidentally|mistakenly) sent.*please (send|return|transfer) (it )?back",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Zelle accidental transfer scam — asks victim to return money that was never real."
+    },
+    {
+      "id": "us_venmo_scam",
+      "pattern": "(venmo).*(payment|request|deposit).*(verify|confirm|suspicious|click)",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Venmo notification phishing."
+    },
+    {
+      "id": "us_fdic_impersonation",
+      "pattern": "(fdic|federal deposit insurance).*(account|deposit).*(at risk|not insured|verify)",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "FDIC impersonation — claims deposits are at risk or uninsured."
+    }
+  ]
+}

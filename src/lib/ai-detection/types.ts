@@ -28,14 +28,22 @@ export interface ScamPattern {
 }
 
 export type ScamCategory =
+  // Canada-specific
   | 'CRA_IMPERSONATION'
-  | 'BANK_IMPERSONATION'
   | 'INTERAC_PHISHING'
+  // US-specific
+  | 'IRS_IMPERSONATION'
+  // Mexico-specific (future)
+  | 'SAT_IMPERSONATION'
+  // Shared across countries
+  | 'BANK_IMPERSONATION'
   | 'PIG_BUTCHERING'
   | 'TECH_SUPPORT'
   | 'CRYPTO_INVESTMENT'
   | 'RENTAL_SCAM'
   | 'GENERIC_PHISHING';
+
+export type Country = 'CA' | 'US' | 'MX' | 'ALL';
 
 // ── Domain Rule ──────────────────────────────────────────────
 

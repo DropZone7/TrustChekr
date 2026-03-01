@@ -17,6 +17,17 @@ const LEGITIMATE_DOMAINS: Record<string, { brand: string; category: ScamCategory
   'newton.co':        { brand: 'Newton', category: 'CRYPTO_INVESTMENT' },
   'shakepay.com':     { brand: 'Shakepay', category: 'CRYPTO_INVESTMENT' },
   'wealthsimple.com': { brand: 'Wealthsimple', category: 'CRYPTO_INVESTMENT' },
+  // US
+  'irs.gov':          { brand: 'IRS', category: 'IRS_IMPERSONATION' },
+  'ssa.gov':          { brand: 'Social Security', category: 'IRS_IMPERSONATION' },
+  'chase.com':        { brand: 'Chase', category: 'BANK_IMPERSONATION' },
+  'bankofamerica.com': { brand: 'Bank of America', category: 'BANK_IMPERSONATION' },
+  'wellsfargo.com':   { brand: 'Wells Fargo', category: 'BANK_IMPERSONATION' },
+  'citi.com':         { brand: 'Citibank', category: 'BANK_IMPERSONATION' },
+  'capitalone.com':   { brand: 'Capital One', category: 'BANK_IMPERSONATION' },
+  'usbank.com':       { brand: 'US Bank', category: 'BANK_IMPERSONATION' },
+  'zellepay.com':     { brand: 'Zelle', category: 'BANK_IMPERSONATION' },
+  'venmo.com':        { brand: 'Venmo', category: 'BANK_IMPERSONATION' },
 };
 
 /**

@@ -1,0 +1,60 @@
+{
+  "domains": [
+    {
+      "id": "domain_irs_fake",
+      "pattern": "(irs|internalrevenue|taxrefund)[-_.]?(secure|refund|payment|verify|login|gov)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "Fake IRS domain combining tax terms with secure/refund/login keywords."
+    },
+    {
+      "id": "domain_ssa_fake",
+      "pattern": "(ssa|socialsecurity)[-_.]?(secure|verify|benefits|login|gov)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "IRS_IMPERSONATION",
+      "description": "Fake Social Security Administration domain."
+    },
+    {
+      "id": "domain_chase_fake",
+      "pattern": "(chase|jpmorgan)[-_.]?(secure|login|verify|alert|banking)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Chase/JPMorgan domain."
+    },
+    {
+      "id": "domain_bofa_fake",
+      "pattern": "(bankofamerica|bofa)[-_.]?(secure|login|verify|alert)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Bank of America domain."
+    },
+    {
+      "id": "domain_wells_fake",
+      "pattern": "(wellsfargo|wells-fargo)[-_.]?(secure|login|verify|alert)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Wells Fargo domain."
+    },
+    {
+      "id": "domain_zelle_fake",
+      "pattern": "(zelle)[-_.]?(pay|secure|verify|transfer|deposit)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Zelle payment domain."
+    },
+    {
+      "id": "domain_venmo_fake",
+      "pattern": "(venmo)[-_.]?(secure|verify|payment|login)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Venmo domain."
+    }
+  ]
+}

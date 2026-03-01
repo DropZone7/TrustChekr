@@ -596,3 +596,34 @@
 - **Sites:** VirusTotal scan; WHOIS age <1 month = red flag
 - **Universal:** TrustChekr scan + CAFC report
 
+
+---
+
+## Test Data Sources (for Detection Engine Validation)
+
+### Phishing Email Corpora
+- Kaggle "Email Phishing Dataset" (Ethan Cratchley) — ~500K emails, CSV with subject/body/label
+- Kaggle "Phishing Email Dataset" (Naser Abdullah Alam) — Enron + Ling, subject/body/labels
+- Kaggle "Phishing and Legitimate Emails for ML" — 10K synthetic, balanced classes
+- HuggingFace ealvaradob/phishing-dataset — unified CSV: text + label (1=phish, 0=benign), includes SMS
+
+### Phishing URL + Domain/WHOIS
+- FIT/Brno "Phishing and Benign Domain Dataset" — 432K benign + 37K phishing, DNS/WHOIS/TLS/GeoIP
+- Zenodo domainradar-dib — 368K+461K benign, 164K phishing, 101K malware, full features per record
+
+### Canadian Scam Sources
+- CRA "Recognize a scam" page (canada.ca) — real vs fake CRA message examples
+- CRTC scam alerts — Canadian scam patterns documented
+- RCMP/CAFC case writeups — verbatim scam snippets
+
+### Blocklists
+- PhishTank full feed (CSV/XML/JSON) — verified phishing URLs + brand targets
+- OpenPhish community feed — active phishing URLs
+- URLhaus (abuse.ch) — malware/phishing URLs with metadata
+- Zenodo domainradar phishing.json + malware.json — 265K domains
+
+### Legitimate-but-Suspicious (False Positive Testing)
+- CRA official notification examples (contrast real vs scam)
+- Big 5 bank security pages (real alert formats)
+- Interac official e-Transfer notification format
+- "Valid" class from labeled email datasets

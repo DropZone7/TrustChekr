@@ -6,53 +6,114 @@ import type {
   ScamPattern,
   ScamScript,
   DomainPattern,
+  Country,
 } from './types';
 import { matchTextPatterns } from './matchers/textMatcher';
 import { matchUrlPatterns } from './matchers/urlMatcher';
 import { matchScriptPatterns } from './matchers/scriptMatcher';
 import { applyChannelAnalysis } from './matchers/channelMatcher';
 import { computeTotalPenalty, mapScoreToAIRiskTier } from './scoring';
-import { getCanadianGuidance } from './canadianContext';
+import { getCountryGuidance } from './canadianContext';
 
 // ── Rule Loading ─────────────────────────────────────────────
 // Rules are loaded from JSON files at build time.
 // In production these could be fetched from a CMS or database.
 
-import craRules from './rules/cra.json';
-import bankRules from './rules/banks.json';
-import interacRules from './rules/interac.json';
-import cryptoRules from './rules/crypto.json';
-import techSupportRules from './rules/tech_support.json';
-import rentalRules from './rules/rental.json';
-import phishingRules from './rules/phishing.json';
-import domainRules from './rules/domains.json';
-import scriptRules from './rules/scripts.json';
+// ── Canada-specific rules ────────────────────────────────────
+import craRules from './rules/ca/cra.json';
+import caBankRules from './rules/ca/banks.json';
+import interacRules from './rules/ca/interac.json';
+import caDomainRules from './rules/ca/domains.json';
+import caScriptRules from './rules/ca/scripts.json';
+import caRentalRules from './rules/ca/rental.json';
+
+// ── US-specific rules ────────────────────────────────────────
+import irsRules from './rules/us/irs.json';
+import usBankRules from './rules/us/banks.json';
+import usDomainRules from './rules/us/domains.json';
+import usScriptRules from './rules/us/scripts.json';
+
+// ── Shared rules (all countries) ─────────────────────────────
+import cryptoRules from './rules/shared/crypto.json';
+import techSupportRules from './rules/shared/tech_support.json';
+import phishingRules from './rules/shared/phishing.json';
 
 /**
- * Combine all loaded rule sets into a single array.
+ * Get text patterns for a specific country (includes shared rules).
  */
-function getAllTextPatterns(): ScamPattern[] {
-  return [
-    ...craRules.patterns,
-    ...bankRules.patterns,
-    ...interacRules.patterns,
+function getTextPatterns(country: Country = 'ALL'): ScamPattern[] {
+  // Shared rules always included
+  const shared = [
     ...cryptoRules.patterns,
     ...techSupportRules.patterns,
-    ...rentalRules.patterns,
     ...phishingRules.patterns,
   ] as ScamPattern[];
+
+  const ca = [
+    ...craRules.patterns,
+    ...caBankRules.patterns,
+    ...interacRules.patterns,
+    ...caRentalRules.patterns,
+  ] as ScamPattern[];
+
+  const us = [
+    ...irsRules.patterns,
+    ...usBankRules.patterns,
+  ] as ScamPattern[];
+
+  switch (country) {
+    case 'CA': return [...shared, ...ca];
+    case 'US': return [...shared, ...us];
+    case 'MX': return [...shared]; // Future: add MX-specific rules
+    case 'ALL':
+    default: return [...shared, ...ca, ...us];
+  }
 }
 
-function getAllDomainPatterns(): DomainPattern[] {
-  return domainRules.domains as DomainPattern[];
+/**
+ * Get domain patterns for a specific country (includes shared).
+ */
+function getDomainPatterns(country: Country = 'ALL'): DomainPattern[] {
+  const ca = caDomainRules.domains as DomainPattern[];
+  const us = usDomainRules.domains as DomainPattern[];
+
+  switch (country) {
+    case 'CA': return ca;
+    case 'US': return us;
+    case 'MX': return []; // Future
+    case 'ALL':
+    default: return [...ca, ...us];
+  }
+}
+
+/**
+ * Get script templates for a specific country.
+ */
+function getScriptTemplates(country: Country = 'ALL'): ScamScript[] {
+  const ca = caScriptRules.scripts as ScamScript[];
+  const us = usScriptRules.scripts as ScamScript[];
+
+  switch (country) {
+    case 'CA': return ca;
+    case 'US': return us;
+    case 'MX': return []; // Future
+    case 'ALL':
+    default: return [...ca, ...us];
+  }
 }
 
 // ── Human-Readable Category Names ────────────────────────────
 
 const CATEGORY_LABELS: Record<ScamCategory, string> = {
+  // Canada
   CRA_IMPERSONATION: 'CRA Impersonation',
-  BANK_IMPERSONATION: 'Bank Impersonation',
   INTERAC_PHISHING: 'Interac e-Transfer Phishing',
+  // US
+  IRS_IMPERSONATION: 'IRS / SSA Impersonation',
+  // Mexico (future)
+  SAT_IMPERSONATION: 'SAT Impersonation',
+  // Shared
+  BANK_IMPERSONATION: 'Bank Impersonation',
   PIG_BUTCHERING: 'Romance / Pig Butchering Scam',
   TECH_SUPPORT: 'Tech Support Scam',
   CRYPTO_INVESTMENT: 'Crypto Investment Fraud',
@@ -71,12 +132,13 @@ const CATEGORY_LABELS: Record<ScamCategory, string> = {
 export async function analyzeForAIScam(
   input: AIScamAnalysisInput,
   currentTrustScore: number = 100,
+  country: Country = 'ALL',
 ): Promise<AIScamAnalysisResult> {
   const allSignals: MatchedSignal[] = [];
 
   // ── Step 1: Text pattern matching ────────────────────────
   if (input.text) {
-    const textSignals = matchTextPatterns(input.text, getAllTextPatterns());
+    const textSignals = matchTextPatterns(input.text, getTextPatterns(country));
     allSignals.push(...textSignals);
   }
 
@@ -84,7 +146,7 @@ export async function analyzeForAIScam(
   if (input.text) {
     const scriptSignals = matchScriptPatterns(
       input.text,
-      scriptRules.scripts as ScamScript[],
+      getScriptTemplates(country),
     );
     allSignals.push(...scriptSignals);
   }
@@ -94,7 +156,7 @@ export async function analyzeForAIScam(
     const urlSignals = matchUrlPatterns(
       input.url,
       input.osintSignals?.domainAge,
-      getAllDomainPatterns(),
+      getDomainPatterns(country),
     );
     allSignals.push(...urlSignals);
   }
@@ -125,8 +187,8 @@ export async function analyzeForAIScam(
     .slice(0, 5) // top 5 for user display
     .map((s) => s.description);
 
-  // ── Step 8: Canadian context + actions ───────────────────
-  const { context, actions } = getCanadianGuidance(categories);
+  // ── Step 8: Country-specific context + actions ────────────
+  const { context, actions } = getCountryGuidance(categories, country);
 
   return {
     aiRiskTier,

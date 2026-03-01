@@ -1,0 +1,7 @@
+id,domain,full_url,label,domain_age_days,category,source
+pt_0,rbc-secure-login.xyz,https://rbc-secure-login.xyz/verify,phishing,,banking,placeholder
+pt_1,td-alert-verify.com,https://td-alert-verify.com/auth,phishing,,banking,placeholder
+pt_2,interac-etransfer-deposit.ca,https://interac-etransfer-deposit.ca/claim,phishing,,banking,placeholder
+pt_3,cra-refund-claim.net,https://cra-refund-claim.net/refund,phishing,,government,placeholder
+pt_4,apple-id-verify.xyz,https://apple-id-verify.xyz/login,phishing,,tech,placeholder
+pt_5,microsoft-alert.support,https://microsoft-alert.support/fix,phishing,,tech,placeholder
