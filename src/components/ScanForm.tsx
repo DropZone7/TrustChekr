@@ -74,19 +74,17 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
             />
           )}
 
-          <div className="flex items-center justify-between">
-            <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>
-              We don&apos;t store what you paste. Pro tip: copy and paste — never click unknown links. That&apos;s our job.
-            </p>
-            <button
-              onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
-              disabled={!input.trim()}
-              className="px-6 py-2.5 rounded-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed tc-scan-btn"
-              style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
-            >
-              Check this
-            </button>
-          </div>
+          <button
+            onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
+            disabled={!input.trim()}
+            className="w-full py-3 rounded-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed tc-scan-btn"
+            style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
+          >
+            Check this
+          </button>
+          <p className="text-xs text-center" style={{ color: "var(--tc-text-muted)" }}>
+            We don&apos;t store what you paste. Copy and paste — never click unknown links. That&apos;s our job.
+          </p>
         </div>
       )}
 
