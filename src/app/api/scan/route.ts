@@ -14,6 +14,8 @@ import { analyzeWithAI } from "@/lib/google/scamAnalysis";
 import { matchScamPattern } from "@/lib/phone/scamPatterns";
 import { verifyMessageClaims } from "@/lib/google/knowledgeGraph";
 import { calculateTrustScore, type PositiveSignalContext } from "@/lib/trustScore";
+import { analyzeForAIScam } from "@/lib/ai-detection";
+import type { Channel } from "@/lib/ai-detection/types";
 
 export async function POST(req: NextRequest) {
   try {
@@ -309,6 +311,46 @@ export async function POST(req: NextRequest) {
     };
     const trustScore = calculateTrustScore(dedupedSignals, type, trustScoreContext);
 
+    // ── Round C: AI Scam Pattern Detection ──────────────────────
+    let aiScamResult: any = null;
+    try {
+      // Infer channel from input type
+      const channelMap: Record<string, Channel> = {
+        message: 'sms',
+        website: 'website',
+        other: 'other',
+      };
+      const channel = channelMap[type] ?? 'other';
+
+      // Extract URLs from message text for URL matching
+      const extractedUrl = type === 'website'
+        ? cleaned
+        : (cleaned.match(/https?:\/\/\S+/i)?.[0] ?? null);
+
+      const aiInput = {
+        url: extractedUrl,
+        text: type === 'message' ? cleaned : null,
+        channel,
+        osintSignals: osintResults ? {
+          domainAge: osintResults.domain?.domainAgeDays ?? null,
+          virusTotalScore: osintResults.virusTotal?.positives ?? null,
+          safeBrowsingFlags: osintResults.safeBrowsing?.flagged ? ['flagged'] : [],
+          phishTankMatch: osintResults.phishTank?.flagged ?? false,
+          urlhausMatch: osintResults.urlhaus?.flagged ?? false,
+          trancoRank: osintResults.tranco?.rank ?? null,
+        } : undefined,
+        patternSignals: {
+          cryptoDetected: patternResult.inputType === 'crypto',
+          romanceDetected: patternResult.whyBullets?.some((b: string) => /romance|dating|love/i.test(b)) ?? false,
+          urgencyScore: riskSignals.filter((s: any) => /urgent|immediately|now|today/i.test(s.text)).length * 10,
+        },
+      };
+
+      aiScamResult = await analyzeForAIScam(aiInput, trustScore.score);
+    } catch {
+      // AI scam detection is enrichment — never break the scan
+    }
+
     return NextResponse.json({
       inputType: patternResult.inputType,
       inputValue: patternResult.inputValue,
@@ -339,6 +381,8 @@ export async function POST(req: NextRequest) {
       ...(aiAnalysis?.available ? { ai_analysis: aiAnalysis } : {}),
       // Trust Score (0-100)
       trustScore,
+      // AI Scam Pattern Detection (Round C)
+      ...(aiScamResult ? { ai_scam_detection: aiScamResult } : {}),
     });
   } catch (err: any) {
     console.error('[SCAN API ERROR]', err?.message, err?.stack?.split('\n').slice(0, 5).join('\n'));
