@@ -1,0 +1,389 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1a1a1a; }
+h1 { color: #A40000; border-bottom: 2px solid #A40000; padding-bottom: 8px; }
+h2 { color: #333; margin-top: 2em; }
+h3 { color: #555; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+th { background: #f5f5f5; font-weight: 600; }
+tr:nth-child(even) { background: #fafafa; }
+strong { color: #A40000; }
+code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+ul, ol { padding-left: 1.5em; }
+li { margin-bottom: 0.3em; }
+em { color: #666; }
+</style>
+</head><body><h1>TrustChekr — Investor Summary</h1>
+<p><strong>March 1, 2026 | Prepared for Vancouver Pitch</strong></p>
+<hr />
+<h2>The Problem</h2>
+<p>Canadians reported <strong>$638 million</strong> in fraud losses in 2024 — and only <strong>5–10% of victims actually report</strong>. The real number is likely in the billions. There is no consumer-facing tool in Canada that lets regular people check if something is a scam before they lose money.</p>
+<p><strong>Source:</strong> Canadian Anti-Fraud Centre, 2024 Annual Report</p>
+<hr />
+<h2>The Solution</h2>
+<p><strong>TrustChekr</strong> — a free, privacy-first scam detection platform. Paste a suspicious text, URL, phone number, or email → get a plain-language risk assessment in seconds. No account needed. No data stored.</p>
+<p><strong>Live at:</strong> <a href="https://trustchekr.com">trustchekr.com</a></p>
+<hr />
+<h2>What We Built (in 3 weeks)</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Lines of code</strong></td>
+<td>21,800+</td>
+</tr>
+<tr>
+<td><strong>Pages &amp; flows</strong></td>
+<td>29 pages</td>
+</tr>
+<tr>
+<td><strong>Components</strong></td>
+<td>34 React components</td>
+</tr>
+<tr>
+<td><strong>Detection rules</strong></td>
+<td>138 patterns across 13 scam categories</td>
+</tr>
+<tr>
+<td><strong>OSINT modules</strong></td>
+<td>9 (RDAP, HIBP, VirusTotal, Google Safe Browsing, PhishTank, URLhaus, Etherscan, blockchain.info, XRPL)</td>
+</tr>
+<tr>
+<td><strong>Domain blocklist</strong></td>
+<td>49,762 known scam domains</td>
+</tr>
+<tr>
+<td><strong>Commits (last 48h)</strong></td>
+<td>119</td>
+</tr>
+<tr>
+<td><strong>Tech stack</strong></td>
+<td>Next.js 15, React 19, TypeScript, Tailwind CSS, Vercel</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Development Velocity (Last 48 Hours)</h2>
+<h3>🔴 Scam Radar — Live Threat Dashboard (NEW)</h3>
+<ul>
+<li>Real-time scam activity monitoring powered by X/Twitter data</li>
+<li>5 categories tracked: CRA/IRS, Bank Fraud, Crypto, Romance, AI Deepfakes</li>
+<li>Color-coded threat levels (low → moderate → high → critical)</li>
+<li>Trend indicators (rising/stable/falling)</li>
+<li>Auto-refreshes every 5 minutes from cached data</li>
+<li><strong>Nobody else has this.</strong> First consumer-facing live scam threat dashboard.</li>
+</ul>
+<h3>🤖 AI Chat Assistant (REDESIGNED)</h3>
+<ul>
+<li>Conversational scam checker — describe what happened in plain English</li>
+<li>Dark theme UI with branded logo watermark</li>
+<li>Risk level badges on responses (LOW / MEDIUM / HIGH)</li>
+<li>Suggestion prompts for common scenarios</li>
+<li>Available on web + Telegram (@TrustChekrbot)</li>
+</ul>
+<h3>🔍 Grok/xAI Integration (NEW)</h3>
+<ul>
+<li>Connected to xAI's x_search API for real-time social media intelligence</li>
+<li>Scans X/Twitter for emerging scam patterns every 6 hours</li>
+<li>Powers the Scam Radar with live data</li>
+<li>Invisible to users — appears as TrustChekr's own intelligence</li>
+</ul>
+<h3>📊 3 New Detection Categories (NEW)</h3>
+<ul>
+<li><strong>Job Scams</strong> — 7 rules (task deposit fraud, fake recruitment, WhatsApp/Telegram schemes)</li>
+<li><strong>Delivery/Parcel Scams</strong> — 6 rules (Canada Post, UPS, FedEx impersonation)</li>
+<li><strong>Toll Road Scams</strong> — 4 rules (407 ETR, EZPass, SunPass impersonation)</li>
+</ul>
+<h3>🌎 North America Coverage (EXPANDED)</h3>
+<ul>
+<li>Full Canada + US + Mexico detection engine</li>
+<li>Mexico: 14 patterns including virtual kidnapping detection</li>
+<li>XRPL native blockchain analysis — <strong>first consumer tool with this</strong></li>
+</ul>
+<h3>📝 Content &amp; Education</h3>
+<ul>
+<li>3 new long-form articles: IRS scams, Zelle/Venmo fraud, Immigration scams</li>
+<li>5 academy modules with new quiz scenarios</li>
+<li>Full de-AI content sweep — every page reads human, not generated</li>
+<li>Real founder story with sourced CAFC statistics</li>
+</ul>
+<h3>🎨 Professional Design Overhaul</h3>
+<ul>
+<li>Lucide SVG icon system (replaced all emoji icons)</li>
+<li>Plus Jakarta Sans + Inter font pairing</li>
+<li>Standardized design tokens (border-radius hierarchy, touch targets)</li>
+<li>Senior-friendly 5-tab navigation: Home · Chat · Learn · Tools · Support</li>
+<li>Dark mode fully working across all pages</li>
+<li>Micro-interactions on cards and buttons</li>
+</ul>
+<h3>📋 Business &amp; Regulatory</h3>
+<ul>
+<li>Honest competitive analysis (real competitor capabilities documented)</li>
+<li>CanExport SMEs application draft ($50K project, $25K grant)</li>
+<li>Regulatory compliance map (PIPEDA, CCPA, CASL, PHIPA)</li>
+<li>Valuation estimate and 90-day business plan</li>
+<li>Federal incorporation complete (17734344 Canada Inc.)</li>
+</ul>
+<hr />
+<h2>Complete Feature List</h2>
+<h3>Scan Engine</h3>
+<ul>
+<li>URL/domain risk analysis with RDAP lookups</li>
+<li>Phone number pattern detection (CRA, IRS, bank impersonation)</li>
+<li>Email/message text analysis (138 detection rules)</li>
+<li>Crypto wallet risk scoring (XRPL, Ethereum, Bitcoin)</li>
+<li>AI-generated text detection (Gemini 2.5 Flash)</li>
+<li>Romance scam classifier (multi-class ML model)</li>
+<li>Screenshot OCR scanner (in-browser, no upload)</li>
+<li>QR code scanner</li>
+<li>Document manipulation detector</li>
+<li>Email header forensic analyzer</li>
+<li>Reverse image search</li>
+<li>Domain age &amp; registration analysis</li>
+<li>Google Knowledge Graph entity verification</li>
+<li>Tranco ranking display (top 1M sites)</li>
+<li>49,762-domain blocklist</li>
+</ul>
+<h3>Intelligence</h3>
+<ul>
+<li><strong>Scam Radar</strong> — live threat dashboard (Grok/xAI powered)</li>
+<li>9 OSINT modules running in parallel</li>
+<li>Phishing keyword engine (80+ keywords from 5,100 labeled emails)</li>
+<li>Brand impersonation detection (40+ legitimate domains)</li>
+<li>Time-decay freshness scoring</li>
+</ul>
+<h3>Education</h3>
+<ul>
+<li><strong>Safety Academy</strong> — 8 modules with interactive quizzes</li>
+<li><strong>Learn Center</strong> — 10+ long-form articles with sourced statistics</li>
+<li><strong>Scam-Check SEO Pages</strong> — targeting high-volume search queries</li>
+<li>Grokipedia integration for real-time scam intelligence</li>
+</ul>
+<h3>User-Facing</h3>
+<ul>
+<li>AI chat assistant (web + Telegram)</li>
+<li>Scan history (local, no account needed)</li>
+<li>Shareable results with unique URLs</li>
+<li>Community scam reports</li>
+<li>Interactive North America scam heat map</li>
+<li>Newsletter signup for monthly alerts</li>
+<li>Embeddable widget for partners</li>
+<li>Browser extension (scaffold)</li>
+<li>PWA-ready (installable on mobile)</li>
+</ul>
+<h3>Business</h3>
+<ul>
+<li>Public API v1 with documentation</li>
+<li>Partner integration endpoints (webhook forwarding)</li>
+<li>Admin dashboard with feedback analytics</li>
+<li>Rate limiting and security hardening</li>
+<li>PIPEDA/CCPA compliant — no data stored</li>
+</ul>
+<hr />
+<h2>What Separates Us From Competitors</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>TrustChekr</th>
+<th>ScamAdviser</th>
+<th>Norton LifeLock</th>
+<th>Bitdefender Scamio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Free, no account</strong></td>
+<td>✅</td>
+<td>Partial</td>
+<td>❌ ($12-35/mo)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Live threat dashboard</strong></td>
+<td>✅ (FIRST)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Real-time X/social monitoring</strong></td>
+<td>✅ (FIRST)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>XRPL blockchain analysis</strong></td>
+<td>✅ (FIRST)</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Canada-specific (CRA, Interac)</strong></td>
+<td>✅</td>
+<td>Limited</td>
+<td>US-focused</td>
+<td>EU-focused</td>
+</tr>
+<tr>
+<td><strong>AI chat assistant</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Romance scam ML classifier</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Screenshot/QR/doc scanning</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>Limited</td>
+</tr>
+<tr>
+<td><strong>Privacy-first (no data stored)</strong></td>
+<td>✅</td>
+<td>Stores data</td>
+<td>Stores data</td>
+<td>Stores data</td>
+</tr>
+<tr>
+<td><strong>Open API for partners</strong></td>
+<td>✅</td>
+<td>Paid only</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Safety Academy + quizzes</strong></td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Embeddable widget</strong></td>
+<td>✅</td>
+<td>Paid</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Trilingual (EN/FR/ES ready)</strong></td>
+<td>✅</td>
+<td>Limited</td>
+<td>EN only</td>
+<td>Multi</td>
+</tr>
+</tbody>
+</table>
+<h3>Our Unique Advantages</h3>
+<ol>
+<li><strong>First live scam threat dashboard</strong> — no consumer tool shows real-time scam activity</li>
+<li><strong>First XRPL native analysis</strong> — as XRPL adoption grows, we're already there</li>
+<li><strong>Canada-first</strong> — ScamAdviser gets &lt;3% Canadian traffic. We own this market.</li>
+<li><strong>Privacy-first architecture</strong> — we never store scan data. In a post-Moffatt v Air Canada world, this matters.</li>
+<li><strong>Speed</strong> — 119 commits in 48 hours. We ship faster than funded teams.</li>
+<li><strong>AI-powered, human-built</strong> — real founder story, real mission, not another AI wrapper</li>
+</ol>
+<h3>What Competitors Have That We Don't (Yet)</h3>
+<ul>
+<li>Mobile app (ScamAdviser, Norton)</li>
+<li>$1M identity theft insurance (Norton)</li>
+<li>Call blocking (Norton, McAfee)</li>
+<li>Credit monitoring (Norton, Aura)</li>
+<li>Enterprise ML models (all majors)</li>
+<li>Established user base (ScamAdviser: 6.5M/mo, Norton: millions)</li>
+</ul>
+<hr />
+<h2>Revenue Model</h2>
+<ol>
+<li><strong>Freemium API</strong> — free tier for individuals, paid for businesses ($49-499/mo)</li>
+<li><strong>Credit union / library partnerships</strong> — white-label widget ($500-2,000/mo)</li>
+<li><strong>NordVPN affiliate</strong> — security product recommendations</li>
+<li><strong>Premium features</strong> — real-time alerts, API access, priority scanning</li>
+<li><strong>Enterprise</strong> — custom integrations, bulk scanning, compliance reporting</li>
+</ol>
+<p><strong>Target:</strong> $1M+ ARR within 18 months</p>
+<hr />
+<h2>Funding Potential</h2>
+<table>
+<thead>
+<tr>
+<th>Program</th>
+<th>Amount</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CanExport SMEs</strong></td>
+<td>Up to $25,000</td>
+<td>Application drafted, opens March 1</td>
+</tr>
+<tr>
+<td><strong>SR&amp;ED Tax Credit</strong></td>
+<td>~43% of R&amp;D spend</td>
+<td>Eligible (CCPC incorporated)</td>
+</tr>
+<tr>
+<td><strong>IRAP</strong></td>
+<td>Up to $50,000</td>
+<td>Ready to apply</td>
+</tr>
+<tr>
+<td><strong>Cybersecure Catalyst</strong></td>
+<td>Accelerator + funding</td>
+<td>Apply March</td>
+</tr>
+<tr>
+<td><strong>CDAP</strong></td>
+<td>Up to $15,000</td>
+<td>Digital adoption</td>
+</tr>
+<tr>
+<td><strong>Total potential</strong></td>
+<td><strong>$545K–$925K+</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>The Team</h2>
+<p><strong>Alex</strong> — Founder, Toronto
+- Telecom → Cybersecurity → Crypto → TrustChekr
+- Google IT &amp; Security Certificates, York University Cybersecurity Certificate
+- CompTIA Network+ / Security+ (in progress)
+- Attacker mindset — understands how scammers operate</p>
+<p><strong>17734344 Canada Inc.</strong> — Federal CCPC incorporation (Feb 28, 2026)</p>
+<hr />
+<h2>The Ask</h2>
+<p>We're looking for:
+- <strong>Angel investment</strong> ($50K–$150K) for mobile app development, ML infrastructure, and first hires
+- <strong>Strategic partnerships</strong> with credit unions, consumer protection organizations, and fintech platforms
+- <strong>Pilot customers</strong> for the embeddable widget and API</p>
+<hr />
+<h2>Contact</h2>
+<ul>
+<li><strong>Web:</strong> <a href="https://trustchekr.com">trustchekr.com</a></li>
+<li><strong>Email:</strong> hello@trustchekr.com</li>
+<li><strong>GitHub:</strong> <a href="https://github.com/DropZone7/TrustChekr">github.com/DropZone7/TrustChekr</a></li>
+<li><strong>Telegram Bot:</strong> <a href="https://t.me/TrustChekrbot">@TrustChekrbot</a></li>
+</ul>
+<hr />
+<p><em>Built in Toronto. For Canadians. Against scammers.</em></p></body></html>
