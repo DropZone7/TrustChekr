@@ -14,6 +14,7 @@ const moreLinks = [
   { href: '/chat', label: 'Chat Scanner' },
   { href: '/community', label: 'Community Reports' },
   { href: '/map', label: 'Scam Map' },
+  { href: '/claim', label: 'Claim Your Website' },
   { href: '/learn', label: 'Learn' },
   { href: '/partners', label: 'For Partners' },
   { href: '/about', label: 'About' },
