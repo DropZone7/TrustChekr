@@ -23,7 +23,9 @@ export async function GET(req: NextRequest) {
       if (value.length < 3 || value.length > 200) {
         return NextResponse.json({ error: 'Search value must be 3-200 characters.' }, { status: 400 });
       }
-      query = query.ilike('value', `%${value}%`);
+      // Escape SQL LIKE wildcards to prevent wildcard injection
+      const escaped = value.replace(/[%_\\]/g, '\\$&');
+      query = query.ilike('value', `%${escaped}%`);
     }
     if (confirmed === 'true') query = query.eq('confirmed_scam', true);
 

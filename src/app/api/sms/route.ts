@@ -5,6 +5,17 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
   try {
+    // Verify the webhook is from Twilio using a shared secret token
+    // In production, use Twilio's request signature validation instead
+    const webhookToken = process.env.TWILIO_WEBHOOK_TOKEN;
+    if (webhookToken) {
+      const url = new URL(req.url);
+      const providedToken = url.searchParams.get('token');
+      if (providedToken !== webhookToken) {
+        return new NextResponse('Unauthorized', { status: 401 });
+      }
+    }
+
     const formData = await req.formData();
     const from = formData.get('From')?.toString() ?? '';
     const body = formData.get('Body')?.toString() ?? '';

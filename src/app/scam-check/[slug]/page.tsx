@@ -53,7 +53,7 @@ function ArticleJsonLd({ article }: { article: Article }) {
     publisher: { "@type": "Organization", name: "TrustChekr", url: base },
     mainEntityOfPage: { "@type": "@id", "@id": url },
   };
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />;
 }
 
 function formatDate(iso: string): string {

@@ -95,6 +95,7 @@ function formatTimestamp(iso: string): string {
 }
 
 function buildJsonLd(domain: string, report: ReportApiResponse): string {
+  // Escape </script> sequences to prevent XSS via JSON-LD injection
   return JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -109,7 +110,7 @@ function buildJsonLd(domain: string, report: ReportApiResponse): string {
       reviewRating: { "@type": "Rating", ratingValue: report.trustScore.score, bestRating: 100, worstRating: 0 },
       author: { "@type": "Organization", name: "TrustChekr" },
     },
-  });
+  }).replace(/</g, '\\u003c');
 }
 
 function FindingsList({ bullets }: { bullets: string[] }) {
