@@ -49,9 +49,11 @@ export default function Home() {
               Think it might be a scam?
             </h1>
             <p className="mt-2 text-base" style={{ color: "var(--tc-text-muted)" }}>
-              Paste it below. We check it against known threats, scam databases, and AI analysis.
+              Paste it below — or just upload a screenshot. No need to click any sketchy links.
               <br />
               <span style={{ fontSize: "0.85rem" }}>Free. Private. No account needed.</span>
+              <br />
+              <span style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--tc-text-main)" }}>Choose what you have:</span>
             </p>
           </div>
 
