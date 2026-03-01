@@ -37,11 +37,11 @@ export function MobileNav() {
   }, [open]);
 
   return (
-    <div ref={menuRef} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+    <div ref={menuRef} style={{ display: 'flex', alignItems: 'center', gap: '0' }}>
       {/* Desktop nav — top-level links + hamburger for more */}
-      <nav className="hidden sm:flex gap-4 text-sm items-center" style={{ color: 'var(--tc-text-muted)' }}>
+      <nav className="hidden sm:flex text-sm" style={{ color: 'var(--tc-text-muted)', alignItems: 'baseline', gap: '1rem' }}>
         {mainLinks.map(l => (
-          <a key={l.href} href={l.href} className="hover:underline">{l.label}</a>
+          <a key={l.href} href={l.href} className="hover:underline" style={{ whiteSpace: 'nowrap' }}>{l.label}</a>
         ))}
         <button
           onClick={() => setOpen(!open)}
@@ -52,6 +52,7 @@ export function MobileNav() {
             padding: 0, margin: 0,
             fontSize: 'inherit', cursor: 'pointer',
             color: 'inherit',
+            whiteSpace: 'nowrap',
           }}
         >
           More
