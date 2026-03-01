@@ -1,0 +1,36 @@
+{
+  "domains": [
+    {
+      "id": "domain_sat_fake",
+      "pattern": "(sat|hacienda|tributario)[-_.]?(verificar|devolucion|reembolso|seguro|login)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "SAT_IMPERSONATION",
+      "description": "Fake SAT/Hacienda domain."
+    },
+    {
+      "id": "domain_bbva_mx_fake",
+      "pattern": "(bbva|bancomer)[-_.]?(seguro|verificar|login|alerta|mx)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake BBVA México / Bancomer domain."
+    },
+    {
+      "id": "domain_banorte_fake",
+      "pattern": "(banorte)[-_.]?(seguro|verificar|login|alerta)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Banorte domain."
+    },
+    {
+      "id": "domain_spei_fake",
+      "pattern": "(spei|transferencia)[-_.]?(verificar|deposito|seguro|confirmar)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake SPEI transfer domain."
+    }
+  ]
+}

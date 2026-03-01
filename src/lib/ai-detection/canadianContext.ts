@@ -107,6 +107,53 @@ const US_GUIDANCE: Partial<Record<ScamCategory, CountryGuidance>> = {
   },
 };
 
+// ── Mexico Guidance ──────────────────────────────────────────
+
+const MX_GUIDANCE: Partial<Record<ScamCategory, CountryGuidance>> = {
+  SAT_IMPERSONATION: {
+    context: [
+      'El SAT nunca amenaza con arresto, embargo o multas por teléfono ni por correo electrónico.',
+      'El SAT se comunica principalmente a través del Buzón Tributario en sat.gob.mx.',
+      'El SAT nunca solicita tu RFC, CURP o datos bancarios por teléfono, SMS o email.',
+      'México reportó más de 100,000 fraudes cibernéticos en 2024 según la CONDUSEF.',
+    ],
+    actions: [
+      'Cuelga inmediatamente — no proporciones ningún dato personal.',
+      'Verifica en tu Buzón Tributario directamente en sat.gob.mx.',
+      'Reporta al SAT: 55 627 22 728 o sat.gob.mx.',
+      'Denuncia ante la CONDUSEF: 55 5340 0999 o condusef.gob.mx.',
+      'Denuncia ante la Policía Cibernética: 55 5242 5100 ext. 5086.',
+    ],
+  },
+  BANK_IMPERSONATION: {
+    context: [
+      'Tu banco nunca te pedirá tu NIP, CVV, contraseña o código de verificación por teléfono o SMS.',
+      'BBVA, Banorte, Santander y otros bancos mexicanos nunca envían enlaces por SMS para "verificar" tu cuenta.',
+      'Las transferencias SPEI son legítimas pero los enlaces falsos de "depósito pendiente" son estafas.',
+      'La CONDUSEF reportó más de $14,000 millones MXN en fraudes financieros en 2024.',
+    ],
+    actions: [
+      'Cuelga y llama a tu banco usando el número en tu tarjeta.',
+      'Nunca hagas clic en enlaces de SMS — abre tu app bancaria directamente.',
+      'Reporta a CONDUSEF: 55 5340 0999 o condusef.gob.mx.',
+      'Reporta a la Policía Cibernética: 55 5242 5100 ext. 5086.',
+    ],
+  },
+  GENERIC_PHISHING: {
+    context: [
+      'El secuestro virtual es una de las estafas telefónicas más comunes en México — los estafadores fingen tener a un familiar.',
+      'Si recibes una llamada de "secuestro," cuelga y llama directamente a tu familiar.',
+      'Las estafas de lotería que piden un "depósito" o "comisión" para reclamar un premio son siempre fraude.',
+    ],
+    actions: [
+      'Si te llaman sobre un "secuestro": cuelga, verifica que tu familiar esté bien, llama al 911.',
+      'Nunca deposites dinero en OXXO, SPEI o transferencia bancaria a desconocidos.',
+      'Reporta al 088 (línea de la Policía Cibernética).',
+      'Denuncia ante el Ministerio Público más cercano.',
+    ],
+  },
+};
+
 // ── Canadian Guidance ────────────────────────────────────────
 
 interface CanadianGuidance {
@@ -252,6 +299,15 @@ export function getCountryGuidance(
 
   for (const cat of categories) {
     // Try country-specific guidance first
+    if (country === 'MX') {
+      const mxG = MX_GUIDANCE[cat];
+      if (mxG) {
+        mxG.context.forEach((c) => contextSet.add(c));
+        mxG.actions.forEach((a) => actionSet.add(a));
+        continue;
+      }
+    }
+
     if (country === 'US') {
       const usG = US_GUIDANCE[cat];
       if (usG) {

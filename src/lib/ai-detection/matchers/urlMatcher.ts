@@ -28,6 +28,12 @@ const LEGITIMATE_DOMAINS: Record<string, { brand: string; category: ScamCategory
   'usbank.com':       { brand: 'US Bank', category: 'BANK_IMPERSONATION' },
   'zellepay.com':     { brand: 'Zelle', category: 'BANK_IMPERSONATION' },
   'venmo.com':        { brand: 'Venmo', category: 'BANK_IMPERSONATION' },
+  // Mexico
+  'sat.gob.mx':       { brand: 'SAT', category: 'SAT_IMPERSONATION' },
+  'condusef.gob.mx':  { brand: 'CONDUSEF', category: 'BANK_IMPERSONATION' },
+  'bbva.mx':          { brand: 'BBVA México', category: 'BANK_IMPERSONATION' },
+  'banorte.com':      { brand: 'Banorte', category: 'BANK_IMPERSONATION' },
+  'santander.com.mx': { brand: 'Santander México', category: 'BANK_IMPERSONATION' },
 };
 
 /**

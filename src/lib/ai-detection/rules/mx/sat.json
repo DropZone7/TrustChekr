@@ -1,0 +1,116 @@
+{
+  "patterns": [
+    {
+      "id": "sat_debt_threat",
+      "pattern": "(servicio de administración tributaria|\\bSAT\\b).*(adeudo|multa|orden de aprehensión|embargo)",
+      "type": "regex",
+      "weight": 10,
+      "category": "SAT_IMPERSONATION",
+      "description": "SAT impersonation threatening fines, arrest warrants, or asset seizure for unpaid taxes."
+    },
+    {
+      "id": "sat_refund_phishing",
+      "pattern": "(sat|hacienda).*(devolución|reembolso|saldo a favor).*(clic|enlace|link|ingresa)",
+      "type": "regex",
+      "weight": 8,
+      "category": "SAT_IMPERSONATION",
+      "description": "Fake SAT tax refund phishing — claims a refund is waiting and asks you to click a link."
+    },
+    {
+      "id": "sat_rfc_request",
+      "pattern": "(proporcione|confirme|verifique) su (RFC|CURP|número de seguridad social)",
+      "type": "regex",
+      "weight": 8,
+      "category": "SAT_IMPERSONATION",
+      "description": "Requests your RFC, CURP, or social security number — SAT never asks for these by phone or email."
+    },
+    {
+      "id": "sat_cuenta_bloqueada",
+      "pattern": "(su cuenta|buzón tributario).*(bloqueado|suspendido|cancelado).*(verifique|actualice|ingrese)",
+      "type": "regex",
+      "weight": 8,
+      "category": "SAT_IMPERSONATION",
+      "description": "Claims your SAT account or tax mailbox is blocked — designed to create panic."
+    },
+    {
+      "id": "mx_cfdi_fake",
+      "pattern": "(factura|CFDI).*(cancelad[ao]|rechazad[ao]).*(regularice|pague|clic)",
+      "type": "regex",
+      "weight": 7,
+      "category": "SAT_IMPERSONATION",
+      "description": "Fake CFDI invoice cancellation notice — demands immediate action on an electronic invoice."
+    },
+    {
+      "id": "mx_virtual_kidnapping",
+      "pattern": "(tenemos a|secuestramos a) (tu|su) (hijo|hija|esposa|familiar).*(deposita|transfiere|paga)",
+      "type": "regex",
+      "weight": 10,
+      "category": "GENERIC_PHISHING",
+      "description": "Virtual kidnapping extortion — claims a family member has been kidnapped and demands immediate payment."
+    },
+    {
+      "id": "mx_virtual_kidnapping_alt",
+      "pattern": "(no llames a la policía|no cuelgues|si cuelgas).*(matar|le va a pasar algo|no lo vuelves a ver)",
+      "type": "regex",
+      "weight": 10,
+      "category": "GENERIC_PHISHING",
+      "description": "Virtual kidnapping threats — tells victim not to call police or hang up."
+    },
+    {
+      "id": "mx_condusef_fake",
+      "pattern": "(condusef|comisión nacional).*(bloqueo|fraude|verificar).*(datos|cuenta|tarjeta)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "CONDUSEF impersonation — Mexico's financial consumer protection agency doesn't call to verify your data."
+    },
+    {
+      "id": "mx_spei_phishing",
+      "pattern": "(transferencia SPEI|depósito SPEI).*(recibid[ao]|pendiente).*(clic|enlace|verifica)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake SPEI transfer notification — Mexico's interbank payment system doesn't send deposit links."
+    },
+    {
+      "id": "mx_bank_bbva",
+      "pattern": "(bbva|bancomer).*(verificar|actualizar|suspendid[ao]|bloqueado).*(cuenta|tarjeta|acceso)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "BBVA México / Bancomer phishing — asking to verify or update account access."
+    },
+    {
+      "id": "mx_bank_banorte",
+      "pattern": "(banorte).*(verificar|actualizar|suspendid[ao]|bloqueado).*(cuenta|tarjeta)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Banorte phishing."
+    },
+    {
+      "id": "mx_bank_santander",
+      "pattern": "(santander méxico|santander mx).*(verificar|actualizar|suspendid[ao])",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Santander México phishing."
+    },
+    {
+      "id": "mx_lottery_scam",
+      "pattern": "(lotería nacional|sorteo|premio).*(ganador|felicidades).*(deposite|pague|comisión)",
+      "type": "regex",
+      "weight": 9,
+      "category": "GENERIC_PHISHING",
+      "description": "Mexican lottery scam — claims you won a prize and demands a commission or deposit."
+    },
+    {
+      "id": "mx_codi_phishing",
+      "pattern": "(cobro digital|\\bCoDi\\b).*(pendiente|rechazado).*(verifica|ingresa|link)",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake CoDi (Cobro Digital) payment notification."
+    }
+  ]
+}

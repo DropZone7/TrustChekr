@@ -1,0 +1,43 @@
+{
+  "scripts": [
+    {
+      "id": "script_virtual_kidnapping",
+      "category": "GENERIC_PHISHING",
+      "weight": 10,
+      "description": "Mexican virtual kidnapping extortion call.",
+      "steps": [
+        "Call victim's phone, often with a crying voice in the background.",
+        "Claim to have kidnapped a family member.",
+        "Demand immediate cash deposit via OXXO, SPEI, or bank transfer.",
+        "Tell victim not to hang up or call police.",
+        "Keep victim on the phone while an accomplice collects the payment.",
+        "Threaten to harm the 'hostage' if payment is delayed."
+      ]
+    },
+    {
+      "id": "script_sat_refund_phishing",
+      "category": "SAT_IMPERSONATION",
+      "weight": 8,
+      "description": "Fake SAT tax refund via email/SMS.",
+      "steps": [
+        "Send email or SMS claiming SAT has a refund (devolución) pending.",
+        "Include link to fake SAT portal (sat-devolucion-mx.com style).",
+        "Ask for RFC, CURP, CLABE, and banking credentials.",
+        "Drain bank account using captured credentials."
+      ]
+    },
+    {
+      "id": "script_mx_bank_call",
+      "category": "BANK_IMPERSONATION",
+      "weight": 9,
+      "description": "Mexican bank impersonation phone scam.",
+      "steps": [
+        "Call victim claiming to be from BBVA/Banorte/Santander fraud department.",
+        "Claim a suspicious purchase was made on their card.",
+        "Ask victim to 'verify' by providing card number, CVV, and OTP.",
+        "Use the information to make real purchases immediately.",
+        "Sometimes ask victim to install remote access app for 'security check'."
+      ]
+    }
+  ]
+}

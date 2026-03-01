@@ -33,6 +33,11 @@ import usBankRules from './rules/us/banks.json';
 import usDomainRules from './rules/us/domains.json';
 import usScriptRules from './rules/us/scripts.json';
 
+// ── Mexico-specific rules ────────────────────────────────────
+import satRules from './rules/mx/sat.json';
+import mxDomainRules from './rules/mx/domains.json';
+import mxScriptRules from './rules/mx/scripts.json';
+
 // ── Shared rules (all countries) ─────────────────────────────
 import cryptoRules from './rules/shared/crypto.json';
 import techSupportRules from './rules/shared/tech_support.json';
@@ -64,9 +69,9 @@ function getTextPatterns(country: Country = 'ALL'): ScamPattern[] {
   switch (country) {
     case 'CA': return [...shared, ...ca];
     case 'US': return [...shared, ...us];
-    case 'MX': return [...shared]; // Future: add MX-specific rules
+    case 'MX': return [...shared, ...satRules.patterns as ScamPattern[]];
     case 'ALL':
-    default: return [...shared, ...ca, ...us];
+    default: return [...shared, ...ca, ...us, ...satRules.patterns as ScamPattern[]];
   }
 }
 
@@ -80,9 +85,9 @@ function getDomainPatterns(country: Country = 'ALL'): DomainPattern[] {
   switch (country) {
     case 'CA': return ca;
     case 'US': return us;
-    case 'MX': return []; // Future
+    case 'MX': return mxDomainRules.domains as DomainPattern[];
     case 'ALL':
-    default: return [...ca, ...us];
+    default: return [...ca, ...us, ...mxDomainRules.domains as DomainPattern[]];
   }
 }
 
@@ -92,13 +97,14 @@ function getDomainPatterns(country: Country = 'ALL'): DomainPattern[] {
 function getScriptTemplates(country: Country = 'ALL'): ScamScript[] {
   const ca = caScriptRules.scripts as ScamScript[];
   const us = usScriptRules.scripts as ScamScript[];
+  const mx = mxScriptRules.scripts as ScamScript[];
 
   switch (country) {
     case 'CA': return ca;
     case 'US': return us;
-    case 'MX': return []; // Future
+    case 'MX': return mx;
     case 'ALL':
-    default: return [...ca, ...us];
+    default: return [...ca, ...us, ...mx];
   }
 }
 
