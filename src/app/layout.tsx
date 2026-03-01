@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | TrustChekr",
   },
   description:
-    "Check if a website, phone number, email, or message is a scam. Free, private, no sign-up. Powered by OSINT and threat intelligence databases. Made in Canada.",
+    "Check if a website, phone number, email, or message is a scam. Free, private, no sign-up. Made in Canada.",
   applicationName: "TrustChekr",
   manifest: "/manifest.webmanifest",
   keywords: ["scam checker", "is this a scam", "scam detection canada", "phishing checker", "url scam checker", "phone scam checker canada", "email scam detector", "CRA scam", "romance scam canada", "fraud prevention canada"],
