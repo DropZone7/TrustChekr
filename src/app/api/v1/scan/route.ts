@@ -12,8 +12,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing type and input fields' }, { status: 400 });
     }
 
-    // Proxy to internal scan API
-    const scanRes = await fetch(new URL('/api/scan', req.url).toString(), {
+    // Proxy to internal scan API (hardcoded base to prevent SSRF via Host header)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.trustchekr.com';
+    const scanRes = await fetch(`${baseUrl}/api/scan`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type, input }),

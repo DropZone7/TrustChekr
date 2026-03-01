@@ -52,8 +52,8 @@ export async function POST(req: NextRequest) {
       claimCounts.set(emailKey, { count: 1, resetAt: now + 86_400_000 });
     }
 
-    // Generate claim ID
-    const claimId = "clm_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+    // Generate claim ID (crypto-random to prevent enumeration)
+    const claimId = "clm_" + crypto.randomUUID().replace(/-/g, "").slice(0, 16);
 
     // Store in Supabase
     const { error } = await supabaseServer

@@ -167,5 +167,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/api/v1/:path*', '/api/scan', '/api/scan/:path*', '/api/chat/analyze', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/api/partnerships', '/api/feed/:path*', '/api/phone/:path*', '/tc47x/:path*', '/admin/:path*'],
+  matcher: ['/api/v1/:path*', '/api/scan', '/api/scan/:path*', '/api/chat/analyze', '/api/newsletter', '/api/user-reports', '/api/community/:path*', '/api/partnerships', '/api/feed/:path*', '/api/phone/:path*', '/api/claim/:path*', '/api/certificate', '/api/digest', '/api/feedback', '/api/feedback/:path*', '/api/health', '/api/scam-intel/:path*', '/api/sms', '/api/stats/:path*', '/tc47x/:path*', '/admin/:path*'],
 };

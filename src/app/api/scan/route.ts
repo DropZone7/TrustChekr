@@ -26,6 +26,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Reject oversized inputs (prevent abuse via large payloads)
+    if (input.length > 5000) {
+      return NextResponse.json(
+        { error: "Input too long. Maximum 5,000 characters." },
+        { status: 400 }
+      );
+    }
+
     // Redact obvious sensitive data
     const sensitivePatterns = [
       /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g,

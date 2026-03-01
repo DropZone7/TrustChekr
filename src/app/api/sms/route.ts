@@ -23,8 +23,9 @@ export async function POST(req: NextRequest) {
     else if (/^0x[a-fA-F0-9]{40}$/.test(text)) type = 'crypto';
     else if (/^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(text)) type = 'crypto';
 
-    // Call our own scan API internally
-    const scanRes = await fetch(new URL('/api/scan', req.url).toString(), {
+    // Call our own scan API internally (hardcoded base to prevent SSRF via Host header)
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://www.trustchekr.com';
+    const scanRes = await fetch(`${baseUrl}/api/scan`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type, input: text }),

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase/server';
 
 export const revalidate = 60;
@@ -12,7 +12,13 @@ type FeedbackRow = {
   created_at: string;
 };
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  // Admin-only — prevent operational data leakage
+  const token = req.headers.get('authorization')?.replace('Bearer ', '');
+  if (token !== process.env.TC_ADMIN_TOKEN) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   try {
     const now = new Date();
     const ninetyDaysAgo = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000).toISOString();
