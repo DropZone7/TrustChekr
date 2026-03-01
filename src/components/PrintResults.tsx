@@ -22,7 +22,7 @@ What you should do now:
 ${result.nextSteps.map((s) => `  → ${s}`).join("\n")}
 
 Where to report:
-${result.reportTo.map((r) => `  📞 ${r}`).join("\n")}
+${result.reportTo.map((r) => `  ${r}`).join("\n")}
 
 Good to know:
   ${result.educationalTip}

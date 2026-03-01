@@ -1,4 +1,14 @@
+import { MailOpen, Globe, Smartphone, Mail, Coins, Gift, Bot, Shield, AlertTriangle } from 'lucide-react';
 import type { Metadata } from 'next';
+
+const ARTICLE_ICONS: Record<string, React.ComponentType<any>> = {
+  '💌': MailOpen,
+  '🌐': Globe,
+  '📱': Smartphone,
+  '📧': Mail,
+  '💰': Coins,
+  '🎁': Gift,
+};
 
 export const metadata: Metadata = {
   title: 'Learn About Scams',
@@ -102,7 +112,7 @@ export default function LearnPage() {
           </span>
         </div>
         <h2 className="text-xl font-bold" style={{ color: "var(--tc-text-main)" }}>
-          🤖 How AI Can Figure Out Who You Are — Even From Anonymous Posts
+          <Bot size={20} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> How AI Can Figure Out Who You Are — Even From Anonymous Posts
         </h2>
         <p className="mt-2" style={{ color: "var(--tc-text-muted)" }}>
           New research shows AI can identify anonymous internet users from their posts alone — at 67% accuracy, for as little as $1 per person. Here's what you need to know.
@@ -119,8 +129,9 @@ export default function LearnPage() {
             className="p-6 rounded-xl border"
             style={{ borderColor: "var(--tc-border)", background: "var(--tc-surface)" }}
           >
-            <h2 className="text-xl font-bold mb-1" style={{ color: "var(--tc-text-main)" }}>
-              {a.emoji} {a.title}
+            <h2 className="text-xl font-bold mb-1 flex items-center gap-2" style={{ color: "var(--tc-text-main)" }}>
+              {(() => { const Icon = ARTICLE_ICONS[a.emoji]; return Icon ? <Icon size={20} strokeWidth={1.75} /> : null; })()}
+              {a.title}
             </h2>
             <p className="mb-3" style={{ color: "var(--tc-text-muted)" }}>{a.summary}</p>
             <h3 className="font-semibold mb-2" style={{ color: "var(--tc-text-main)" }}>
@@ -129,7 +140,7 @@ export default function LearnPage() {
             <ul className="flex flex-col gap-1.5">
               {a.tips.map((tip, j) => (
                 <li key={j} className="flex gap-2">
-                  <span style={{ color: "var(--tc-warning)" }}>⚠️</span>
+                  <span style={{ color: "var(--tc-warning)", display: 'flex', flexShrink: 0 }}><AlertTriangle size={16} strokeWidth={1.75} /></span>
                   <span>{tip}</span>
                 </li>
               ))}
@@ -146,7 +157,7 @@ export default function LearnPage() {
           Remember: Scams are designed to fool smart people. You are not foolish for being targeted.
         </p>
         <p className="mt-1" style={{ color: "var(--tc-text-muted)" }}>
-          Checking is always the right move. 🛡️
+          Checking is always the right move. <Shield size={16} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} />
         </p>
       </div>
     </div>

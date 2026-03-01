@@ -178,10 +178,10 @@ export function QRScanner() {
                   }}
                 >
                   <p className="font-bold" style={{ color: (threatColors[result.threat_level] ?? threatColors.unknown).text }}>
-                    {result.threat_level === 'safe' && '🟢 Low Risk'}
-                    {result.threat_level === 'suspicious' && '🟡 Suspicious'}
-                    {result.threat_level === 'high-risk' && '🟠 High Risk'}
-                    {result.threat_level === 'very-likely-scam' && '🔴 Very Likely Scam'}
+                    {result.threat_level === 'safe' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', marginRight: 6 }} />Low Risk</>}
+                    {result.threat_level === 'suspicious' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#eab308', display: 'inline-block', marginRight: 6 }} />Suspicious</>}
+                    {result.threat_level === 'high-risk' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#f97316', display: 'inline-block', marginRight: 6 }} />High Risk</>}
+                    {result.threat_level === 'very-likely-scam' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ef4444', display: 'inline-block', marginRight: 6 }} />Very Likely Scam</>}
                     {result.threat_level === 'info' && 'ℹ️ Non-URL Data Found'}
                     {result.threat_level === 'unknown' && '❓ Could Not Determine'}
                   </p>

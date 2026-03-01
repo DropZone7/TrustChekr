@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
+import { Bot } from 'lucide-react';
 
 interface ScreenshotScanState {
   phase: 'idle' | 'ocr' | 'scanning' | 'done' | 'error';
@@ -179,10 +180,10 @@ export function ScreenshotScanner() {
                 }}
               >
                 <p className="font-bold text-lg" style={{ color: (threatColors[state.scanResult.riskLevel] ?? threatColors.safe).text }}>
-                  {state.scanResult.riskLevel === 'safe' && '🟢 Low Risk'}
-                  {state.scanResult.riskLevel === 'suspicious' && '🟡 Suspicious'}
-                  {state.scanResult.riskLevel === 'high-risk' && '🟠 High Risk'}
-                  {state.scanResult.riskLevel === 'very-likely-scam' && '🔴 Very Likely Scam'}
+                  {state.scanResult.riskLevel === 'safe' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', marginRight: 6 }} />Low Risk</>}
+                  {state.scanResult.riskLevel === 'suspicious' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#eab308', display: 'inline-block', marginRight: 6 }} />Suspicious</>}
+                  {state.scanResult.riskLevel === 'high-risk' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#f97316', display: 'inline-block', marginRight: 6 }} />High Risk</>}
+                  {state.scanResult.riskLevel === 'very-likely-scam' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ef4444', display: 'inline-block', marginRight: 6 }} />Very Likely Scam</>}
                 </p>
               </div>
 
@@ -210,7 +211,7 @@ export function ScreenshotScanner() {
                   background: state.scanResult.ai_detection.ai_probability > 0.7 ? '#fee2e2' : 'var(--tc-surface)',
                 }}>
                   <p className="text-xs font-bold uppercase tracking-wide mb-1" style={{ color: 'var(--tc-text-muted)' }}>
-                    🤖 AI Detection
+                      <Bot size={14} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: 4 }} /> AI Detection
                   </p>
                   <p className="text-sm font-semibold" style={{ color: state.scanResult.ai_detection.ai_probability > 0.7 ? '#991b1b' : 'var(--tc-safe)' }}>
                     {state.scanResult.ai_detection.label === 'AI_GENERATED' && `${Math.round(state.scanResult.ai_detection.ai_probability * 100)}% likely AI-generated`}

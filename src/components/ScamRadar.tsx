@@ -2,6 +2,16 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { Landmark, Building2, Coins, HeartCrack, Bot, Shield } from 'lucide-react';
+
+const EMOJI_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  '🏛️': Landmark,
+  '🏛': Landmark,
+  '🏦': Building2,
+  '💰': Coins,
+  '💔': HeartCrack,
+  '🤖': Bot,
+};
 
 interface TrendCategory {
   name: string;
@@ -169,8 +179,13 @@ export default function ScamRadar() {
                 onMouseEnter={e => (e.currentTarget.style.background = '#151515')}
                 onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
               >
-                {/* Emoji */}
-                <span style={{ fontSize: 24, flexShrink: 0 }}>{cat.emoji}</span>
+                {/* Icon */}
+                <span style={{ fontSize: 24, flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                  {(() => {
+                    const IconComp = EMOJI_ICON_MAP[cat.emoji] || Shield;
+                    return <IconComp size={24} strokeWidth={1.75} />;
+                  })()}
+                </span>
 
                 {/* Name + Description */}
                 <div style={{ flex: 1, minWidth: 0 }}>

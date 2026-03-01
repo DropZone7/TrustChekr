@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Shield } from 'lucide-react';
 
 type ChatMessage = {
   id: string;
@@ -179,7 +180,7 @@ export function ChatScanner() {
             justifyContent: 'center',
             fontSize: '0.85rem',
           }}>
-            🛡️
+<Shield size={14} strokeWidth={1.75} color="#fff" />
           </div>
           <div>
             <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff' }}>TrustChekr AI</div>
@@ -311,7 +312,7 @@ export function ChatScanner() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem',
                 flexShrink: 0,
               }}>
-                🛡️
+    <Shield size={14} strokeWidth={1.75} color="#fff" />
               </div>
             )}
             <div style={{
@@ -362,7 +363,7 @@ export function ChatScanner() {
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem',
               flexShrink: 0,
             }}>
-              🛡️
+  <Shield size={14} strokeWidth={1.75} color="#fff" />
             </div>
             <div style={{
               borderRadius: '20px 20px 20px 4px',

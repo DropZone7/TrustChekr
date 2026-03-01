@@ -1,5 +1,6 @@
 'use client';
 
+import { Shield } from 'lucide-react';
 import { getRecommendations } from '@/lib/affiliates';
 
 export function AffiliateRecommendations({ riskLevel, scanType }: { riskLevel: string; scanType: string }) {
@@ -13,7 +14,7 @@ export function AffiliateRecommendations({ riskLevel, scanType }: { riskLevel: s
       display: 'flex', flexDirection: 'column', gap: '0.75rem',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-        <span style={{ fontSize: '1.1rem' }}>🛡️</span>
+        <Shield size={18} strokeWidth={1.75} />
         <h3 style={{ margin: 0, fontSize: '0.98rem', fontWeight: 600, color: 'var(--tc-text-main)' }}>Protect Yourself</h3>
       </div>
 

@@ -1,3 +1,4 @@
+import { Shield } from 'lucide-react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function FounderPage() {
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px',
             }}
           >
-            🛡️
+            <Shield size={40} strokeWidth={1.75} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <div style={{ fontSize: '20px', fontWeight: 600 }}>The TrustChekr Team</div>

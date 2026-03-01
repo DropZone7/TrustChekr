@@ -1,3 +1,11 @@
+import { Bot, AlertTriangle, Target, Landmark, Briefcase, Search, FileText } from 'lucide-react';
+
+const DEANON_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  '🎯': Target,
+  '🏛️': Landmark,
+  '💼': Briefcase,
+  '🔍': Search,
+};
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -22,7 +30,7 @@ export default function AIDeanonymizationArticle() {
           className="text-3xl font-bold mt-3"
           style={{ color: "var(--tc-primary)" }}
         >
-          🤖 How AI Can Figure Out Who You Are — Even From Anonymous Posts
+          <Bot size={24} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> How AI Can Figure Out Who You Are — Even From Anonymous Posts
         </h1>
         <p className="mt-2 text-sm" style={{ color: "var(--tc-text-muted)" }}>
           Published February 26, 2026 · 5 minute read
@@ -94,7 +102,7 @@ export default function AIDeanonymizationArticle() {
             "When you post (your timezone, your schedule patterns)",
           ].map((item, i) => (
             <li key={i} className="flex gap-2">
-              <span style={{ color: "var(--tc-warning)" }}>⚠️</span>
+              <span style={{ color: "var(--tc-warning)", display: 'flex', flexShrink: 0 }}><AlertTriangle size={16} strokeWidth={1.75} /></span>
               <span>{item}</span>
             </li>
           ))}
@@ -150,8 +158,9 @@ export default function AIDeanonymizationArticle() {
                 background: "var(--tc-surface)",
               }}
             >
-              <p className="font-semibold">
-                {item.emoji} {item.title}
+              <p className="font-semibold flex items-center gap-2">
+                {(() => { const Icon = DEANON_ICON_MAP[item.emoji]; return Icon ? <Icon size={18} strokeWidth={1.75} /> : null; })()}
+                {item.title}
               </p>
               <p
                 className="mt-1 text-sm"
@@ -293,7 +302,7 @@ export default function AIDeanonymizationArticle() {
         }}
       >
         <p className="font-semibold" style={{ color: "var(--tc-text-main)" }}>
-          📄 Source
+          <FileText size={16} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> Source
         </p>
         <p className="mt-1 text-sm" style={{ color: "var(--tc-text-muted)" }}>
           "Large-Scale Online Deanonymization with LLMs" — Simon Lermen (MATS

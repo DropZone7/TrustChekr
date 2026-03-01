@@ -1,3 +1,5 @@
+import { Bot } from 'lucide-react';
+
 type Props = {
   query: string;
   label?: string;
@@ -13,7 +15,7 @@ export function GrokipediaLink({ query, label }: Props) {
       className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border text-sm font-medium transition-all hover:shadow-sm"
       style={{ borderColor: 'var(--tc-border)', background: 'var(--tc-surface)', color: 'var(--tc-primary)' }}
     >
-      🤖 {label ?? 'Check this on Grokipedia'} <span style={{ color: 'var(--tc-text-muted)' }}>→</span>
+      <Bot size={16} strokeWidth={1.75} /> {label ?? 'Check this on Grokipedia'} <span style={{ color: 'var(--tc-text-muted)' }}>→</span>
     </a>
   );
 }

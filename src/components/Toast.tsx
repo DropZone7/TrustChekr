@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
+import { AlertTriangle } from 'lucide-react';
 
 type ToastType = 'success' | 'error' | 'info';
 type Toast = { id: number; message: string; type: ToastType };
@@ -26,9 +27,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     info: 'var(--tc-primary)',
   };
 
-  const emojis: Record<ToastType, string> = {
+  const emojis: Record<ToastType, React.ReactNode> = {
     success: '✅',
-    error: '⚠️',
+    error: <AlertTriangle size={16} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} />,
     info: 'ℹ️',
   };
 

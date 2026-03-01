@@ -185,9 +185,9 @@ export function DocumentScanner() {
           {/* Risk Level */}
           <div className="p-4 rounded-xl border-2" style={{ borderColor: riskColors[result.risk_level].border, background: riskColors[result.risk_level].bg }}>
             <p className="font-bold" style={{ color: riskColors[result.risk_level].text }}>
-              {result.risk_level === 'LOW' && '🟢 No manipulation detected'}
-              {result.risk_level === 'MEDIUM' && '🟡 Possible manipulation detected'}
-              {result.risk_level === 'HIGH' && '🔴 Multiple manipulation indicators found'}
+              {result.risk_level === 'LOW' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', marginRight: 6 }} />No manipulation detected</>}
+              {result.risk_level === 'MEDIUM' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#eab308', display: 'inline-block', marginRight: 6 }} />Possible manipulation detected</>}
+              {result.risk_level === 'HIGH' && <><span style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: '#ef4444', display: 'inline-block', marginRight: 6 }} />Multiple manipulation indicators found</>}
             </p>
           </div>
 

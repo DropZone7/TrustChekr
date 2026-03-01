@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
+import { AlertTriangle } from 'lucide-react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -112,7 +113,7 @@ export function NewsletterForm() {
 
       {status === 'error' && message && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#dc2626', fontSize: '0.9rem', fontWeight: 500 }}>
-          <span>⚠️</span>
+          <AlertTriangle size={16} strokeWidth={1.75} />
           <span>{message}</span>
         </div>
       )}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Smartphone, ScanLine, FileText, HeartCrack, Lock, AlertTriangle } from 'lucide-react';
 import { ScreenshotScanner } from '@/components/scanners/ScreenshotScanner';
 import { QRScanner } from '@/components/scanners/QRScanner';
 import { DocumentScanner } from '@/components/scanners/DocumentScanner';
@@ -8,11 +9,18 @@ import { ReverseImageSearch } from '@/components/scanners/ReverseImageSearch';
 
 type Tool = 'screenshot' | 'qr' | 'document' | 'reverse-image';
 
-const tools: { id: Tool; emoji: string; title: string; desc: string }[] = [
-  { id: 'screenshot', emoji: '📱', title: 'Screenshot Scanner', desc: 'Upload a screenshot of a suspicious text, email, or DM' },
-  { id: 'qr', emoji: '📷', title: 'QR Code Scanner', desc: 'Check if a QR code leads to a scam website' },
-  { id: 'document', emoji: '📄', title: 'Document Checker', desc: 'Check if an image or document has been manipulated' },
-  { id: 'reverse-image', emoji: '💔', title: 'Reverse Image Search', desc: 'Check if a photo from a romance interest is stolen' },
+const TOOL_ICONS: Record<Tool, React.ComponentType<any>> = {
+  screenshot: Smartphone,
+  qr: ScanLine,
+  document: FileText,
+  'reverse-image': HeartCrack,
+};
+
+const tools: { id: Tool; title: string; desc: string }[] = [
+  { id: 'screenshot', title: 'Screenshot Scanner', desc: 'Upload a screenshot of a suspicious text, email, or DM' },
+  { id: 'qr', title: 'QR Code Scanner', desc: 'Check if a QR code leads to a scam website' },
+  { id: 'document', title: 'Document Checker', desc: 'Check if an image or document has been manipulated' },
+  { id: 'reverse-image', title: 'Reverse Image Search', desc: 'Check if a photo from a romance interest is stolen' },
 ];
 
 export default function ToolsPage() {
@@ -46,7 +54,7 @@ export default function ToolsPage() {
                 cursor: 'pointer',
               }}
             >
-              <span className="text-2xl">{tool.emoji}</span>
+              <span className="text-2xl">{(() => { const Icon = TOOL_ICONS[tool.id]; return <Icon size={24} strokeWidth={1.75} />; })()}</span>
               <p className="font-semibold mt-1 text-sm">{tool.title}</p>
               <p className="text-xs mt-0.5" style={{ opacity: 0.8 }}>{tool.desc}</p>
             </button>
@@ -62,13 +70,13 @@ export default function ToolsPage() {
         {/* Privacy note */}
         <div className="text-center p-3 rounded-xl" style={{ background: 'var(--tc-primary-soft)' }}>
           <p className="text-sm" style={{ color: 'var(--tc-primary)' }}>
-            🔒 All image processing happens in your browser. Your files are never uploaded to our servers.
+            <Lock size={16} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> All image processing happens in your browser. Your files are never uploaded to our servers.
           </p>
         </div>
 
         {/* Disclaimer */}
         <p className="text-xs text-center leading-relaxed" style={{ color: 'var(--tc-text-muted)' }}>
-          ⚠️ These tools use automated analysis and may not be accurate. Results do not constitute professional advice.
+          <AlertTriangle size={16} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> These tools use automated analysis and may not be accurate. Results do not constitute professional advice.
           When in doubt, contact the{' '}
           <a href="https://antifraudcentre-centreantifraude.ca/" target="_blank" rel="noopener" style={{ color: 'var(--tc-primary)' }}>
             Canadian Anti-Fraud Centre

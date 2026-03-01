@@ -1,6 +1,16 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { Phone, Landmark, Building2, Monitor, HeartCrack, AlertTriangle } from 'lucide-react';
+
+const SCAM_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  phone_scam: Phone,
+  cra_impersonation: Landmark,
+  bank_impersonation: Building2,
+  tech_support: Monitor,
+  romance_scam: HeartCrack,
+  other: AlertTriangle,
+};
 
 interface ScamReport {
   id: string;
@@ -269,8 +279,9 @@ export default function CommunityPage() {
               return (
                 <div key={report.id} className="p-4 rounded-xl" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
                   <div className="flex justify-between items-start mb-2">
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: 'var(--tc-primary-soft)', color: 'var(--tc-primary)' }}>
-                      {typeInfo.emoji} {typeInfo.label}
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full inline-flex items-center gap-1" style={{ background: 'var(--tc-primary-soft)', color: 'var(--tc-primary)' }}>
+                      {(() => { const Icon = SCAM_ICON_MAP[report.scam_type]; return Icon ? <Icon size={12} strokeWidth={1.75} /> : null; })()}
+                      {typeInfo.label}
                     </span>
                     <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--tc-text-muted)' }}>
                       {report.province && <span>{report.province}</span>}

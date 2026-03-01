@@ -1,6 +1,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { Phone, Landmark, Building2, Monitor, HeartCrack, Shield } from 'lucide-react';
+
+const STAT_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  phone_scam: Phone,
+  cra_impersonation: Landmark,
+  bank_impersonation: Building2,
+  tech_support: Monitor,
+  romance_scam: HeartCrack,
+};
+
+function StatIcon({ type }: { type: string }) {
+  const Icon = STAT_ICON_MAP[type];
+  if (!Icon) return null;
+  return <Icon size={14} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: 4 }} />;
+}
 
 type ScamTypeStat = { type: string; count: number };
 type MonthStat = { month: string; count: number };
@@ -21,16 +36,16 @@ type OverviewResponse = {
 };
 
 const SCAM_TYPE_LABELS: Record<string, string> = {
-  phone_scam: '📞 Phone Scam',
-  cra_impersonation: '🏛 CRA Impersonation',
-  bank_impersonation: '🏦 Bank Impersonation',
-  tech_support: '💻 Tech Support',
-  romance_scam: '💔 Romance Scam',
-  crypto_scam: '🪙 Crypto Scam',
-  phishing: '🎣 Phishing',
-  investment_fraud: '— Investment Fraud',
-  other: '❓ Other',
-  unknown: '❓ Unknown',
+  phone_scam: 'Phone Scam',
+  cra_impersonation: 'CRA Impersonation',
+  bank_impersonation: 'Bank Impersonation',
+  tech_support: 'Tech Support',
+  romance_scam: 'Romance Scam',
+  crypto_scam: 'Crypto Scam',
+  phishing: 'Phishing',
+  investment_fraud: 'Investment Fraud',
+  other: 'Other',
+  unknown: 'Unknown',
 };
 
 export default function StatsPage() {
@@ -80,7 +95,7 @@ export default function StatsPage() {
       {/* Hero */}
       <section style={{ marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-          <span style={{ fontSize: '28px' }}>🛡</span>
+          <Shield size={28} strokeWidth={1.75} />
           <h1 style={{ margin: 0, fontSize: '24px', fontWeight: 700 }}>TrustChekr by the Numbers</h1>
         </div>
         <p style={{ margin: 0, fontSize: '14px', color: 'var(--tc-text-muted)' }}>
@@ -159,7 +174,8 @@ export default function StatsPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '20px' }}>
               {data.scamTypes.slice(0, 8).map((s) => (
                 <div key={s.type} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <div style={{ width: '160px', fontSize: '13px', flexShrink: 0 }}>
+                  <div style={{ width: '160px', fontSize: '13px', flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                    <StatIcon type={s.type} />
                     {SCAM_TYPE_LABELS[s.type] ?? s.type}
                   </div>
                   <div
