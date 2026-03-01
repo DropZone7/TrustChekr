@@ -1,0 +1,60 @@
+{
+  "patterns": [
+    {
+      "id": "bank_suspicious_activity",
+      "pattern": "(royal bank of canada|\\bRBC\\b|td canada trust|scotiabank|bank of montreal|\\bBMO\\b|cibc).*suspicious (activity|transaction)",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "Warns of suspicious activity on your account — real banks use verified short codes, not random messages."
+    },
+    {
+      "id": "bank_account_locked",
+      "pattern": "account (locked|blocked|suspended) due to (unusual|suspicious) activity",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "Claims your account is locked or suspended — designed to create panic."
+    },
+    {
+      "id": "bank_verify_via_link",
+      "pattern": "verify (your )?(account|identity|information) by (clicking|tapping) (the )?link",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Asks you to verify identity by clicking a link — real banks direct you to their app."
+    },
+    {
+      "id": "bank_share_otp",
+      "pattern": "share the (security|verification|one-time|one time|2fa) code.*we just sent you",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Asks for your one-time security code — your bank will never ask for this."
+    },
+    {
+      "id": "bank_secure_transaction",
+      "pattern": "to (secure|protect) your account, please complete this transaction",
+      "type": "regex",
+      "weight": 7,
+      "category": "BANK_IMPERSONATION",
+      "description": "Asks you to complete a transaction to 'protect' your account — banks don't do this."
+    },
+    {
+      "id": "bank_rbc_phishing",
+      "pattern": "rbc.*(verify|secure|update).*login",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "RBC-branded phishing asking to verify or update your login credentials."
+    },
+    {
+      "id": "bank_td_phishing",
+      "pattern": "td.*(security alert|verify your td account)",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "TD-branded security alert phishing."
+    }
+  ]
+}

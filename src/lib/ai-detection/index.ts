@@ -17,12 +17,12 @@ import { getCanadianGuidance } from './canadianContext';
 // In production these could be fetched from a CMS or database.
 
 import craRules from './rules/cra.json';
-// Future: import bankRules from './rules/banks.json';
-// Future: import interacRules from './rules/interac.json';
-// Future: import cryptoRules from './rules/crypto.json';
-// Future: import techSupportRules from './rules/tech_support.json';
-// Future: import rentalRules from './rules/rental.json';
-// Future: import phishingRules from './rules/phishing.json';
+import bankRules from './rules/banks.json';
+import interacRules from './rules/interac.json';
+import cryptoRules from './rules/crypto.json';
+import techSupportRules from './rules/tech_support.json';
+import rentalRules from './rules/rental.json';
+import phishingRules from './rules/phishing.json';
 
 /**
  * Combine all loaded rule sets into a single array.
@@ -30,12 +30,12 @@ import craRules from './rules/cra.json';
 function getAllTextPatterns(): ScamPattern[] {
   return [
     ...craRules.patterns,
-    // ...bankRules.patterns,
-    // ...interacRules.patterns,
-    // ...cryptoRules.patterns,
-    // ...techSupportRules.patterns,
-    // ...rentalRules.patterns,
-    // ...phishingRules.patterns,
+    ...bankRules.patterns,
+    ...interacRules.patterns,
+    ...cryptoRules.patterns,
+    ...techSupportRules.patterns,
+    ...rentalRules.patterns,
+    ...phishingRules.patterns,
   ] as ScamPattern[];
 }
 

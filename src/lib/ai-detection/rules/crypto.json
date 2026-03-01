@@ -1,0 +1,60 @@
+{
+  "patterns": [
+    {
+      "id": "pig_wrong_number",
+      "pattern": "wrong number|sorry, I must have the wrong number",
+      "type": "regex",
+      "weight": 6,
+      "category": "PIG_BUTCHERING",
+      "description": "Common pig-butchering opener — 'wrong number' text on WhatsApp or SMS."
+    },
+    {
+      "id": "pig_be_friends",
+      "pattern": "you seem (nice|kind|interesting).*can we be friends",
+      "type": "regex",
+      "weight": 5,
+      "category": "PIG_BUTCHERING",
+      "description": "Transition from wrong-number opener to friendly chat — grooming phase."
+    },
+    {
+      "id": "pig_crypto_expert",
+      "pattern": "i (work in|do) crypto trading|forex trading|liquidity mining",
+      "type": "regex",
+      "weight": 7,
+      "category": "PIG_BUTCHERING",
+      "description": "Scammer introduces themselves as a trading or crypto expert."
+    },
+    {
+      "id": "pig_secret_strategy",
+      "pattern": "special (strategy|algorithm|insider information) for (crypto|bitcoin|forex)",
+      "type": "regex",
+      "weight": 8,
+      "category": "PIG_BUTCHERING",
+      "description": "Claims to have a secret strategy or insider trading method."
+    },
+    {
+      "id": "pig_guaranteed_returns",
+      "pattern": "i can help you (make|earn) \\d+% (per day|per month) with no risk",
+      "type": "regex",
+      "weight": 9,
+      "category": "PIG_BUTCHERING",
+      "description": "Promises high, risk-free returns — no legitimate investment can guarantee this."
+    },
+    {
+      "id": "pig_fake_app",
+      "pattern": "download this app.*(binancc|coin-bse|meta-trder|usdtpro)",
+      "type": "regex",
+      "weight": 9,
+      "category": "PIG_BUTCHERING",
+      "description": "Directs victim to a fake trading app with a misspelled brand name."
+    },
+    {
+      "id": "pig_withdrawal_fee",
+      "pattern": "you need to pay (a )?(tax|fee|service charge) before you can withdraw",
+      "type": "regex",
+      "weight": 8,
+      "category": "PIG_BUTCHERING",
+      "description": "Withdrawal-fee trap — the final stage of pig butchering before the scammer disappears."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "patterns": [
+    {
+      "id": "interac_fake_deposit_link",
+      "pattern": "you have received an.*Interac\\s*e-Transfer.*click.*to deposit",
+      "type": "regex",
+      "weight": 8,
+      "category": "INTERAC_PHISHING",
+      "description": "Fake Interac e-Transfer notification with a deposit link — real auto-deposits need no action."
+    },
+    {
+      "id": "interac_cra_etransfer",
+      "pattern": "interac.*e-Transfer.*from.*(canada revenue agency|\\bCRA\\b)",
+      "type": "regex",
+      "weight": 9,
+      "category": "INTERAC_PHISHING",
+      "description": "Claims an Interac e-Transfer from the CRA — the CRA never sends e-Transfers."
+    },
+    {
+      "id": "interac_bank_deposit_lure",
+      "pattern": "you have received \\$?[0-9,.]+ from (rbc|td|scotiabank|bmo|cibc).*via Interac",
+      "type": "regex",
+      "weight": 7,
+      "category": "INTERAC_PHISHING",
+      "description": "Unexpected Interac deposit supposedly from a bank — used as a lure to click a phishing link."
+    },
+    {
+      "id": "interac_expired_reclaim",
+      "pattern": "your Interac e-Transfer has (expired|failed).*click here to re-claim",
+      "type": "regex",
+      "weight": 7,
+      "category": "INTERAC_PHISHING",
+      "description": "Claims your e-Transfer expired and needs to be reclaimed via a link."
+    }
+  ]
+}

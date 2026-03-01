@@ -1,0 +1,44 @@
+{
+  "patterns": [
+    {
+      "id": "tech_brand_support",
+      "pattern": "microsoft support|windows support|apple support|amazon support",
+      "type": "regex",
+      "weight": 7,
+      "category": "TECH_SUPPORT",
+      "description": "Claims to be support from Microsoft, Apple, or Amazon — these companies don't cold-call you."
+    },
+    {
+      "id": "tech_virus_infected",
+      "pattern": "your computer is (infected|at risk|blocked) by a virus",
+      "type": "regex",
+      "weight": 8,
+      "category": "TECH_SUPPORT",
+      "description": "Pop-up or call claiming your device is infected with a virus."
+    },
+    {
+      "id": "tech_call_toll_free",
+      "pattern": "call (the )?toll[- ]free number below for (immediate|urgent) support",
+      "type": "regex",
+      "weight": 7,
+      "category": "TECH_SUPPORT",
+      "description": "Fake pop-up instructing you to call a toll-free support number."
+    },
+    {
+      "id": "tech_remote_access",
+      "pattern": "download (anydesk|teamviewer|ultraviewer|logmein)",
+      "type": "regex",
+      "weight": 9,
+      "category": "TECH_SUPPORT",
+      "description": "Instructs you to install remote access software — this gives the scammer full control of your computer."
+    },
+    {
+      "id": "tech_refund_overpayment",
+      "pattern": "we will refund \\$?[0-9,.]+ to your (bank account|card).*we sent (too much|extra money)",
+      "type": "regex",
+      "weight": 8,
+      "category": "TECH_SUPPORT",
+      "description": "Refund overpayment scam — claims they sent too much and asks you to return the difference."
+    }
+  ]
+}

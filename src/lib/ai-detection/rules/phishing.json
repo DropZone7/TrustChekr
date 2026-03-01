@@ -1,0 +1,44 @@
+{
+  "patterns": [
+    {
+      "id": "crypto_official_platform",
+      "pattern": "official (crypto|bitcoin|forex) investment platform",
+      "type": "regex",
+      "weight": 6,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "Self-described 'official' investment platform — legitimate platforms don't need to say this."
+    },
+    {
+      "id": "crypto_guaranteed_returns",
+      "pattern": "guaranteed returns? of \\d+% (daily|weekly|monthly)",
+      "type": "regex",
+      "weight": 8,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "Promises guaranteed returns with specific time frames — no legitimate investment can guarantee returns."
+    },
+    {
+      "id": "crypto_fake_endorsement",
+      "pattern": "as seen on (cbc|ctv|dragons' den|shark tank)",
+      "type": "regex",
+      "weight": 7,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "Fake media endorsements referencing Canadian/US TV shows."
+    },
+    {
+      "id": "crypto_false_regulation",
+      "pattern": "regulated by (the )?(csa|iiroc|osc|sec)",
+      "type": "regex",
+      "weight": 6,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "False regulatory claims — verify at securities-administrators.ca."
+    },
+    {
+      "id": "crypto_minimum_invest",
+      "pattern": "minimum investment \\$?[0-9,.]+.*start earning today",
+      "type": "regex",
+      "weight": 6,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "Minimum investment pitch with instant earnings promise."
+    }
+  ]
+}

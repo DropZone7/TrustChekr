@@ -1,0 +1,52 @@
+{
+  "patterns": [
+    {
+      "id": "rental_platform_mention",
+      "pattern": "kijiji|facebook marketplace|craigslist",
+      "type": "regex",
+      "weight": 4,
+      "category": "RENTAL_SCAM",
+      "description": "Mentions a common rental listing platform — contextual signal, not conclusive alone."
+    },
+    {
+      "id": "rental_too_good_price",
+      "pattern": "(apartment|condo|room|basement).*\\$[0-9]{3,4}.*all utilities included",
+      "type": "regex",
+      "weight": 6,
+      "category": "RENTAL_SCAM",
+      "description": "Too-good-to-be-true rent with all utilities included."
+    },
+    {
+      "id": "rental_overseas_landlord",
+      "pattern": "i am currently (overseas|out of the country|working abroad)",
+      "type": "regex",
+      "weight": 7,
+      "category": "RENTAL_SCAM",
+      "description": "Landlord claims to be overseas and can't show the unit — classic rental scam setup."
+    },
+    {
+      "id": "rental_deposit_before_viewing",
+      "pattern": "cannot show you the place before you (send|pay) (the )?(deposit|first and last)",
+      "type": "regex",
+      "weight": 9,
+      "category": "RENTAL_SCAM",
+      "description": "Demands deposit before any viewing — never pay without seeing the property in person."
+    },
+    {
+      "id": "rental_etransfer_deposit",
+      "pattern": "please send (first and last|a deposit of \\$?[0-9,.]+) via (e-Transfer|interac|wire)",
+      "type": "regex",
+      "weight": 8,
+      "category": "RENTAL_SCAM",
+      "description": "Requests upfront e-Transfer or wire deposit for a rental — high-risk payment method."
+    },
+    {
+      "id": "rental_mail_keys",
+      "pattern": "do not worry, i will mail you the keys|the keys will be with the cleaner",
+      "type": "regex",
+      "weight": 8,
+      "category": "RENTAL_SCAM",
+      "description": "Promises to mail keys or leave with a third party after deposit — you'll never get them."
+    }
+  ]
+}
