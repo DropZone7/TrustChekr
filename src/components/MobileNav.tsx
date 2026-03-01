@@ -3,19 +3,19 @@
 import { useState } from 'react';
 
 const mainLinks = [
-  { href: '/chat', label: 'Chat' },
-  { href: '/academy', label: 'Academy' },
+  { href: '/', label: 'Home' },
+  { href: '/learn', label: 'Learn' },
   { href: '/tools', label: 'Tools' },
-  { href: '/threats', label: 'Threats' },
-  { href: '/help', label: 'Help' },
+  { href: '/help', label: 'Support' },
 ];
 
 const moreLinks = [
+  { href: '/chat', label: 'Chat with TrustChekr' },
+  { href: '/academy', label: 'Safety Academy' },
+  { href: '/threats', label: 'Active Threats' },
   { href: '/report', label: 'Report a Scam' },
   { href: '/community', label: 'Community Reports' },
   { href: '/map', label: 'Scam Map' },
-  { href: '/claim', label: 'Claim Your Website' },
-  { href: '/learn', label: 'Learn' },
   { href: '/partners', label: 'For Partners' },
   { href: '/about', label: 'About' },
 ];
