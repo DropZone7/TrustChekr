@@ -124,7 +124,7 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
         </div>
       )}
 
-      {/* OSINT details */}
+      {/* Detailed analysis */}
       <OsintDetails result={result} />
 
       {/* Actions row */}

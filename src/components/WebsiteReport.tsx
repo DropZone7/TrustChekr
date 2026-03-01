@@ -286,12 +286,12 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
         </p>
       </div>
 
-      {/* Google Safe Browsing */}
+      {/* Safety Check */}
       <div style={{ padding: "12px 0", borderBottom: "1px solid var(--tc-border)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
           <div>
-            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>Google Safe Browsing</div>
-            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Google's global list of dangerous websites</div>
+            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>Safety Check</div>
+            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Checked against a global database of dangerous websites</div>
           </div>
           {security?.googleSafeBrowsing != null ? (
             <StatusPill ok={!security.googleSafeBrowsing.flagged} okText="No Issues" badText={`Flagged${security.googleSafeBrowsing.threatType ? `: ${security.googleSafeBrowsing.threatType}` : ""}`} />
@@ -305,8 +305,8 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
       <div style={{ padding: "12px 0", borderBottom: "1px solid var(--tc-border)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
           <div>
-            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>VirusTotal</div>
-            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Scanned by 70+ antivirus and security engines</div>
+            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>Security Scan</div>
+            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Scanned by multiple security engines</div>
           </div>
           <span style={{ fontSize: "14px", fontWeight: "600", color: security?.virusTotal?.flagged ? "var(--tc-danger, #A40000)" : "var(--tc-ok, #2A6E2A)" }}>{vtRatio}</span>
         </div>
@@ -316,8 +316,8 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
       <div style={{ padding: "12px 0", borderBottom: "1px solid var(--tc-border)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
           <div>
-            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>PhishTank</div>
-            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Community-verified phishing site database</div>
+            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>Phishing Check</div>
+            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Checked against known phishing sites</div>
           </div>
           {security?.phishTank != null ? (
             <StatusPill ok={!security.phishTank.flagged} okText="Not Listed" badText="Listed as Phishing" />
@@ -331,8 +331,8 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
       <div style={{ padding: "12px 0" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
           <div>
-            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>URLhaus</div>
-            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Tracks URLs used to distribute malware</div>
+            <div style={{ fontSize: "16px", fontWeight: "500", color: "var(--tc-text-main)" }}>Malware Check</div>
+            <div style={{ fontSize: "13px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Checked for links to malware distribution</div>
           </div>
           {security?.urlHaus != null ? (
             <StatusPill ok={!security.urlHaus.flagged} okText="Not Listed" badText={`Listed${security.urlHaus.threat ? `: ${security.urlHaus.threat}` : " as Malware"}`} />
@@ -345,7 +345,7 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
   );
 }
 
-function TrancoSection({ tranco }: { tranco?: { rank: number | null; isPopular: boolean } | null }) {
+function PopularitySection({ tranco }: { tranco?: { rank: number | null; isPopular: boolean } | null }) {
   if (tranco === undefined) return null;
 
   if (tranco === null) {
@@ -460,12 +460,12 @@ export default function WebsiteReport({ domain, osint, trustScore }: WebsiteRepo
         </p>
       </div>
 
-      {/* OSINT Sections */}
+      {/* Security checks */}
       <DomainSection info={osint?.domain} />
       <SslSection ssl={osint?.ssl} />
       <HostingSection hosting={osint?.hosting} />
       <SecuritySection security={osint?.security} />
-      <TrancoSection tranco={osint?.tranco} />
+      <PopularitySection tranco={osint?.tranco} />
       <DnsSection dns={osint?.dns} />
 
       {/* Footer Disclaimer */}

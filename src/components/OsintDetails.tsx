@@ -14,9 +14,7 @@ const titleStyle = {
   fontWeight: 600 as const,
   fontSize: '0.95rem',
   marginBottom: '0.25rem',
-  display: 'flex' as const,
-  alignItems: 'center' as const,
-  gap: '0.5rem',
+  color: 'var(--tc-text-main)',
 };
 
 const bodyStyle = { fontSize: '0.85rem', color: 'var(--tc-text-main)' };
@@ -29,10 +27,9 @@ export function OsintDetails({ result }: { result: any }) {
   const safeBrowsing = result?.osint?.safeBrowsing;
   const phishTank = result?.osint?.phishTank;
   const urlhaus = result?.osint?.urlhaus;
-  const graph = result?.graph;
   const ai = result?.ai_detection;
 
-  const hasAny = domain || virusTotal || safeBrowsing || phishTank || urlhaus || graph || ai;
+  const hasAny = domain || virusTotal || safeBrowsing || phishTank || urlhaus || ai;
   if (!hasAny) return null;
 
   let domainIsVeryNew = false;
@@ -66,9 +63,7 @@ export function OsintDetails({ result }: { result: any }) {
           color: 'var(--tc-text-main)',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600, fontSize: '0.95rem' }}>
-          <span>Scan</span><span>Detailed Analysis</span>
-        </div>
+        <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>Detailed Analysis</span>
         <span style={{ display: 'inline-block', transition: 'transform 0.2s ease', transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}>▶</span>
       </button>
 
@@ -77,83 +72,61 @@ export function OsintDetails({ result }: { result: any }) {
 
           {domain && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>Domain</span><span>Domain Info</span></div>
+              <div style={titleStyle}>Website Registration</div>
               <div style={bodyStyle}>
-                {domain.registrar && <div><strong>Registrar:</strong> {domain.registrar}</div>}
+                {domain.registrar && <div><strong>Registered with:</strong> {domain.registrar}</div>}
                 {domainCreationDisplay && <div><strong>Created:</strong> {domainCreationDisplay}</div>}
                 {domain.country && <div><strong>Country:</strong> {domain.country}</div>}
-                {domainIsVeryNew && <div style={{ marginTop: '0.4rem', color: '#f97316', fontWeight: 500 }}>! Very new domain</div>}
+                {domainIsVeryNew && <div style={{ marginTop: '0.4rem', color: '#f97316', fontWeight: 500 }}>⚠ This website was created very recently — a common sign of scam sites.</div>}
               </div>
             </div>
           )}
 
           {virusTotal && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>Block</span><span>VirusTotal</span></div>
+              <div style={titleStyle}>Security Scan</div>
               <div style={bodyStyle}>
                 {vtPositives !== null && vtTotal !== null ? (
-                  <div><span style={{ fontWeight: 500, color: vtPositives > 0 ? '#dc2626' : '#16a34a' }}>{vtPositives}/{vtTotal} security vendors</span> flagged this.</div>
-                ) : <div>Scan results unavailable.</div>}
-                {virusTotal.scan_date && <div style={{ marginTop: '0.25rem' }}><strong>Scan date:</strong> {virusTotal.scan_date}</div>}
+                  <div><span style={{ fontWeight: 500, color: vtPositives > 0 ? '#dc2626' : '#16a34a' }}>{vtPositives} out of {vtTotal} security checks</span> flagged this as dangerous.</div>
+                ) : <div>Security scan results unavailable.</div>}
               </div>
             </div>
           )}
 
           {safeBrowsing && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>GSB</span><span>Google Safe Browsing</span></div>
+              <div style={titleStyle}>Threat Database Check</div>
               <div style={{ fontSize: '0.85rem', color: sbStatus === 'No threats found' ? '#16a34a' : '#dc2626', fontWeight: 500 }}>{sbStatus}</div>
             </div>
           )}
 
           {phishTank && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>PT</span><span>PhishTank</span></div>
+              <div style={titleStyle}>Phishing Check</div>
               <div style={{ fontSize: '0.85rem', color: isPhishing ? '#dc2626' : '#16a34a', fontWeight: 500 }}>
-                {isPhishing ? 'Known phishing URL' : 'Not in phishing database'}
+                {isPhishing ? 'This URL has been reported as a phishing site' : 'Not found in known phishing databases'}
               </div>
             </div>
           )}
 
           {urlhaus && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>VT</span><span>URLhaus Malware Check</span></div>
+              <div style={titleStyle}>Malware Check</div>
               <div style={bodyStyle}>
-                {urlhaus.status && <div><strong>Status:</strong> {urlhaus.status}</div>}
-                {urlhaus.threat && <div><strong>Threat:</strong> {urlhaus.threat}</div>}
-                {!urlhaus.status && !urlhaus.threat && <div>Details unavailable.</div>}
+                {urlhaus.threat && <div style={{ color: '#dc2626', fontWeight: 500 }}>Threat detected: {urlhaus.threat}</div>}
+                {urlhaus.status && !urlhaus.threat && <div>{urlhaus.status}</div>}
+                {!urlhaus.status && !urlhaus.threat && <div>No malware detected.</div>}
               </div>
             </div>
           )}
 
           {ai && (
             <div style={cardStyle}>
-              <div style={titleStyle}><span>AI</span><span>AI Text Analysis</span></div>
+              <div style={titleStyle}>AI Content Analysis</div>
               <div style={bodyStyle}>
                 {typeof ai.ai_probability === 'number' && ai.label && (
-                  <div style={{ marginBottom: '0.25rem' }}><strong>Probability:</strong> {(ai.ai_probability * 100).toFixed(1)}% ({ai.label})</div>
+                  <div>{ai.label === 'likely_ai' ? 'This text shows signs of being AI-generated.' : 'This text appears to be human-written.'}</div>
                 )}
-                {Array.isArray(ai.signals) && ai.signals.length > 0 && (
-                  <div>
-                    <strong>Signals:</strong>
-                    <ul style={{ listStyle: 'disc', paddingLeft: '1.25rem', marginTop: '0.25rem' }}>
-                      {ai.signals.map((s: any, i: number) => (
-                        <li key={i}>{s.name ?? 'Signal'} {typeof s.score === 'number' ? `(${(s.score * 100).toFixed(1)}%)` : ''}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {graph && (
-            <div style={cardStyle}>
-              <div style={titleStyle}><span>Graph</span><span>Network Analysis</span></div>
-              <div style={bodyStyle}>
-                {typeof graph.network_risk_score === 'number' && <div><strong>Network risk score:</strong> {graph.network_risk_score}</div>}
-                {typeof graph.entities_created === 'number' && <div><strong>Entities created:</strong> {graph.entities_created}</div>}
-                {typeof graph.edges_created === 'number' && <div><strong>Edges created:</strong> {graph.edges_created}</div>}
               </div>
             </div>
           )}
