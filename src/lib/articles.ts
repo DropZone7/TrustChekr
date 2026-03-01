@@ -217,6 +217,66 @@ const ARTICLES: Article[] = [
       "Use e-Transfer freely with people you know in real life. Never send one to a stranger, never send one because someone on the phone told you to, and turn on Autodeposit today if you have not already. If you think you sent money to a scammer, call your bank within minutes — not hours. Speed is everything.",
     ],
   },
+  {
+    slug: "how-to-spot-a-crypto-scam",
+    title: "How to Spot a Crypto Scam",
+    domain: "trustchekr.com",
+    category: "Crypto Safety",
+    publishedAt: "2026-02-15",
+    updatedAt: "2026-02-28",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "Cryptocurrency scams cost consumers over $5.6 billion in 2023 according to the FBI. Most scams follow a small number of patterns that are easy to recognize once you know what to look for. This guide covers the five most common types and how to protect yourself.",
+    body: [
+      "Crypto scams are growing fast. The FBI's IC3 reported $5.6 billion in cryptocurrency fraud losses in 2023 — a 45% increase from 2022. In Canada, the CAFC flagged cryptocurrency as the #1 payment method used in investment fraud. You do not need to understand blockchain to protect yourself. You just need to recognize the patterns.",
+      "The most common crypto scam is fake investment platforms. A stranger — often met on social media or a dating app — introduces you to a \"trading platform\" that shows your money growing. The website looks professional. Your balance goes up every day. But when you try to withdraw, you are told to pay a \"tax\" or \"fee\" first. The platform is fake. The balance was never real. The FBI calls this \"pig butchering\" because scammers fatten victims with fake profits before taking everything. Losses average $170,000 per victim.",
+      "Giveaway scams are the second most common. Someone impersonating Elon Musk, a crypto exchange, or a celebrity posts on social media: \"Send me 1 BTC and I will send back 2.\" No one will ever double your money for free. These scams pulled in over $80 million in 2023 according to the FTC. They work because crypto transactions cannot be reversed — once you send it, it is gone.",
+      "Fake wallets and exchanges steal your money directly. A website that looks exactly like Coinbase, Binance, or MetaMask asks you to log in. You enter your credentials or seed phrase. The scammer now controls your wallet. Always type the URL directly — never click a link from an email, text, or social media post. Real exchanges will never ask for your seed phrase. Ever. Your seed phrase is the master key to your crypto. Anyone who has it can take everything.",
+      "Rug pulls happen in newer, smaller tokens. A team launches a new cryptocurrency with hype and marketing. Early buyers drive the price up. Then the creators sell all their tokens at once, crashing the price to zero and walking away with everyone's money. Over $2.8 billion was lost to rug pulls in 2021 alone according to Chainalysis. If you cannot find the team's real names, the project has no working product, and the only selling point is \"get in early\" — walk away.",
+      "Here is how to stay safe. Never send crypto to someone you met online who promises returns. Never share your seed phrase or private keys with anyone — not support, not an exchange, not a friend. Use two-factor authentication (an app like Google Authenticator, not SMS). Only use exchanges you can verify are regulated — in Canada, check the CSA's registered list at securities-administrators.ca. And if someone says you need to \"act fast\" or an \"opportunity\" will disappear, that pressure is the scam.",
+      "Crypto itself is not a scam. Bitcoin, Ethereum, and other major cryptocurrencies are real technology used by millions of people. But the lack of regulation and the irreversibility of transactions make crypto a magnet for fraud. Think of it like cash — it is real money, but if you hand cash to a stranger on the street, nobody can get it back for you. The same rules apply: verify before you trust, and never rush a financial decision.",
+    ],
+  },
+  {
+    slug: "what-is-a-seed-phrase",
+    title: "What Is a Seed Phrase and Why Scammers Want Yours",
+    domain: "trustchekr.com",
+    category: "Crypto Safety",
+    publishedAt: "2026-02-20",
+    updatedAt: "2026-02-28",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "Your seed phrase is a 12 or 24 word password that controls your entire crypto wallet. If someone gets it, they can steal everything you own — instantly and irreversibly. Here is what it is, how scammers try to get it, and how to protect it.",
+    body: [
+      "When you create a crypto wallet — whether it is MetaMask, Trust Wallet, Ledger, or any other — you are given a list of 12 or 24 random English words. This is your seed phrase (also called a recovery phrase or mnemonic). It is the master key to your wallet. Anyone who has these words can access your crypto from any device, anywhere in the world, without needing your password or your phone.",
+      "Think of your seed phrase like the deed to your house, except there are no police and no courts. If someone copies it, they own everything inside your wallet. There is no customer support to call. There is no way to reverse the transaction. Blockchain transactions are final by design. In 2023, the FBI received over 69,000 complaints related to cryptocurrency fraud. A large share of those involved stolen seed phrases.",
+      "Scammers use three main tactics to get seed phrases. First: fake support. Someone posts on Twitter or Discord pretending to be MetaMask support and asks you to \"verify your wallet\" by entering your seed phrase on a website. No legitimate wallet or exchange will ever ask for your seed phrase. Second: phishing sites. You click a Google ad or email link that looks like your wallet's real website but the URL is slightly different (metamask.io vs metamaask.io). You enter your phrase and it goes straight to the scammer. Third: malware. You download a fake wallet app or browser extension that records your phrase when you type it.",
+      "How to protect your seed phrase: Write it on paper — not in a notes app, not in an email, not in a screenshot. Store the paper somewhere safe, like a fireproof safe or safety deposit box. Never type it into any website. The only time you should ever enter your seed phrase is when recovering your wallet on a new device using the official app. Some people use metal seed phrase backups (stamped steel plates) that survive fire and water.",
+      "If anyone — a customer support agent, a friend, a website, an app — asks for your seed phrase, it is a scam. No exceptions. Coinbase support will never ask for it. MetaMask support will never ask for it. Your bank will never ask for it. The words exist for one purpose: for you to recover your own wallet. They are not a login. They are not a verification code. They are the keys to your money.",
+    ],
+  },
+  {
+    slug: "crypto-scams-in-canada",
+    title: "Crypto Scams in Canada — What the CAFC Is Seeing",
+    domain: "trustchekr.com",
+    category: "Crypto Safety",
+    publishedAt: "2026-02-10",
+    updatedAt: "2026-02-28",
+    trustScore: 100,
+    verdict: "Educational",
+    summary:
+      "Canadian crypto fraud losses are rising fast. The Canadian Anti-Fraud Centre tracks cryptocurrency as the leading payment method in investment scams. Here is what is happening, which scams are hitting Canadians hardest, and where to report them.",
+    body: [
+      "Cryptocurrency has become the #1 payment method in Canadian investment fraud. The CAFC's 2024 annual report showed $638 million in total fraud losses across Canada — and investment fraud, increasingly paid in crypto, was the single largest category. The Ontario Securities Commission (OSC) has issued over 20 investor alerts specifically about crypto-related schemes since 2022.",
+      "The biggest crypto scam hitting Canadians is the romance-investment hybrid. It starts on a dating app or social media. The scammer builds a relationship over weeks or months. Then they introduce a \"trading opportunity\" — usually a fake app or website showing fake returns. Victims are coached to buy crypto through a legitimate exchange like Newton, Shakepay, or Coinbase and then send it to the scammer's wallet. Average losses are $100,000 to $500,000. The RCMP and local police forces across Ontario and BC have issued repeated public warnings.",
+      "ATM crypto scams are growing in Canada. There are over 3,000 Bitcoin ATMs across the country — more per capita than almost any nation. Scammers call victims, often pretending to be the CRA, police, or a utility company, and instruct them to deposit cash into a Bitcoin ATM with a QR code the scammer provides. The money goes directly to the scammer's wallet. Once sent, it cannot be recovered. These machines are legitimate, but the transactions are being used for fraud.",
+      "Fake Canadian exchanges and tokens are another pattern. Scammers create professional-looking websites claiming to be registered with FINTRAC or the OSC. They are not. Before sending money to any crypto platform, check two things: the Canadian Securities Administrators registered firm list (securities-administrators.ca) and FINTRAC's MSB registry. If the platform is not on either list, do not use it.",
+      "If you have been scammed, report it to the CAFC at 1-888-495-8501 or antifraudcentre.ca. Also report to your local police, the OSC (if investment-related), and the platform where you bought the crypto (they may be able to flag the receiving wallet). Acting quickly matters — in some cases, exchanges can freeze funds if the scammer has not moved them yet. You should also file a report with the RCMP's National Cybercrime Coordination Centre (NC3).",
+      "Crypto is legal and widely used in Canada. The problem is not the technology — it is that irreversible payments attract criminals. The same way wire fraud existed before email, crypto fraud is the modern version of an old crime. Protecting yourself comes down to three rules: never send crypto to anyone you have not met in person, verify any platform through official registries before depositing money, and remember that any \"guaranteed return\" is a lie.",
+    ],
+  },
 ];
 
 export function getArticle(slug: string): Article | null {
