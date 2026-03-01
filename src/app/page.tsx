@@ -7,6 +7,7 @@ import type { ScanResult } from "@/lib/types";
 import { ScanProgress } from "@/components/ScanProgress";
 import { ScanHistory, addToHistory } from "@/components/ScanHistory";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import ScamRadar from "@/components/ScamRadar";
 
 export default function Home() {
   const [result, setResult] = useState<ScanResult | null>(null);
@@ -65,6 +66,9 @@ export default function Home() {
               Source: Canadian Anti-Fraud Centre 2024 Annual Report
             </span>
           </p>
+
+          {/* Scam Radar — live threat levels */}
+          <ScamRadar />
 
           {/* Recent checks */}
           <ScanHistory onRescan={handleScan} />

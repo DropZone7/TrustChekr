@@ -1,55 +1,57 @@
 /**
  * Grok/xAI API Client for TrustChekr
- * 
- * Uses the Responses API with x_search for real-time scam trend monitoring.
- * Endpoint: https://api.x.ai/v1/responses
- * Model: grok-4-1-fast-non-reasoning (cheapest with tool support)
+ *
+ * Uses the Responses API (/v1/responses) with x_search built-in tool.
+ * Model: grok-4-1-fast-non-reasoning (cheapest with server-side tool support)
+ *
+ * IMPORTANT: x_search only works with grok-4 family via /v1/responses.
+ * Do NOT use /v1/chat/completions — that's a different API.
  */
 
 const XAI_API_KEY = process.env.XAI_API_KEY;
 const XAI_BASE_URL = 'https://api.x.ai/v1';
 
-export interface GrokSearchResult {
-  content: string;
-  citations: Array<{
-    url: string;
-    title: string;
-  }>;
-  sourcesUsed: number;
-}
-
-export interface ScamTrend {
-  category: string;
+export interface TrendCategory {
+  name: string;
+  level: 'low' | 'moderate' | 'high' | 'critical';
+  emoji: string;
   description: string;
   postCount: number;
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  samplePosts: string[];
-  citations: string[];
-  detectedAt: string;
+  change: 'rising' | 'stable' | 'falling';
+  academyLink?: string;
 }
 
-/**
- * Search X/Twitter for scam-related posts using Grok's x_search tool.
- * This is the core intelligence-gathering function.
- */
-export async function searchXForScams(
-  query: string,
-  timeframe: '24h' | '7d' | '30d' = '24h',
-): Promise<GrokSearchResult> {
-  if (!XAI_API_KEY) {
-    throw new Error('XAI_API_KEY not set');
-  }
+interface GrokResponse {
+  output: Array<{
+    type: string;
+    content?: Array<{
+      type: string;
+      text?: string;
+      annotations?: Array<{ type: string; url: string; title: string }>;
+    }>;
+  }>;
+  usage?: { num_sources_used: number };
+}
 
-  const timeframeText = {
-    '24h': 'in the last 24 hours',
-    '7d': 'in the last 7 days',
-    '30d': 'in the last 30 days',
-  }[timeframe];
+const CATEGORY_CONFIG = [
+  { name: 'CRA / IRS Tax Scams', emoji: '🏛️', academyLink: '/academy/government-impersonation' },
+  { name: 'Bank Impersonation', emoji: '🏦', academyLink: '/academy/financial-scams' },
+  { name: 'Crypto & Investment', emoji: '💰', academyLink: '/academy/financial-scams' },
+  { name: 'Romance Scams', emoji: '💔', academyLink: '/academy/romance-scams' },
+  { name: 'AI Deepfake Scams', emoji: '🤖', academyLink: undefined },
+];
+
+/**
+ * Run a full scam trend scan via Grok x_search.
+ * Returns structured trend data ready for the /api/trends endpoint.
+ */
+export async function scanScamTrends(): Promise<TrendCategory[]> {
+  if (!XAI_API_KEY) throw new Error('XAI_API_KEY not set');
 
   const response = await fetch(`${XAI_BASE_URL}/responses`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${XAI_API_KEY}`,
+      Authorization: `Bearer ${XAI_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
@@ -57,144 +59,77 @@ export async function searchXForScams(
       input: [
         {
           role: 'user',
-          content: `Search X/Twitter posts ${timeframeText}. ${query} Give specific posts with usernames, engagement counts, and any emerging patterns.`,
+          content: `Search X for recent posts (last few days) about each of these scam types. Do NOT use geo filters - search globally. For each category give me: post count found, a severity assessment (low/moderate/high/critical), whether activity is rising/stable/falling, and a one-sentence description of what people are reporting.
+
+Categories:
+1. CRA tax scam OR IRS tax scam
+2. Bank impersonation scam calls
+3. Crypto pig butchering OR investment scam
+4. Romance scam
+5. AI deepfake voice clone scam
+
+Return ONLY valid JSON in this exact format:
+{
+  "categories": [
+    {"name": "...", "post_count": 0, "severity": "low", "trend": "stable", "description": "..."},
+    ...
+  ]
+}`,
         },
       ],
       tools: [{ type: 'x_search' }],
     }),
   });
 
-  const data = await response.json();
+  const data: GrokResponse = await response.json();
 
-  // Extract text content and citations from the response
-  let content = '';
-  const citations: Array<{ url: string; title: string }> = [];
+  // Extract the message text (last output item)
+  const msgItem = data.output?.find((item) => item.type === 'message');
+  if (!msgItem?.content) return [];
 
-  for (const item of data.output || []) {
-    if (item.type === 'message') {
-      for (const c of item.content || []) {
-        if (c.type === 'text') {
-          content += c.text;
-          // Extract annotations/citations
-          for (const ann of c.annotations || []) {
-            if (ann.type === 'url_citation') {
-              citations.push({ url: ann.url, title: ann.title || '' });
-            }
-          }
-        }
-      }
-    }
-  }
+  const textContent = msgItem.content.find((c) => c.type === 'output_text' || c.type === 'text');
+  if (!textContent?.text) return [];
 
-  return {
-    content,
-    citations,
-    sourcesUsed: data.usage?.num_sources_used || 0,
-  };
+  // Parse JSON from response
+  const jsonMatch = textContent.text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) return [];
+
+  const parsed = JSON.parse(jsonMatch[0]);
+
+  // Map to our format
+  return parsed.categories.map((cat: any, i: number) => {
+    const config = CATEGORY_CONFIG[i] || { name: cat.name, emoji: '⚠️' };
+    const severity = cat.severity?.toLowerCase() || 'low';
+
+    return {
+      name: config.name,
+      emoji: config.emoji,
+      level: severity as TrendCategory['level'],
+      description: cat.description || cat.summary || '',
+      postCount: cat.post_count || cat.post_count_found || 0,
+      change: (cat.trend || cat.activity || 'stable') as TrendCategory['change'],
+      academyLink: config.academyLink,
+    };
+  });
 }
 
 /**
- * Run a comprehensive scam trend scan across all TrustChekr categories.
- * Designed to be called by cron job (e.g., every 6 hours).
+ * Push trend data to the TrustChekr trends API.
+ * Called by external cron (e.g., OpenClaw heartbeat or dedicated cron job).
  */
-export async function scanScamTrends(): Promise<ScamTrend[]> {
-  const categories = [
-    {
-      name: 'CRA/IRS Tax Scams',
-      query: 'CRA scam OR IRS scam OR tax scam OR "revenue agency" scam OR SAT fraude. Report on government tax impersonation scam calls, texts, and emails targeting North Americans.',
+export async function pushTrendsToApi(
+  apiUrl: string,
+  updateKey: string,
+  categories: TrendCategory[],
+): Promise<boolean> {
+  const response = await fetch(`${apiUrl}/api/trends`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${updateKey}`,
+      'Content-Type': 'application/json',
     },
-    {
-      name: 'Bank Impersonation',
-      query: 'bank scam call OR "fraud department" scam OR Zelle scam OR Venmo scam OR Interac scam OR "e-transfer" scam. Report on people receiving fake bank fraud alerts.',
-    },
-    {
-      name: 'Crypto & Investment Fraud',
-      query: 'crypto scam OR bitcoin scam OR "guaranteed returns" OR pig butchering OR "trading platform" scam. Focus on investment fraud and fake crypto platforms.',
-    },
-    {
-      name: 'Romance & Social Engineering',
-      query: 'romance scam OR dating scam OR "met someone online" scam OR catfish OR love scam. Focus on emotional manipulation and romance-to-crypto schemes.',
-    },
-    {
-      name: 'AI-Powered Scams',
-      query: 'AI scam OR deepfake scam OR voice clone scam OR "AI generated" fraud OR "sounds like" family emergency. Focus on AI-enabled fraud.',
-    },
-  ];
+    body: JSON.stringify({ categories }),
+  });
 
-  const trends: ScamTrend[] = [];
-
-  for (const cat of categories) {
-    try {
-      const result = await searchXForScams(cat.query, '24h');
-      
-      if (result.content) {
-        trends.push({
-          category: cat.name,
-          description: result.content.slice(0, 500),
-          postCount: result.sourcesUsed,
-          severity: result.sourcesUsed > 10 ? 'high' : result.sourcesUsed > 5 ? 'medium' : 'low',
-          samplePosts: [],
-          citations: result.citations.map(c => c.url),
-          detectedAt: new Date().toISOString(),
-        });
-      }
-    } catch (err) {
-      console.error(`Grok scan failed for ${cat.name}:`, err);
-    }
-  }
-
-  return trends;
-}
-
-/**
- * Map ScamTrend results to the TrendData format used by /api/trends
- * and write to the cache file for the frontend to consume.
- */
-export async function updateTrendCache(): Promise<void> {
-  const { writeFile, mkdir } = await import('fs/promises');
-  const { join } = await import('path');
-
-  const trends = await scanScamTrends();
-
-  const severityToLevel: Record<string, 'low' | 'moderate' | 'high' | 'critical'> = {
-    low: 'low',
-    medium: 'moderate',
-    high: 'high',
-    critical: 'critical',
-  };
-
-  const categoryMeta: Record<string, { emoji: string; change: 'rising' | 'stable' | 'falling' }> = {
-    'CRA/IRS Tax Scams': { emoji: '🏛️', change: 'stable' },
-    'Bank Impersonation': { emoji: '🏦', change: 'stable' },
-    'Crypto & Investment Fraud': { emoji: '💰', change: 'rising' },
-    'Romance & Social Engineering': { emoji: '💔', change: 'stable' },
-    'AI-Powered Scams': { emoji: '🤖', change: 'rising' },
-  };
-
-  const categoryNameMap: Record<string, string> = {
-    'CRA/IRS Tax Scams': 'CRA / IRS Tax Scams',
-    'Bank Impersonation': 'Bank Impersonation',
-    'Crypto & Investment Fraud': 'Crypto & Investment',
-    'Romance & Social Engineering': 'Romance Scams',
-    'AI-Powered Scams': 'AI-Powered Scams',
-  };
-
-  const trendData = {
-    lastUpdated: new Date().toISOString(),
-    categories: trends.map((t) => {
-      const meta = categoryMeta[t.category] || { emoji: '⚠️', change: 'stable' as const };
-      return {
-        name: categoryNameMap[t.category] || t.category,
-        level: severityToLevel[t.severity] || 'moderate',
-        emoji: meta.emoji,
-        description: t.description.slice(0, 200),
-        postCount: t.postCount,
-        change: t.postCount > 8 ? 'rising' as const : meta.change,
-      };
-    }),
-  };
-
-  const dataDir = join(process.cwd(), 'data');
-  await mkdir(dataDir, { recursive: true });
-  await writeFile(join(dataDir, 'scam-trends.json'), JSON.stringify(trendData, null, 2));
+  return response.ok;
 }
