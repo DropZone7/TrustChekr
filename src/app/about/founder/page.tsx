@@ -24,42 +24,45 @@ export default function FounderPage() {
             <Shield size={40} strokeWidth={1.75} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ fontSize: '20px', fontWeight: 600 }}>The TrustChekr Team</div>
-            <div style={{ fontSize: '14px', color: 'var(--tc-text-muted)' }}>Founded in Toronto, Canada</div>
+            <div style={{ fontSize: '20px', fontWeight: 600 }}>Alex</div>
+            <div style={{ fontSize: '14px', color: 'var(--tc-text-muted)' }}>Founder — Toronto, Canada 🇨🇦</div>
           </div>
         </div>
       </section>
 
       {/* The Story */}
       <section style={{ marginBottom: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>Why TrustChekr exists</h2>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          TrustChekr didn&apos;t start with a pitch deck. It started with phone calls and messages that made
-          family members nervous — threats from fake government agents, too-good-to-be-true investment offers,
-          and &quot;urgent&quot; delivery texts that didn&apos;t feel right but were hard to decode under pressure.
+        <h2 style={{ margin: 0, fontSize: '18px', fontWeight: 600 }}>Why I Built TrustChekr</h2>
+        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
+          I&apos;ve spent years in telecom and tech — from Samsung to Sprint, learning networking from the
+          inside out. Somewhere along the way, I stumbled into cybersecurity (let&apos;s say I learned what&apos;s
+          possible when you&apos;re curious enough). That rabbit hole led me to crypto, and that showed me a
+          much deeper problem: regular people repeatedly getting destroyed by scams.
         </p>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          Watching loved ones try to navigate those moments without a technical background was a turning point.
-          Our founder had spent years studying cybersecurity — earning Google&apos;s IT Support and Security
-          certificates, completing York University&apos;s Cybersecurity Certificate, and deepening that path
-          with CompTIA Network+ and Security+ to sharpen understanding of how attackers operate.
+        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
+          Then one Thursday morning, I caught{' '}
+          <em>Moore in the Morning</em> on Newstalk 1010 talking about how Canadians keep getting ripped
+          off — and there&apos;s nothing out there to help them. The thought basically burnt itself into my
+          mind, and I started building immediately.
         </p>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          The gap wasn&apos;t &quot;more security knowledge&quot; for regular people. It was a missing layer
-          of translation between scammer tactics and human decisions.
+        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
+          In 2024, Canadians reported over $638 million in fraud losses — and only 5–10% of victims
+          actually report. The real number is likely in the billions.
         </p>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          TrustChekr is built with an attacker mindset — understanding how scammers structure messages, where
-          they register domains, how they exploit fear and urgency — then flipping that knowledge into analysis
-          modules that catch patterns most people never see. Seniors, parents, and everyday Canadians shouldn&apos;t
-          need a computer science degree to figure out if a text or email is dangerous. They should be able to
-          paste it into a box and get a clear, confident answer in seconds.
+        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7, fontWeight: 500 }}>
+          Scammers have AI, automation, and scale. Victims have Google and guesswork. TrustChekr is my
+          way of evening the odds.
         </p>
-        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.6 }}>
-          From day one, TrustChekr has been Canadian-built and privacy-first. Data handling is designed around
-          PIPEDA&apos;s core principles — collecting only what&apos;s needed, using it only for clear purposes,
-          and protecting it with appropriate safeguards — so people can ask for help without becoming the
-          product themselves.
+        <p style={{ margin: '8px 0 0', fontSize: '12px', color: 'var(--tc-text-muted)' }}>
+          Source:{' '}
+          <a
+            href="https://antifraudcentre-centreantifraude.ca/annual-reports-2024-rapports-annuels-eng.htm"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--tc-text-muted)', textDecoration: 'underline' }}
+          >
+            Canadian Anti-Fraud Centre, 2024 Annual Report
+          </a>
         </p>
       </section>
 
