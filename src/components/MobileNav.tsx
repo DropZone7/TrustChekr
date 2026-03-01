@@ -4,13 +4,13 @@ import { useState } from 'react';
 
 const mainLinks = [
   { href: '/', label: 'Home' },
+  { href: '/chat', label: 'Chat' },
   { href: '/learn', label: 'Learn' },
   { href: '/tools', label: 'Tools' },
   { href: '/help', label: 'Support' },
 ];
 
 const moreLinks = [
-  { href: '/chat', label: 'Chat with TrustChekr' },
   { href: '/academy', label: 'Safety Academy' },
   { href: '/threats', label: 'Active Threats' },
   { href: '/report', label: 'Report a Scam' },
