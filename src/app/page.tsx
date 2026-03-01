@@ -80,6 +80,17 @@ export default function Home() {
           </div>
           <ScamRadar />
 
+          {/* Quick Lookup */}
+          <div className="p-4 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <p className="font-semibold text-sm mb-2" style={{ color: 'var(--tc-text-main)' }}>
+              Quick Lookup — check a phone number, email, or URL
+            </p>
+            <a href="/tools/lookup" className="block w-full py-3 rounded-lg text-center text-sm font-medium"
+              style={{ background: 'var(--tc-primary-soft)', color: 'var(--tc-primary)', textDecoration: 'none' }}>
+              Open Scam Lookup →
+            </a>
+          </div>
+
           {/* Recent checks */}
           <ScanHistory onRescan={handleScan} />
 
@@ -108,6 +119,21 @@ export default function Home() {
             <p className="text-xs mt-2" style={{ color: "var(--tc-text-muted)" }}>
               Results in seconds. <a href="/trust-score" className="underline">See how scoring works →</a>
             </p>
+          </div>
+
+          {/* Latest Alerts */}
+          <div className="p-4 rounded-lg" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-border)' }}>
+            <div className="flex items-center justify-between mb-2">
+              <p className="font-semibold text-sm" style={{ color: 'var(--tc-text-main)' }}>Latest Scam Alerts</p>
+              <a href="/alerts" className="text-xs" style={{ color: 'var(--tc-primary)' }}>View all →</a>
+            </div>
+            <p className="text-xs" style={{ color: 'var(--tc-text-muted)' }}>
+              Subscribe to get personalized alerts about scams targeting your area, carrier, and bank.
+            </p>
+            <a href="/alerts" className="inline-block mt-2 px-3 py-1.5 rounded-lg text-xs font-medium"
+              style={{ background: 'var(--tc-primary-soft)', color: 'var(--tc-primary)', textDecoration: 'none' }}>
+              Set up alerts
+            </a>
           </div>
 
           {/* Tools */}

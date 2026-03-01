@@ -9,6 +9,7 @@ import { AffiliateRecommendations } from "./AffiliateRecommendations";
 import { ShareResult } from "./ShareResult";
 import { FeedbackWidget } from "./FeedbackWidget";
 import { gradeToCssColor } from "@/lib/trustScore";
+import { ScamIntelCard } from "./scam-intel/ScamIntelCard";
 
 export default function Results({ result, onReset }: { result: ScanResult; onReset: () => void }) {
   const [showTechnical, setShowTechnical] = useState(false);
@@ -123,6 +124,9 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
           {(result as any).overall_risk_score !== undefined && <p>Overall score: {(result as any).overall_risk_score}</p>}
         </div>
       )}
+
+      {/* Scam Intelligence Match */}
+      <ScamIntelCard content={result.inputValue || ''} />
 
       {/* Detailed analysis */}
       <OsintDetails result={result} />

@@ -3,7 +3,7 @@
 import { BackButton } from '@/components/BackButton';
 
 import { useState } from 'react';
-import { Smartphone, ScanLine, FileText, HeartCrack, Lock, AlertTriangle } from 'lucide-react';
+import { Smartphone, ScanLine, FileText, HeartCrack, Lock, AlertTriangle, Search } from 'lucide-react';
 import { ScreenshotScanner } from '@/components/scanners/ScreenshotScanner';
 import { QRScanner } from '@/components/scanners/QRScanner';
 import { DocumentScanner } from '@/components/scanners/DocumentScanner';
@@ -42,6 +42,19 @@ export default function ToolsPage() {
             <br />All processing happens in your browser — nothing leaves your device.
           </p>
         </div>
+
+        {/* Featured: Scam Lookup */}
+        <a href="/tools/lookup" className="block p-4 rounded-xl transition-all tc-card"
+          style={{ background: 'var(--tc-primary)', color: 'white', textDecoration: 'none' }}>
+          <div className="flex items-center gap-3">
+            <Search size={24} />
+            <div>
+              <p className="font-semibold">Scam Lookup</p>
+              <p className="text-sm opacity-85">Check if a phone number, email, or URL has been reported in a scam</p>
+            </div>
+            <span className="text-xl opacity-75 ml-auto">→</span>
+          </div>
+        </a>
 
         {/* Tool picker */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">

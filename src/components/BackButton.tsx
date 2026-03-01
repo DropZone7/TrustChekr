@@ -29,6 +29,8 @@ const PAGE_NAMES: Record<string, string> = {
   '/safety': 'Safety',
   '/api-docs': 'API Docs',
   '/tools/email-headers': 'Tools',
+  '/tools/lookup': 'Tools',
+  '/alerts': 'Home',
 };
 
 function getPageName(path: string): string {
