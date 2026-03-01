@@ -48,6 +48,12 @@ export default function FounderPage() {
           mind, and I started building immediately.
         </p>
         <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
+          I&apos;m the founder and the direction behind TrustChekr — the vision, the research, the decisions
+          on what to build and why. The technical development is powered by AI tools that I direct and oversee.
+          Every feature, every word on this site, and every decision about what matters was made by a human.
+          The code was written faster than any one person could do alone, and I&apos;m not going to pretend otherwise.
+        </p>
+        <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
           In 2024, Canadians reported over $638 million in fraud losses — and only 5–10% of victims
           actually report. The real number is likely in the billions.
         </p>
