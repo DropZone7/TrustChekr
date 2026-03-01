@@ -19,7 +19,12 @@ export async function GET(req: NextRequest) {
       .limit(limit);
 
     if (type) query = query.eq('type', type);
-    if (value) query = query.ilike('value', `%${value}%`);
+    if (value) {
+      if (value.length < 3 || value.length > 200) {
+        return NextResponse.json({ error: 'Search value must be 3-200 characters.' }, { status: 400 });
+      }
+      query = query.ilike('value', `%${value}%`);
+    }
     if (confirmed === 'true') query = query.eq('confirmed_scam', true);
 
     const { data, error } = await query;

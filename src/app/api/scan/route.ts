@@ -34,11 +34,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Redact obvious sensitive data
+    // Redact obvious sensitive data (SSN/SIN, credit cards, passport numbers)
     const sensitivePatterns = [
-      /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g,
-      /\b\d{9}\b/g,
-      /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g,
+      /\b\d{3}[-.]?\d{2}[-.]?\d{4}\b/g,       // SSN
+      /\b\d{9}\b/g,                             // SIN
+      /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/g, // Credit card
+      /\bpassport\s*#?\s*[A-Z0-9]{6,9}\b/gi,     // Passport numbers (contextual match)
     ];
 
     const cleaned = input.trim();

@@ -7,6 +7,26 @@ const ONE_HOUR_MS = 60 * 60 * 1000;
 const ipCounters = new Map<string, Counter>();
 const newsletterCounters = new Map<string, Counter>();
 
+// Periodic pruning to prevent unbounded memory growth (#8)
+let lastPrune = Date.now();
+const PRUNE_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+
+function pruneExpired(map: Map<string, Counter>) {
+  const now = Date.now();
+  for (const [key, val] of map) {
+    if (now > val.resetAt) map.delete(key);
+  }
+}
+
+function maybePrune() {
+  const now = Date.now();
+  if (now - lastPrune > PRUNE_INTERVAL_MS) {
+    lastPrune = now;
+    pruneExpired(ipCounters);
+    pruneExpired(newsletterCounters);
+  }
+}
+
 function getClientIp(req: NextRequest): string {
   const header = req.headers.get('x-forwarded-for');
   if (!header) return 'unknown';
@@ -36,6 +56,9 @@ function checkLimit(ip: string, map: Map<string, Counter>, limit: number, window
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const ip = getClientIp(req);
+
+  // Prune expired entries periodically
+  maybePrune();
 
   // Rate limit public API: 100/day
   if (pathname.startsWith('/api/v1/')) {
@@ -146,18 +169,92 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // Block admin paths without token (server-side gate)
-  if (pathname.startsWith('/admin/')) {
-    const token = req.nextUrl.searchParams.get('k');
-    const expected = process.env.TC_ADMIN_TOKEN;
-    if (!token || !expected || token !== expected) {
-      return new NextResponse('Unauthorized', { status: 401 });
+  // Rate limit claim endpoints: 10/hour per IP
+  if (pathname.startsWith('/api/claim')) {
+    if (!checkLimit(`claim:${ip}`, newsletterCounters, 10, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
     }
   }
 
-  if (pathname.startsWith('/tc47x/')) {
-    const token = req.nextUrl.searchParams.get('k');
+  // Rate limit certificate generation: 20/hour per IP
+  if (pathname === '/api/certificate') {
+    if (!checkLimit(`cert:${ip}`, newsletterCounters, 20, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many certificate requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit feedback: 20/hour per IP
+  if (pathname.startsWith('/api/feedback')) {
+    if (!checkLimit(`feedback:${ip}`, newsletterCounters, 20, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit scam intel: 60/hour per IP
+  if (pathname.startsWith('/api/scam-intel/')) {
+    if (!checkLimit(`intel:${ip}`, newsletterCounters, 60, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit stats: 30/hour per IP
+  if (pathname.startsWith('/api/stats/')) {
+    if (!checkLimit(`stats:${ip}`, newsletterCounters, 30, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit SMS webhook: 60/hour per IP
+  if (pathname === '/api/sms') {
+    if (!checkLimit(`sms:${ip}`, newsletterCounters, 60, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit digest: 10/hour per IP
+  if (pathname === '/api/digest') {
+    if (!checkLimit(`digest:${ip}`, newsletterCounters, 10, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Rate limit health: 120/hour per IP
+  if (pathname === '/api/health') {
+    if (!checkLimit(`health:${ip}`, newsletterCounters, 120, ONE_HOUR_MS)) {
+      return NextResponse.json(
+        { error: 'Rate limit exceeded.' },
+        { status: 429 }
+      );
+    }
+  }
+
+  // Admin auth — accept both query string and Authorization header (#6)
+  if (pathname.startsWith('/admin/') || pathname.startsWith('/tc47x/')) {
     const expected = process.env.TC_ADMIN_TOKEN;
+    const queryToken = req.nextUrl.searchParams.get('k');
+    const headerToken = req.headers.get('authorization')?.replace('Bearer ', '');
+    const token = headerToken || queryToken;
     if (!token || !expected || token !== expected) {
       return new NextResponse('Unauthorized', { status: 401 });
     }

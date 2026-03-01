@@ -38,6 +38,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Description too long (max 2000 characters)' }, { status: 400 });
     }
 
+    // Validate province against whitelist
+    const VALID_PROVINCES = ['AB','BC','MB','NB','NL','NS','NT','NU','ON','PE','QC','SK','YT',
+      'AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY',
+      'LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND',
+      'OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'];
+    const cleanProvince = province && VALID_PROVINCES.includes(province.toUpperCase?.()) ? province.toUpperCase() : undefined;
+
     // Validate entities
     const validEntities = (entities ?? [])
       .filter((e: any) => e.type && e.value && VALID_ENTITY_TYPES.includes(e.type))
@@ -47,7 +54,7 @@ export async function POST(req: NextRequest) {
       scam_type,
       message: message.trim(),
       entities: validEntities,
-      province,
+      province: cleanProvince,
     });
 
     logAudit('report_submitted', { scam_type: body.scam_type, province: body.province });

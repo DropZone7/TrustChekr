@@ -7,8 +7,15 @@ export async function GET(req: NextRequest) {
   const modules = searchParams.get('modules') ?? '8';
   const date = searchParams.get('date') ?? new Date().toLocaleDateString('en-CA');
 
-  // Sanitize inputs
-  const safeName = name.replace(/[<>&"']/g, '').slice(0, 60);
+  // Sanitize inputs — full XML entity escape + strip control chars
+  const safeName = name
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+    .replace(/[\x00-\x1F\x7F]/g, '')
+    .slice(0, 60);
   const safeModules = Math.min(8, Math.max(1, parseInt(modules) || 8));
 
   const svg = `<?xml version="1.0" encoding="UTF-8"?>
