@@ -145,3 +145,56 @@ export async function scanScamTrends(): Promise<ScamTrend[]> {
 
   return trends;
 }
+
+/**
+ * Map ScamTrend results to the TrendData format used by /api/trends
+ * and write to the cache file for the frontend to consume.
+ */
+export async function updateTrendCache(): Promise<void> {
+  const { writeFile, mkdir } = await import('fs/promises');
+  const { join } = await import('path');
+
+  const trends = await scanScamTrends();
+
+  const severityToLevel: Record<string, 'low' | 'moderate' | 'high' | 'critical'> = {
+    low: 'low',
+    medium: 'moderate',
+    high: 'high',
+    critical: 'critical',
+  };
+
+  const categoryMeta: Record<string, { emoji: string; change: 'rising' | 'stable' | 'falling' }> = {
+    'CRA/IRS Tax Scams': { emoji: '🏛️', change: 'stable' },
+    'Bank Impersonation': { emoji: '🏦', change: 'stable' },
+    'Crypto & Investment Fraud': { emoji: '💰', change: 'rising' },
+    'Romance & Social Engineering': { emoji: '💔', change: 'stable' },
+    'AI-Powered Scams': { emoji: '🤖', change: 'rising' },
+  };
+
+  const categoryNameMap: Record<string, string> = {
+    'CRA/IRS Tax Scams': 'CRA / IRS Tax Scams',
+    'Bank Impersonation': 'Bank Impersonation',
+    'Crypto & Investment Fraud': 'Crypto & Investment',
+    'Romance & Social Engineering': 'Romance Scams',
+    'AI-Powered Scams': 'AI-Powered Scams',
+  };
+
+  const trendData = {
+    lastUpdated: new Date().toISOString(),
+    categories: trends.map((t) => {
+      const meta = categoryMeta[t.category] || { emoji: '⚠️', change: 'stable' as const };
+      return {
+        name: categoryNameMap[t.category] || t.category,
+        level: severityToLevel[t.severity] || 'moderate',
+        emoji: meta.emoji,
+        description: t.description.slice(0, 200),
+        postCount: t.postCount,
+        change: t.postCount > 8 ? 'rising' as const : meta.change,
+      };
+    }),
+  };
+
+  const dataDir = join(process.cwd(), 'data');
+  await mkdir(dataDir, { recursive: true });
+  await writeFile(join(dataDir, 'scam-trends.json'), JSON.stringify(trendData, null, 2));
+}
