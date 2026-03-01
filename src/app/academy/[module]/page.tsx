@@ -24,7 +24,7 @@ const modules: Record<string, ModuleData> = {
     videoTitle: "Fraud Fighters: Hackers expose illegal call centres (Marketplace)",
     videoSource: "CBC Marketplace",
     keyPoints: [
-      "Canadians lost over $569 million to fraud in 2023 according to the CAFC — phone scams are one of the biggest categories",
+      "Canadians lost over $569 million to fraud in 2023 according to the CAFC, and the FTC reported $12.5 billion in total U.S. fraud losses in 2024 — phone scams are one of the biggest categories on both sides of the border",
       "Scammers call pretending to be a grandchild, police officer, or lawyer and create panic with fake emergencies like arrests or hospital stays",
       "In 2023, a Mississauga senior lost $180,000 to a grandparent scam after criminals posed as her grandson and a fake bail officer — these cases happen across Canada every week",
       "Scammers now use AI voice cloning to mimic a real family member's voice — a short clip from social media is all they need to create a convincing fake",
@@ -123,6 +123,7 @@ const modules: Record<string, ModuleData> = {
       "Scammers threaten account closures, legal action, or missed refunds to create panic — real institutions give you time to respond",
       "If a bank texts you a link, do not click it — open your banking app directly or type your bank's URL into your browser",
       "Caller ID and email addresses can be faked to look exactly like real bank or CRA numbers — this is called spoofing",
+      "Interac interception fraud is real — scammers hack email accounts, intercept e-Transfer notifications, and answer the security question before the real recipient does, which is why CIBC and other banks push auto-deposit as the safer option",
       "When in doubt, hang up, find the real number on the back of your card or on your statement, and call back yourself",
       "CRA communicates primarily through My Account online and regular mail — bookmark canada.ca/my-cra-account so you always go to the real site",
       "If someone tells you to buy gift cards or Bitcoin to pay a tax debt, hang up immediately — the CRA accepts payment through banks, not retail stores",
@@ -305,7 +306,7 @@ const modules: Record<string, ModuleData> = {
       "Reverse image search their profile photos by uploading to images.google.com — stolen photos from real people are extremely common",
       "AI can now generate realistic fake profile photos that have never been used before — look for oddly smooth skin, weird earrings, or blurry backgrounds",
       "Anyone who asks for money, crypto, or gift cards in an online relationship is very likely a scammer — no matter how real the connection feels",
-      "Romance scam victims in Canada lost over $50 million in 2023 — these are skilled criminals, not bad dates",
+      "Romance scam victims in Canada lost over $50 million in 2023 — the FBI calls them 'pig butchering' scams, and the average victim loses $170,000 before they realize what happened",
       "A Vancouver woman lost $750,000 over 18 months to a romance scammer pretending to be a European engineer — the emotional manipulation was so strong she borrowed against her home",
       "If someone you have never met in person asks for money, the answer is always no — no matter how urgent the story sounds",
     ],
@@ -394,6 +395,7 @@ const modules: Record<string, ModuleData> = {
       "Real prizes never require you to pay a processing fee, taxes, or shipping upfront — that is always a scam",
       "Legitimate employers never ask you to pay for training, equipment, or a background check before starting work",
       "If investment returns are guaranteed, it is a scam — no investment is risk-free, and anyone who says otherwise is lying",
+      "Cash flipping scams on social media promise to turn $100 into $1,000 through a 'money hack' — you send real money via Cash App or e-Transfer and get nothing back",
       "Cryptocurrency is not regulated like banks — once you send crypto, it is almost impossible to recover",
       "Pig butchering scams are a growing threat — scammers build trust over weeks, then lure you into a fake crypto trading app that shows fake profits until you try to withdraw",
       "Canadians lost over $309 million to investment fraud in 2023 — making it the single most costly fraud type reported to the CAFC",
@@ -450,6 +452,22 @@ const modules: Record<string, ModuleData> = {
           { text: "The screenshots prove it works", correct: false, feedback: "Screenshots of profits are easily faked. This is called a pig butchering scam — the app is fake, the profits are fake, and when you try to withdraw your money, you will be told to pay 'taxes' or 'fees' first. Your money is already gone." },
         ],
       },
+      {
+        id: "q7",
+        scenario: "📱 You download a slick-looking trading app recommended by someone you've been chatting with for two months on WhatsApp. You deposit $500 and the app shows your balance growing to $2,300 within a week. When you try to withdraw, the app says you must pay a 15% 'capital gains tax' before funds can be released.",
+        options: [
+          { text: "This is a pig butchering scam — the profits and the app are fake", correct: true, feedback: "Correct! The app is completely fake — the balance is just numbers on a screen controlled by the scammers. The 'tax' is another way to extract money from you. Real trading platforms deduct taxes automatically or report to the CRA — they never demand upfront tax payments to unlock withdrawals. Canadians lost over $309 million to investment fraud in 2023." },
+          { text: "Paying 15% tax on gains sounds reasonable", correct: false, feedback: "No legitimate platform requires you to pay 'taxes' before withdrawing your own money. This is a pig butchering scam — the app, the profits, and the person who introduced you are all part of the fraud. Real capital gains taxes are handled through your tax return, not paid to an app." },
+        ],
+      },
+      {
+        id: "q8",
+        scenario: "💼 You receive an email: \"Congratulations! You've been hired as a Remote Quality Assurance Specialist for Amazon. Salary: $35/hour. To get started, please purchase your equipment kit ($475) from our approved vendor. You'll be reimbursed on your first paycheque.\"",
+        options: [
+          { text: "This is a fake job scam — real employers never ask you to pay for equipment upfront", correct: true, feedback: "Correct! Amazon and other legitimate employers provide equipment at no cost to you. Any job that requires you to spend money before you start — for equipment, training, background checks, or 'activation fees' — is a scam. The CAFC reported over $30 million lost to job scams in Canada in 2023." },
+          { text: "Amazon is a big company so this is probably real", correct: false, feedback: "Scammers impersonate Amazon, Shopify, and other trusted brands constantly. No legitimate employer asks new hires to buy their own equipment from a specific vendor. Amazon provides all work equipment directly. If you did not apply through amazon.jobs, it is not real." },
+        ],
+      },
     ],
     grokipediaQueries: [
       { label: "What is a pig butchering scam?", query: "pig butchering scam how it works Canada 2026" },
@@ -480,6 +498,8 @@ const modules: Record<string, ModuleData> = {
       "Real companies do not ask you to verify your account through an email link — they tell you to log in through their app or website",
       "When in doubt, type the company's website address directly into your browser — never click the email link",
       "Check for the padlock icon AND the correct domain name — scam sites can have padlocks too, so the padlock alone means nothing",
+      "Coinbase users lost over $65 million to social engineering and phishing in just two months (December 2024 to January 2025) according to blockchain investigator ZachXBT — fake login pages and support impersonation were the top tactics",
+      "Fake Interac e-Transfer confirmation emails are a growing Canadian threat — scammers send them from Gmail addresses mimicking Interac to trick sellers into shipping items before the 'deposit' actually clears",
       "Phishing was the number one fraud type reported to the CAFC in 2023 — over 70,000 reports in a single year",
       "A Brampton family lost $28,000 after clicking a fake Scotiabank text link and entering their login on a lookalike site — the scammers drained the account within an hour",
       "On a phone, press and hold a link to preview the URL before opening it — this is the mobile version of hovering",
@@ -531,6 +551,22 @@ const modules: Record<string, ModuleData> = {
         options: [
           { text: "This is a phishing scam", correct: true, feedback: "Correct! Even though the grammar is perfect and it uses your real name, the domain 'canadapost-delivery.com' is not Canada Post's real domain (canadapost-postescanada.ca). AI helps scammers write flawless emails now — perfect grammar no longer means it is safe." },
           { text: "It looks professional so it might be real", correct: false, feedback: "AI now writes phishing emails with perfect grammar and correct names. The giveaway is the domain: 'canadapost-delivery.com' is fake. Canada Post's real domain is canadapost-postescanada.ca. Always check the sender domain, not the quality of the writing." },
+        ],
+      },
+      {
+        id: "q7",
+        scenario: "📧 Email from \"Netflix Support\" <support@netflix.com> with perfect grammar, your full name, and your correct account email: \"We were unable to process your payment of $16.49. Please update your billing information within 24 hours to avoid service interruption.\" The email has no typos, includes the Netflix logo, and links to a page that looks exactly like the Netflix login.",
+        options: [
+          { text: "Still suspicious — verify by going to netflix.com directly, not through the email link", correct: true, feedback: "Correct! AI-written phishing emails are now flawless — perfect grammar, real logos, and accurate personal details scraped from data breaches. Even the sender address can be spoofed. The ONLY safe approach is to never click email links — open netflix.com yourself or use the app. Over 70,000 phishing reports were filed with the CAFC in 2023." },
+          { text: "It has my real info and perfect grammar so it must be Netflix", correct: false, feedback: "Scammers now use AI to write perfect emails and pull your real name and email from data breaches. The sender address can be spoofed to look exactly like netflix.com. Always go to the website directly — type netflix.com in your browser or open the app — never click the link in the email." },
+        ],
+      },
+      {
+        id: "q8",
+        scenario: "📱 You receive a letter in your mailbox from your electricity provider with a QR code: \"Scan to pay your overdue balance of $127.50 and avoid disconnection.\" You don't remember being behind on payments.",
+        options: [
+          { text: "Do not scan — call your provider directly to verify the bill", correct: true, feedback: "Correct! QR code phishing — called 'quishing' — is a fast-growing scam. Fraudulent QR codes can appear in physical mail, on parking meters, or on posters. Scanning takes you to a fake payment page that steals your card details. Always verify bills by calling the number on your real statement or logging into your account directly." },
+          { text: "QR codes in physical mail must be safe", correct: false, feedback: "Physical mail can be faked too. Scammers send professional-looking letters with QR codes that lead to phishing sites — this is called 'quishing.' A QR code is just a link you cannot read with your eyes, which makes it even more dangerous than a clickable link. Call your provider using the number on a previous bill to verify." },
         ],
       },
     ],
@@ -614,6 +650,22 @@ const modules: Record<string, ModuleData> = {
         options: [
           { text: "This is likely a deepfake video scam", correct: true, feedback: "Correct! Deepfake technology can create realistic videos of anyone — including politicians and celebrities — endorsing products they have never heard of. Always check the original source. If a politician endorsed something real, it would be on official news sites, not just social media ads." },
           { text: "If they are on video it must be real", correct: false, feedback: "Deepfake videos can make anyone appear to say anything. Scammers create fake endorsement videos of trusted public figures to promote fraudulent investments. Always verify through official news sources before believing video endorsements shared on social media." },
+        ],
+      },
+      {
+        id: "q7",
+        scenario: "📹 Your close friend video-calls you on WhatsApp. It looks and sounds exactly like them. They say they're stuck abroad and need you to e-Transfer $1,500 for an emergency flight home. But when you ask about something only they would know, they dodge the question.",
+        options: [
+          { text: "This could be a deepfake video call — verify through another channel before sending money", correct: true, feedback: "Correct! Deepfake video calls can now be generated in real time using a single photo of someone's face. If anything feels off — dodging personal questions, unusual urgency, or unexpected money requests — hang up and contact your friend through a different method like calling their phone number directly or texting them separately." },
+          { text: "I can see their face on video so it must be them", correct: false, feedback: "Real-time deepfake video is now accessible to scammers. They can hijack or fake a video call using AI trained on your friend's photos from social media. Always verify through a separate channel — call their real phone number or ask a question only the real person could answer. Social media fraud cost Canadians over $120 million in 2023." },
+        ],
+      },
+      {
+        id: "q8",
+        scenario: "📱 A verified Instagram account with a blue checkmark DMs you: \"Hey! I have 2 extra Drake concert tickets for tonight — $150 each, way below face value. E-Transfer only, first come first served.\" The account has 45,000 followers and posts that look legitimate.",
+        options: [
+          { text: "This is likely a scam — do not send money via e-Transfer for tickets from a stranger", correct: true, feedback: "Correct! Blue checkmarks can be purchased on most platforms now and do not guarantee trustworthiness. Scammers create or buy verified accounts to sell fake tickets, especially for sold-out events. Once you send an e-Transfer, the money is gone. Buy tickets only through official platforms like Ticketmaster or verified resale sites that offer buyer protection." },
+          { text: "The blue checkmark and followers mean the account is trustworthy", correct: false, feedback: "Blue checkmarks can now be purchased on Instagram, X, and Facebook — they no longer mean the account is verified as authentic. Scammers invest in followers and checkmarks to look credible. Never send e-Transfers to strangers for event tickets. Use official ticket platforms with buyer protection — if the deal sounds too good, it is." },
         ],
       },
     ],
@@ -700,6 +752,22 @@ const modules: Record<string, ModuleData> = {
           { text: "Change your wallet password — that should be enough", correct: false, feedback: "A seed phrase overrides any password. Anyone with your seed phrase has permanent access to that wallet. You must create a brand-new wallet, move remaining funds, and abandon the compromised one entirely. Report to the CAFC and police." },
         ],
       },
+      {
+        id: "q7",
+        scenario: "😰 During a phone scam, you gave the caller your Social Insurance Number (SIN) before realizing it was fraud. What should you do immediately?",
+        options: [
+          { text: "Contact both credit bureaus, report to Service Canada, file a police report, and monitor your credit", correct: true, feedback: "Correct! A compromised SIN is serious. Contact Equifax (1-800-465-7166) and TransUnion (1-800-663-9980) to place fraud alerts. Call Service Canada at 1-866-274-6627 to report the compromised SIN. File a police report and report to the CAFC. Monitor your credit reports closely for at least 6 years — fraudsters may wait months before using a stolen SIN." },
+          { text: "There's nothing you can do once someone has your SIN", correct: false, feedback: "You absolutely can take action. Place fraud alerts with Equifax and TransUnion immediately. Report to Service Canada at 1-866-274-6627 — in severe cases, they may issue a new SIN. File a police report and CAFC report. Check your credit reports regularly. Acting fast limits the damage a stolen SIN can cause." },
+        ],
+      },
+      {
+        id: "q8",
+        scenario: "😰 A stranger online tricked you into sharing an intimate image and is now threatening to send it to your family and coworkers unless you pay $3,000 in Bitcoin. You feel panicked and ashamed. What should you do?",
+        options: [
+          { text: "Do NOT pay — block the scammer, save evidence, and report to police and the CAFC", correct: true, feedback: "Correct! This is sextortion — a crime, and you are the victim. Paying almost always leads to more demands, not silence. Screenshot the threats, block the scammer on all platforms, and report to your local police and the CAFC at 1-888-495-8501. If you are under 18, also report to cybertip.ca. You can contact needhelpnow.ca for support. There is no shame — sextortion affects thousands of Canadians every year." },
+          { text: "Pay quickly so they don't follow through on the threat", correct: false, feedback: "Do NOT pay. In most cases, paying leads to more demands for more money. Block the scammer, screenshot all threats as evidence, and report to police and the CAFC. If you are under 18, report to cybertip.ca. Visit needhelpnow.ca for support. Remember: you are the victim of a crime, and help is available. The RCMP reports sextortion complaints have increased over 300% in recent years." },
+        ],
+      },
     ],
     grokipediaQueries: [
       { label: "What to do after being scammed in Canada", query: "what to do after scam Canada steps recovery 2026" },
@@ -728,7 +796,7 @@ const modules: Record<string, ModuleData> = {
       "You do not need to buy a whole Bitcoin — you can buy $20 worth, just like you do not need to buy an entire gold bar to own gold",
       "A crypto wallet is not like a physical wallet — it does not actually hold your coins, it holds the keys that prove the coins are yours, like a deed proves you own a house",
       "There are two types of wallets — hot wallets are apps on your phone or computer that connect to the internet, and cold wallets are physical devices that stay offline and are much harder to hack",
-      "In Canada, legitimate crypto exchanges must register with provincial securities regulators — Wealthsimple Crypto, Bitbuy, Newton, Shakepay, and Coinbase are all registered",
+      "In Canada, legitimate crypto exchanges must register with provincial securities regulators — Wealthsimple Crypto, Bitbuy, Newton, Shakepay, and Coinbase (registered as a Restricted Dealer in 2024) are all registered",
       "Check any exchange at securities-administrators.ca before sending money — if they are not on the list, do not use them, no matter how professional the website looks",
       "Over 2.5 million Canadians own cryptocurrency according to the Bank of Canada's 2023 survey — this is not a fringe technology, it is part of the financial system now",
       "Crypto prices go up and down — sometimes dramatically — and that is normal, not a sign that something is broken or a scam, the same way stock prices move every day",
@@ -815,6 +883,7 @@ const modules: Record<string, ModuleData> = {
       "Fake crypto exchanges look professional — they have live charts, customer support chatbots, and mobile apps, but the balance you see is not real and you will never be able to withdraw",
       "Bitcoin ATM scams are surging in Canada — there are over 3,000 machines nationwide and scammers instruct victims to deposit cash using a QR code that sends the money directly to the scammer's wallet",
       "If someone says you need to 'act now' or 'the opportunity closes today,' that pressure is the scam — real investments do not have countdown timers",
+      "The FBI's IC3 reported $5.6 billion in crypto fraud losses in 2023 — a 45% jump from the year before — and blockchain investigator ZachXBT tracked over $65 million stolen from Coinbase users alone in just December 2024 through January 2025",
       "Two-factor authentication should be on every crypto account — use an authenticator app like Google Authenticator or Authy, never SMS, because SIM swap attacks can hijack your text messages",
       "If you sent crypto to a scammer, report to the CAFC at 1-888-495-8501, your local police, and the exchange you used to buy the crypto — exchanges can sometimes flag or freeze receiving wallets",
       "If you shared your seed phrase, create a brand-new wallet on a clean device and move any remaining funds immediately — the compromised wallet is permanently unsafe",
