@@ -228,7 +228,7 @@ export function EmailHeaderAnalyzer() {
               Risk score: {parsed.overallRisk.score} / 100. This is an automated signal to help you decide whether to trust the message — not a guarantee.
             </p>
             {parsed.overallRisk.reasons.length > 0 && (
-              <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.1rem', fontSize: '0.9rem', color: '#374151' }}>
+              <ul style={{ margin: '0.5rem 0 0', paddingLeft: '1.1rem', fontSize: '0.9rem', color: 'var(--tc-text-main)' }}>
                 {parsed.overallRisk.reasons.map((r, idx) => <li key={idx} style={{ marginBottom: '0.15rem' }}>{r}</li>)}
               </ul>
             )}
@@ -245,7 +245,7 @@ export function EmailHeaderAnalyzer() {
               ].map(({ label, value }) => (
                 <div key={label}>
                   <div style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--tc-text-muted)', marginBottom: '0.15rem' }}>{label}</div>
-                  <div style={{ wordBreak: 'break-all' }}>{value ?? <span style={{ color: '#9ca3af' }}>Not found</span>}</div>
+                  <div style={{ wordBreak: 'break-all' }}>{value ?? <span style={{ color: 'var(--tc-text-muted)' }}>Not found</span>}</div>
                 </div>
               ))}
             </div>
@@ -288,7 +288,7 @@ export function EmailHeaderAnalyzer() {
               <p style={{ margin: '0 0 0.5rem', fontSize: '0.9rem', color: 'var(--tc-text-muted)' }}>
                 Read from top to bottom. The first hop is the original sending server.
               </p>
-              <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', color: '#374151' }}>
+              <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', color: 'var(--tc-text-main)' }}>
                 {parsed.hops.map((hop, idx) => (
                   <li key={idx} style={{ marginBottom: '0.4rem' }}>
                     <div><strong>From:</strong> {hop.from ?? 'Unknown'} <strong>→ By:</strong> {hop.by ?? 'Unknown'}</div>
@@ -303,7 +303,7 @@ export function EmailHeaderAnalyzer() {
           {parsed.spoofingSignals.length > 0 && (
             <section style={{ borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.9rem' }}>
               <h2 style={{ margin: '0 0 0.5rem', fontSize: '1.05rem', fontWeight: 600 }}>Spoofing indicators</h2>
-              <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.9rem', color: '#374151' }}>
+              <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.9rem', color: 'var(--tc-text-main)' }}>
                 {parsed.spoofingSignals.map((s, idx) => <li key={idx} style={{ marginBottom: '0.15rem' }}>{s}</li>)}
               </ul>
             </section>

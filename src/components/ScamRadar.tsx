@@ -47,14 +47,6 @@ const CHANGE_ARROWS: Record<string, string> = {
   falling: '↓',
 };
 
-const CATEGORY_LINKS: Record<string, string> = {
-  'CRA / IRS Tax Scams': '/academy/tax-scams',
-  'Bank Impersonation': '/academy/bank-scams',
-  'Crypto & Investment': '/academy/crypto-scams',
-  'Romance Scams': '/academy/romance-scams',
-  'AI-Powered Scams': '/academy/ai-scams',
-};
-
 function timeAgo(dateStr: string): string {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
@@ -74,11 +66,8 @@ export default function ScamRadar() {
       const res = await fetch('/api/trends');
       const json = await res.json();
       setData(json);
-    } catch {
-      // Keep existing data on error
-    } finally {
-      setLoading(false);
-    }
+    } catch { /* keep existing */ }
+    finally { setLoading(false); }
   }, []);
 
   useEffect(() => {
@@ -90,10 +79,10 @@ export default function ScamRadar() {
   if (loading) {
     return (
       <div style={{
-        background: '#111',
+        background: 'var(--tc-surface)',
         borderRadius: 12,
         padding: 24,
-        border: '1px solid #222',
+        border: '1px solid var(--tc-border)',
         animation: 'pulse 2s ease-in-out infinite',
       }}>
         <div style={{ color: 'var(--tc-text-muted)', textAlign: 'center' }}>Loading threat data...</div>
@@ -107,9 +96,9 @@ export default function ScamRadar() {
 
   return (
     <div style={{
-      background: '#0a0a0a',
+      background: 'var(--tc-surface)',
       borderRadius: 12,
-      border: `1px solid ${hasCritical ? '#ef444466' : '#222'}`,
+      border: `1px solid ${hasCritical ? '#ef444466' : 'var(--tc-border)'}`,
       overflow: 'hidden',
     }}>
       {/* Header */}
@@ -118,17 +107,16 @@ export default function ScamRadar() {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '16px 20px',
-        borderBottom: '1px solid #1a1a1a',
-        background: '#111',
+        borderBottom: '1px solid var(--tc-border)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <span style={{ fontSize: 20 }}>📡</span>
-          <span style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>Scam Radar</span>
+          <Shield size={20} strokeWidth={1.75} style={{ color: 'var(--tc-primary)' }} />
+          <span style={{ color: 'var(--tc-text-main)', fontWeight: 700, fontSize: 16 }}>Scam Radar</span>
           <span style={{
             display: 'inline-flex',
             alignItems: 'center',
             gap: 4,
-            background: 'rgba(239, 68, 68, 0.2)',
+            background: 'rgba(239, 68, 68, 0.15)',
             color: '#ef4444',
             fontSize: 11,
             fontWeight: 600,
@@ -137,11 +125,8 @@ export default function ScamRadar() {
             letterSpacing: 0.5,
           }}>
             <span style={{
-              width: 6,
-              height: 6,
-              borderRadius: '50%',
-              background: '#ef4444',
-              display: 'inline-block',
+              width: 6, height: 6, borderRadius: '50%',
+              background: '#ef4444', display: 'inline-block',
               animation: 'blink 1.5s ease-in-out infinite',
             }} />
             LIVE
@@ -158,13 +143,12 @@ export default function ScamRadar() {
           const color = LEVEL_COLORS[cat.level];
           const bg = LEVEL_BG[cat.level];
           const arrow = CHANGE_ARROWS[cat.change];
-          const link = CATEGORY_LINKS[cat.name] || '/academy';
           const isPulsing = cat.level === 'critical' || cat.level === 'high';
 
           return (
             <Link
               key={cat.name}
-              href={link}
+              href="/academy"
               style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
             >
               <div style={{
@@ -175,12 +159,9 @@ export default function ScamRadar() {
                 transition: 'background 0.2s',
                 cursor: 'pointer',
                 borderLeft: `3px solid ${color}`,
-              }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#151515')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-              >
+              }}>
                 {/* Icon */}
-                <span style={{ fontSize: 24, flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                <span style={{ fontSize: 24, flexShrink: 0, display: 'flex', alignItems: 'center', color: 'var(--tc-text-muted)' }}>
                   {(() => {
                     const IconComp = EMOJI_ICON_MAP[cat.emoji] || Shield;
                     return <IconComp size={24} strokeWidth={1.75} />;
@@ -214,14 +195,14 @@ export default function ScamRadar() {
                 {/* Trend + Count */}
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <div style={{
-                    color: cat.change === 'rising' ? '#ef4444' : cat.change === 'falling' ? '#22c55e' : '#888',
+                    color: cat.change === 'rising' ? '#ef4444' : cat.change === 'falling' ? '#22c55e' : 'var(--tc-text-muted)',
                     fontSize: 18,
                     fontWeight: 700,
                   }}>
                     {arrow}
                   </div>
                   {cat.postCount > 0 && (
-                    <div style={{ color: '#555', fontSize: 11 }}>
+                    <div style={{ color: 'var(--tc-text-muted)', fontSize: 11 }}>
                       {cat.postCount.toLocaleString()} reports
                     </div>
                   )}
@@ -235,20 +216,19 @@ export default function ScamRadar() {
       {/* Footer */}
       <div style={{
         padding: '10px 20px',
-        borderTop: '1px solid #1a1a1a',
+        borderTop: '1px solid var(--tc-border)',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <span style={{ color: '#444', fontSize: 10 }}>
-          Powered by real-time X data via Grok
+        <span style={{ color: 'var(--tc-text-muted)', fontSize: 10 }}>
+          Powered by real-time data
         </span>
-        <Link href="/academy" style={{ color: '#A40000', fontSize: 11, textDecoration: 'none', fontWeight: 600 }}>
+        <Link href="/academy" style={{ color: 'var(--tc-primary)', fontSize: 11, textDecoration: 'none', fontWeight: 600 }}>
           Learn to protect yourself →
         </Link>
       </div>
 
-      {/* Animations */}
       <style>{`
         @keyframes blink {
           0%, 100% { opacity: 1; }
