@@ -23,6 +23,7 @@ import cryptoRules from './rules/crypto.json';
 import techSupportRules from './rules/tech_support.json';
 import rentalRules from './rules/rental.json';
 import phishingRules from './rules/phishing.json';
+import domainRules from './rules/domains.json';
 
 /**
  * Combine all loaded rule sets into a single array.
@@ -40,9 +41,7 @@ function getAllTextPatterns(): ScamPattern[] {
 }
 
 function getAllDomainPatterns(): DomainPattern[] {
-  // Domain patterns can be embedded in the same rule files
-  // or in a separate domains.json — we'll add as rules arrive
-  return [] as DomainPattern[];
+  return domainRules.domains as DomainPattern[];
 }
 
 // ── Human-Readable Category Names ────────────────────────────

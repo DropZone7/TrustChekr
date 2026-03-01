@@ -1,0 +1,76 @@
+{
+  "domains": [
+    {
+      "id": "domain_cra_fake",
+      "pattern": "(cra|canadarevenue|revenuecanada)[-_.]?(secure|refund|payment|verify|login)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "CRA_IMPERSONATION",
+      "description": "Fake CRA domain combining CRA terms with secure/refund/login keywords."
+    },
+    {
+      "id": "domain_rbc_fake",
+      "pattern": "(rbc|royalbank)[-_.]?(secure|update|alert|verify|banking)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake RBC domain using security/update/auth keywords."
+    },
+    {
+      "id": "domain_td_fake",
+      "pattern": "(td|tdcanadatrust)[-_.]?(secure|login|verify|alert)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake TD domain for phishing."
+    },
+    {
+      "id": "domain_scotia_fake",
+      "pattern": "(scotiabank|scotia)[-_.]?(online|secure|login)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake Scotiabank login/secure domain."
+    },
+    {
+      "id": "domain_bmo_fake",
+      "pattern": "(bmo|bankofmontreal)[-_.]?(secure|verify|online)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake BMO online/secure domain."
+    },
+    {
+      "id": "domain_cibc_fake",
+      "pattern": "(cibc)[-_.]?(secure|login|online|verify)\\.",
+      "type": "regex",
+      "weight": 8,
+      "category": "BANK_IMPERSONATION",
+      "description": "Fake CIBC domain."
+    },
+    {
+      "id": "domain_interac_fake",
+      "pattern": "(interac)[-_.]?(deposit|claim|refund|secure)\\.",
+      "type": "regex",
+      "weight": 9,
+      "category": "INTERAC_PHISHING",
+      "description": "Fake Interac e-Transfer deposit/claim domain."
+    },
+    {
+      "id": "domain_crypto_fake",
+      "pattern": "(crypto|coin|btc|usdt|eth)[-_.]?(pro|trade|profit|max|capital)\\.",
+      "type": "regex",
+      "weight": 7,
+      "category": "CRYPTO_INVESTMENT",
+      "description": "Generic fake crypto trading platform domain."
+    },
+    {
+      "id": "domain_rental_fake",
+      "pattern": "(rent|rental|apartment|condo)[-_.]?(deals|cheap|now|canada)\\.",
+      "type": "regex",
+      "weight": 6,
+      "category": "RENTAL_SCAM",
+      "description": "Suspicious rental listing aggregator used in scams."
+    }
+  ]
+}
