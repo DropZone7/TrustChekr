@@ -36,7 +36,7 @@ export default function FounderPage() {
         <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
           I&apos;ve spent years in telecom and tech — from Samsung to Sprint, learning networking from the
           inside out. Somewhere along the way, I stumbled into cybersecurity (let&apos;s say I learned what&apos;s
-          possible when you&apos;re curious enough). That rabbit hole led me to crypto, and that showed me a
+          possible when you&apos;re curious enough). That rabbit hole led me to crypto, which showed me a
           much deeper problem: regular people repeatedly getting destroyed by scams.
         </p>
         <p style={{ margin: 0, fontSize: '14px', lineHeight: 1.7 }}>
