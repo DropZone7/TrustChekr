@@ -371,7 +371,7 @@ export default async function ScamCheckArticlePage({ params }: { params: Promise
               padding: "0.625rem 1.25rem",
               backgroundColor: "var(--tc-primary)",
               color: "white",
-              borderRadius: "8px",
+              borderRadius: "12px",
               textDecoration: "none",
               fontWeight: 700,
               fontSize: "0.9375rem",

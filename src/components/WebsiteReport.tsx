@@ -157,7 +157,7 @@ function SectionCard({ title, defaultOpen = false, children, flagged }: {
       background: "var(--tc-surface)",
       border: `1px solid ${flagged ? "var(--tc-danger, #A40000)" : "var(--tc-border)"}`,
       borderLeft: flagged ? "4px solid var(--tc-danger, #A40000)" : "4px solid var(--tc-border)",
-      borderRadius: "10px", overflow: "hidden",
+      borderRadius: "12px", overflow: "hidden",
     }}>
       <button onClick={() => setOpen((prev) => !prev)} aria-expanded={open}
         style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
@@ -447,7 +447,7 @@ export default function WebsiteReport({ domain, osint, trustScore }: WebsiteRepo
       {/* Report Header */}
       <div style={{
         background: "var(--tc-surface)", border: "1px solid var(--tc-border)",
-        borderTop: "4px solid var(--tc-primary, #A40000)", borderRadius: "10px",
+        borderTop: "4px solid var(--tc-primary, #A40000)", borderRadius: "12px",
         padding: "24px", display: "flex", flexDirection: "column", alignItems: "center", gap: "20px", textAlign: "center",
       }}>
         <div>
@@ -471,7 +471,7 @@ export default function WebsiteReport({ domain, osint, trustScore }: WebsiteRepo
       {/* Footer Disclaimer */}
       <div style={{
         padding: "16px 20px", background: "var(--tc-surface)", border: "1px solid var(--tc-border)",
-        borderRadius: "10px", fontSize: "13px", color: "var(--tc-text-muted)", lineHeight: "1.7", textAlign: "center",
+        borderRadius: "12px", fontSize: "13px", color: "var(--tc-text-muted)", lineHeight: "1.7", textAlign: "center",
       }}>
         TrustChekr provides this report for informational purposes only. Scores and signals are probabilistic and may not reflect real-time changes.
         Report scam websites to the <strong>Canadian Anti-Fraud Centre</strong> at <strong>antifraudcentre-centreantifraude.ca</strong> or call <strong>1-888-495-8501</strong>.

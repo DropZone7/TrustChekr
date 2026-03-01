@@ -123,7 +123,7 @@ export default function ScamRadar() {
             fontSize: 11,
             fontWeight: 600,
             padding: '2px 8px',
-            borderRadius: 10,
+            borderRadius: 12,
             letterSpacing: 0.5,
           }}>
             <span style={{
@@ -179,7 +179,7 @@ export default function ScamRadar() {
                     <span style={{
                       display: 'inline-block',
                       padding: '1px 8px',
-                      borderRadius: 6,
+                      borderRadius: 4,
                       fontSize: 11,
                       fontWeight: 700,
                       textTransform: 'uppercase',

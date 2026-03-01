@@ -81,7 +81,7 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
             <button
               onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
               disabled={!input.trim()}
-              className="px-6 py-2.5 rounded-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 rounded-lg font-semibold text-white transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed tc-scan-btn"
               style={{ background: input.trim() ? "var(--tc-primary)" : "var(--tc-border)" }}
             >
               Check this

@@ -191,7 +191,7 @@ export function EmailHeaderAnalyzer() {
   const riskBadge = useMemo(() => (parsed ? getRiskBadge(parsed.overallRisk) : null), [parsed]);
 
   return (
-    <section style={{ borderRadius: '16px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', padding: '1.25rem 1.1rem 1.5rem', fontSize: '18px' }}>
+    <section style={{ borderRadius: '20px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', padding: '1.25rem 1.1rem 1.5rem', fontSize: '18px' }}>
       {/* Input */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
         <label htmlFor="email-headers" style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--tc-primary)' }}>

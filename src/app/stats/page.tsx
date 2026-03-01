@@ -107,7 +107,7 @@ export default function StatsPage() {
             key={card.label}
             style={{
               padding: '12px 14px',
-              borderRadius: '10px',
+              borderRadius: '12px',
               border: '1px solid var(--tc-border)',
               backgroundColor: 'var(--tc-surface)',
             }}
@@ -246,7 +246,7 @@ export default function StatsPage() {
           style={{
             display: 'inline-block',
             padding: '10px 24px',
-            borderRadius: '8px',
+            borderRadius: '12px',
             backgroundColor: 'var(--tc-primary)',
             color: '#fff',
             fontWeight: 600,

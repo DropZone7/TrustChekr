@@ -35,14 +35,14 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
 
   if (submitted) {
     return (
-      <div style={{ padding: '12px 16px', borderRadius: '10px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', textAlign: 'center', fontSize: '14px', color: 'var(--tc-text-muted)' }}>
+      <div style={{ padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', textAlign: 'center', fontSize: '14px', color: 'var(--tc-text-muted)' }}>
         ✅ Thanks for your feedback — it helps us improve.
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '12px 16px', borderRadius: '10px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+    <div style={{ padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
       <p style={{ margin: 0, fontSize: '14px', fontWeight: 600, color: 'var(--tc-text-main)' }}>
         Was this result helpful?
       </p>
@@ -52,7 +52,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
           disabled={sending}
           onClick={() => submit(true)}
           style={{
-            padding: '8px 20px', borderRadius: '8px', border: '1px solid var(--tc-border)',
+            padding: '8px 20px', borderRadius: '12px', border: '1px solid var(--tc-border)',
             backgroundColor: 'var(--tc-primary-soft)', color: 'var(--tc-text-main)',
             fontSize: '14px', cursor: 'pointer', fontWeight: 500,
           }}
@@ -64,7 +64,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
           disabled={sending}
           onClick={() => setShowComment(true)}
           style={{
-            padding: '8px 20px', borderRadius: '8px', border: '1px solid var(--tc-border)',
+            padding: '8px 20px', borderRadius: '12px', border: '1px solid var(--tc-border)',
             backgroundColor: 'var(--tc-surface)', color: 'var(--tc-text-main)',
             fontSize: '14px', cursor: 'pointer', fontWeight: 500,
           }}
@@ -81,7 +81,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
             maxLength={500}
             rows={2}
             style={{
-              width: '100%', padding: '8px 10px', borderRadius: '8px',
+              width: '100%', padding: '8px 10px', borderRadius: '12px',
               border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-bg)',
               color: 'var(--tc-text-main)', fontSize: '13px', resize: 'vertical',
               fontFamily: 'inherit',
@@ -92,7 +92,7 @@ export function FeedbackWidget({ scanType, riskLevel }: FeedbackWidgetProps) {
             disabled={sending}
             onClick={() => submit(false, comment)}
             style={{
-              alignSelf: 'flex-start', padding: '6px 16px', borderRadius: '8px',
+              alignSelf: 'flex-start', padding: '6px 16px', borderRadius: '12px',
               border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-primary)',
               color: '#fff', fontSize: '13px', cursor: 'pointer', fontWeight: 500,
             }}

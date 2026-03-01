@@ -116,7 +116,7 @@ export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: str
   if (items.length === 0) return null;
 
   return (
-    <section style={{ marginTop: '1.5rem', borderRadius: '16px', border: '1px solid var(--tc-border)', padding: '1rem', backgroundColor: 'var(--tc-surface)' }}>
+    <section style={{ marginTop: '1.5rem', borderRadius: '20px', border: '1px solid var(--tc-border)', padding: '1rem', backgroundColor: 'var(--tc-surface)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 600, color: 'var(--tc-primary)' }}>Recent Scans</h2>
         <div style={{ display: 'flex', gap: '0.5rem', fontSize: '0.8rem' }}>
@@ -151,7 +151,7 @@ export function ScanHistory({ onRescan }: { onRescan?: (input: string, type: str
         {filtered.map((item) => {
           const risk = riskColors[item.riskLevel] ?? riskColors.low;
           return (
-            <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.6rem', borderRadius: '10px', border: '1px solid var(--tc-border)', fontSize: '0.9rem' }}>
+            <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.6rem', borderRadius: '12px', border: '1px solid var(--tc-border)', fontSize: '0.9rem' }}>
               <span style={{ fontSize: '1.1rem' }}>{typeIcon[item.type] ?? '?'}</span>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{truncate(item.input)}</div>

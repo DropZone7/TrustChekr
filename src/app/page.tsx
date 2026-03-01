@@ -102,19 +102,19 @@ export default function Home() {
 
           {/* Tools */}
           <div className="flex gap-2 pt-2">
-            <a href="/tools" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
+            <a href="/tools" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors tc-card" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
               Screenshot &amp; QR Scanner
             </a>
-            <a href="/chat" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
+            <a href="/chat" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors tc-card" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
               Chat with TrustChekr
             </a>
-            <a href="/tools/email-headers" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
+            <a href="/tools/email-headers" className="flex-1 p-3 rounded-lg text-center text-sm font-medium transition-colors tc-card" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", color: "var(--tc-text-main)" }}>
               Email Header Check
             </a>
           </div>
 
           {/* Academy — one line, not a billboard */}
-          <a href="/academy" className="block p-4 rounded-lg transition-colors" style={{ background: "var(--tc-primary)", color: "white" }}>
+          <a href="/academy" className="block p-4 rounded-lg transition-colors tc-card" style={{ background: "var(--tc-primary)", color: "white" }}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-semibold">Free Safety Academy</p>

@@ -63,7 +63,7 @@ export function ShareResult({ result }: ShareResultProps) {
         style={{
           height: '44px',
           padding: '0 16px',
-          borderRadius: '8px',
+          borderRadius: '12px',
           border: '1px solid var(--tc-border)',
           backgroundColor: 'var(--tc-primary-soft)',
           color: 'var(--tc-text-main)',
@@ -86,7 +86,7 @@ export function ShareResult({ result }: ShareResultProps) {
         style={{
           height: '44px',
           padding: '0 16px',
-          borderRadius: '8px',
+          borderRadius: '12px',
           border: '1px solid var(--tc-border)',
           backgroundColor: 'var(--tc-primary)',
           color: '#ffffff',
@@ -109,7 +109,7 @@ export function ShareResult({ result }: ShareResultProps) {
         style={{
           height: '44px',
           padding: '0 16px',
-          borderRadius: '8px',
+          borderRadius: '12px',
           border: '1px solid var(--tc-border)',
           backgroundColor: 'var(--tc-surface)',
           color: 'var(--tc-text-main)',

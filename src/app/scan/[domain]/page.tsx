@@ -143,7 +143,7 @@ function NextStepsList({ steps }: { steps: string[] }) {
 
 function SectionBox({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "10px", padding: "24px", display: "flex", flexDirection: "column", gap: "16px" }}>
+    <section style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "12px", padding: "24px", display: "flex", flexDirection: "column", gap: "16px" }}>
       <h2 style={{ fontSize: "18px", fontWeight: "700", color: "var(--tc-text-main)", margin: 0, paddingBottom: "12px", borderBottom: "1px solid var(--tc-border)" }}>{title}</h2>
       {children}
     </section>
@@ -153,10 +153,10 @@ function SectionBox({ title, children }: { title: string; children: React.ReactN
 function ErrorState({ domain }: { domain: string }) {
   return (
     <main style={{ maxWidth: "720px", margin: "40px auto", padding: "0 16px", fontFamily: "system-ui, -apple-system, sans-serif", display: "flex", flexDirection: "column", gap: "24px" }}>
-      <div style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderTop: "4px solid var(--tc-danger, #A40000)", borderRadius: "10px", padding: "32px", textAlign: "center" }}>
+      <div style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderTop: "4px solid var(--tc-danger, #A40000)", borderRadius: "12px", padding: "32px", textAlign: "center" }}>
         <h1 style={{ fontSize: "22px", fontWeight: "700", color: "var(--tc-text-main)", margin: "0 0 12px" }}>Could not scan {domain}</h1>
         <p style={{ fontSize: "16px", color: "var(--tc-text-muted)", margin: "0 0 24px" }}>We were unable to retrieve a scan report for this domain right now. Please try again in a moment.</p>
-        <a href="/" style={{ display: "inline-block", padding: "12px 28px", background: "var(--tc-primary, #A40000)", color: "#fff", borderRadius: "8px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Check another website</a>
+        <a href="/" style={{ display: "inline-block", padding: "12px 28px", background: "var(--tc-primary, #A40000)", color: "#fff", borderRadius: "12px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Check another website</a>
       </div>
     </main>
   );
@@ -196,14 +196,14 @@ export default async function DomainReportPage({ params }: PageProps) {
           </div>
 
           {isHighRisk && (
-            <div role="alert" style={{ width: "100%", background: "rgba(164,0,0,0.08)", border: "1px solid var(--tc-danger, #A40000)", borderRadius: "8px", padding: "14px 18px", fontSize: "16px", color: "var(--tc-danger, #A40000)", fontWeight: "500", lineHeight: "1.6", textAlign: "left" }}>
+            <div role="alert" style={{ width: "100%", background: "rgba(164,0,0,0.08)", border: "1px solid var(--tc-danger, #A40000)", borderRadius: "12px", padding: "14px 18px", fontSize: "16px", color: "var(--tc-danger, #A40000)", fontWeight: "500", lineHeight: "1.6", textAlign: "left" }}>
               Do not enter any personal information, passwords, or payment details on this site. If you have already done so, contact your bank immediately.
             </div>
           )}
         </div>
 
         {/* When checked */}
-        <div style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "8px", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
+        <div style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "12px", padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
           <span style={{ fontSize: "15px", color: "var(--tc-text-muted)" }}>Last checked</span>
           <span style={{ fontSize: "15px", fontWeight: "600", color: "var(--tc-text-main)" }}>{scannedAt}</span>
         </div>
@@ -242,14 +242,14 @@ export default async function DomainReportPage({ params }: PageProps) {
         )}
 
         {/* Disclaimer */}
-        <div style={{ padding: "16px 20px", background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "8px", fontSize: "13px", color: "var(--tc-text-muted)", lineHeight: "1.7" }}>
+        <div style={{ padding: "16px 20px", background: "var(--tc-surface)", border: "1px solid var(--tc-border)", borderRadius: "12px", fontSize: "13px", color: "var(--tc-text-muted)", lineHeight: "1.7" }}>
           Automated analysis as of {scannedAt}. Results may change as new information becomes available. This report is provided for informational purposes only and does not constitute legal or financial advice. TrustChekr uses probabilistic signals — a low score does not guarantee the site is free from risk.
         </div>
 
         {/* CTA row */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
-          <a href="/" style={{ display: "inline-block", padding: "14px 28px", background: "var(--tc-primary, #A40000)", color: "#fff", borderRadius: "8px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Check another website</a>
-          <a href={`/report?domain=${encodeURIComponent(domain)}`} style={{ display: "inline-block", padding: "14px 28px", background: "transparent", color: "var(--tc-primary, #A40000)", border: "2px solid var(--tc-primary, #A40000)", borderRadius: "8px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Report this website</a>
+          <a href="/" style={{ display: "inline-block", padding: "14px 28px", background: "var(--tc-primary, #A40000)", color: "#fff", borderRadius: "12px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Check another website</a>
+          <a href={`/report?domain=${encodeURIComponent(domain)}`} style={{ display: "inline-block", padding: "14px 28px", background: "transparent", color: "var(--tc-primary, #A40000)", border: "2px solid var(--tc-primary, #A40000)", borderRadius: "12px", textDecoration: "none", fontSize: "16px", fontWeight: "600" }}>Report this website</a>
         </div>
       </main>
     </>

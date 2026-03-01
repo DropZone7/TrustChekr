@@ -61,7 +61,7 @@ export default function FeedbackAdminPage() {
       </section>
 
       {error && !loading && (
-        <div style={{ marginBottom: '16px', padding: '8px 10px', borderRadius: '8px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', color: 'var(--tc-text-main)', fontSize: '13px' }}>
+        <div style={{ marginBottom: '16px', padding: '8px 10px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', color: 'var(--tc-text-main)', fontSize: '13px' }}>
           {error}
         </div>
       )}
@@ -74,10 +74,10 @@ export default function FeedbackAdminPage() {
           { label: 'Positive feedback', value: loading ? null : String(data?.helpfulCount ?? 0) },
           { label: 'Negative feedback', value: loading ? null : String(data?.notHelpfulCount ?? 0) },
         ].map((card) => (
-          <div key={card.label} style={{ padding: '12px 14px', borderRadius: '10px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)' }}>
+          <div key={card.label} style={{ padding: '12px 14px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)' }}>
             <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--tc-text-muted)', marginBottom: '4px', letterSpacing: '0.04em' }}>{card.label}</div>
             {card.value === null ? (
-              <div style={{ height: '22px', borderRadius: '8px', backgroundColor: 'var(--tc-primary-soft)', opacity: 0.4 }} />
+              <div style={{ height: '22px', borderRadius: '12px', backgroundColor: 'var(--tc-primary-soft)', opacity: 0.4 }} />
             ) : (
               <div style={{ fontSize: '22px', fontWeight: 700 }}>{card.value}</div>
             )}
@@ -153,7 +153,7 @@ export default function FeedbackAdminPage() {
                 const showLabel = index === 0 || index === arr.length - 1 || index === Math.floor(arr.length / 2);
                 return (
                   <div key={item.date} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '4px' }}>
-                    <div style={{ width: '100%', height: `${heightPercent}%`, borderRadius: '6px 6px 0 0', backgroundColor: 'var(--tc-primary)' }} />
+                    <div style={{ width: '100%', height: `${heightPercent}%`, borderRadius: '4px 4px 0 0', backgroundColor: 'var(--tc-primary)' }} />
                     {showLabel && <span style={{ fontSize: '9px', color: 'var(--tc-text-muted)' }}>{item.date.slice(5)}</span>}
                   </div>
                 );
@@ -171,7 +171,7 @@ export default function FeedbackAdminPage() {
           {!loading && data && data.recentNegative.length > 0 && (
             <div style={{ marginTop: '8px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {data.recentNegative.map((item) => (
-                <div key={item.id} style={{ padding: '8px 10px', borderRadius: '8px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', fontSize: '12px' }}>
+                <div key={item.id} style={{ padding: '8px 10px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)', fontSize: '12px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', gap: '8px' }}>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                       {item.riskLevel && <span style={{ padding: '2px 6px', borderRadius: '999px', border: '1px solid var(--tc-border)', fontSize: '10px', backgroundColor: 'var(--tc-primary-soft)' }}>{item.riskLevel}</span>}

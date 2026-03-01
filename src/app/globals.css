@@ -28,9 +28,13 @@ html.text-xl { font-size: 22px; }
 body {
   background: var(--tc-bg);
   color: var(--tc-text-main);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -60,6 +64,35 @@ body {
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+/* Touch target minimum size */
+button, a, [role="button"], input[type="submit"], input[type="button"] {
+  min-height: 44px;
+}
+
+/* Micro-interactions */
+a {
+  transition: color 0.2s ease;
+}
+
+/* Card hover effects - applied via utility class */
+.tc-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Scan button hover */
+.tc-scan-btn {
+  transition: transform 0.15s ease, background-color 0.2s ease;
+}
+
+.tc-scan-btn:hover:not(:disabled) {
+  transform: scale(1.02);
 }
 
 /* Focus ring for keyboard navigation */

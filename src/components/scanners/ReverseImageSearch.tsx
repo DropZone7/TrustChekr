@@ -67,20 +67,20 @@ export function ReverseImageSearch() {
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '1.25rem' }}>
               <button
                 onClick={() => window.open('https://images.google.com', '_blank')}
-                style={{ padding: '0.65rem 1.25rem', background: 'var(--tc-primary)', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}
+                style={{ padding: '0.65rem 1.25rem', background: 'var(--tc-primary)', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}
               >
                 Search Google Images
               </button>
               <button
                 onClick={handleTinEyeSearch}
                 disabled={!file}
-                style={{ padding: '0.65rem 1.25rem', background: '#f8c200', color: '#000', border: 'none', borderRadius: '8px', fontWeight: 600, cursor: file ? 'pointer' : 'not-allowed', fontSize: '0.9rem', opacity: file ? 1 : 0.6 }}
+                style={{ padding: '0.65rem 1.25rem', background: '#f8c200', color: '#000', border: 'none', borderRadius: '12px', fontWeight: 600, cursor: file ? 'pointer' : 'not-allowed', fontSize: '0.9rem', opacity: file ? 1 : 0.6 }}
               >
                 🕵️ Search TinEye
               </button>
             </div>
 
-            <div style={{ background: 'var(--tc-primary-soft)', borderRadius: '8px', padding: '0.75rem 1rem', marginBottom: '1rem' }}>
+            <div style={{ background: 'var(--tc-primary-soft)', borderRadius: '12px', padding: '0.75rem 1rem', marginBottom: '1rem' }}>
               <p style={{ color: 'var(--tc-text-main)', fontSize: '0.85rem', fontWeight: 500, margin: 0 }}>
                 💡 Drag your image into Google Images to search
               </p>

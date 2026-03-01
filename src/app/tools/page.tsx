@@ -38,7 +38,7 @@ export default function ToolsPage() {
             <button
               key={tool.id}
               onClick={() => setActiveTool(activeTool === tool.id ? null : tool.id)}
-              className="p-4 rounded-xl text-center transition-all"
+              className="p-4 rounded-xl text-center transition-all tc-card"
               style={{
                 background: activeTool === tool.id ? 'var(--tc-primary)' : 'var(--tc-surface)',
                 color: activeTool === tool.id ? 'white' : 'var(--tc-text-main)',

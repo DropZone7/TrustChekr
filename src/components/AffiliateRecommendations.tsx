@@ -37,7 +37,7 @@ export function AffiliateRecommendations({ riskLevel, scanType }: { riskLevel: s
                 rel="noopener sponsored"
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                  padding: '0.5rem 0.9rem', borderRadius: '8px', backgroundColor: 'var(--tc-primary)',
+                  padding: '0.5rem 0.9rem', borderRadius: '12px', backgroundColor: 'var(--tc-primary)',
                   color: '#ffffff', fontWeight: 600, fontSize: '0.85rem', textDecoration: 'none', cursor: 'pointer',
                 }}
               >

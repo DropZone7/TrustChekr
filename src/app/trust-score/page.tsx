@@ -46,7 +46,7 @@ export default function TrustScorePage() {
       <h2 style={{ margin: '0 0 0.5rem', fontSize: '1.3rem', fontWeight: 600 }}>Risk Levels</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
         {scoringRules.map((r) => (
-          <div key={r.range} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.6rem 0.75rem', borderRadius: '10px', border: '1px solid var(--tc-border)' }}>
+          <div key={r.range} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.6rem 0.75rem', borderRadius: '12px', border: '1px solid var(--tc-border)' }}>
             <span style={{ borderRadius: '999px', padding: '0.15rem 0.5rem', fontSize: '0.8rem', fontWeight: 700, backgroundColor: r.bg, color: r.color, whiteSpace: 'nowrap' }}>{r.range}</span>
             <div>
               <div style={{ fontWeight: 600, fontSize: '0.95rem', color: r.color }}>{r.level}</div>

@@ -1,5 +1,17 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import "./globals.css";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['600', '700', '800'],
+  variable: '--font-heading',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+});
 import TextSizeControl from "@/components/TextSizeControl";
 import HighContrastToggle from "@/components/HighContrastToggle";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
@@ -88,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className={`min-h-screen flex flex-col ${jakarta.variable} ${inter.variable}`}>
         <SkipToContent />
         <ToastProvider>
         <header className="w-full border-b border-[var(--tc-border)] bg-[var(--tc-surface)]" style={{ position: 'relative' }}>

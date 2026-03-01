@@ -72,7 +72,7 @@ export function NewsletterForm() {
           style={{
             flex: 1,
             border: '2px solid var(--tc-border)',
-            borderRadius: '8px',
+            borderRadius: '12px',
             padding: '12px',
             fontSize: '0.95rem',
             outline: 'none',
@@ -84,7 +84,7 @@ export function NewsletterForm() {
           type="submit"
           disabled={isLoading}
           style={{
-            borderRadius: '8px',
+            borderRadius: '12px',
             padding: '12px 16px',
             border: 'none',
             cursor: isLoading ? 'default' : 'pointer',

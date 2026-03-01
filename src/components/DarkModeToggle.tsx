@@ -27,7 +27,7 @@ export function DarkModeToggle() {
         backgroundColor: 'var(--tc-surface)',
         color: 'var(--tc-text-main)',
         border: '1px solid var(--tc-border)',
-        borderRadius: '8px',
+        borderRadius: '12px',
         padding: '0.5rem 0.75rem',
         fontSize: '1.1rem',
         cursor: 'pointer',

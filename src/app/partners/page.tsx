@@ -66,7 +66,7 @@ export default function PartnersPage() {
                 Built to plug into Central 1 Forge, telecom fraud platforms, case management tools, and internal security dashboards.
               </p>
             </div>
-            <div style={{ flex: 2.5, borderRadius: '16px', border: '1px solid var(--tc-border)', background: 'radial-gradient(circle at top left, rgba(26,82,118,0.18), transparent 55%) var(--tc-surface)', padding: '1rem' }}>
+            <div style={{ flex: 2.5, borderRadius: '20px', border: '1px solid var(--tc-border)', background: 'radial-gradient(circle at top left, rgba(26,82,118,0.18), transparent 55%) var(--tc-surface)', padding: '1rem' }}>
               <h2 style={{ margin: '0 0 0.4rem', fontSize: '1rem', fontWeight: 600 }}>Why partners integrate TrustChekr</h2>
               <ul style={{ margin: 0, paddingLeft: '1.15rem', fontSize: '0.9rem', color: 'var(--tc-text-muted)' }}>
                 <li>Reduce fraud losses and write-offs with early scam detection at the edge.</li>
@@ -78,7 +78,7 @@ export default function PartnersPage() {
         </section>
 
         {/* Stats */}
-        <section className="tc-section" style={{ borderRadius: '14px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-bg-alt, #f9fafb)', padding: '0.9rem 1.1rem' }}>
+        <section className="tc-section" style={{ borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-bg-alt, #f9fafb)', padding: '0.9rem 1.1rem' }}>
           <div className="tc-grid-3">
             {[
               { value: '20+', label: 'Analysis modules', desc: 'Phone, text, email, web, device, crypto & behavioural signals.' },
@@ -107,7 +107,7 @@ export default function PartnersPage() {
               { title: 'White-label experience', subtitle: 'Your brand, our engine', body: 'Offer a branded scam checker to your members or customers while TrustChekr handles risk analysis, updates, and threat intel.' },
               { title: 'Data feed & exports', subtitle: 'Threat intel for your SIEM', body: 'Stream normalized scam signals and campaign indicators into your fraud systems, data lake, or SIEM for correlation and modelling.' },
             ].map((opt) => (
-              <div key={opt.title} style={{ borderRadius: '14px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
+              <div key={opt.title} style={{ borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
                 <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.15rem' }}>{opt.title}</div>
                 <div style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--tc-primary)', marginBottom: '0.4rem' }}>{opt.subtitle}</div>
                 <div style={{ fontSize: '0.9rem', color: 'var(--tc-text-muted)' }}>{opt.body}</div>
@@ -129,7 +129,7 @@ export default function PartnersPage() {
               { title: 'Police & consumer agencies', bullets: ['Triage community reports faster with structured risk scores and common patterns.', 'Spot new campaigns across phone, web, and messaging in days, not months.', 'Generate cleaner evidence packages for investigations and prosecutions.'] },
               { title: 'Government & regulators', bullets: ['Monitor how scams target specific programs, benefits, and regions.', 'Share de-identified trends with financial institutions and telecoms in near real-time.', 'Support education campaigns with current, evidence-based examples.'] },
             ].map((p) => (
-              <div key={p.title} style={{ borderRadius: '14px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
+              <div key={p.title} style={{ borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
                 <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.35rem' }}>{p.title}</div>
                 <ul style={{ margin: 0, paddingLeft: '1.1rem', fontSize: '0.9rem', color: 'var(--tc-text-muted)' }}>
                   {p.bullets.map((b) => <li key={b} style={{ marginBottom: '0.2rem' }}>{b}</li>)}
@@ -152,7 +152,7 @@ export default function PartnersPage() {
               { title: 'Police & victim services', body: 'Turn raw call notes and screenshots into structured intel your analysts and investigators can search, trend, and act on.' },
               { title: 'E-commerce & marketplaces', body: 'Spot fake support numbers, refund scams, and buyer/seller fraud patterns before they scale across your platform.' },
             ].map((c) => (
-              <div key={c.title} style={{ borderRadius: '14px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
+              <div key={c.title} style={{ borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.9rem', backgroundColor: 'var(--tc-surface)' }}>
                 <div style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.35rem' }}>{c.title}</div>
                 <div style={{ fontSize: '0.9rem', color: 'var(--tc-text-muted)' }}>{c.body}</div>
               </div>
@@ -161,7 +161,7 @@ export default function PartnersPage() {
         </section>
 
         {/* Demo Form */}
-        <section id="demo" className="tc-section" style={{ borderRadius: '16px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-bg-alt, #f9fafb)', padding: '1.2rem 1.1rem 1.4rem' }}>
+        <section id="demo" className="tc-section" style={{ borderRadius: '20px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-bg-alt, #f9fafb)', padding: '1.2rem 1.1rem 1.4rem' }}>
           <h2 style={{ margin: '0 0 0.5rem', fontSize: '1.6rem', fontWeight: 700 }}>Request a demo</h2>
           <p style={{ margin: '0 0 1rem', fontSize: '0.95rem', color: 'var(--tc-text-muted)' }}>
             Share a few details and we&apos;ll follow up with a short call or live demo tailored to your environment. No pressure, no hard sell.

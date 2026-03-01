@@ -15,7 +15,7 @@ export default function FounderPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div
             style={{
-              width: '120px', height: '120px', borderRadius: '16px',
+              width: '120px', height: '120px', borderRadius: '20px',
               border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)',
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px',
             }}
@@ -76,7 +76,7 @@ export default function FounderPage() {
             { value: '49,762', label: 'Blocked domains' },
             { value: '50+', label: 'Pages & flows built' },
           ].map((stat) => (
-            <div key={stat.label} style={{ padding: '10px 12px', borderRadius: '10px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)' }}>
+            <div key={stat.label} style={{ padding: '10px 12px', borderRadius: '12px', border: '1px solid var(--tc-border)', backgroundColor: 'var(--tc-surface)' }}>
               <div style={{ fontSize: '22px', fontWeight: 700 }}>{stat.value}</div>
               <div style={{ fontSize: '12px', color: 'var(--tc-text-muted)' }}>{stat.label}</div>
             </div>

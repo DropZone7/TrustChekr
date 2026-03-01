@@ -18,7 +18,7 @@ export default function LanguageToggle() {
       style={{
         background: "none",
         border: "1px solid var(--tc-border)",
-        borderRadius: "6px",
+        borderRadius: "4px",
         padding: "4px 10px",
         cursor: "pointer",
         fontSize: "13px",

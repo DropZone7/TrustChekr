@@ -202,7 +202,7 @@ export function ChatScanner() {
               color: 'rgba(255,255,255,0.4)',
               background: 'none',
               border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '8px',
+              borderRadius: '12px',
               padding: '4px 10px',
               cursor: 'pointer',
             }}
@@ -316,7 +316,7 @@ export function ChatScanner() {
             )}
             <div style={{
               maxWidth: '75%',
-              borderRadius: m.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+              borderRadius: m.role === 'user' ? '20px 20px 4px 20px' : '20px 20px 20px 4px',
               padding: '0.65rem 0.9rem',
               fontSize: '0.9rem',
               lineHeight: 1.55,
@@ -365,7 +365,7 @@ export function ChatScanner() {
               🛡️
             </div>
             <div style={{
-              borderRadius: '18px 18px 18px 4px',
+              borderRadius: '20px 20px 20px 4px',
               padding: '0.65rem 0.9rem',
               backgroundColor: 'rgba(255,255,255,0.07)',
               color: 'rgba(255,255,255,0.5)',
@@ -396,7 +396,7 @@ export function ChatScanner() {
             placeholder="Paste a suspicious text, email, or describe what happened..."
             style={{
               flex: 1,
-              borderRadius: '16px',
+              borderRadius: '20px',
               border: '1px solid rgba(255,255,255,0.12)',
               backgroundColor: 'rgba(255,255,255,0.05)',
               padding: '0.65rem 0.85rem',

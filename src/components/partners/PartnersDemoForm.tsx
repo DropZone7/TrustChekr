@@ -69,7 +69,7 @@ export function PartnersDemoForm() {
 
   if (state === 'success') {
     return (
-      <div style={{ borderRadius: '16px', border: '2px solid #059669', backgroundColor: 'rgba(16,185,129,0.06)', padding: '1.5rem', textAlign: 'center' }}>
+      <div style={{ borderRadius: '20px', border: '2px solid #059669', backgroundColor: 'rgba(16,185,129,0.06)', padding: '1.5rem', textAlign: 'center' }}>
         <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>✅</div>
         <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#059669' }}>Request received!</h3>
         <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--tc-text-muted)' }}>
