@@ -46,6 +46,7 @@ export interface WebsiteReportOsint {
   hosting?: HostingInfo | null;
   security?: SecurityChecks | null;
   dns?: DnsInfo | null;
+  tranco?: { rank: number | null; isPopular: boolean } | null;
 }
 
 interface WebsiteReportProps {
@@ -344,6 +345,58 @@ function SecuritySection({ security }: { security?: SecurityChecks | null }) {
   );
 }
 
+function TrancoSection({ tranco }: { tranco?: { rank: number | null; isPopular: boolean } | null }) {
+  if (tranco === undefined) return null;
+
+  if (tranco === null) {
+    return (
+      <SectionCard title="Website Popularity">
+        <p style={{ fontSize: "15px", color: "var(--tc-text-muted)", padding: "12px 0" }}>
+          Could not retrieve popularity data for this website. This may be a temporary issue.
+        </p>
+      </SectionCard>
+    );
+  }
+
+  if (tranco.rank === null) {
+    return (
+      <SectionCard title="Website Popularity">
+        <p style={{ fontSize: "15px", color: "var(--tc-text-muted)", padding: "12px 0" }}>
+          This website is not in the top 1 million most visited sites globally.
+          This does not necessarily mean it is suspicious — many legitimate small businesses are not ranked.
+        </p>
+      </SectionCard>
+    );
+  }
+
+  const rank = tranco.rank;
+  const tierLabel = rank <= 10_000 ? "Top 10,000" : rank <= 100_000 ? "Top 100,000" : "Top 1,000,000";
+  const tierColor = rank <= 10_000 ? "var(--tc-ok, #2A6E2A)" : rank <= 100_000 ? "var(--tc-caution, #B08A00)" : "var(--tc-text-muted)";
+  const barPercent = Math.max(2, Math.min(100, (1 - Math.log10(rank) / Math.log10(1_000_000)) * 100));
+
+  return (
+    <SectionCard title="Website Popularity">
+      <InfoRow label="Global Rank" value={`#${rank.toLocaleString("en-CA")}`} hint="position among the world's most visited websites" />
+      <InfoRow label="Tier" value={<span style={{ color: tierColor, fontWeight: 600 }}>{tierLabel}</span>} />
+      <div style={{ padding: "12px 0" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "var(--tc-text-muted)", marginBottom: "6px" }}>
+          <span>Most popular</span>
+          <span>Least popular</span>
+        </div>
+        <div style={{ width: "100%", height: "8px", borderRadius: "4px", background: "var(--tc-border)" }}>
+          <div style={{ width: `${barPercent}%`, height: "8px", borderRadius: "4px", background: tierColor, transition: "width 0.3s ease" }} />
+        </div>
+      </div>
+      {tranco.isPopular && (
+        <div style={{ display: "inline-block", padding: "4px 12px", borderRadius: "9999px", fontSize: "13px", fontWeight: 600,
+          background: "rgba(42,110,42,0.12)", color: "var(--tc-ok, #2A6E2A)", border: "1px solid var(--tc-ok, #2A6E2A)" }}>
+          Well-known website
+        </div>
+      )}
+    </SectionCard>
+  );
+}
+
 function DnsSection({ dns }: { dns?: DnsInfo | null }) {
   const hasData = (dns?.nameservers?.length ?? 0) > 0 || (dns?.mxRecords?.length ?? 0) > 0;
 
@@ -412,6 +465,7 @@ export default function WebsiteReport({ domain, osint, trustScore }: WebsiteRepo
       <SslSection ssl={osint?.ssl} />
       <HostingSection hosting={osint?.hosting} />
       <SecuritySection security={osint?.security} />
+      <TrancoSection tranco={osint?.tranco} />
       <DnsSection dns={osint?.dns} />
 
       {/* Footer Disclaimer */}

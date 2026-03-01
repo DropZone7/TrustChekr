@@ -8,13 +8,31 @@ import { OsintDetails } from "./OsintDetails";
 import { AffiliateRecommendations } from "./AffiliateRecommendations";
 import { ShareResult } from "./ShareResult";
 import { FeedbackWidget } from "./FeedbackWidget";
+import { gradeToCssColor } from "@/lib/trustScore";
 
 export default function Results({ result, onReset }: { result: ScanResult; onReset: () => void }) {
   const [showTechnical, setShowTechnical] = useState(false);
+  const [showFactors, setShowFactors] = useState(false);
   const risk = riskConfig[result.riskLevel];
+  const ts = (result as any).trustScore as { score: number; grade: string; label: string; positiveFactors: string[]; negativeFactors: string[] } | undefined;
+  const gradeColor = ts ? gradeToCssColor(ts.grade as any) : undefined;
 
   return (
     <div className="flex flex-col gap-5">
+      {/* Trust Score + Risk badge */}
+      {ts && (
+        <div className="p-5 rounded-lg" style={{ background: "var(--tc-surface)", border: "1px solid var(--tc-border)", display: "flex", alignItems: "center", gap: "16px" }}>
+          <div style={{ width: "72px", height: "72px", borderRadius: "50%", border: `4px solid ${gradeColor}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <span style={{ fontSize: "26px", fontWeight: 700, color: gradeColor, lineHeight: 1 }}>{ts.grade}</span>
+            <span style={{ fontSize: "11px", color: "var(--tc-text-muted)" }}>{ts.score}/100</span>
+          </div>
+          <div>
+            <div style={{ fontSize: "18px", fontWeight: 700, color: gradeColor }}>{ts.label}</div>
+            <div style={{ fontSize: "14px", color: "var(--tc-text-muted)", marginTop: "2px" }}>Trust score {ts.score} out of 100</div>
+          </div>
+        </div>
+      )}
+
       {/* Risk badge — the answer */}
       <div className="p-4 rounded-lg text-center" style={{ borderLeft: `4px solid ${risk.border}`, background: risk.bg }}>
         <p className="text-xl font-bold" style={{ color: risk.color }}>{risk.label}</p>
@@ -61,6 +79,30 @@ export default function Results({ result, onReset }: { result: ScanResult; onRes
       {result.educationalTip && (
         <div className="p-3 rounded-lg text-sm" style={{ background: "var(--tc-surface)", borderLeft: "3px solid var(--tc-primary)", color: "var(--tc-text-main)" }}>
           {result.educationalTip}
+        </div>
+      )}
+
+      {/* Trust Factors */}
+      {ts && (ts.positiveFactors.length > 0 || ts.negativeFactors.length > 0) && (
+        <div>
+          <button
+            onClick={() => setShowFactors(!showFactors)}
+            className="text-sm font-semibold cursor-pointer flex items-center gap-2"
+            style={{ color: "var(--tc-text-main)", background: "none", border: "none", padding: 0 }}
+          >
+            <span style={{ transform: showFactors ? "rotate(90deg)" : "rotate(0deg)", transition: "transform 0.2s", display: "inline-block" }}>&#9654;</span>
+            Trust Factors
+          </button>
+          {showFactors && (
+            <div className="flex flex-col gap-1 mt-2 text-sm">
+              {ts.positiveFactors.map((f, i) => (
+                <div key={`p${i}`} style={{ color: "var(--tc-ok, #2A6E2A)" }}>+ {f}</div>
+              ))}
+              {ts.negativeFactors.map((f, i) => (
+                <div key={`n${i}`} style={{ color: "var(--tc-danger, #A40000)" }}>- {f}</div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
