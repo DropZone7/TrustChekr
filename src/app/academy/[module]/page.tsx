@@ -187,7 +187,6 @@ const modules: Record<string, ModuleData> = {
           { text: "The CRA does send refunds so this could be real", correct: false, feedback: "While the CRA does issue refunds, they NEVER use Interac e-Transfer or ask you to confirm banking details through a text link. Refunds are sent by direct deposit or cheque. Log into My CRA Account at canada.ca to verify." },
         ],
       },
-    ],
       {
         id: "q8",
         scenario: "📞 You get a call from someone claiming to be your bank's Zelle fraud department. They say someone is trying to drain your account and you need to send $1,500 via Zelle to a \"secure holding account\" to protect your funds. The caller ID shows your bank's real number.",
@@ -379,7 +378,6 @@ const modules: Record<string, ModuleData> = {
           { text: "I should pay to make it go away", correct: false, feedback: "Do NOT pay. In most cases, paying leads to more demands — not relief. Block the scammer, screenshot the threats as evidence, and report to the RCMP and CAFC at 1-888-495-8501. Sextortion is a crime and you are the victim. If you or someone you know is under 18, also report to cybertip.ca." },
         ],
       },
-    ],
       {
         id: "q8",
         scenario: "💕 Someone you have been chatting with on WhatsApp for six weeks says: \"I have been making great returns on this trading app — let me show you how.\" They send a link to download an app called CryptoVault Pro. You install it, deposit $1,000, and within days the app shows your balance at $4,200. When you try to withdraw, the app says you must pay a 20% \"withdrawal tax\" first.",
@@ -591,7 +589,6 @@ const modules: Record<string, ModuleData> = {
           { text: "QR codes in physical mail must be safe", correct: false, feedback: "Physical mail can be faked too. Scammers send professional-looking letters with QR codes that lead to phishing sites — this is called 'quishing.' A QR code is just a link you cannot read with your eyes, which makes it even more dangerous than a clickable link. Call your provider using the number on a previous bill to verify." },
         ],
       },
-    ],
       {
         id: "q9",
         scenario: "📱 Text message: \"IRS ALERT: Your tax account is past due. Purchase $2,000 in Apple gift cards and text the codes to this number to resolve your balance immediately or a warrant will be issued.\"",
@@ -700,7 +697,6 @@ const modules: Record<string, ModuleData> = {
           { text: "The blue checkmark and followers mean the account is trustworthy", correct: false, feedback: "Blue checkmarks can now be purchased on Instagram, X, and Facebook — they no longer mean the account is verified as authentic. Scammers invest in followers and checkmarks to look credible. Never send e-Transfers to strangers for event tickets. Use official ticket platforms with buyer protection — if the deal sounds too good, it is." },
         ],
       },
-    ],
       {
         id: "q9",
         scenario: "📱 You post regularly on Reddit using an anonymous username. You never share your real name. One day, someone DMs you: \"Hey [your real name], interesting post about your neighbourhood.\" They figured out who you are from your writing style and the details in your posts — the coffee shop you mentioned, the intersection you complained about, your job industry.",
@@ -810,7 +806,6 @@ const modules: Record<string, ModuleData> = {
           { text: "Pay quickly so they don't follow through on the threat", correct: false, feedback: "Do NOT pay. In most cases, paying leads to more demands for more money. Block the scammer, screenshot all threats as evidence, and report to police and the CAFC. If you are under 18, report to cybertip.ca. Visit needhelpnow.ca for support. Remember: you are the victim of a crime, and help is available. The RCMP reports sextortion complaints have increased over 300% in recent years." },
         ],
       },
-    ],
       {
         id: "q9",
         scenario: "😰 You paid an immigration consultant $15,000 to file your permanent residency application. Six months later, you discover they were never registered with the CICC and never filed anything. Your work permit expires in 60 days. What should you do?",

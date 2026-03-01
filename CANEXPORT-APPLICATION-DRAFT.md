@@ -132,7 +132,7 @@ All activities are time-bound within a 12-month project period, with measurable 
 - **Security mindset:** Attacker-perspective approach to threat modeling and scam detection
 - **Technical execution:** Full-stack development (Next.js, TypeScript), deployed and operational
 - **Domain expertise:** Deep knowledge of North American fraud ecosystems (CRA, IRS, SAT, banking, P2P payments, cryptocurrency)
-- **Pursuing:** CompTIA Network+ and Security+ certifications
+- **Currently studying:** CompTIA Network+ and Security+ certifications — building hands-on technical depth in network security and threat analysis to complement existing credentials
 
 ---
 
