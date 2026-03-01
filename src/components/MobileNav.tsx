@@ -48,10 +48,11 @@ export function MobileNav() {
           aria-label="More pages"
           style={{
             background: 'none', border: '1px solid var(--tc-border)',
-            borderRadius: '8px', padding: '4px 10px',
-            fontSize: '0.85rem', cursor: 'pointer',
+            borderRadius: '6px', padding: '1px 6px',
+            fontSize: '0.875rem', cursor: 'pointer',
             color: 'var(--tc-text-muted)',
-            display: 'flex', alignItems: 'center', gap: '4px',
+            display: 'inline-flex', alignItems: 'center', gap: '3px',
+            lineHeight: 1.4,
           }}
         >
           More {open ? '✕' : '☰'}
