@@ -83,7 +83,7 @@ export default function MapView({ regions, selected, onSelect }: {
                       <div>⚠️ Top: {region.topScam}</div>
                     </div>
                   ) : (
-                    <div style={{ marginTop: '6px', fontSize: '0.85em', color: '#6b7280' }}>
+                    <div style={{ marginTop: '6px', fontSize: '0.85em', color: 'var(--tc-text-muted)' }}>
                       Regional data coming soon
                     </div>
                   )}

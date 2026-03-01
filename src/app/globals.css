@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   /* TrustChekr Design Tokens — Falcon Shield Brand */
   --tc-primary: #A40000;
   --tc-primary-hover: #8B0000;
@@ -111,6 +112,7 @@ a {
 
 /* Dark mode theme — Falcon Shield Dark */
 html.dark {
+  color-scheme: dark;
   --tc-primary: #FF0000;
   --tc-primary-hover: #CC0000;
   --tc-primary-soft: #3d0000;
@@ -120,4 +122,32 @@ html.dark {
   --tc-border: #333333;
   --tc-text-main: #f0f0f0;
   --tc-text-muted: #999999;
+}
+
+/* Force all text elements to use theme variables */
+html.dark body,
+html.dark p,
+html.dark span,
+html.dark div,
+html.dark li,
+html.dark td,
+html.dark th,
+html.dark label,
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6 {
+  color: var(--tc-text-main);
+}
+
+html.dark a {
+  color: var(--tc-primary);
+}
+
+/* Fix textarea and input backgrounds in dark mode */
+html.dark textarea,
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="search"],
+html.dark select {
+  background-color: var(--tc-surface);
+  color: var(--tc-text-main);
+  border-color: var(--tc-border);
 }

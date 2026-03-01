@@ -148,7 +148,7 @@ export default function Home() {
 
       {error && (
         <div className="p-4 rounded-lg text-center" style={{ border: "2px solid var(--tc-warning)", background: "var(--tc-surface)" }}>
-          <p className="font-semibold mb-1" style={{ color: "#b7791f" }}>Something went wrong</p>
+          <p className="font-semibold mb-1" style={{ color: "var(--tc-warning)" }}>Something went wrong</p>
           <p className="text-sm">{error}</p>
           <button
             onClick={() => setError(null)}

@@ -96,7 +96,7 @@ export default function ScamRadar() {
         border: '1px solid #222',
         animation: 'pulse 2s ease-in-out infinite',
       }}>
-        <div style={{ color: '#666', textAlign: 'center' }}>Loading threat data...</div>
+        <div style={{ color: 'var(--tc-text-muted)', textAlign: 'center' }}>Loading threat data...</div>
       </div>
     );
   }
@@ -147,7 +147,7 @@ export default function ScamRadar() {
             LIVE
           </span>
         </div>
-        <span style={{ color: '#666', fontSize: 12 }}>
+        <span style={{ color: 'var(--tc-text-muted)', fontSize: 12 }}>
           Updated {timeAgo(data.lastUpdated)}
         </span>
       </div>
@@ -190,7 +190,7 @@ export default function ScamRadar() {
                 {/* Name + Description */}
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                    <span style={{ color: '#e5e5e5', fontWeight: 600, fontSize: 14 }}>{cat.name}</span>
+                    <span style={{ color: 'var(--tc-text-main)', fontWeight: 600, fontSize: 14 }}>{cat.name}</span>
                     <span style={{
                       display: 'inline-block',
                       padding: '1px 8px',
@@ -206,7 +206,7 @@ export default function ScamRadar() {
                       {cat.level}
                     </span>
                   </div>
-                  <div style={{ color: '#888', fontSize: 12, marginTop: 2, lineHeight: 1.4 }}>
+                  <div style={{ color: 'var(--tc-text-muted)', fontSize: 12, marginTop: 2, lineHeight: 1.4 }}>
                     {cat.description}
                   </div>
                 </div>
