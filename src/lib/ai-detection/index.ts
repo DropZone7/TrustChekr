@@ -42,6 +42,9 @@ import mxScriptRules from './rules/mx/scripts.json';
 import cryptoRules from './rules/shared/crypto.json';
 import techSupportRules from './rules/shared/tech_support.json';
 import phishingRules from './rules/shared/phishing.json';
+import jobScamRules from './rules/shared/job_scam.json';
+import deliveryScamRules from './rules/shared/delivery_scam.json';
+import tollRoadRules from './rules/shared/toll_road.json';
 
 /**
  * Get text patterns for a specific country (includes shared rules).
@@ -52,6 +55,9 @@ function getTextPatterns(country: Country = 'ALL'): ScamPattern[] {
     ...cryptoRules.patterns,
     ...techSupportRules.patterns,
     ...phishingRules.patterns,
+    ...jobScamRules.patterns,
+    ...deliveryScamRules.patterns,
+    ...tollRoadRules.patterns,
   ] as ScamPattern[];
 
   const ca = [
@@ -124,6 +130,9 @@ const CATEGORY_LABELS: Record<ScamCategory, string> = {
   TECH_SUPPORT: 'Tech Support Scam',
   CRYPTO_INVESTMENT: 'Crypto Investment Fraud',
   RENTAL_SCAM: 'Rental Scam',
+  JOB_SCAM: 'Job / Task Scam',
+  DELIVERY_SCAM: 'Delivery / Parcel Scam',
+  TOLL_ROAD_SCAM: 'Toll Road Scam',
   GENERIC_PHISHING: 'Phishing',
 };
 

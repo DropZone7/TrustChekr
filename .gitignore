@@ -10,3 +10,5 @@ data/
 !data/xrpl_wallet_labels.json
 scripts/
 !scripts/*.ts
+test-data/schema1_scam_texts.csv
+test-data/downloads/

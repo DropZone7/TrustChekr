@@ -1,0 +1,60 @@
+{
+  "patterns": [
+    {
+      "id": "job_no_experience_high_pay",
+      "pattern": "no experience (required|needed|necessary).*\\$\\d{2,}",
+      "type": "regex",
+      "weight": 7,
+      "category": "JOB_SCAM",
+      "description": "Job offer requires no experience but promises high pay — a hallmark of job scams and money mule recruitment."
+    },
+    {
+      "id": "job_whatsapp_telegram_contact",
+      "pattern": "(contact|message|text|reach) (us |me )?(on|via|at) (whatsapp|telegram|signal)",
+      "type": "regex",
+      "weight": 7,
+      "category": "JOB_SCAM",
+      "description": "Job recruiter asking to communicate via WhatsApp or Telegram instead of company email — legitimate employers don't recruit this way."
+    },
+    {
+      "id": "job_same_day_payout",
+      "pattern": "same[- ]day (payout|pay|payment)|paid (daily|same day)|instant (payout|payment)",
+      "type": "regex",
+      "weight": 6,
+      "category": "JOB_SCAM",
+      "description": "Promises same-day or instant payouts — real employers pay on regular pay cycles."
+    },
+    {
+      "id": "job_vague_tasks",
+      "pattern": "(place|post) ads|review products|rate (products|apps)|complete (simple )?tasks|data entry.*(from home|remote)",
+      "type": "regex",
+      "weight": 6,
+      "category": "JOB_SCAM",
+      "description": "Vague task descriptions like 'place ads' or 'rate products' — common in task scams that steal deposits."
+    },
+    {
+      "id": "job_upfront_fee",
+      "pattern": "(training|registration|equipment|starter kit) fee.*\\$|pay.*\\$.*to (start|begin|get started)",
+      "type": "regex",
+      "weight": 8,
+      "category": "JOB_SCAM",
+      "description": "Requires upfront payment for training, equipment, or registration — legitimate employers never charge you to work."
+    },
+    {
+      "id": "job_found_your_profile",
+      "pattern": "(found|came across|noticed|saw) your (profile|resume|cv|application).*perfect (fit|match|candidate)",
+      "type": "regex",
+      "weight": 5,
+      "category": "JOB_SCAM",
+      "description": "Unsolicited claim that they found your profile and you're a 'perfect fit' — classic job scam opener."
+    },
+    {
+      "id": "job_task_deposit_scam",
+      "pattern": "complete.*tasks?.*deposit.*commission|commission.*deposit.*tasks?|boost.*ratings?.*deposit",
+      "type": "regex",
+      "weight": 9,
+      "category": "JOB_SCAM",
+      "description": "Task scam requiring deposits to earn commissions — you'll never get your money back."
+    }
+  ]
+}

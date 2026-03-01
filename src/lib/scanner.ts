@@ -39,6 +39,21 @@ function analyzeUrl(input: string): Signal[] {
     cibc: ["cibc.com"],
     scotiabank: ["scotiabank.com"],
     bmo: ["bmo.com", "bmoinvestorline.com", "bmoharris.com"],
+    desjardins: ["desjardins.com", "disnat.com"],
+    national: ["nbc.ca", "bnc.ca"],
+    interac: ["interac.ca"],
+    costco: ["costco.com", "costco.ca"],
+    walmart: ["walmart.com", "walmart.ca"],
+    bestbuy: ["bestbuy.com", "bestbuy.ca"],
+    canadapost: ["canadapost.ca", "canadapost-postescanada.ca"],
+    ups: ["ups.com"],
+    fedex: ["fedex.com"],
+    usps: ["usps.com"],
+    cra: ["canada.ca"],
+    irs: ["irs.gov"],
+    meta: ["meta.com", "facebook.com", "instagram.com", "whatsapp.com"],
+    tiktok: ["tiktok.com"],
+    shopify: ["shopify.com", "myshopify.com"],
   };
   for (const [brand, legit] of Object.entries(brandDomains)) {
     if (lower.includes(brand)) {
@@ -180,6 +195,35 @@ function analyzeMessage(input: string): Signal[] {
     if (amount >= 200) {
       signals.push({ text: `Claims of earning $${amount}+ per day with no experience are a hallmark of job scams and money mule recruitment.`, weight: 20 });
     }
+  }
+
+  // Delivery / parcel scam patterns
+  const deliveryPhrases = [
+    "package is being held", "parcel is pending", "delivery delayed",
+    "unable to deliver", "redelivery fee", "update your delivery address",
+    "missed delivery attempt", "customs fee", "clearance fee",
+    "canada post", "purolator", "package held at warehouse",
+  ];
+  const deliveryHits = deliveryPhrases.filter((p) => lower.includes(p));
+  if (deliveryHits.length >= 2) {
+    signals.push({ text: "This looks like a fake delivery notification. Real carriers like Canada Post don't send texts demanding fees — they leave physical notices.", weight: 30 });
+  } else if (deliveryHits.length === 1) {
+    signals.push({ text: "This message mentions a package or delivery. If you weren't expecting anything, be suspicious — fake delivery texts are one of the most common scams in 2025.", weight: 15 });
+  }
+
+  // Toll road scam patterns
+  const tollPhrases = [
+    "unpaid toll", "toll balance", "toll penalty", "407 etr",
+    "ezpass", "e-zpass", "sunpass", "fastrak", "toll road notice",
+    "outstanding toll", "overdue toll",
+  ];
+  if (tollPhrases.some((p) => lower.includes(p))) {
+    signals.push({ text: "This message claims you have unpaid tolls. Toll road scam texts surged massively in 2025 — real toll agencies send bills by mail, not SMS payment demands.", weight: 30 });
+  }
+
+  // QR code / quishing patterns
+  if (/scan (this |the )?qr code/i.test(input) || /qr code.*(payment|verify|login|access)/i.test(input)) {
+    signals.push({ text: "The message asks you to scan a QR code. 'Quishing' (QR phishing) is a fast-growing scam where QR codes lead to fake login pages or malware downloads.", weight: 25 });
   }
 
   // Grammar / spelling patterns (common in scams)

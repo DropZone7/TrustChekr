@@ -41,6 +41,9 @@ export type ScamCategory =
   | 'TECH_SUPPORT'
   | 'CRYPTO_INVESTMENT'
   | 'RENTAL_SCAM'
+  | 'JOB_SCAM'
+  | 'DELIVERY_SCAM'
+  | 'TOLL_ROAD_SCAM'
   | 'GENERIC_PHISHING';
 
 export type Country = 'CA' | 'US' | 'MX' | 'ALL';

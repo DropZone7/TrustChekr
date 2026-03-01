@@ -1,0 +1,36 @@
+{
+  "patterns": [
+    {
+      "id": "toll_unpaid_balance",
+      "pattern": "(unpaid|outstanding|overdue) (toll|407|ezpass|sunpass|e-?zpass|fastrak) (balance|charge|fee|payment)",
+      "type": "regex",
+      "weight": 7,
+      "category": "TOLL_ROAD_SCAM",
+      "description": "Claims you have an unpaid toll balance — toll agencies don't send payment demands via text."
+    },
+    {
+      "id": "toll_pay_now_penalty",
+      "pattern": "toll.*(penalty|late fee|suspended|licence).*pay (now|immediately|today)|pay.*\\$.*toll.*(avoid|prevent).*(penalty|suspension)",
+      "type": "regex",
+      "weight": 8,
+      "category": "TOLL_ROAD_SCAM",
+      "description": "Threatens penalties or licence suspension for unpaid tolls — real toll authorities don't threaten via SMS."
+    },
+    {
+      "id": "toll_407_etr",
+      "pattern": "407 (etr|express toll route).*overdue|overdue.*407",
+      "type": "regex",
+      "weight": 7,
+      "category": "TOLL_ROAD_SCAM",
+      "description": "Impersonates Ontario's 407 ETR — the real 407 sends bills by mail, not text messages demanding payment."
+    },
+    {
+      "id": "toll_generic_sms",
+      "pattern": "toll (road |highway )?(notice|notification|alert|reminder).*click|click.*settle.*toll",
+      "type": "regex",
+      "weight": 7,
+      "category": "TOLL_ROAD_SCAM",
+      "description": "Toll road SMS with a suspicious link — a widespread text scam that surged in 2025."
+    }
+  ]
+}

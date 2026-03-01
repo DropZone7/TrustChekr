@@ -255,6 +255,51 @@ const GUIDANCE: Record<ScamCategory, CanadianGuidance> = {
     ],
   },
 
+  JOB_SCAM: {
+    context: [
+      'Task scams (where you pay deposits to "earn commissions") are the fastest-growing fraud type in 2025.',
+      'Legitimate employers never charge you to work — any job requiring upfront payment is a scam.',
+      'CAFC reports job scams surged as the largest-increase category in 2024, surpassing investment fraud growth.',
+      'Scammers recruit via WhatsApp, Telegram, and social media DMs — real companies use corporate email.',
+    ],
+    actions: [
+      'Stop all communication with the "recruiter" immediately.',
+      'Never send money, crypto, or gift cards for training, equipment, or "task deposits."',
+      'Research the company independently — check the Better Business Bureau (bbb.org) and look for reviews.',
+      'Report to the CAFC at 1-888-495-8501 and the Canadian Centre for Cyber Security.',
+    ],
+  },
+
+  DELIVERY_SCAM: {
+    context: [
+      'Fake delivery texts are one of the top phishing vectors in 2025, exploiting the surge in online shopping.',
+      'Canada Post, UPS, FedEx, and Purolator never send texts demanding fees to release a package.',
+      'Canadians lost $43M to spear phishing in 2025, with delivery scams being a major subset (CAFC).',
+      'Real tracking notifications come from verified sender IDs — not random phone numbers.',
+    ],
+    actions: [
+      'Do not click any links — go directly to the carrier\'s official website to check tracking.',
+      'Canada Post tracking: canadapost-postescanada.ca | UPS: ups.com | FedEx: fedex.com',
+      'If you entered payment info on a fake site, call your bank immediately to block the card.',
+      'Report to the CAFC at 1-888-495-8501.',
+    ],
+  },
+
+  TOLL_ROAD_SCAM: {
+    context: [
+      'Toll road scam texts exploded in 2025 — the FBI issued a specific warning about them.',
+      'Ontario\'s 407 ETR sends bills by regular mail, never by text demanding immediate payment.',
+      'In the US, EZPass and SunPass agencies confirmed they never request payment via text message.',
+      'These texts are sent to millions of numbers at random — the scammer doesn\'t know if you use toll roads.',
+    ],
+    actions: [
+      'Do not click any links in the text — delete the message.',
+      'If you use the 407 ETR, check your account directly at 407etr.com.',
+      'If you entered payment info, call your bank immediately to block the card.',
+      'Report to the CAFC at 1-888-495-8501.',
+    ],
+  },
+
   RENTAL_SCAM: {
     context: [
       'Rental fraud costs Canadians $10M+ yearly (CAFC/RCMP estimate), up 50% since COVID.',

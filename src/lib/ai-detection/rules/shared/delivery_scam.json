@@ -1,0 +1,52 @@
+{
+  "patterns": [
+    {
+      "id": "delivery_package_held",
+      "pattern": "(your )?(package|parcel|shipment|delivery) (is |has been )?(held|delayed|pending|on hold|unable to deliver)",
+      "type": "regex",
+      "weight": 6,
+      "category": "DELIVERY_SCAM",
+      "description": "Claims your package is held or delayed — scammers send these to millions of people hoping someone is expecting a delivery."
+    },
+    {
+      "id": "delivery_redelivery_fee",
+      "pattern": "(re-?delivery|customs|clearance|handling) fee.*\\$|pay.*\\$.*to (release|receive|claim) (your )?(package|parcel|shipment)",
+      "type": "regex",
+      "weight": 8,
+      "category": "DELIVERY_SCAM",
+      "description": "Requests a fee to release or redeliver a package — Canada Post, UPS, and FedEx don't collect fees via text."
+    },
+    {
+      "id": "delivery_update_address",
+      "pattern": "update (your )?(delivery|shipping) (address|information|details).*click",
+      "type": "regex",
+      "weight": 7,
+      "category": "DELIVERY_SCAM",
+      "description": "Asks you to click a link to update delivery address — designed to steal your personal information."
+    },
+    {
+      "id": "delivery_tracking_link",
+      "pattern": "track (your )?(package|parcel|order|shipment).*https?://",
+      "type": "regex",
+      "weight": 5,
+      "category": "DELIVERY_SCAM",
+      "description": "Unsolicited tracking link for a package — verify tracking numbers directly on the carrier's official website."
+    },
+    {
+      "id": "delivery_brand_impersonation",
+      "pattern": "(canada post|postes canada|ups|fedex|dhl|purolator|amazon delivery).*action required",
+      "type": "regex",
+      "weight": 7,
+      "category": "DELIVERY_SCAM",
+      "description": "Impersonates a known delivery carrier with urgent action — real carriers use their official app for notifications."
+    },
+    {
+      "id": "delivery_missed_attempt",
+      "pattern": "missed delivery attempt|we attempted delivery|delivery attempt failed|unable to complete delivery",
+      "type": "regex",
+      "weight": 6,
+      "category": "DELIVERY_SCAM",
+      "description": "Fake missed delivery notification — carriers leave physical notices, they don't text asking for payment."
+    }
+  ]
+}
