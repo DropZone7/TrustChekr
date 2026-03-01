@@ -1,7 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const PAGE_NAMES: Record<string, string> = {
   '/': 'Home',
@@ -23,37 +22,70 @@ const PAGE_NAMES: Record<string, string> = {
   '/trust-score': 'How Scoring Works',
   '/stats': 'Stats',
   '/claim': 'Claim',
-  '/scan': 'Scan',
+  '/claim/status': 'Claim',
+  '/scan': 'Scan Results',
+  '/scam-check': 'Scam Check',
+  '/safety': 'Safety',
+  '/safety/scams': 'Safety',
+  '/api-docs': 'API Docs',
+  '/tools/email-headers': 'Tools',
 };
 
-function getPageName(path: string): string {
-  if (PAGE_NAMES[path]) return PAGE_NAMES[path];
-  // Check partial matches (e.g., /academy/phone-scams → Academy)
-  for (const [route, name] of Object.entries(PAGE_NAMES)) {
-    if (route !== '/' && path.startsWith(route)) return name;
+function getParentName(pathname: string): string {
+  // For nested routes, find the parent path name
+  // e.g., /academy/phone-scams → "Academy"
+  // e.g., /about/founder → "About"
+  // e.g., /tools/email-headers → "Tools"
+  // e.g., /learn/ai-deanonymization → "Learn"
+
+  // Direct match first
+  if (PAGE_NAMES[pathname]) {
+    // This page is a top-level page, go back to Home
+    return 'Home';
   }
-  return 'previous page';
+
+  // Try parent paths
+  const segments = pathname.split('/').filter(Boolean);
+  for (let i = segments.length - 1; i > 0; i--) {
+    const parentPath = '/' + segments.slice(0, i).join('/');
+    if (PAGE_NAMES[parentPath]) {
+      return PAGE_NAMES[parentPath];
+    }
+  }
+
+  return 'Home';
+}
+
+function getParentPath(pathname: string): string {
+  if (PAGE_NAMES[pathname]) {
+    return '/';
+  }
+
+  const segments = pathname.split('/').filter(Boolean);
+  for (let i = segments.length - 1; i > 0; i--) {
+    const parentPath = '/' + segments.slice(0, i).join('/');
+    if (PAGE_NAMES[parentPath]) {
+      return parentPath;
+    }
+  }
+
+  return '/';
 }
 
 export function BackButton() {
   const router = useRouter();
-  const [prevName, setPrevName] = useState('previous page');
+  const pathname = usePathname();
 
-  useEffect(() => {
-    // Get referrer to determine where user came from
-    if (document.referrer) {
-      try {
-        const url = new URL(document.referrer);
-        if (url.origin === window.location.origin) {
-          setPrevName(getPageName(url.pathname));
-        }
-      } catch { /* ignore */ }
-    }
-  }, []);
+  const parentName = getParentName(pathname);
+  const parentPath = getParentPath(pathname);
 
   return (
-    <button
-      onClick={() => router.back()}
+    <a
+      href={parentPath}
+      onClick={(e) => {
+        e.preventDefault();
+        router.back();
+      }}
       style={{
         background: 'none',
         border: 'none',
@@ -65,9 +97,10 @@ export function BackButton() {
         alignItems: 'center',
         gap: '4px',
         marginBottom: '1rem',
+        textDecoration: 'none',
       }}
     >
-      ← Back to {prevName}
-    </button>
+      ← Back to {parentName}
+    </a>
   );
 }
