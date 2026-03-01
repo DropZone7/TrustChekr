@@ -1,0 +1,5 @@
+PERPLEXITY CLAIM PAGE CODE (saved for later integration)
+This is the enhanced version with draft saving, honeypot, validation indicators, etc.
+See the raw Telegram messages from Feb 28 2026 for the full code.
+Status: NOT INTEGRATED - our simpler version is live and working.
+To upgrade: replace src/app/claim/page.tsx with this code after installing resend + react-email.
