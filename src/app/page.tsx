@@ -70,6 +70,14 @@ export default function Home() {
           </p>
 
           {/* Scam Radar — live threat levels */}
+          <div className="text-center">
+            <p className="text-sm" style={{ color: "var(--tc-text-muted)", lineHeight: 1.6 }}>
+              This is our <strong style={{ color: "var(--tc-text-main)" }}>Scam Radar</strong> — it monitors
+              what people across North America are reporting right now, so you can see which scams are active
+              today. If something you received matches a trend below, that&apos;s a red flag. We update this
+              throughout the day so you always know what to watch out for.
+            </p>
+          </div>
           <ScamRadar />
 
           {/* Recent checks */}
