@@ -5,8 +5,8 @@ import FileUpload from "./FileUpload";
 import { useBotDetection } from "@/hooks/useBotDetection";
 
 const scanTypes = [
-  { id: "website", label: "Website", placeholder: "Paste the URL (e.g. www.example.com)" },
-  { id: "message", label: "Message", placeholder: "Paste the suspicious text message or email" },
+  { id: "website", label: "Website", placeholder: "Paste the URL here — don't visit it, let us do the clicking" },
+  { id: "message", label: "Message", placeholder: "Paste the suspicious text or email here — do NOT click any links in it" },
   { id: "other", label: "Phone / Email / Crypto", placeholder: "Paste a phone number, email, crypto address, or username" },
   { id: "romance", label: "Relationship", placeholder: "", isLink: true, href: "/romance" },
   { id: "file", label: "Upload", placeholder: "" },
@@ -76,7 +76,7 @@ export default function ScanForm({ onScan }: { onScan: (type: string, input: str
 
           <div className="flex items-center justify-between">
             <p className="text-xs" style={{ color: "var(--tc-text-muted)" }}>
-              We don't store what you paste.
+              We don&apos;t store what you paste. Pro tip: copy and paste — never click unknown links. That&apos;s our job.
             </p>
             <button
               onClick={() => input.trim() && onScan(activeType.id, input.trim(), getProfile())}
