@@ -146,6 +146,42 @@ function analyzeMessage(input: string): Signal[] {
     signals.push({ text: "The message appears to impersonate a government agency or major company. Scammers often pretend to be the CRA, IRS, Amazon, or your bank.", weight: 20 });
   }
 
+  // ── Job scam detection ──
+  const jobScamPhrases = [
+    "no experience required", "no experience needed", "full training included",
+    "full training provided", "work from home", "work remotely",
+    "flexible remote", "remote opportunity", "own schedule",
+    "same-day payouts", "same day payout", "same-day pay",
+    "earn $", "make $", "/day", "per day",
+    "top earners", "top performers make",
+    "onboarding new", "hiring immediately", "start today", "start this week",
+    "place ads", "post ads", "review products", "rate products",
+    "message us on whatsapp", "contact us on whatsapp", "text us on whatsapp",
+    "dm us on", "message us on telegram",
+    "we found your profile", "we found your resume", "your profile caught",
+    "we came across your", "you were selected",
+  ];
+  const jobScamHits = jobScamPhrases.filter((p) => lower.includes(p));
+  if (jobScamHits.length >= 3) {
+    signals.push({ text: "This message has multiple signs of a fake job scam: vague role, unrealistic pay, urgency to start, and contact through messaging apps instead of company email. Legitimate employers don't recruit this way.", weight: 40 });
+  } else if (jobScamHits.length >= 2) {
+    signals.push({ text: "This message shows signs of a job scam. Be cautious of vague job offers with high pay and no experience needed — especially if they ask you to contact them on WhatsApp or Telegram.", weight: 25 });
+  }
+
+  // WhatsApp/Telegram contact in unsolicited message (red flag for any scam type)
+  if (/whatsapp|telegram|signal/i.test(lower) && /\+\d{10,}/.test(input)) {
+    signals.push({ text: "The message asks you to contact someone on WhatsApp/Telegram with a phone number. Legitimate businesses use company email and official channels.", weight: 15 });
+  }
+
+  // "Too good to be true" earnings claims
+  const earningsMatch = lower.match(/\$(\d+)[–\-\s]*\$?(\d+)?.*(?:per|a|\/)\s*(?:day|hour|hr|week)/);
+  if (earningsMatch) {
+    const amount = parseInt(earningsMatch[2] || earningsMatch[1]);
+    if (amount >= 200) {
+      signals.push({ text: `Claims of earning $${amount}+ per day with no experience are a hallmark of job scams and money mule recruitment.`, weight: 20 });
+    }
+  }
+
   // Grammar / spelling patterns (common in scams)
   const grammarPatterns = ["dear customer", "dear user", "dear friend", "kindly", "do the needful", "revert back"];
   if (grammarPatterns.some((p) => lower.includes(p))) {

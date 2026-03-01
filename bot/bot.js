@@ -1,114 +1,98 @@
 #!/usr/bin/env node
 // TrustChekr Telegram Bot — @TrustChekrBot
-// Forward suspicious messages, get instant scam analysis
 
 const TelegramBot = require('node-telegram-bot-api');
 
 const TOKEN = process.env.TC_BOT_TOKEN;
-const API_URL = process.env.TC_API_URL || 'https://trustchekr.com';
+const API_URL = process.env.TC_API_URL || 'https://www.trustchekr.com';
 
-if (!TOKEN) {
-  console.error('Set TC_BOT_TOKEN environment variable');
-  process.exit(1);
-}
+if (!TOKEN) { console.error('Set TC_BOT_TOKEN'); process.exit(1); }
 
 const bot = new TelegramBot(TOKEN, { polling: true });
 
-// Risk level display
+bot.on('polling_error', (err) => console.error('Polling error:', err.message));
+
 const riskDisplay = {
-  'safe': { emoji: '🟢', label: 'Low Risk' },
-  'suspicious': { emoji: '🟡', label: 'Suspicious' },
-  'high-risk': { emoji: '🟠', label: 'High Risk' },
-  'very-likely-scam': { emoji: '🔴', label: 'Very Likely Scam' },
+  'safe':             { emoji: '🟢', label: 'Low Risk' },
+  'suspicious':       { emoji: '🟡', label: 'Suspicious' },
+  'high-risk':        { emoji: '🟠', label: 'High Risk' },
+  'very-likely-scam': { emoji: '🔴', label: 'Very Likely a Scam' },
 };
 
-// /start command
+// Friendly reassurance for safe results
+const safeResponses = [
+  "This looks fine. Nothing suspicious jumped out.",
+  "I checked this against our databases — it looks legitimate.",
+  "No red flags found. This appears to be normal.",
+  "Looks safe to me. I didn't find anything concerning.",
+  "I ran this through 21 checks — nothing suspicious came up.",
+];
+
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, [
-    '🛡️ *TrustChekr Bot*',
+    '*TrustChekr*',
     '',
-    'Forward or paste anything suspicious and I\'ll check it for scams.',
+    'Send me anything that seems suspicious and I\'ll check it for you.',
     '',
-    '✅ *What I can check:*',
-    '• Suspicious text messages or emails',
-    '• Websites and URLs',
+    'I can look at:',
+    '• Text messages or emails someone sent you',
+    '• Website links',
     '• Phone numbers',
     '• Email addresses',
     '• Crypto wallet addresses',
     '',
-    '🔒 Private — I don\'t store your messages.',
-    '🇨🇦 Built in Canada for Canadians.',
-    '',
-    'Just send me something suspicious to get started!',
+    'Just forward it or paste it here. I don\'t store anything you send.',
   ].join('\n'), { parse_mode: 'Markdown' });
 });
 
-// /help command
 bot.onText(/\/help/, (msg) => {
   bot.sendMessage(msg.chat.id, [
-    '*How to use TrustChekr Bot:*',
+    '*How to use this:*',
     '',
-    '1. Forward a suspicious message here',
-    '2. Or paste a URL, phone number, or email',
-    '3. I\'ll analyze it and tell you the risk level',
+    '1. Forward a message that feels off',
+    '2. Or paste a link, phone number, or email',
+    '3. I\'ll tell you if it looks safe or suspicious',
     '',
-    '*Commands:*',
-    '/start — Welcome message',
-    '/help — This help text',
-    '/romance — Start romance scam assessment',
+    'If you\'re worried someone online might be scamming you romantically, type /romance',
     '',
-    '🌐 Full scanner: trustchekr.com',
-    '🎓 Safety academy: trustchekr.com/academy',
+    'Full website: trustchekr.com',
   ].join('\n'), { parse_mode: 'Markdown' });
 });
 
-// /romance command — link to web form
 bot.onText(/\/romance/, (msg) => {
   bot.sendMessage(msg.chat.id, [
-    '💔 *Romance Scam Assessment*',
+    '*Romance Scam Check*',
     '',
-    'Our romance scam checker asks guided questions about the situation to give you a thorough analysis.',
+    'If someone you met online is asking for money, making excuses not to video call, or moving very fast — those are warning signs.',
     '',
-    'It works best on the full website:',
+    'Our guided assessment asks a few questions about the situation:',
     '👉 trustchekr.com/romance',
     '',
-    'Or you can describe the situation here and I\'ll do a basic text analysis.',
+    'Or just describe what\'s happening here and I\'ll take a look.',
   ].join('\n'), { parse_mode: 'Markdown' });
 });
 
-// Detect input type
 function detectType(text) {
-  const trimmed = text.trim();
-  // URL
-  if (/^https?:\/\//i.test(trimmed) || /^www\./i.test(trimmed)) return 'website';
-  // Email
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) return 'email';
-  // Phone (10+ digits, optional + prefix)
-  if (/^\+?\d[\d\s\-().]{8,}$/.test(trimmed)) return 'phone';
-  // Crypto: BTC
-  if (/^(1|3|bc1)[a-zA-Z0-9]{25,62}$/.test(trimmed)) return 'crypto';
-  // Crypto: ETH
-  if (/^0x[a-fA-F0-9]{40}$/.test(trimmed)) return 'crypto';
-  // Crypto: XRP
-  if (/^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(trimmed)) return 'crypto';
-  // Default to message
+  const t = text.trim();
+  if (/^https?:\/\//i.test(t) || /^www\./i.test(t) || /^[a-z0-9.-]+\.(com|net|org|ca|xyz|io|co|info|biz|ru|cn)\b/i.test(t)) return 'website';
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)) return 'other';
+  if (/^\+?\d[\d\s\-().]{8,}$/.test(t)) return 'other';
+  if (/^(1|3|bc1)[a-zA-Z0-9]{25,62}$/.test(t)) return 'other';
+  if (/^0x[a-fA-F0-9]{40}$/.test(t)) return 'other';
+  if (/^r[1-9A-HJ-NP-Za-km-z]{24,34}$/.test(t)) return 'other';
   return 'message';
 }
 
-// Main message handler
 bot.on('message', async (msg) => {
-  // Skip commands
   if (msg.text && msg.text.startsWith('/')) return;
 
   const text = msg.text || msg.caption || '';
   if (!text || text.trim().length < 3) {
-    bot.sendMessage(msg.chat.id, 'Send me a message, URL, phone number, or email to check. Type /help for more info.');
+    bot.sendMessage(msg.chat.id, 'Send me something to check — a message, link, phone number, or email. Type /help if you\'re not sure.');
     return;
   }
 
   const chatId = msg.chat.id;
-
-  // Send "analyzing" indicator
   bot.sendChatAction(chatId, 'typing');
 
   const inputType = detectType(text.trim());
@@ -120,68 +104,60 @@ bot.on('message', async (msg) => {
       body: JSON.stringify({ type: inputType, input: text.trim() }),
     });
 
-    if (!res.ok) throw new Error(`API returned ${res.status}`);
-
+    if (!res.ok) throw new Error(`API ${res.status}`);
     const data = await res.json();
 
     if (data.error) {
-      bot.sendMessage(chatId, `❌ ${data.error}`);
+      bot.sendMessage(chatId, `Something went wrong on my end. Try again in a moment, or use trustchekr.com`);
       return;
     }
 
     const risk = riskDisplay[data.riskLevel] || { emoji: '❓', label: 'Unknown' };
+    const lines = [];
 
-    const lines = [
-      `${risk.emoji} *${risk.label}*`,
-      '',
-    ];
+    // Main verdict
+    lines.push(`${risk.emoji} *${risk.label}*`);
+    lines.push('');
 
-    // Why bullets
-    if (data.whyBullets && data.whyBullets.length > 0) {
-      lines.push('*What we found:*');
-      for (const bullet of data.whyBullets.slice(0, 5)) {
-        lines.push(`• ${bullet}`);
+    // For safe results, give a warm reassurance instead of clinical bullets
+    if (data.riskLevel === 'safe') {
+      lines.push(safeResponses[Math.floor(Math.random() * safeResponses.length)]);
+      if (data.whyBullets?.length > 0) {
+        lines.push('');
+        for (const b of data.whyBullets.slice(0, 3)) {
+          lines.push(`• ${b}`);
+        }
       }
-      lines.push('');
-    }
-
-    // AI detection
-    if (data.ai_detection && data.ai_detection.label === 'AI_GENERATED') {
-      lines.push(`🤖 *${Math.round(data.ai_detection.ai_probability * 100)}% likely AI-generated text*`);
-      lines.push('');
-    }
-
-    // Next steps
-    if (data.nextSteps && data.nextSteps.length > 0) {
-      lines.push('*What to do:*');
-      for (const step of data.nextSteps.slice(0, 3)) {
-        lines.push(`→ ${step}`);
+    } else {
+      // For risky results, be clear and direct
+      if (data.whyBullets?.length > 0) {
+        for (const b of data.whyBullets.slice(0, 5)) {
+          lines.push(`• ${b}`);
+        }
+        lines.push('');
       }
-      lines.push('');
+
+      if (data.nextSteps?.length > 0) {
+        lines.push('*What you should do:*');
+        for (const s of data.nextSteps.slice(0, 3)) {
+          lines.push(`→ ${s}`);
+        }
+        lines.push('');
+      }
     }
 
-    // Graph intelligence
-    if (data.graph && data.graph.network_risk_label !== 'LOW') {
-      lines.push(`🕸️ Network risk: *${data.graph.network_risk_label}* (linked to ${data.graph.entities_created} known entities)`);
-      lines.push('');
-    }
+    // Disclaimer
+    lines.push('_This is automated analysis, not professional advice._');
 
-    // Footer
-    lines.push('—');
-    lines.push('⚠️ _Automated analysis — not professional advice._');
-    lines.push('🌐 Full scanner: trustchekr.com');
-
-    bot.sendMessage(chatId, lines.join('\n'), { parse_mode: 'Markdown', disable_web_page_preview: true });
+    bot.sendMessage(chatId, lines.join('\n'), {
+      parse_mode: 'Markdown',
+      disable_web_page_preview: true,
+    });
 
   } catch (err) {
-    console.error('Scan error:', err);
-    bot.sendMessage(chatId, [
-      '❌ Sorry, I couldn\'t complete the scan right now.',
-      '',
-      'Try again in a moment, or use the full scanner:',
-      '🌐 trustchekr.com',
-    ].join('\n'));
+    console.error('Scan error:', err.message);
+    bot.sendMessage(chatId, 'Sorry, I couldn\'t check that right now. Try again in a moment or use trustchekr.com');
   }
 });
 
-console.log('🛡️ TrustChekr Bot running...');
+console.log('TrustChekr Bot running');

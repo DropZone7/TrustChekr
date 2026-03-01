@@ -16,15 +16,18 @@ const SPAM_KEYWORDS: Record<string, number> = {
   // Urgency/pressure
   urgent: 62, guaranteed: 55, immediately: 25, expires: 20,
   // Money/offers
-  cash: 58, offer: 57, cashback: 15, discount: 18, voucher: 20,
+  cash: 58, cashback: 15, discount: 18, voucher: 20,
   // Action demands
   reply: 101, subscribe: 15, unsubscribe: 12,
   // Suspicious patterns
-  tone: 53, ringtone: 30, mobile: 123, txt: 40, msg: 35,
+  ringtone: 30, txt: 40, msg: 35,
   // Financial
   creditcard: 10, refund: 22, billing: 18, invoice: 15,
   // Classic spam signals
   "18+": 8, adult: 10, dating: 12,
+  // Job scam keywords
+  payout: 20, payouts: 20, earning: 15, earnings: 15,
+  commission: 12, onboarding: 10,
 };
 
 const maxCount = Math.max(...Object.values(SPAM_KEYWORDS));
