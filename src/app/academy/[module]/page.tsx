@@ -884,7 +884,7 @@ const modules: Record<string, ModuleData> = {
     keyPoints: [
       "The #1 crypto scam in Canada is the romance-investment hybrid — a stranger builds a relationship with you online, then introduces a 'trading platform' that shows fake profits until you try to withdraw",
       "The FBI calls it 'pig butchering' because scammers spend weeks or months fattening you with fake gains before taking everything — average losses are $170,000 per victim",
-      "Your seed phrase — the 12 or 24 words you received when you set up your wallet — is the master key to everything you own, giving it to anyone is like handing them the deed to your house with no way to get it back",
+      "Your seed phrase — the 12 or 24 words you received when you set up your wallet — is the master key to everything you own, and stolen phrases accounted for an estimated 20% of 2024's $9.3 billion in IC3-reported crypto thefts",
       "Write your seed phrase on paper and store it somewhere safe like a fireproof box — never save it in a screenshot, a notes app, an email, or a cloud drive where it can be hacked",
       "No legitimate exchange, wallet, or support agent will ever ask for your seed phrase — not Coinbase, not MetaMask, not anyone, and there are zero exceptions to this rule",
       "Fake crypto exchanges look professional — they have live charts, customer support chatbots, and mobile apps, but the balance you see is not real and you will never be able to withdraw",
