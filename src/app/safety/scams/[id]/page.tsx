@@ -109,7 +109,7 @@ export default async function ScamDetailsPage({ params }: PageProps) {
         <h2 className="text-lg font-bold mb-3" style={{ color: 'var(--tc-text-main)' }}>🚩 Red flags</h2>
         <div className="flex flex-col gap-2">
           {scam.red_flags.map((flag, i) => (
-            <div key={i} className="flex gap-3 p-3 rounded-lg border" style={{ borderColor: '#e74c3c', background: '#fdedec' }}>
+            <div key={i} className="flex gap-3 p-3 rounded-lg border" style={{ borderColor: '#e74c3c', background: 'var(--tc-surface)' }}>
               <span>⚠️</span>
               <span>{flag}</span>
             </div>
@@ -118,7 +118,7 @@ export default async function ScamDetailsPage({ params }: PageProps) {
       </section>
 
       {/* What you should do */}
-      <section className="p-4 rounded-xl border-2" style={{ borderColor: 'var(--tc-safe)', background: '#eafaf1' }}>
+      <section className="p-4 rounded-xl border-2" style={{ borderColor: 'var(--tc-safe)', background: 'var(--tc-surface)' }}>
         <h2 className="font-bold mb-2" style={{ color: 'var(--tc-safe)' }}>What you should do</h2>
         <p>{scam.recommended_ui_messaging}</p>
         {scam.academy_modules_impacted.includes('M8_WHAT_TO_DO') && (

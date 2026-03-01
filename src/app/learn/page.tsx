@@ -101,7 +101,7 @@ export default function LearnPage() {
       <a
         href="/learn/ai-deanonymization"
         className="block p-6 rounded-xl border-2 transition-all hover:shadow-lg"
-        style={{ borderColor: "var(--tc-danger)", background: "#fdedec" }}
+        style={{ borderColor: "var(--tc-danger)", background: "var(--tc-surface)" }}
       >
         <div className="flex items-center gap-2 mb-2">
           <span className="text-xs font-bold px-2 py-1 rounded-full" style={{ background: "var(--tc-danger)", color: "white" }}>

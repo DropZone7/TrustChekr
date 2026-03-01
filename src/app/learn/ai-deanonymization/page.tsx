@@ -42,7 +42,7 @@ export default function AIDeanonymizationArticle() {
         className="p-5 rounded-xl border-2"
         style={{
           borderColor: "var(--tc-danger)",
-          background: "#fdedec",
+          background: "var(--tc-surface)",
         }}
       >
         <p

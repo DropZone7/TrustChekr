@@ -20,7 +20,7 @@ export default function HelpPage() {
       {/* Emergency contacts */}
       <section
         className="p-6 rounded-xl border-2"
-        style={{ borderColor: "var(--tc-danger)", background: "#fdedec" }}
+        style={{ borderColor: "var(--tc-danger)", background: "var(--tc-surface)" }}
       >
         <h2 className="text-lg font-bold mb-3" style={{ color: "var(--tc-danger)" }}>
           If you already sent money
@@ -68,7 +68,7 @@ export default function HelpPage() {
       {/* Emotional support */}
       <section
         className="p-6 rounded-xl border"
-        style={{ borderColor: "var(--tc-accent)", background: "#eaf2f8" }}
+        style={{ borderColor: "var(--tc-accent)", background: "var(--tc-surface)" }}
       >
         <h2 className="text-lg font-bold mb-3" style={{ color: "var(--tc-accent)" }}>
           Feeling overwhelmed or embarrassed?

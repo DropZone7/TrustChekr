@@ -160,7 +160,7 @@ export default function CommunityPage() {
 
         {/* Success message */}
         {submitted && (
-          <div className="p-3 rounded-xl text-center" style={{ background: '#eafaf1', border: '1px solid var(--tc-safe)' }}>
+          <div className="p-3 rounded-xl text-center" style={{ background: 'var(--tc-surface)', border: '1px solid var(--tc-safe)' }}>
             <p className="font-semibold" style={{ color: 'var(--tc-safe)' }}>
               Report submitted. It will appear after verification. Thank you for helping protect others.
             </p>
@@ -296,7 +296,7 @@ export default function CommunityPage() {
                       {report.upvotes} {report.upvotes === 1 ? 'person' : 'people'} found this helpful
                     </span>
                     {report.verified && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: '#eafaf1', color: 'var(--tc-safe)' }}>
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: 'var(--tc-surface)', color: 'var(--tc-safe)' }}>
                         Verified
                       </span>
                     )}

@@ -118,7 +118,7 @@ export default function FileUpload({ onFilesReady }: { onFilesReady: (files: Upl
 
       {/* Error */}
       {error && (
-        <div className="p-3 rounded-lg border" style={{ borderColor: "var(--tc-warning)", background: "#fef9e7" }}>
+        <div className="p-3 rounded-lg border" style={{ borderColor: "var(--tc-warning)", background: "var(--tc-surface)" }}>
           <p className="text-sm" style={{ color: "var(--tc-warning)" }}>{error}</p>
         </div>
       )}

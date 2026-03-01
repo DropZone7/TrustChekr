@@ -26,6 +26,9 @@ export default function AboutPage() {
           TrustChekr lets anyone check if something is a scam — no jargon, no judgment, no account needed.
           Paste a suspicious message, URL, phone number, or email and get a plain-language risk assessment in seconds.
         </p>
+        <a href="/about/founder" className="mt-3 inline-block font-semibold text-sm" style={{ color: 'var(--tc-primary)' }}>
+          Read the full founder story →
+        </a>
       </section>
 
       <section>

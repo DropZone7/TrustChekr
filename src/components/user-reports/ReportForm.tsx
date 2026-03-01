@@ -49,7 +49,7 @@ export function ReportForm({ sourcePage, sourceRef }: Props) {
 
   if (submitted) {
     return (
-      <div className="rounded-xl border-2 p-4 text-center" style={{ borderColor: 'var(--tc-safe)', background: '#eafaf1' }}>
+      <div className="rounded-xl border-2 p-4 text-center" style={{ borderColor: 'var(--tc-safe)', background: 'var(--tc-surface)' }}>
         <p className="text-lg mb-1">✅</p>
         <p className="font-semibold" style={{ color: 'var(--tc-safe)' }}>Thank you — your report has been received.</p>
         <p className="text-sm mt-1" style={{ color: 'var(--tc-text-muted)' }}>

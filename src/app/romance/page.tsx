@@ -75,7 +75,7 @@ export default function RomancePage() {
       )}
 
       {error && (
-        <div className="p-5 rounded-xl border-2 text-center" style={{ borderColor: "var(--tc-warning)", background: "#fef9e7" }}>
+        <div className="p-5 rounded-xl border-2 text-center" style={{ borderColor: "var(--tc-warning)", background: "var(--tc-surface)" }}>
           <p className="font-semibold mb-1" style={{ color: "var(--tc-warning)" }}>⚠️ Something went wrong</p>
           <p>{error}</p>
           <button

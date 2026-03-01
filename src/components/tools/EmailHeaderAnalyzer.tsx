@@ -203,7 +203,7 @@ export function EmailHeaderAnalyzer() {
           onChange={(e) => setRaw(e.target.value)}
           rows={10}
           placeholder={'Authentication-Results: mx.google.com;\n  spf=pass ...\n  dkim=pass ...\nReceived: from ...'}
-          style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.75rem 0.8rem', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', fontSize: '0.85rem', minHeight: '200px', resize: 'vertical', color: 'var(--tc-text-main)', backgroundColor: '#f9fafb', whiteSpace: 'pre' }}
+          style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--tc-border)', padding: '0.75rem 0.8rem', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', fontSize: '0.85rem', minHeight: '200px', resize: 'vertical', color: 'var(--tc-text-main)', backgroundColor: 'var(--tc-surface)', whiteSpace: 'pre' }}
         />
         <button type="button" onClick={handleAnalyze} style={{ alignSelf: 'flex-start', padding: '0.6rem 1.1rem', borderRadius: '999px', border: 'none', backgroundColor: 'var(--tc-primary)', color: '#ffffff', fontSize: '0.95rem', fontWeight: 600, cursor: 'pointer' }}>
           Analyze headers

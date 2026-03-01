@@ -64,7 +64,7 @@ export default function ReportPage() {
           </p>
         </div>
 
-        <div className="p-5 rounded-xl border" style={{ borderColor: "var(--tc-accent)", background: "#eaf2f8" }}>
+        <div className="p-5 rounded-xl border" style={{ borderColor: "var(--tc-accent)", background: "var(--tc-surface)" }}>
           <p className="font-semibold mb-2" style={{ color: "var(--tc-accent)" }}>📋 We also recommend reporting to:</p>
           <ul className="flex flex-col gap-2 text-sm">
             <li>• <strong>Canadian Anti-Fraud Centre (CAFC):</strong> 1-888-495-8501 or antifraudcentre-centreantifraude.ca</li>
@@ -114,7 +114,7 @@ export default function ReportPage() {
         </p>
       </div>
 
-      <div className="p-4 rounded-xl border" style={{ borderColor: "var(--tc-safe)", background: "#eafaf1" }}>
+      <div className="p-4 rounded-xl border" style={{ borderColor: "var(--tc-safe)", background: "var(--tc-surface)" }}>
         <p className="text-sm" style={{ color: "var(--tc-text-main)" }}>
           <strong>Your privacy is protected.</strong> We never share your personal information.
           Reports are used only to improve scam detection and warn others. You don't need an account.

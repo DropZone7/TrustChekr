@@ -1035,7 +1035,7 @@ function SpotTheScam({ items }: { items: QuizItem[] }) {
 
   if (finished) {
     return (
-      <div className="p-5 rounded-xl border text-center" style={{ borderColor: "var(--tc-safe)", background: "#eafaf1" }}>
+      <div className="p-5 rounded-xl border text-center" style={{ borderColor: "var(--tc-safe)", background: "var(--tc-surface)" }}>
         <p className="text-3xl mb-2">🎉</p>
         <p className="text-xl font-bold" style={{ color: "var(--tc-safe)" }}>
           You got {score} out of {items.length} correct!
@@ -1156,7 +1156,7 @@ export default function ModulePage() {
       </div>
 
       {/* Objectives */}
-      <div className="p-4 rounded-xl border" style={{ borderColor: "var(--tc-accent)", background: "#eaf2f8" }}>
+      <div className="p-4 rounded-xl border" style={{ borderColor: "var(--tc-accent)", background: "var(--tc-surface)" }}>
         <p className="font-semibold mb-2" style={{ color: "var(--tc-accent)" }}>📚 What you'll learn</p>
         <ul className="flex flex-col gap-1">
           {mod.objectives.map((obj, i) => (

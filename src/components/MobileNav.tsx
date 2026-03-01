@@ -3,15 +3,15 @@
 import { useState } from 'react';
 
 const mainLinks = [
+  { href: '/chat', label: 'Chat' },
   { href: '/academy', label: 'Academy' },
   { href: '/tools', label: 'Tools' },
   { href: '/threats', label: 'Threats' },
-  { href: '/report', label: 'Report a Scam' },
   { href: '/help', label: 'Help' },
 ];
 
 const moreLinks = [
-  { href: '/chat', label: 'Chat Scanner' },
+  { href: '/report', label: 'Report a Scam' },
   { href: '/community', label: 'Community Reports' },
   { href: '/map', label: 'Scam Map' },
   { href: '/claim', label: 'Claim Your Website' },

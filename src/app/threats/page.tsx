@@ -114,7 +114,7 @@ export default async function ThreatsPage() {
                     <span style={{ fontWeight: 500 }}>{t.name}</span>
                     <span style={{ color: 'var(--tc-text-muted)' }}>{t.count}</span>
                   </div>
-                  <div style={{ height: '8px', borderRadius: '4px', backgroundColor: '#e5e7eb', overflow: 'hidden' }}>
+                  <div style={{ height: '8px', borderRadius: '4px', backgroundColor: 'var(--tc-border)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: `${pct}%`, borderRadius: '4px', backgroundColor: 'var(--tc-primary)', transition: 'width 0.3s ease' }} />
                   </div>
                 </div>
