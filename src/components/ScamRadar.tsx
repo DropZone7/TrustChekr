@@ -2,34 +2,42 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { Landmark, Building2, Coins, HeartCrack, Bot, Shield } from 'lucide-react';
+import { Smartphone, Globe, Coins, HeartCrack, Fingerprint, Shield } from 'lucide-react';
 
 const EMOJI_ICON_MAP: Record<string, React.ComponentType<any>> = {
-  '🏛️': Landmark,
-  '🏛': Landmark,
-  '🏦': Building2,
+  '📱': Smartphone,
+  '🌐': Globe,
   '💰': Coins,
   '💔': HeartCrack,
-  '🤖': Bot,
+  '🪪': Fingerprint,
+  // Legacy mappings
+  '🏛️': Shield,
+  '🏛': Shield,
+  '🏦': Globe,
+  '🤖': Globe,
 };
 
 interface TrendCategory {
   name: string;
-  level: 'low' | 'moderate' | 'high' | 'critical';
+  level: 'low' | 'moderate' | 'elevated' | 'high' | 'critical';
   emoji: string;
   description: string;
   postCount: number;
-  change: 'rising' | 'stable' | 'falling';
+  change: 'rising' | 'stable' | 'falling' | 'declining';
+  sources?: string[];
+  reportCount?: number;
 }
 
 interface TrendData {
   lastUpdated: string;
   categories: TrendCategory[];
+  sourceCount?: number;
 }
 
 const LEVEL_COLORS: Record<string, string> = {
   low: '#22c55e',
   moderate: '#eab308',
+  elevated: '#f97316',
   high: '#f97316',
   critical: '#ef4444',
 };
@@ -37,6 +45,7 @@ const LEVEL_COLORS: Record<string, string> = {
 const LEVEL_BG: Record<string, string> = {
   low: 'rgba(34, 197, 94, 0.15)',
   moderate: 'rgba(234, 179, 8, 0.15)',
+  elevated: 'rgba(249, 115, 22, 0.15)',
   high: 'rgba(249, 115, 22, 0.15)',
   critical: 'rgba(239, 68, 68, 0.15)',
 };
@@ -45,6 +54,7 @@ const CHANGE_ARROWS: Record<string, string> = {
   rising: '↑',
   stable: '→',
   falling: '↓',
+  declining: '↓',
 };
 
 function timeAgo(dateStr: string): string {
@@ -93,6 +103,7 @@ export default function ScamRadar() {
   if (!data) return null;
 
   const hasCritical = data.categories.some(c => c.level === 'critical');
+  const sourceCount = data.sourceCount || 6;
 
   return (
     <div style={{
@@ -132,18 +143,24 @@ export default function ScamRadar() {
             LIVE
           </span>
         </div>
-        <span style={{ color: 'var(--tc-text-muted)', fontSize: 12 }}>
-          Updated {timeAgo(data.lastUpdated)}
-        </span>
+        <div style={{ textAlign: 'right' }}>
+          <div style={{ color: 'var(--tc-text-muted)', fontSize: 12 }}>
+            Updated {timeAgo(data.lastUpdated)}
+          </div>
+          <div style={{ color: 'var(--tc-text-muted)', fontSize: 10, marginTop: 2 }}>
+            Tracking across {sourceCount}+ platforms
+          </div>
+        </div>
       </div>
 
       {/* Categories */}
       <div style={{ padding: '8px 0' }}>
         {data.categories.map((cat) => {
-          const color = LEVEL_COLORS[cat.level];
-          const bg = LEVEL_BG[cat.level];
-          const arrow = CHANGE_ARROWS[cat.change];
+          const color = LEVEL_COLORS[cat.level] || LEVEL_COLORS.moderate;
+          const bg = LEVEL_BG[cat.level] || LEVEL_BG.moderate;
+          const arrow = CHANGE_ARROWS[cat.change] || '→';
           const isPulsing = cat.level === 'critical' || cat.level === 'high';
+          const reportCount = cat.reportCount || cat.postCount || 0;
 
           return (
             <Link
@@ -190,20 +207,28 @@ export default function ScamRadar() {
                   <div style={{ color: 'var(--tc-text-muted)', fontSize: 12, marginTop: 2, lineHeight: 1.4 }}>
                     {cat.description}
                   </div>
+                  {/* Source count indicator */}
+                  {cat.sources && cat.sources.length > 0 && (
+                    <div style={{ color: 'var(--tc-text-muted)', fontSize: 10, marginTop: 3, opacity: 0.7 }}>
+                      {cat.sources.length} source{cat.sources.length !== 1 ? 's' : ''} reporting
+                    </div>
+                  )}
                 </div>
 
                 {/* Trend + Count */}
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                   <div style={{
-                    color: cat.change === 'rising' ? '#ef4444' : cat.change === 'falling' ? '#22c55e' : 'var(--tc-text-muted)',
+                    color: (cat.change === 'rising') ? '#ef4444'
+                      : (cat.change === 'falling' || cat.change === 'declining') ? '#22c55e'
+                      : 'var(--tc-text-muted)',
                     fontSize: 18,
                     fontWeight: 700,
                   }}>
                     {arrow}
                   </div>
-                  {cat.postCount > 0 && (
+                  {reportCount > 0 && (
                     <div style={{ color: 'var(--tc-text-muted)', fontSize: 11 }}>
-                      {cat.postCount.toLocaleString()} reports
+                      {reportCount.toLocaleString()} reports
                     </div>
                   )}
                 </div>
@@ -222,7 +247,7 @@ export default function ScamRadar() {
         alignItems: 'center',
       }}>
         <span style={{ color: 'var(--tc-text-muted)', fontSize: 10 }}>
-          Powered by real-time data
+          TrustChekr Intelligence · {sourceCount}+ platforms
         </span>
         <Link href="/academy" style={{ color: 'var(--tc-primary)', fontSize: 11, textDecoration: 'none', fontWeight: 600 }}>
           Learn to protect yourself →

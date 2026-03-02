@@ -1,76 +1,131 @@
 import { NextResponse } from 'next/server';
+import { fetchAllSources } from '@/lib/scrapers/aggregator';
 
-interface TrendCategory {
+interface TrendCategoryData {
   name: string;
-  level: 'low' | 'moderate' | 'high' | 'critical';
+  level: 'low' | 'moderate' | 'elevated' | 'high' | 'critical';
   emoji: string;
   description: string;
   postCount: number;
-  change: 'rising' | 'stable' | 'falling';
+  change: 'rising' | 'stable' | 'falling' | 'declining';
   academyLink?: string;
+  sources?: string[];
+  reportCount?: number;
 }
 
 interface TrendData {
   lastUpdated: string;
-  categories: TrendCategory[];
+  categories: TrendCategoryData[];
+  sourceCount?: number;
 }
 
-// In-memory trend cache — updated by POST /api/trends/update
-// Falls back to curated defaults on cold start
+// In-memory trend cache — updated by POST /api/trends or background fetch
 let trendCache: TrendData | null = null;
+let lastFetchTime = 0;
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
 const DEFAULT_TRENDS: TrendData = {
   lastUpdated: new Date().toISOString(),
+  sourceCount: 6,
   categories: [
     {
-      name: "CRA / IRS Tax Scams",
+      name: "Phone Scams",
       level: "moderate",
-      emoji: "🏛️",
-      description: "Tax season impersonation calls and texts active",
-      postCount: 6,
+      emoji: "📱",
+      description: "Spoofed calls and government impersonation active across multiple platforms",
+      postCount: 8,
       change: "stable",
-      academyLink: "/academy/government-impersonation",
+      sources: ['x', 'reddit'],
+      reportCount: 8,
     },
     {
-      name: "Bank Impersonation",
+      name: "Online Scams",
       level: "high",
-      emoji: "🏦",
-      description: "Fake fraud department calls — victims losing thousands",
-      postCount: 10,
+      emoji: "🌐",
+      description: "Phishing campaigns and fake websites targeting credentials",
+      postCount: 15,
       change: "rising",
-      academyLink: "/academy/financial-scams",
+      sources: ['x', 'reddit', 'mastodon'],
+      reportCount: 15,
     },
     {
-      name: "Crypto & Investment",
+      name: "Financial Fraud",
       level: "high",
       emoji: "💰",
-      description: "Pig butchering operations — $580M+ in seizures",
-      postCount: 14,
+      description: "Crypto scams and pig butchering operations — significant losses reported",
+      postCount: 18,
       change: "rising",
-      academyLink: "/academy/financial-scams",
+      sources: ['x', 'reddit', 'bluesky'],
+      reportCount: 18,
     },
     {
       name: "Romance Scams",
-      level: "high",
+      level: "moderate",
       emoji: "💔",
-      description: "Billion-dollar losses — dating apps to crypto pipeline",
-      postCount: 12,
+      description: "Dating app scams funneling victims into crypto investments",
+      postCount: 10,
       change: "stable",
-      academyLink: "/academy/romance-scams",
+      sources: ['x', 'reddit'],
+      reportCount: 10,
     },
     {
-      name: "AI Deepfake Scams",
-      level: "high",
-      emoji: "🤖",
-      description: "Voice cloning and AI vishing attacks growing",
-      postCount: 10,
+      name: "Identity Theft",
+      level: "elevated",
+      emoji: "🪪",
+      description: "Data breach exploitation and SIN/SSN fraud reports increasing",
+      postCount: 12,
       change: "rising",
+      sources: ['x', 'reddit', 'cyber_gc'],
+      reportCount: 12,
     },
   ],
 };
 
+async function getOrFetchTrends(): Promise<TrendData> {
+  if (trendCache && Date.now() - lastFetchTime < CACHE_TTL) {
+    return trendCache;
+  }
+
+  // Try background fetch from aggregator (non-blocking for first request)
+  try {
+    const trends = await fetchAllSources();
+    const allSources = [...new Set(trends.flatMap((t) => t.sources))];
+
+    trendCache = {
+      lastUpdated: new Date().toISOString(),
+      sourceCount: allSources.length,
+      categories: trends.map((t) => ({
+        name: t.label,
+        level: t.level,
+        emoji: getCategoryEmoji(t.category),
+        description: t.summary,
+        postCount: t.reportCount,
+        change: t.change === 'declining' ? ('falling' as const) : t.change,
+        sources: t.sources,
+        reportCount: t.reportCount,
+      })),
+    };
+    lastFetchTime = Date.now();
+    return trendCache;
+  } catch (err) {
+    console.error('[trends] Aggregator fetch failed, using cache/defaults:', err);
+    return trendCache || DEFAULT_TRENDS;
+  }
+}
+
+function getCategoryEmoji(category: string): string {
+  const map: Record<string, string> = {
+    phone_scams: '📱',
+    online_scams: '🌐',
+    financial_fraud: '💰',
+    romance_scams: '💔',
+    identity_theft: '🪪',
+  };
+  return map[category] || '⚠️';
+}
+
 export async function GET() {
-  const data = trendCache || DEFAULT_TRENDS;
+  const data = await getOrFetchTrends();
   return NextResponse.json(data, {
     headers: {
       'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=7200',
@@ -79,7 +134,6 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  // Protected update endpoint — called by external cron/webhook
   const authHeader = request.headers.get('Authorization');
   const expectedKey = process.env.TRENDS_UPDATE_KEY;
 
@@ -91,8 +145,10 @@ export async function POST(request: Request) {
     const body = await request.json();
     trendCache = {
       lastUpdated: new Date().toISOString(),
+      sourceCount: body.sourceCount || undefined,
       categories: body.categories,
     };
+    lastFetchTime = Date.now();
     return NextResponse.json({ ok: true, lastUpdated: trendCache.lastUpdated });
   } catch {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
